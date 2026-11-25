@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-11-25T16:33:01Z",
+  "updatedAt": "2026-11-25T16:41:02Z",
   "accountName": "Jahronimo Ellis",
   "accountEmail": "jahronimo1@hotmail.com",
   "profileUrl": "https://www.facebook.com/profile.php",
   "stats": {
     "totalGroups": 32,
-    "joinedCount": 3,
+    "joinedCount": 8,
     "postedCount": 2,
     "commentsCount": 1
   },
@@ -48,63 +48,63 @@
     },
     {
       "id": "fb04",
-      "groupName": "Tenerife / Canary Islands House Sitting",
+      "groupName": "Pet Sitting in Europe (Canaries / Spain)",
       "groupType": "House & Pet Sitting",
-      "groupUrl": "https://www.facebook.com/search/groups/?q=Canary%20Islands%20House%20Sitting",
+      "groupUrl": "https://www.facebook.com/groups/1792977621542372/",
       "postUrl": "",
       "postedAt": "",
       "next48hCheck": "",
-      "status": "ready_to_post",
+      "status": "joined_ready_to_post",
       "responsesCount": 0,
-      "notes": "Winter-sun sits"
+      "notes": "116.3K members \u00b7 30+ posts/day"
     },
     {
       "id": "fb05",
-      "groupName": "Seville Expats",
+      "groupName": "Sevilla - Locals Expats & Travelers",
       "groupType": "City Expats & Locals",
-      "groupUrl": "https://www.facebook.com/search/groups/?q=Seville%20Expats",
+      "groupUrl": "https://www.facebook.com/groups/meetpeopleinnseville/",
       "postUrl": "",
       "postedAt": "",
       "next48hCheck": "",
-      "status": "ready_to_post",
+      "status": "joined_ready_to_post",
       "responsesCount": 0,
-      "notes": "Use Language/Homestay or Skill Swap post"
+      "notes": "6.5K members \u00b7 4 posts/day"
     },
     {
       "id": "fb06",
-      "groupName": "Madrid Expats",
+      "groupName": "Madrid Expats Group - Internationals",
       "groupType": "City Expats & Locals",
-      "groupUrl": "https://www.facebook.com/search/groups/?q=Madrid%20Expats",
+      "groupUrl": "https://www.facebook.com/groups/madridexpatsgroup/",
       "postUrl": "",
       "postedAt": "",
       "next48hCheck": "",
-      "status": "ready_to_post",
+      "status": "joined_ready_to_post",
       "responsesCount": 0,
-      "notes": "Great for language & creative swaps"
+      "notes": "102.3K members \u00b7 10+ posts/day"
     },
     {
       "id": "fb07",
-      "groupName": "Valencia Expats",
+      "groupName": "Expats Valencia",
       "groupType": "City Expats & Locals",
-      "groupUrl": "https://www.facebook.com/search/groups/?q=Valencia%20Expats",
+      "groupUrl": "https://www.facebook.com/groups/1411999335713930/",
       "postUrl": "",
       "postedAt": "",
       "next48hCheck": "",
-      "status": "ready_to_post",
+      "status": "joined_ready_to_post",
       "responsesCount": 0,
-      "notes": "Slowmad sublets & language exchanges"
+      "notes": "91.5K members \u00b7 40 posts/day"
     },
     {
       "id": "fb08",
-      "groupName": "Barcelona Expats",
+      "groupName": "Barcelona Expats - International BCN",
       "groupType": "City Expats & Locals",
-      "groupUrl": "https://www.facebook.com/search/groups/?q=Barcelona%20Expats",
+      "groupUrl": "https://www.facebook.com/groups/barcelonaexpatsgroup/",
       "postUrl": "",
       "postedAt": "",
       "next48hCheck": "",
-      "status": "ready_to_post",
+      "status": "joined_ready_to_post",
       "responsesCount": 0,
-      "notes": "100k+ members; check pinned WhatsApp chats"
+      "notes": "152.5K members \u00b7 20+ posts/day"
     },
     {
       "id": "fb09",
