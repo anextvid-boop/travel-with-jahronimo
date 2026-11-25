@@ -429,10 +429,12 @@ Jahronimo</textarea>
           </div>
           <div id="fbAccountSummary" style="padding:12px 14px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);margin-bottom:12px;font-size:0.88rem;color:var(--ink);"></div>
           <div id="fbCoverageGraphs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:14px;"></div>
-          <details open style="border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
-            <summary style="cursor:pointer;font-weight:700;color:var(--ink);" id="fbGroupsSummary">📘 Connected Facebook Groups by Type (0)</summary>
-            <div id="fbGroupsList" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
-          </details>
+          <div>
+            <button type="button" class="btn btn-primary" id="fbGroupsAddedBtn" aria-expanded="false" aria-controls="fbGroupsAddedPanel">📘 Facebook groups added (0) ▾</button>
+            <div id="fbGroupsAddedPanel" style="display:none;margin-top:12px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--surface-soft);">
+              <div id="fbGroupsList" style="display:flex;flex-direction:column;gap:10px;"></div>
+            </div>
+          </div>
         </div>
 
         <div class="card">
@@ -1282,8 +1284,24 @@ Jahronimo</textarea>
         }
         const groups = data.groups || [];
         const comments = data.comments || [];
-        const fbSum = document.getElementById("fbGroupsSummary");
-        if (fbSum) fbSum.textContent = `📘 Connected Facebook Groups by Type (${groups.length} Groups · ${data.stats?.joinedCount ?? 0} Joined)`;
+        const fbAddedBtn = document.getElementById("fbGroupsAddedBtn");
+        const fbAddedPanel = document.getElementById("fbGroupsAddedPanel");
+        if (fbAddedBtn) {
+          const isOpen = fbAddedPanel && fbAddedPanel.style.display !== "none";
+          fbAddedBtn.textContent = `📘 Facebook groups added (${groups.length}) ${isOpen ? "▴" : "▾"}`;
+          if (!fbAddedBtn.dataset.bound) {
+            fbAddedBtn.dataset.bound = "1";
+            fbAddedBtn.addEventListener("click", () => {
+              if (!fbAddedPanel) return;
+              const willOpen = fbAddedPanel.style.display === "none";
+              fbAddedPanel.style.display = willOpen ? "block" : "none";
+              fbAddedBtn.setAttribute("aria-expanded", String(willOpen));
+              const count = fbAddedBtn.dataset.count || groups.length;
+              fbAddedBtn.textContent = `📘 Facebook groups added (${count}) ${willOpen ? "▴" : "▾"}`;
+            });
+          }
+          fbAddedBtn.dataset.count = String(groups.length);
+        }
 
         const graphsEl = document.getElementById("fbCoverageGraphs");
         if (graphsEl) {
@@ -1339,29 +1357,50 @@ Jahronimo</textarea>
           if (!byType[t]) byType[t] = [];
           byType[t].push(g);
         }
-        listEl.innerHTML = Object.entries(byType).map(([gType, items]) => `
-          <details style="border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fff;">
-            <summary style="cursor:pointer;font-size:0.86rem;font-weight:700;color:var(--ink);">
-              ${escOutreach(gType)} <span class="c-badge" style="margin-left:6px;">${items.length} groups</span>
-            </summary>
-            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-              ${items.map((g) => `
-                <div style="padding:8px 10px;border-radius:8px;background:var(--surface-soft);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center;font-size:0.8rem;">
-                  <div>
-                    <a href="${escOutreach(g.groupUrl)}" target="_blank" rel="noopener" style="font-weight:700;color:var(--ink);text-decoration:none;">${escOutreach(g.groupName)} ↗</a>
-                    <span class="c-badge" style="margin-left:6px;">${escOutreach(g.status)}</span>
-                    ${g.postUrl ? `<div><a href="${escOutreach(g.postUrl)}" target="_blank" rel="noopener">View Post / Pending ↗</a></div>` : ""}
-                    ${g.notes ? `<div style="color:var(--muted);margin-top:2px;">${escOutreach(g.notes)}</div>` : ""}
+        const sortedTypes = Object.entries(byType).sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+        listEl.innerHTML = sortedTypes.map(([gType, items]) => {
+          const byCountry = {};
+          for (const g of items) {
+            const c = g.country || "Global / Worldwide";
+            if (!byCountry[c]) byCountry[c] = [];
+            byCountry[c].push(g);
+          }
+          const sortedCountries = Object.entries(byCountry).sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+          const countriesHtml = sortedCountries.map(([countryName, cItems]) => `
+            <details style="border:1px solid var(--line);border-radius:8px;padding:7px 10px;background:var(--surface-soft);">
+              <summary style="cursor:pointer;font-size:0.82rem;font-weight:700;color:var(--ink);">
+                🌍 ${escOutreach(countryName)} <span class="c-badge" style="margin-left:6px;">${cItems.length}</span>
+              </summary>
+              <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;">
+                ${cItems.map((g) => `
+                  <div style="padding:8px 10px;border-radius:8px;background:#fff;border:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center;font-size:0.8rem;">
+                    <div>
+                      <a href="${escOutreach(g.groupUrl)}" target="_blank" rel="noopener" style="font-weight:700;color:var(--ink);text-decoration:none;">${escOutreach(g.groupName)} ↗</a>
+                      <span class="c-badge" style="margin-left:6px;">${escOutreach(g.status)}</span>
+                      ${g.city ? `<span class="c-badge" style="margin-left:4px;">${escOutreach(g.city)}</span>` : ""}
+                      ${g.postUrl ? `<div><a href="${escOutreach(g.postUrl)}" target="_blank" rel="noopener">View Post / Pending ↗</a></div>` : ""}
+                      ${g.notes ? `<div style="color:var(--muted);margin-top:2px;">${escOutreach(g.notes)}</div>` : ""}
+                    </div>
+                    <div style="text-align:right;color:var(--muted);">
+                      <div>Posted: <strong>${escOutreach(g.postedAt || "Not yet")}</strong></div>
+                      ${g.next48hCheck ? `<div>48h Check: ${escOutreach(g.next48hCheck)}</div>` : ""}
+                    </div>
                   </div>
-                  <div style="text-align:right;color:var(--muted);">
-                    <div>Posted: <strong>${escOutreach(g.postedAt || "Not yet")}</strong></div>
-                    ${g.next48hCheck ? `<div>48h Check: ${escOutreach(g.next48hCheck)}</div>` : ""}
-                  </div>
-                </div>
-              `).join("")}
-            </div>
-          </details>
-        `).join("");
+                `).join("")}
+              </div>
+            </details>
+          `).join("");
+          return `
+            <details style="border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fff;">
+              <summary style="cursor:pointer;font-size:0.86rem;font-weight:700;color:var(--ink);">
+                ${escOutreach(gType)} <span class="c-badge" style="margin-left:6px;">${items.length} groups · ${sortedCountries.length} countries</span>
+              </summary>
+              <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+                ${countriesHtml}
+              </div>
+            </details>
+          `;
+        }).join("");
       } catch (e) {
         if (badge) badge.textContent = "Unavailable";
       }
