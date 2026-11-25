@@ -275,6 +275,9 @@
           <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
             <button type="button" class="btn btn-ghost" id="selectAllCrmBtn" style="padding:7px 12px;font-size:0.8rem;">☑ Select All</button>
             <button type="button" class="btn btn-ghost" id="clearSelCrmBtn" style="padding:7px 12px;font-size:0.8rem;">Clear</button>
+            <select class="field" id="countryFilter" style="max-width:170px;margin:0;">
+              <option value="ALL">All Countries</option>
+            </select>
             <select class="field" id="statusFilter" style="max-width:160px;margin:0;">
               <option value="ALL">All Statuses</option>
               <option value="New">New</option>
@@ -284,7 +287,7 @@
             </select>
           </div>
         </div>
-        <div class="crm-grid" id="crmGrid"></div>
+        <div id="crmGrid" style="display:flex;flex-direction:column;gap:18px;"></div>
       </div>
 
       <!-- Bulk & Direct Email Sender -->
@@ -449,10 +452,40 @@ Jahronimo</textarea>
       document.getElementById("statChat").textContent = list.filter((c) => c.status === "Chatting").length;
       document.getElementById("statBooked").textContent = list.filter((c) => c.status === "Booked" || c.status === "Met").length;
 
+      function extractCountry(cityStr) {
+        const s = (cityStr || "").trim();
+        if (!s || s.toLowerCase() === "not specified") return "Other / Unspecified";
+        const low = s.toLowerCase();
+        const known = [
+          ["united kingdom", "United Kingdom"], ["uk", "United Kingdom"], ["brighton", "United Kingdom"], ["london", "United Kingdom"],
+          ["spain", "Spain"], ["málaga", "Spain"], ["malaga", "Spain"], ["valencia", "Spain"], ["marbella", "Spain"],
+          ["portugal", "Portugal"], ["lisbon", "Portugal"], ["morocco", "Morocco"],
+          ["thailand", "Thailand"], ["bangkok", "Thailand"], ["chiang mai", "Thailand"],
+          ["bali", "Indonesia (Bali)"], ["indonesia", "Indonesia (Bali)"], ["ubud", "Indonesia (Bali)"],
+          ["vietnam", "Vietnam"], ["japan", "Japan"], ["italy", "Italy"], ["france", "France"],
+          ["greece", "Greece"], ["turkey", "Turkey"], ["malaysia", "Malaysia"]
+        ];
+        for (const [k, v] of known) {
+          if (low.includes(k)) return v;
+        }
+        const parts = s.split(",").map((p) => p.trim()).filter(Boolean);
+        return parts.length > 1 ? parts[parts.length - 1] : s;
+      }
+
+      const cFilter = document.getElementById("countryFilter");
+      const prevCountry = cFilter ? cFilter.value : "ALL";
+      const allCountries = Array.from(new Set(list.map((c) => extractCountry(c.city)))).sort();
+      if (cFilter) {
+        cFilter.innerHTML = `<option value="ALL">All Countries</option>` + allCountries.map((cn) => `<option value="${cn}">${cn}</option>`).join("");
+        if (allCountries.includes(prevCountry)) cFilter.value = prevCountry;
+      }
+      const selectedCountry = cFilter ? cFilter.value : "ALL";
+
       const filtered = list.filter((c) => {
         const matchSt = st === "ALL" || c.status === st;
+        const matchCn = selectedCountry === "ALL" || extractCountry(c.city) === selectedCountry;
         const text = `${c.name} ${c.city} ${c.offer} ${c.contact} ${c.notes || ""}`.toLowerCase();
-        return matchSt && (!q || text.includes(q));
+        return matchSt && matchCn && (!q || text.includes(q));
       });
 
       const grid = document.getElementById("crmGrid");
@@ -462,30 +495,62 @@ Jahronimo</textarea>
       }
 
       const selectedIds = new Set(Array.from(document.querySelectorAll(".crm-sel-cb:checked")).map((cb) => cb.value));
-      grid.innerHTML = filtered.map((c) => `
-        <div class="contact-card">
-          <div class="c-head">
-            <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;">
-              <input type="checkbox" class="crm-sel-cb" value="${c.id}" ${selectedIds.has(c.id) ? "checked" : ""} style="width:16px;height:16px;margin:0;" />
-              <span class="c-name">${c.name}</span>
-            </label>
-            <span class="c-badge">${c.status || "New"}</span>
-          </div>
-          <div class="c-meta">📍 ${c.city} · ${c.offer}</div>
-          <div class="c-meta">✉️ ${c.contact}</div>
-          ${c.notes ? `<div class="c-meta">📝 ${c.notes}</div>` : ""}
-          ${c.lastEmailed ? `<div class="c-meta" style="color:var(--accent-dark);font-weight:700;">📨 Last Emailed: ${c.lastEmailed}</div>` : ""}
-          <div class="c-actions">
-            <select class="field" data-id="${c.id}" onchange="updateStatus(this)" style="width:auto;padding:5px 8px;font-size:0.78rem;margin:0;">
-              ${["New","Chatting","Booked","Met"].map((s) => `<option value="${s}" ${c.status === s ? "selected" : ""}>${s}</option>`).join("")}
-            </select>
-            ${c.contact.includes("@") ? `<button type="button" class="btn btn-primary" onclick="sendSingleEmail('${c.id}')">✉ Send Email</button>` : ""}
-            <button type="button" class="btn btn-ghost" onclick="deleteContact('${c.id}')" style="color:#b91c1c;">Delete</button>
-          </div>
-        </div>
-      `).join("");
+      const grouped = {};
+      filtered.forEach((c) => {
+        const cn = extractCountry(c.city);
+        if (!grouped[cn]) grouped[cn] = [];
+        grouped[cn].push(c);
+      });
+
+      grid.innerHTML = Object.keys(grouped)
+        .sort()
+        .map((country) => {
+          const cardsHtml = grouped[country]
+            .map(
+              (c) => `
+              <div class="contact-card">
+                <div class="c-head">
+                  <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;">
+                    <input type="checkbox" class="crm-sel-cb" data-country="${country}" value="${c.id}" ${selectedIds.has(c.id) ? "checked" : ""} style="width:16px;height:16px;margin:0;" />
+                    <span class="c-name">${c.name}</span>
+                  </label>
+                  <span class="c-badge">${c.status || "New"}</span>
+                </div>
+                <div class="c-meta">📍 ${c.city} · ${c.offer}</div>
+                <div class="c-meta">✉️ ${c.contact}</div>
+                ${c.notes ? `<div class="c-meta">📝 ${c.notes}</div>` : ""}
+                ${c.lastEmailed ? `<div class="c-meta" style="color:var(--accent-dark);font-weight:700;">📨 Last Emailed: ${c.lastEmailed}</div>` : ""}
+                <div class="c-actions">
+                  <select class="field" data-id="${c.id}" onchange="updateStatus(this)" style="width:auto;padding:5px 8px;font-size:0.78rem;margin:0;">
+                    ${["New","Chatting","Booked","Met"].map((s) => `<option value="${s}" ${c.status === s ? "selected" : ""}>${s}</option>`).join("")}
+                  </select>
+                  ${c.contact.includes("@") ? `<button type="button" class="btn btn-primary" onclick="sendSingleEmail('${c.id}')">✉ Send Email</button>` : ""}
+                  <button type="button" class="btn btn-ghost" onclick="deleteContact('${c.id}')" style="color:#b91c1c;">Delete</button>
+                </div>
+              </div>`
+            )
+            .join("");
+
+          return `
+            <div style="border:1.5px solid var(--line);border-radius:18px;padding:14px;background:rgba(255,253,248,0.65);">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;">
+                <strong style="font-size:0.98rem;color:var(--accent-dark);">🌍 ${country} (${grouped[country].length})</strong>
+                <button type="button" class="btn btn-ghost" onclick="selectCountryCrm('${country.replace(/'/g, "\\'")}')" style="padding:5px 10px;font-size:0.76rem;">☑ Select ${country}</button>
+              </div>
+              <div class="crm-grid">${cardsHtml}</div>
+            </div>`;
+        })
+        .join("");
       updateBulkSelectedCount();
     }
+
+    window.selectCountryCrm = function (country) {
+      document.querySelectorAll(".crm-sel-cb").forEach((cb) => {
+        if (cb.getAttribute("data-country") === country) cb.checked = true;
+      });
+      updateBulkSelectedCount();
+    };
+    document.getElementById("countryFilter")?.addEventListener("change", renderCRM);
 
     function updateBulkSelectedCount() {
       const checked = document.querySelectorAll(".crm-sel-cb:checked");
