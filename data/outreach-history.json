@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T21:44:07Z",
+  "updatedAt": "2026-11-25T21:44:26Z",
   "stats": {
     "totalLeads": 147,
     "totalOutreachSent": 2,
@@ -51,10 +51,10 @@
       {
         "key": "dms",
         "label": "DMs (FB / IG / WhatsApp)",
-        "sentToday": 0,
+        "sentToday": 1,
         "dailyTarget": 10,
-        "remainingToday": 10,
-        "finalTotal": 0,
+        "remainingToday": 9,
+        "finalTotal": 1,
         "note": "Paired with FB comments + IG/WhatsApp follow-ups"
       }
     ]

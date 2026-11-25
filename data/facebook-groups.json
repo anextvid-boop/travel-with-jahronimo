@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T21:44:07Z",
+  "updatedAt": "2026-11-25T21:44:26Z",
   "accountName": "Jahronimo Ellis",
   "accountEmail": "jahronimo1@hotmail.com",
   "profileUrl": "https://www.facebook.com/profile.php",
@@ -1968,7 +1968,8 @@
       "groupName": "Expats in Malaga",
       "commentUrl": "https://www.facebook.com/groups/209440851259330/posts/1434296595440410/?comment_id=1437481485121921",
       "postedAt": "2026-11-25",
-      "status": "live"
+      "status": "live",
+      "dmSent": "yes"
     }
   ]
 }
