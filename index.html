@@ -129,6 +129,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.css" />
+  <script src="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.js"></script>
 
   <style>
     :root {
@@ -872,22 +874,20 @@
 
     .map-stage-wrap {
       position: relative;
-      height: 360px;
+      height: 420px;
       border-radius: 18px;
       overflow: hidden;
       border: 1px solid var(--line);
-      background: radial-gradient(circle at 50% 35%, #f4ecdc 0%, #e7dcc8 100%);
-      perspective: 1100px;
+      background: radial-gradient(circle at 50% 45%, #e5eee9 0%, #d4e3dc 100%);
+      box-shadow: inset 0 2px 8px rgba(45, 34, 18, 0.08), var(--shadow-sm);
+      touch-action: none;
     }
-    .map-stage-inner {
+    #worldMap3D {
       width: 100%;
       height: 100%;
-      transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.75s ease;
-      transform-style: preserve-3d;
     }
-    .map-stage-wrap.is-3d .map-stage-inner {
-      transform: rotateX(48deg) rotateZ(-8deg) scale(1.06) translateY(-10px);
-      box-shadow: 0 30px 40px rgba(27, 29, 31, 0.22);
+    #worldMap3D .maplibregl-canvas {
+      filter: sepia(0.2) hue-rotate(132deg) saturate(0.88) contrast(0.98);
     }
 
     .svg-map {
@@ -1553,8 +1553,9 @@
 
       <div class="map-toolbar">
         <div class="map-controls-group">
-          <button class="map-btn active" id="btn2D" type="button">🗺️ <span data-i18n="btn2D">2D Map</span></button>
-          <button class="map-btn" id="btn3D" type="button">🌐 <span data-i18n="btn3D">3D Map</span></button>
+          <button class="map-btn active" id="btn3D" type="button">🌐 <span data-i18n="btn3D">3D Globe</span></button>
+          <button class="map-btn" id="btn2D" type="button">🗺️ <span data-i18n="btn2D">2D Flat</span></button>
+          <button class="map-btn" id="btnResetGlobe" type="button">🧭 <span>Full World</span></button>
         </div>
         <div class="map-controls-group">
           <button class="map-btn geo" id="btnPhoneLoc" type="button">📍 <span data-i18n="btnPhoneLoc">Connect Phone Location</span></button>
@@ -1562,158 +1563,28 @@
       </div>
 
       <div class="map-status-note" id="mapStatusNote" data-i18n="mapStatusDefault">
-        Origin set to Brighton, UK · Tap any pin or "Connect Phone Location" to connect your live GPS path.
+        Drag, pinch-zoom, or two-finger tilt/rotate anywhere on the 3D world · Origin: Brighton, UK.
       </div>
 
-      <!-- Main Colorized SVG Map (2D by default, 3D on click) -->
+      <!-- Single Interactive 3D World Map (MapLibre GL JS v5 Globe + Gestures) -->
       <div class="map-stage-wrap" id="mapStageWrap">
-        <div class="map-stage-inner">
-          <svg class="svg-map" id="mainSvgMap" viewBox="0 0 900 420" preserveAspectRatio="xMidYMid slice">
-            <defs>
-              <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#d9ccb7" stroke-width="0.7" opacity="0.55"/>
-              </pattern>
-            </defs>
-            <rect width="900" height="420" fill="#e5eee9"/>
-            <rect width="900" height="420" fill="url(#gridPattern)"/>
-
-            <!-- Stylized Cream/Teal Continents -->
-            <g fill="#dfd2bc" stroke="#c5b499" stroke-width="1.4">
-              <!-- UK & Ireland -->
-              <path d="M210 72 L226 68 L234 90 L224 114 L206 112 L202 88 Z"/>
-              <!-- Western Europe / Spain / Portugal / France -->
-              <path d="M200 128 L255 118 L286 135 L278 168 L242 185 L196 188 L190 156 Z"/>
-              <!-- North Africa -->
-              <path d="M192 204 L310 198 L345 235 L335 280 L215 285 L182 245 Z"/>
-              <!-- Middle East / Asia -->
-              <path d="M325 130 L485 110 L620 120 L710 165 L685 245 L595 255 L520 225 L430 230 L345 190 Z"/>
-              <!-- Thailand / SE Asia Mainland -->
-              <path d="M615 232 L662 228 L674 268 L645 305 L622 278 Z"/>
-              <!-- Indonesia / Bali Archipelago -->
-              <path d="M652 332 L710 326 L755 344 L735 356 L680 350 Z"/>
-              <path d="M760 342 L790 346 L785 358 L758 354 Z"/>
-            </g>
-
-            <!-- Connected Route Path (Brighton -> Malaga -> Valencia -> Thailand -> Bali) -->
-            <path id="routePathSvg" class="route-arc" d="M 222 108 Q 208 145 212 182 Q 230 184 246 172 Q 440 165 642 268 Q 685 305 734 344" />
-
-            <!-- Animated Plane Icon flying along the route -->
-            <g fill="#b45309">
-              <path d="M-7 -3 L7 0 L-7 3 L-4 0 Z">
-                <animateMotion dur="7s" repeatCount="indefinite" rotate="auto">
-                  <mpath href="#routePathSvg"/>
-                </animateMotion>
-              </path>
-            </g>
-
-            <!-- Marked Location Pins -->
-            <!-- Brighton / Live Origin -->
-            <g class="pin-group" data-stop="brighton" id="pinBrighton">
-              <circle id="originPulse" class="pin-pulse" cx="222" cy="108" r="9"/>
-              <circle id="originDot" cx="222" cy="108" r="7" fill="#16a34a" stroke="#fff" stroke-width="2.5"/>
-              <text id="originMainLabel" class="pin-label" x="234" y="105">Brighton, UK</text>
-              <text class="pin-sub" id="originSubLabel" x="234" y="117">Your Starting Location</text>
-            </g>
-
-            <!-- Málaga -->
-            <g class="pin-group" data-stop="malaga">
-              <circle cx="212" cy="182" r="6" fill="#0f766e" stroke="#fff" stroke-width="2.5"/>
-              <text class="pin-label" x="148" y="185">Málaga</text>
-            </g>
-
-            <!-- Valencia -->
-            <g class="pin-group" data-stop="valencia">
-              <circle cx="246" cy="172" r="6" fill="#0f766e" stroke="#fff" stroke-width="2.5"/>
-              <text class="pin-label" x="256" y="172">Valencia</text>
-            </g>
-
-            <!-- Thailand -->
-            <g class="pin-group" data-stop="thailand">
-              <circle cx="642" cy="268" r="6.5" fill="#0f766e" stroke="#fff" stroke-width="2.5"/>
-              <text class="pin-label" x="654" y="266">Thailand</text>
-              <text class="pin-sub" x="654" y="278">Bangkok · Chiang Mai</text>
-            </g>
-
-            <!-- Bali -->
-            <g class="pin-group" data-stop="bali">
-              <circle cx="734" cy="344" r="6.5" fill="#b45309" stroke="#fff" stroke-width="2.5"/>
-              <text class="pin-label" x="746" y="342">Bali</text>
-              <text class="pin-sub" x="746" y="354">Canggu · Ubud</text>
-            </g>
-          </svg>
-        </div>
+        <div id="worldMap3D"></div>
       </div>
 
       <div class="stop-pills" id="stopPills">
-        <button class="stop-pill active" data-stop="brighton">📍 Brighton (Start)</button>
+        <button class="stop-pill active" data-stop="brighton">🇬🇧 Brighton (Start)</button>
         <button class="stop-pill" data-stop="malaga">🇪🇸 Málaga</button>
         <button class="stop-pill" data-stop="valencia">🇪🇸 Valencia</button>
+        <button class="stop-pill" data-stop="portugal">🇵🇹 Portugal</button>
+        <button class="stop-pill" data-stop="morocco">🇲🇦 Morocco</button>
+        <button class="stop-pill" data-stop="italy">🇮🇹 Italy</button>
+        <button class="stop-pill" data-stop="greece">🇬🇷 Greece</button>
+        <button class="stop-pill" data-stop="turkey">🇹🇷 Turkey</button>
         <button class="stop-pill" data-stop="thailand">🇹🇭 Thailand</button>
+        <button class="stop-pill" data-stop="malaysia">🇲🇾 Malaysia</button>
+        <button class="stop-pill" data-stop="vietnam">🇻🇳 Vietnam</button>
         <button class="stop-pill" data-stop="bali">🇮🇩 Bali</button>
-      </div>
-
-      <!-- Multiple Mini Maps on the Board -->
-      <div class="mini-maps-grid" id="miniMapsGrid">
-        <!-- Mini Map 1: UK -> Spain -->
-        <div class="mini-map-card">
-          <div class="mini-map-svg-wrap">
-            <svg class="svg-map" viewBox="0 0 260 140">
-              <rect width="260" height="140" fill="#efe6d5"/>
-              <path d="M95 14 L118 12 L124 34 L102 42 Z" fill="#dfd2bc" stroke="#c5b499"/>
-              <path d="M72 62 L145 55 L168 78 L146 118 L76 122 L66 86 Z" fill="#dfd2bc" stroke="#c5b499"/>
-              <path class="route-arc" d="M110 38 Q92 75 94 112 Q120 110 140 94"/>
-              <circle cx="110" cy="38" r="5" fill="#16a34a" stroke="#fff" stroke-width="2"/>
-              <circle cx="94" cy="112" r="4.5" fill="#0f766e" stroke="#fff" stroke-width="2"/>
-              <circle cx="140" cy="94" r="4.5" fill="#0f766e" stroke="#fff" stroke-width="2"/>
-              <text class="pin-label" x="120" y="36">Brighton</text>
-              <text class="pin-label" x="45" y="116">Málaga</text>
-              <text class="pin-label" x="148" y="96">Valencia</text>
-            </svg>
-          </div>
-          <div class="mini-map-label">
-            <span data-i18n="miniMap1">UK → Spain Path</span>
-            <span>🇪🇸</span>
-          </div>
-        </div>
-
-        <!-- Mini Map 2: SE Asia -->
-        <div class="mini-map-card">
-          <div class="mini-map-svg-wrap">
-            <svg class="svg-map" viewBox="0 0 260 140">
-              <rect width="260" height="140" fill="#efe6d5"/>
-              <path d="M62 18 L112 22 L122 58 L95 82 L72 60 Z" fill="#dfd2bc" stroke="#c5b499"/>
-              <path d="M115 104 L178 100 L210 116 L186 126 L124 122 Z" fill="#dfd2bc" stroke="#c5b499"/>
-              <path class="route-arc" d="M94 52 Q142 75 174 114"/>
-              <circle cx="94" cy="52" r="5" fill="#0f766e" stroke="#fff" stroke-width="2"/>
-              <circle cx="174" cy="114" r="5" fill="#b45309" stroke="#fff" stroke-width="2"/>
-              <text class="pin-label" x="104" y="50">Thailand</text>
-              <text class="pin-label" x="184" y="114">Bali</text>
-            </svg>
-          </div>
-          <div class="mini-map-label">
-            <span data-i18n="miniMap2">SE Asia Hub</span>
-            <span>🌴</span>
-          </div>
-        </div>
-
-        <!-- Mini Map 3: Active Stop Spotlight -->
-        <div class="mini-map-card">
-          <div class="mini-map-svg-wrap">
-            <svg class="svg-map" viewBox="0 0 260 140">
-              <rect width="260" height="140" fill="#efe6d5"/>
-              <circle cx="130" cy="70" r="46" fill="none" stroke="#c5b499" stroke-dasharray="4 4"/>
-              <circle cx="130" cy="70" r="24" fill="none" stroke="#0f766e" stroke-opacity="0.35"/>
-              <circle class="pin-pulse" cx="130" cy="70" r="9"/>
-              <circle cx="130" cy="70" r="7" fill="#0f766e" stroke="#fff" stroke-width="2.5"/>
-              <text class="pin-label" id="spotlightTitle" x="130" y="106" text-anchor="middle">Brighton, UK</text>
-              <text class="pin-sub" id="spotlightCoords" x="130" y="120" text-anchor="middle">50.8225° N, 0.1372° W</text>
-            </svg>
-          </div>
-          <div class="mini-map-label">
-            <span id="miniMapFocusLabel">Brighton, UK</span>
-            <span>🔎</span>
-          </div>
-        </div>
+        <button class="stop-pill" data-stop="japan">🇯🇵 Japan</button>
       </div>
     </section>
 
@@ -1907,36 +1778,6 @@
             <div class="goal-big-num">13</div>
             <div style="font-size:0.7rem;font-weight:800;color:var(--muted);letter-spacing:0.06em;">COUNTRIES</div>
           </div>
-        </div>
-
-        <!-- Inline 13-Country Mini World Map -->
-        <div class="goal-mini-world">
-          <svg viewBox="0 0 600 160" preserveAspectRatio="xMidYMid slice">
-            <rect width="600" height="160" fill="#e5eee9"/>
-            <g fill="#dfd2bc" stroke="#c5b499" stroke-width="1">
-              <path d="M55 32 L115 26 L138 56 L105 84 L62 76 Z"/>
-              <path d="M110 92 L145 96 L152 138 L124 150 L108 124 Z"/>
-              <path d="M250 26 L325 22 L344 52 L292 68 L248 56 Z"/>
-              <path d="M258 76 L328 74 L350 112 L318 148 L272 136 L252 102 Z"/>
-              <path d="M336 28 L468 24 L515 62 L475 96 L385 94 L338 66 Z"/>
-              <path d="M448 118 L518 116 L536 142 L486 148 Z"/>
-            </g>
-            <path class="route-arc" d="M268 38 Q265 56 266 64 Q340 52 444 82 Q474 106 492 126" stroke-width="2.2"/>
-            <circle class="pin-pulse" cx="268" cy="38" r="6"/>
-            <circle cx="268" cy="38" r="4" fill="#16a34a" stroke="#fff" stroke-width="1.5"/>
-            <circle cx="266" cy="64" r="3.5" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
-            <circle cx="258" cy="62" r="3" fill="#0f766e" stroke="#fff" stroke-width="1.2"/>
-            <circle cx="268" cy="78" r="3" fill="#0f766e" stroke="#fff" stroke-width="1.2"/>
-            <circle cx="294" cy="54" r="3" fill="#0f766e" stroke="#fff" stroke-width="1.2"/>
-            <circle cx="312" cy="48" r="3" fill="#0f766e" stroke="#fff" stroke-width="1.2"/>
-            <circle cx="332" cy="56" r="3" fill="#0f766e" stroke="#fff" stroke-width="1.2"/>
-            <circle cx="444" cy="82" r="3.8" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
-            <circle cx="464" cy="88" r="3" fill="#0f766e" stroke="#fff" stroke-width="1.2"/>
-            <circle cx="458" cy="102" r="3" fill="#0f766e" stroke="#fff" stroke-width="1.2"/>
-            <circle cx="492" cy="126" r="4" fill="#b45309" stroke="#fff" stroke-width="1.5"/>
-            <circle cx="498" cy="60" r="3" fill="#b45309" stroke="#fff" stroke-width="1.2"/>
-            <circle cx="482" cy="56" r="3" fill="#b45309" stroke="#fff" stroke-width="1.2"/>
-          </svg>
         </div>
 
         <div class="goal-hero-bar" style="margin-bottom:0;">
@@ -2782,96 +2623,181 @@
     tickCountdowns();
     setInterval(tickCountdowns, 1000);
 
-    // 2D <-> 3D SVG Map Controls & Phone Geolocation
+    // Single 3D World Globe Map (MapLibre GL JS v5 + Scrolling & Finger Gestures)
     const STOPS = {
-      brighton: { name: "Brighton, UK", coords: "50.8225° N, 0.1372° W" },
-      malaga:   { name: "Málaga, Spain", coords: "36.7213° N, 4.4214° W" },
-      valencia: { name: "Valencia, Spain", coords: "39.4699° N, 0.3763° W" },
-      thailand: { name: "Thailand", coords: "13.7563° N, 100.5018° E" },
-      bali:     { name: "Bali, Indonesia", coords: "8.4095° S, 115.1889° E" }
+      brighton: { name: "Brighton, UK (Start)", coords: [-0.1372, 50.8225], zoom: 4.5 },
+      malaga:   { name: "Málaga, Spain", coords: [-4.4214, 36.7213], zoom: 5.2 },
+      valencia: { name: "Valencia, Spain", coords: [-0.3763, 39.4699], zoom: 5.2 },
+      portugal: { name: "Lisbon / Algarve, Portugal", coords: [-9.1393, 38.7223], zoom: 5.2 },
+      morocco:  { name: "Marrakech, Morocco", coords: [-7.9811, 31.6295], zoom: 4.8 },
+      italy:    { name: "Rome, Italy", coords: [12.4964, 41.9028], zoom: 5.0 },
+      greece:   { name: "Athens, Greece", coords: [23.7275, 37.9838], zoom: 5.0 },
+      turkey:   { name: "Istanbul, Turkey", coords: [28.9784, 41.0082], zoom: 4.8 },
+      thailand: { name: "Bangkok / Chiang Mai, Thailand", coords: [100.5018, 13.7563], zoom: 4.5 },
+      malaysia: { name: "Kuala Lumpur, Malaysia", coords: [101.6869, 3.1390], zoom: 4.8 },
+      vietnam:  { name: "Hanoi, Vietnam", coords: [105.8342, 21.0278], zoom: 4.8 },
+      bali:     { name: "Bali, Indonesia", coords: [115.1889, -8.4095], zoom: 5.8 },
+      japan:    { name: "Tokyo, Japan", coords: [139.6917, 35.6895], zoom: 4.8 }
     };
 
-    const mapStageWrap = document.getElementById("mapStageWrap");
-    const miniCards = document.querySelectorAll(".mini-map-card");
-    const btn2D = document.getElementById("btn2D");
-    const btn3D = document.getElementById("btn3D");
+    let originCoords = [...STOPS.brighton.coords];
+    let is3D = true;
 
-    function setMapDimension(enable3D) {
-      btn2D.classList.toggle("active", !enable3D);
-      btn3D.classList.toggle("active", enable3D);
-      mapStageWrap.classList.toggle("is-3d", enable3D);
-      miniCards.forEach((c) => c.classList.toggle("is-3d", enable3D));
+    function getRouteGeoJSON() {
+      return {
+        type: "Feature",
+        geometry: {
+          type: "LineString",
+          coordinates: [
+            originCoords,
+            STOPS.malaga.coords,
+            STOPS.valencia.coords,
+            STOPS.portugal.coords,
+            STOPS.morocco.coords,
+            STOPS.italy.coords,
+            STOPS.greece.coords,
+            STOPS.turkey.coords,
+            STOPS.thailand.coords,
+            STOPS.malaysia.coords,
+            STOPS.vietnam.coords,
+            STOPS.bali.coords,
+            STOPS.japan.coords
+          ]
+        }
+      };
     }
 
-    btn2D.addEventListener("click", () => setMapDimension(false));
-    btn3D.addEventListener("click", () => setMapDimension(true));
+    function createPinEl(label, color) {
+      const el = document.createElement("div");
+      el.style.cssText = `
+        width:15px;height:15px;border-radius:50%;
+        background:${color};border:2.5px solid #fff;
+        box-shadow:0 3px 10px rgba(0,0,0,0.35);cursor:pointer;
+      `;
+      el.title = label;
+      return el;
+    }
 
-    function selectStop(key) {
-      document.querySelectorAll(".stop-pill").forEach((p) => {
-        p.classList.toggle("active", p.getAttribute("data-stop") === key);
+    if (typeof maplibregl !== "undefined") {
+      const map = new maplibregl.Map({
+        container: "worldMap3D",
+        style: "https://tiles.openfreemap.org/styles/positron",
+        center: [32, 26],
+        zoom: 1.45,
+        pitch: 40,
+        bearing: -12,
+        maxPitch: 75,
+        scrollZoom: true,
+        dragPan: true,
+        dragRotate: true,
+        touchZoomRotate: true,
+        touchPitch: true,
+        antialias: true
       });
-      const stop = STOPS[key] || STOPS.brighton;
-      document.getElementById("miniMapFocusLabel").textContent = stop.name;
-      document.getElementById("spotlightTitle").textContent = stop.name;
-      document.getElementById("spotlightCoords").textContent = stop.coords;
+
+      map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
+
+      let originMarker = null;
+
+      map.on("style.load", () => {
+        if (typeof map.setProjection === "function") {
+          try { map.setProjection({ type: "globe" }); } catch (e) {}
+        }
+      });
+
+      map.on("load", () => {
+        map.addSource("world-route", { type: "geojson", data: getRouteGeoJSON() });
+        map.addLayer({
+          id: "world-route-glow",
+          type: "line",
+          source: "world-route",
+          paint: { "line-color": "#0f766e", "line-width": 7, "line-opacity": 0.22 }
+        });
+        map.addLayer({
+          id: "world-route-line",
+          type: "line",
+          source: "world-route",
+          paint: { "line-color": "#0f766e", "line-width": 3, "line-dasharray": [2, 1.5] }
+        });
+
+        originMarker = new maplibregl.Marker({ element: createPinEl(STOPS.brighton.name, "#16a34a") })
+          .setLngLat(originCoords)
+          .setPopup(new maplibregl.Popup({ offset: 14 }).setText(STOPS.brighton.name))
+          .addTo(map);
+
+        Object.keys(STOPS).forEach((k) => {
+          if (k === "brighton") return;
+          const s = STOPS[k];
+          const color = k === "bali" || k === "japan" ? "#b45309" : "#0f766e";
+          new maplibregl.Marker({ element: createPinEl(s.name, color) })
+            .setLngLat(s.coords)
+            .setPopup(new maplibregl.Popup({ offset: 14 }).setText(s.name))
+            .addTo(map);
+        });
+      });
+
+      const btn3D = document.getElementById("btn3D");
+      const btn2D = document.getElementById("btn2D");
+
+      btn3D?.addEventListener("click", () => {
+        is3D = true;
+        btn3D.classList.add("active");
+        btn2D.classList.remove("active");
+        map.dragRotate.enable();
+        if (typeof map.setProjection === "function") {
+          try { map.setProjection({ type: "globe" }); } catch (e) {}
+        }
+        map.easeTo({ pitch: 45, bearing: -14, duration: 700 });
+      });
+
+      btn2D?.addEventListener("click", () => {
+        is3D = false;
+        btn2D.classList.add("active");
+        btn3D.classList.remove("active");
+        if (typeof map.setProjection === "function") {
+          try { map.setProjection({ type: "mercator" }); } catch (e) {}
+        }
+        map.easeTo({ pitch: 0, bearing: 0, duration: 700 });
+      });
+
+      document.getElementById("btnResetGlobe")?.addEventListener("click", () => {
+        map.flyTo({ center: [32, 26], zoom: 1.45, pitch: is3D ? 40 : 0, bearing: is3D ? -12 : 0, duration: 1000 });
+      });
+
+      document.querySelectorAll(".stop-pill").forEach((pill) => {
+        pill.addEventListener("click", () => {
+          document.querySelectorAll(".stop-pill").forEach((p) => p.classList.remove("active"));
+          pill.classList.add("active");
+          const key = pill.getAttribute("data-stop");
+          const s = STOPS[key] || STOPS.brighton;
+          const target = key === "brighton" ? originCoords : s.coords;
+          map.flyTo({ center: target, zoom: s.zoom, pitch: is3D ? 52 : 0, bearing: is3D ? -15 : 0, duration: 1100 });
+        });
+      });
+
+      document.getElementById("btnPhoneLoc")?.addEventListener("click", () => {
+        const note = document.getElementById("mapStatusNote");
+        if (!navigator.geolocation) {
+          note.textContent = "Geolocation not supported — using Brighton, UK as start.";
+          return;
+        }
+        note.textContent = "Connecting to your phone location...";
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            originCoords = [pos.coords.longitude, pos.coords.latitude];
+            if (originMarker) originMarker.setLngLat(originCoords);
+            const src = map.getSource("world-route");
+            if (src) src.setData(getRouteGeoJSON());
+            map.flyTo({ center: originCoords, zoom: 4.8, pitch: is3D ? 50 : 0, duration: 1100 });
+            note.textContent = `Connected! Live 3D route updated from (${pos.coords.latitude.toFixed(3)}, ${pos.coords.longitude.toFixed(3)}) across all 13 stops.`;
+          },
+          () => {
+            note.textContent = "Location permission declined — keeping Brighton, UK as the starting point.";
+          },
+          { enableHighAccuracy: true, timeout: 8000 }
+        );
+      });
     }
-
-    document.querySelectorAll(".stop-pill, .pin-group").forEach((el) => {
-      el.addEventListener("click", () => selectStop(el.getAttribute("data-stop")));
-    });
-
-    function projectToMap(lat, lon) {
-      // Calibrated to our Eurasia/SE Asia SVG viewport (Brighton ~ 222,108; Bali ~ 734,344)
-      const x = Math.max(40, Math.min(860, 222 + (lon - (-0.1372)) * 4.44));
-      const y = Math.max(30, Math.min(390, 108 + (50.8225 - lat) * 3.98));
-      return [Math.round(x), Math.round(y)];
-    }
-
-    function updateOriginOnMap(lat, lon, labelText) {
-      const [ox, oy] = projectToMap(lat, lon);
-      document.getElementById("originPulse").setAttribute("cx", ox);
-      document.getElementById("originPulse").setAttribute("cy", oy);
-      document.getElementById("originDot").setAttribute("cx", ox);
-      document.getElementById("originDot").setAttribute("cy", oy);
-      document.getElementById("originMainLabel").setAttribute("x", ox + 12);
-      document.getElementById("originMainLabel").setAttribute("y", oy - 3);
-      document.getElementById("originMainLabel").textContent = labelText;
-      document.getElementById("originSubLabel").setAttribute("x", ox + 12);
-      document.getElementById("originSubLabel").setAttribute("y", oy + 9);
-      const midX = Math.round((ox + 212) / 2 - 14);
-      const midY = Math.round((oy + 182) / 2);
-      document.getElementById("routePathSvg").setAttribute(
-        "d",
-        `M ${ox} ${oy} Q ${midX} ${midY} 212 182 Q 230 184 246 172 Q 440 165 642 268 Q 685 305 734 344`
-      );
-    }
-
-    document.getElementById("btnPhoneLoc").addEventListener("click", () => {
-      const note = document.getElementById("mapStatusNote");
-      if (!navigator.geolocation) {
-        note.textContent = "Geolocation not supported here — keeping Brighton, UK as start.";
-        return;
-      }
-      note.textContent = "Connecting to your phone location...";
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          const rawLat = pos.coords.latitude;
-          const rawLon = pos.coords.longitude;
-          const lat = rawLat.toFixed(4);
-          const lon = rawLon.toFixed(4);
-          updateOriginOnMap(rawLat, rawLon, "Your Phone");
-          document.getElementById("originSubLabel").textContent = `Live GPS (${lat}, ${lon})`;
-          document.getElementById("miniMapFocusLabel").textContent = "Your Phone GPS";
-          document.getElementById("spotlightTitle").textContent = "Your Phone Location";
-          document.getElementById("spotlightCoords").textContent = `${lat}, ${lon}`;
-          note.textContent = `Connected! Path updated from (${lat}, ${lon}) → Málaga → Valencia → Thailand → Bali.`;
-        },
-        () => {
-          note.textContent = "Location permission declined — keeping Brighton, UK as the starting point.";
-        },
-        { enableHighAccuracy: true, timeout: 8000 }
-      );
-    });
 
     // Bottom Quick WhatsApp Composer
     const waTextarea = document.getElementById("waCustomMsg");
@@ -3020,8 +2946,8 @@
       document.getElementById("btnPhoneLoc")?.addEventListener("click", () => window.TravelSound?.play("mapPing"));
       document.getElementById("sendCustomWaBtn")?.addEventListener("click", () => window.TravelSound?.play("waSend"));
 
-      const stopKeys = ["brighton", "malaga", "valencia", "thailand", "bali"];
-      document.querySelectorAll(".stop-pill, .pin-group").forEach((el) => {
+      const stopKeys = ["brighton","malaga","valencia","portugal","morocco","italy","greece","turkey","thailand","malaysia","vietnam","bali","japan"];
+      document.querySelectorAll(".stop-pill").forEach((el) => {
         el.addEventListener("click", () => {
           const idx = Math.max(0, stopKeys.indexOf(el.getAttribute("data-stop")));
           window.TravelSound?.play("pinDrop", { index: idx });
