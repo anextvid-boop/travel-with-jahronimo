@@ -717,7 +717,7 @@ window.TRANSLATIONS = {
   });
 
   const HOW_STEPS = {
-    en: { joinTop: "Book / Chat", moreAboutBtn: "👤 Full Profile & Route", launch3dBtn: "Spin 3D Globe →", openPlus: "Read Profile & FAQ →", how1: "1. Check My Route", how2: "2. 5-Min Video Call", how3: "3. Daily Pet & Home Care" },
+    en: { joinTop: "Book / Chat", moreAboutBtn: "👤 Full Profile & Route", launch3dBtn: "Spin 3D Globe →", openPlus: "Read Profile & FAQ →", shareQrBtn: "📲 Send to a Friend (QR)", shareQrTitle: "📲 Send to a Friend", how1: "1. Check My Route", how2: "2. 5-Min Video Call", how3: "3. Daily Pet & Home Care" },
     es: { how1: "1. Mira mi ruta", how2: "2. Videollamada 5 min", how3: "3. Cuidado diario" },
     pt: { how1: "1. Veja a rota", how2: "2. Chamada de 5 min", how3: "3. Cuidado diário" },
     fr: { how1: "1. Voir l'itinéraire", how2: "2. Appel vidéo 5 min", how3: "3. Soins quotidiens" },

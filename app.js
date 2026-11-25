@@ -438,6 +438,41 @@
     });
 
     updateWaHref(input?.value);
+
+    // Send Email straight from Join the Story 4-line box -> routes to Admin CRM + Hotmail
+    document.getElementById("sendJoinEmailBtn")?.addEventListener("click", () => {
+      const msg = (input?.value || "").trim();
+      const name = (document.getElementById("joinSenderName")?.value || "").trim() || "Website Visitor";
+      const email = (document.getElementById("joinSenderEmail")?.value || "").trim() || "Not provided";
+      const statusEl = document.getElementById("joinSendStatus");
+      if (!msg) {
+        if (statusEl) statusEl.textContent = "Please write a quick message or pick a topic above first.";
+        input?.focus();
+        return;
+      }
+
+      try {
+        const list = JSON.parse(localStorage.getItem("twj_crm_contacts") || "[]");
+        list.unshift({
+          id: String(Date.now()),
+          name,
+          city: "Website Visitor",
+          contact: email,
+          offer: "Join the Story",
+          notes: msg,
+          status: "New",
+          source: "Join the Story Box",
+          createdAt: new Date().toISOString().slice(0, 10)
+        });
+        localStorage.setItem("twj_crm_contacts", JSON.stringify(list));
+      } catch (err) {}
+
+      window.SFX?.cta?.();
+      if (statusEl) statusEl.textContent = "✅ Saved to Jahronimo's CRM & opening email…";
+      const subject = encodeURIComponent(`[Travel With Jahronimo] Join the Story — ${name}`);
+      const body = encodeURIComponent(`From: ${name} (${email})\n\n${msg}`);
+      window.location.href = `mailto:${ADMIN_EMAIL}?subject=${subject}&body=${body}`;
+    });
   }
 
   // 8. Admin Login Modal (SHA-256 + Show/Hide Passcode)
@@ -688,8 +723,18 @@
       document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
     }
 
-    // Distinct Sound Voices + Visual Panel Highlight on Press
-    document.getElementById("topJoinBtn")?.addEventListener("click", () => window.SFX?.cta?.());
+    // Distinct Sound Voices + Visual Panel Highlight on Press + Auto-Expand Join Box
+    document.getElementById("topJoinBtn")?.addEventListener("click", () => {
+      window.SFX?.cta?.();
+      const box = document.getElementById("joinExpandBox");
+      if (box) box.open = true;
+    });
+    document.querySelectorAll("details.inline-expand-panel").forEach((det) => {
+      det.addEventListener("toggle", () => {
+        if (det.open) window.SFX?.cardOpen?.();
+        else window.SFX?.cardClose?.();
+      });
+    });
     document.getElementById("pinnedWaBtn")?.addEventListener("click", () => window.SFX?.cta?.());
     document.getElementById("openEmailModalBtn")?.addEventListener("click", () => window.SFX?.cta?.());
     document.getElementById("authQuickBtn")?.addEventListener("click", () => window.SFX?.lock?.());
@@ -701,7 +746,7 @@
       fx.classList.add("is-lit");
       setTimeout(() => fx.classList.remove("is-lit"), 280);
 
-      const panel = fx.closest(".card, details.acc-card");
+      const panel = fx.closest(".card, details.acc-card, details.inline-expand-panel");
       if (panel) {
         panel.classList.add("is-pressed-panel");
         setTimeout(() => panel.classList.remove("is-pressed-panel"), 360);
