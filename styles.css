@@ -283,8 +283,18 @@ h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.18; }
 .tap-fx.is-lit::after { transform: translate(-50%, -50%) scale(2.4); opacity: 1; transition: transform 0.38s ease-out, opacity 0.38s ease-out; }
 
 /* Marquee */
-.travel-marquee { overflow: hidden; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface); padding: 9px 0; box-shadow: var(--shadow-sm); }
-.travel-marquee-track { display: flex; width: max-content; gap: 28px; animation: marqueeScroll 28s linear infinite; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.76rem; font-weight: 800; letter-spacing: 0.1em; color: var(--accent-dark); padding-left: 28px; }
+.travel-marquee {
+  overflow: hidden; border-radius: 16px; border: 2px solid #fbbf24;
+  background: linear-gradient(90deg, #094d47 0%, #0f766e 50%, #094d47 100%);
+  padding: 12px 0; box-shadow: var(--shadow-sm);
+}
+.travel-marquee-track {
+  display: flex; width: max-content; gap: 26px; align-items: center;
+  animation: marqueeScroll 22s linear infinite; will-change: transform;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; font-weight: 800;
+  letter-spacing: 0.1em; color: #fff; padding-left: 26px; white-space: nowrap;
+}
+.travel-marquee:hover .travel-marquee-track { animation-play-state: paused; }
 
 /* Side-by-Side 16-Photo Scroller */
 .photo-scroll-strip { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 6px 2px 12px; margin-top: 12px; }
