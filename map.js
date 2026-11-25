@@ -366,10 +366,10 @@
     });
 
     // Mobile 1F, 2F & 3F Gestures inside Fullscreen 3D Globe:
-    // - 1-Finger: Spin/pan, double-tap zoom, pin tap
-    // - 2-Finger: Pinch zoom, twist bearing, vertical drag tilt, quick 2-finger tap = zoom out
-    // - 3-Finger: Tap = Full World reset | Swipe Down = Exit Fullscreen | Swipe Left/Right = Next/Prev Stop
-    let multiStart = null;
+    // - 1-Finger: Rotate/spin the world
+    // - 2-Finger: Pan (+ pinch zoom)
+    // - 3-Finger: 3D Camera Rotation (bearing & pitch), 3-finger quick tap = Full World reset
+    let touchState = null;
 
     stageWrap?.addEventListener(
       "touchstart",
@@ -382,9 +382,48 @@
             sx += e.touches[i].clientX;
             sy += e.touches[i].clientY;
           }
-          multiStart = { fingers: n, x: sx / n, y: sy / n, t: Date.now() };
+          touchState = {
+            fingers: n,
+            startX: sx / n,
+            startY: sy / n,
+            lastX: sx / n,
+            lastY: sy / n,
+            moved: 0,
+            t: Date.now()
+          };
         } else {
-          multiStart = null;
+          touchState = null;
+        }
+      },
+      { passive: true }
+    );
+
+    stageWrap?.addEventListener(
+      "touchmove",
+      (e) => {
+        if (!touchState || !stageWrap.classList.contains("is-fullscreen")) return;
+        const n = e.touches.length;
+        if (n !== touchState.fingers) return;
+        let sx = 0, sy = 0;
+        for (let i = 0; i < n; i++) {
+          sx += e.touches[i].clientX;
+          sy += e.touches[i].clientY;
+        }
+        const cx = sx / n;
+        const cy = sy / n;
+        const dx = cx - touchState.lastX;
+        const dy = cy - touchState.lastY;
+        touchState.moved += Math.hypot(dx, dy);
+        touchState.lastX = cx;
+        touchState.lastY = cy;
+
+        if (n === 2) {
+          // 2-Finger Pan
+          map.panBy([-dx, -dy], { animate: false });
+        } else if (n === 3) {
+          // 3-Finger 3D Rotation (Bearing + Pitch)
+          map.setBearing(map.getBearing() - dx * 0.38);
+          map.setPitch(Math.max(0, Math.min(60, map.getPitch() - dy * 0.28)));
         }
       },
       { passive: true }
@@ -393,38 +432,23 @@
     stageWrap?.addEventListener(
       "touchend",
       (e) => {
-        if (!multiStart || !stageWrap.classList.contains("is-fullscreen")) return;
-        if (e.touches.length === 0 && e.changedTouches.length > 0) {
-          const endX = e.changedTouches[0].clientX;
-          const endY = e.changedTouches[0].clientY;
-          const dx = endX - multiStart.x;
-          const dy = endY - multiStart.y;
-          const dt = Date.now() - multiStart.t;
-          const fingers = multiStart.fingers;
-          multiStart = null;
+        if (!touchState || !stageWrap.classList.contains("is-fullscreen")) return;
+        if (e.touches.length === 0) {
+          const dt = Date.now() - touchState.t;
+          const moved = touchState.moved;
+          const fingers = touchState.fingers;
+          touchState = null;
 
-          if (fingers === 2) {
-            if (dt < 320 && Math.hypot(dx, dy) < 22) {
-              window.SFX?.tap?.();
-              map.zoomTo(Math.max(1.2, map.getZoom() - 1.4), { duration: 420 });
-              setStatus("2-Finger Tap: Zoomed out.");
-            }
-          } else if (fingers === 3) {
-            if (dy > 48 && Math.abs(dy) > Math.abs(dx)) {
-              exitFullscreen();
-            } else if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) {
-              stepTour(dx < 0 ? 1 : -1);
-            } else if (dt < 450 && Math.hypot(dx, dy) < 28) {
-              window.SFX?.tap?.();
-              map.flyTo({
-                center: [22, 24],
-                zoom: 1.5,
-                pitch: is3D ? 42 : 0,
-                bearing: -10,
-                duration: 1100
-              });
-              setStatus("3-Finger Tap: Full World reset.");
-            }
+          if (fingers === 3 && dt < 340 && moved < 22) {
+            window.SFX?.tap?.();
+            map.flyTo({
+              center: [22, 24],
+              zoom: 1.5,
+              pitch: is3D ? 42 : 0,
+              bearing: -10,
+              duration: 1100
+            });
+            setStatus("3-Finger Tap: Full World reset.");
           }
         }
       },
