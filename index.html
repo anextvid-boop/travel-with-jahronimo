@@ -518,6 +518,45 @@
     }
     .launch-intro-skip:hover { border-color: var(--accent); transform: translateY(-1px); }
 
+    /* Featured Big 2027 Goal Card */
+    details.acc-card.goal-featured {
+      border: 1.5px solid var(--accent);
+      background: linear-gradient(160deg, #fffdf8 0%, #eef7f4 55%, #fef6e4 100%);
+    }
+    details.acc-card.goal-featured > summary {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
+      padding: 22px;
+    }
+    .goal-summary-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .goal-big-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.6rem, 4.5vw, 2.2rem);
+      font-weight: 800;
+      color: var(--accent-dark);
+      line-height: 1;
+    }
+    .goal-mini-world {
+      width: 100%;
+      height: 150px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #e5eee9;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .goal-mini-world svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -1850,20 +1889,63 @@
       </div>
     </details>
 
-    <!-- COLLAPSIBLE WINDOW 4: 2027 Goals -->
-    <details class="acc-card" open>
+    <!-- COLLAPSIBLE WINDOW 4: 2027 Goals (Big Featured Card + 13-Country Map -> Press to Expand) -->
+    <details class="acc-card goal-featured">
       <summary>
-        <div class="acc-head-left">
-          <div class="acc-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        <div class="goal-summary-top">
+          <div class="acc-head-left">
+            <div class="acc-icon" style="width:46px;height:46px;background:var(--accent);color:#fff;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            </div>
+            <div>
+              <div class="section-kicker" style="margin-bottom:2px;">2027 MISSION · PRESS TO EXPAND</div>
+              <div class="acc-title" style="font-size:1.25rem;" data-i18n="goalsTitle">2027 Goals · 13 Different Countries</div>
+              <div class="acc-sub" data-i18n="goalsSub">Slow travel milestones, skill swaps &amp; 13-country map tracker</div>
+            </div>
           </div>
-          <img class="acc-thumb" src="assets/win-goals.jpg" alt="2027 Goals banner" loading="lazy" />
-          <div>
-            <div class="acc-title" data-i18n="goalsTitle">2027 Goals · 13 Different Countries</div>
-            <div class="acc-sub" data-i18n="goalsSub">Slow travel milestones, skill swaps &amp; country tracker</div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div class="goal-big-num">13</div>
+            <div style="font-size:0.7rem;font-weight:800;color:var(--muted);letter-spacing:0.06em;">COUNTRIES</div>
           </div>
         </div>
-        <svg class="acc-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"/></svg>
+
+        <!-- Inline 13-Country Mini World Map -->
+        <div class="goal-mini-world">
+          <svg viewBox="0 0 600 160" preserveAspectRatio="xMidYMid slice">
+            <rect width="600" height="160" fill="#e5eee9"/>
+            <g fill="#dfd2bc" stroke="#c5b499" stroke-width="1">
+              <path d="M55 32 L115 26 L138 56 L105 84 L62 76 Z"/>
+              <path d="M110 92 L145 96 L152 138 L124 150 L108 124 Z"/>
+              <path d="M250 26 L325 22 L344 52 L292 68 L248 56 Z"/>
+              <path d="M258 76 L328 74 L350 112 L318 148 L272 136 L252 102 Z"/>
+              <path d="M336 28 L468 24 L515 62 L475 96 L385 94 L338 66 Z"/>
+              <path d="M448 118 L518 116 L536 142 L486 148 Z"/>
+            </g>
+            <path class="route-arc" d="M268 38 Q265 56 266 64 Q340 52 444 82 Q474 106 492 126" stroke-width="2.2"/>
+            <circle class="pin-pulse" cx="268" cy="38" r="6"/>
+            <circle cx="268" cy="38" r="4" fill="#16a34a" stroke="#fff" stroke-width="1.5"/>
+            <circle cx="266" cy="64" r="3.5" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+            <circle cx="258" cy="62" r="3" fill="#0f766e" stroke="#fff" stroke-width="1.2"/>
+            <circle cx="268" cy="78" r="3" fill="#0f766e" stroke="#fff" stroke-width="1.2"/>
+            <circle cx="294" cy="54" r="3" fill="#0f766e" stroke="#fff" stroke-width="1.2"/>
+            <circle cx="312" cy="48" r="3" fill="#0f766e" stroke="#fff" stroke-width="1.2"/>
+            <circle cx="332" cy="56" r="3" fill="#0f766e" stroke="#fff" stroke-width="1.2"/>
+            <circle cx="444" cy="82" r="3.8" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+            <circle cx="464" cy="88" r="3" fill="#0f766e" stroke="#fff" stroke-width="1.2"/>
+            <circle cx="458" cy="102" r="3" fill="#0f766e" stroke="#fff" stroke-width="1.2"/>
+            <circle cx="492" cy="126" r="4" fill="#b45309" stroke="#fff" stroke-width="1.5"/>
+            <circle cx="498" cy="60" r="3" fill="#b45309" stroke="#fff" stroke-width="1.2"/>
+            <circle cx="482" cy="56" r="3" fill="#b45309" stroke="#fff" stroke-width="1.2"/>
+          </svg>
+        </div>
+
+        <div class="goal-hero-bar" style="margin-bottom:0;">
+          <div class="goal-bar-head" style="font-size:0.86rem;">
+            <span data-i18n="goalMainLabel">🌍 2027 Mission: Visit 13 Different Countries</span>
+            <span>2 / 13</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill"></div></div>
+        </div>
       </summary>
       <div class="acc-body">
         <img class="win-banner" src="assets/win-goals.jpg" alt="2027 Goal 13 countries globe" loading="lazy" />
