@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Admin CRM · Travel With Jahronimo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f1e5;
+      --surface: #fffdf8;
+      --surface-soft: #faf4e8;
+      --ink: #1b1d1f;
+      --muted: #5c5a54;
+      --line: #e2d6c3;
+      --accent: #0f766e;
+      --accent-dark: #0a5852;
+      --accent-soft: #e3f3ef;
+      --wa: #16a34a;
+      --shadow: 0 20px 44px rgba(45, 34, 18, 0.14), 0 8px 18px rgba(45, 34, 18, 0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 24px 16px 64px;
+    }
+    .wrap { max-width: 960px; margin: 0 auto; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    h1, h2 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .kicker {
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.09em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+    }
+    .field {
+      width: 100%; padding: 11px 13px; border-radius: 12px;
+      border: 1px solid var(--line); background: var(--surface-soft);
+      font-family: inherit; font-size: 0.92rem; color: var(--ink); margin-bottom: 10px;
+    }
+    .field:focus { outline: none; border-color: var(--accent); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+      padding: 11px 18px; border-radius: 12px; border: 1px solid transparent;
+      font-weight: 700; font-size: 0.88rem; cursor: pointer; text-decoration: none;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-dark); }
+    .btn-wa { background: var(--wa); color: #fff; }
+    .btn-ghost { background: var(--surface-soft); color: var(--ink); border-color: var(--line); }
+    .topbar {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 12px; margin-bottom: 18px;
+    }
+    .stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px;
+    }
+    .stat-box {
+      background: var(--surface-soft); border: 1px solid var(--line);
+      border-radius: 14px; padding: 14px; text-align: center;
+    }
+    .stat-num { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--accent-dark); }
+    .stat-lbl { font-size: 0.76rem; font-weight: 700; color: var(--muted); }
+    .crm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+    .contact-card {
+      background: var(--surface-soft); border: 1px solid var(--line);
+      border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .c-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .c-name { font-weight: 800; font-size: 1rem; }
+    .c-badge {
+      font-size: 0.72rem; font-weight: 800; padding: 3px 9px; border-radius: 999px;
+      background: var(--accent-soft); color: var(--accent-dark);
+    }
+    .c-meta { font-size: 0.82rem; color: var(--muted); }
+    .c-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .c-actions .btn { padding: 7px 11px; font-size: 0.78rem; }
+    @media (max-width: 640px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- Login Gate -->
+    <div class="card" id="loginCard" style="max-width:440px;margin:48px auto;">
+      <div class="kicker">TRAVEL WITH JAHRONIMO · PRIVATE</div>
+      <h1 style="font-size:1.4rem;margin-bottom:6px;">Admin CRM Login</h1>
+      <p style="font-size:0.86rem;color:var(--muted);margin-bottom:16px;">Sign in to view and manage your travel contacts and helpers.</p>
+      <form id="adminLoginForm">
+        <input class="field" id="admEmail" type="email" placeholder="Admin Email" required />
+        <input class="field" id="admPass" type="password" placeholder="Passcode" required />
+        <div id="admErr" style="font-size:0.82rem;color:#b91c1c;font-weight:700;min-height:18px;margin-bottom:8px;"></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Unlock Admin CRM</button>
+      </form>
+      <div style="margin-top:14px;text-align:center;">
+        <a href="index.html" style="font-size:0.82rem;font-weight:700;color:var(--accent);">← Back to Public Site</a>
+      </div>
+    </div>
+
+    <!-- CRM Dashboard -->
+    <div id="crmApp" style="display:none;">
+      <div class="topbar">
+        <div>
+          <div class="kicker">ADMIN CRM &amp; CONTACT LIST</div>
+          <h1 style="font-size:1.5rem;">Travel Contacts &amp; Helpers</h1>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <a href="index.html" class="btn btn-ghost">← Public Site</a>
+          <button type="button" class="btn btn-ghost" id="exportCsvBtn">⬇ Export CSV</button>
+          <button type="button" class="btn btn-ghost" id="logoutBtn">Log Out</button>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-box"><div class="stat-num" id="statTotal">0</div><div class="stat-lbl">Total Contacts</div></div>
+        <div class="stat-box"><div class="stat-num" id="statNew">0</div><div class="stat-lbl">New Leads</div></div>
+        <div class="stat-box"><div class="stat-num" id="statChat">0</div><div class="stat-lbl">Chatting</div></div>
+        <div class="stat-box"><div class="stat-num" id="statBooked">0</div><div class="stat-lbl">Booked / Met</div></div>
+      </div>
+
+      <!-- Add Contact Form -->
+      <div class="card">
+        <div class="kicker">ADD CONTACT</div>
+        <form id="addContactForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;align-items:start;">
+          <input class="field" id="cName" type="text" placeholder="Name" required style="margin:0;" />
+          <input class="field" id="cCity" type="text" placeholder="City / Country" required style="margin:0;" />
+          <input class="field" id="cEmail" type="text" placeholder="Email or WhatsApp" required style="margin:0;" />
+          <select class="field" id="cOffer" style="margin:0;">
+            <option value="House / Pet Sit">House / Pet Sit</option>
+            <option value="Paid Video / Web">Paid Video / Web</option>
+            <option value="Fair-Rate Stay">Fair-Rate Stay</option>
+            <option value="Coffee / Local">Coffee / Local</option>
+            <option value="Language Exchange">Language Exchange</option>
+          </select>
+          <input class="field" id="cNotes" type="text" placeholder="Notes (dates, details)" style="margin:0;" />
+          <button type="submit" class="btn btn-primary" style="height:42px;">+ Add to CRM</button>
+        </form>
+      </div>
+
+      <!-- Filter & List -->
+      <div class="card">
+        <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <input class="field" id="searchInput" type="search" placeholder="Search name, city, offer, notes..." style="max-width:340px;margin:0;" />
+          <select class="field" id="statusFilter" style="max-width:180px;margin:0;">
+            <option value="ALL">All Statuses</option>
+            <option value="New">New</option>
+            <option value="Chatting">Chatting</option>
+            <option value="Booked">Booked</option>
+            <option value="Met">Met</option>
+          </select>
+        </div>
+        <div class="crm-grid" id="crmGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_EMAIL = "jahronimo1@hotmail.com";
+    const ADMIN_HASH = "a1b537b10d5d1d0fa6643a0ff091d29389ce71538cbfc4a409b1474a0d1fdc14";
+    const CRM_KEY = "twj_crm_contacts";
+    const SESSION_KEY = "twj_admin_session";
+
+    async function sha256(str) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    function loadContacts() {
+      try {
+        return JSON.parse(localStorage.getItem(CRM_KEY) || "[]");
+      } catch (e) { return []; }
+    }
+    function saveContacts(list) {
+      try { localStorage.setItem(CRM_KEY, JSON.stringify(list)); } catch (e) {}
+    }
+
+    function renderCRM() {
+      const list = loadContacts();
+      const q = (document.getElementById("searchInput").value || "").toLowerCase();
+      const st = document.getElementById("statusFilter").value;
+
+      document.getElementById("statTotal").textContent = list.length;
+      document.getElementById("statNew").textContent = list.filter((c) => c.status === "New").length;
+      document.getElementById("statChat").textContent = list.filter((c) => c.status === "Chatting").length;
+      document.getElementById("statBooked").textContent = list.filter((c) => c.status === "Booked" || c.status === "Met").length;
+
+      const filtered = list.filter((c) => {
+        const matchSt = st === "ALL" || c.status === st;
+        const text = `${c.name} ${c.city} ${c.offer} ${c.contact} ${c.notes || ""}`.toLowerCase();
+        return matchSt && (!q || text.includes(q));
+      });
+
+      const grid = document.getElementById("crmGrid");
+      if (!filtered.length) {
+        grid.innerHTML = `<p style="color:var(--muted);font-size:0.9rem;">No contacts yet. Add one above or sign up via the main page.</p>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((c) => `
+        <div class="contact-card">
+          <div class="c-head">
+            <span class="c-name">${c.name}</span>
+            <span class="c-badge">${c.status || "New"}</span>
+          </div>
+          <div class="c-meta">📍 ${c.city} · ${c.offer}</div>
+          <div class="c-meta">✉️ ${c.contact}</div>
+          ${c.notes ? `<div class="c-meta">📝 ${c.notes}</div>` : ""}
+          <div class="c-actions">
+            <select class="field" data-id="${c.id}" onchange="updateStatus(this)" style="width:auto;padding:5px 8px;font-size:0.78rem;margin:0;">
+              ${["New","Chatting","Booked","Met"].map((s) => `<option value="${s}" ${c.status === s ? "selected" : ""}>${s}</option>`).join("")}
+            </select>
+            ${c.contact.includes("@") ? `<a class="btn btn-ghost" href="mailto:${c.contact}?subject=Travel%20With%20Jahronimo">Email</a>` : ""}
+            <button type="button" class="btn btn-ghost" onclick="deleteContact('${c.id}')" style="color:#b91c1c;">Delete</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    window.updateStatus = function (sel) {
+      const id = sel.getAttribute("data-id");
+      const list = loadContacts().map((c) => c.id === id ? { ...c, status: sel.value } : c);
+      saveContacts(list);
+      renderCRM();
+    };
+
+    window.deleteContact = function (id) {
+      saveContacts(loadContacts().filter((c) => c.id !== id));
+      renderCRM();
+    };
+
+    function showCRM() {
+      document.getElementById("loginCard").style.display = "none";
+      document.getElementById("crmApp").style.display = "block";
+      renderCRM();
+    }
+
+    if (sessionStorage.getItem(SESSION_KEY) === ADMIN_HASH) {
+      showCRM();
+    }
+
+    document.getElementById("adminLoginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const em = document.getElementById("admEmail").value.trim().toLowerCase();
+      const pw = document.getElementById("admPass").value.trim();
+      const hash = await sha256(pw);
+      if (em === ADMIN_EMAIL && hash === ADMIN_HASH) {
+        sessionStorage.setItem(SESSION_KEY, hash);
+        showCRM();
+      } else {
+        document.getElementById("admErr").textContent = "Invalid email or passcode.";
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      sessionStorage.removeItem(SESSION_KEY);
+      location.reload();
+    });
+
+    document.getElementById("addContactForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const list = loadContacts();
+      list.unshift({
+        id: String(Date.now()),
+        name: document.getElementById("cName").value.trim(),
+        city: document.getElementById("cCity").value.trim(),
+        contact: document.getElementById("cEmail").value.trim(),
+        offer: document.getElementById("cOffer").value,
+        notes: document.getElementById("cNotes").value.trim(),
+        status: "New",
+        createdAt: new Date().toISOString().slice(0, 10)
+      });
+      saveContacts(list);
+      e.target.reset();
+      renderCRM();
+    });
+
+    document.getElementById("searchInput").addEventListener("input", renderCRM);
+    document.getElementById("statusFilter").addEventListener("change", renderCRM);
+
+    document.getElementById("exportCsvBtn").addEventListener("click", () => {
+      const list = loadContacts();
+      const rows = [["Name","City","Offer","Contact","Status","Notes","Date"]]
+        .concat(list.map((c) => [c.name, c.city, c.offer, c.contact, c.status, c.notes || "", c.createdAt || ""]));
+      const csv = rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(",")).join("\n");
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+      a.download = "jahronimo-travel-crm.csv";
+      a.click();
+    });
+  </script>
+</body>
+</html>

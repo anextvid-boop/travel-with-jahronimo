@@ -3170,6 +3170,18 @@
           try {
             localStorage.setItem("twj_helper_user", JSON.stringify(profile));
             localStorage.setItem("twj_helper_" + email.toLowerCase(), JSON.stringify(profile));
+            const crmList = JSON.parse(localStorage.getItem("twj_crm_contacts") || "[]");
+            crmList.unshift({
+              id: String(Date.now()),
+              name,
+              city,
+              offer,
+              contact: email,
+              notes: "Signed up via Help / Join modal",
+              status: "New",
+              createdAt: new Date().toISOString().slice(0, 10)
+            });
+            localStorage.setItem("twj_crm_contacts", JSON.stringify(crmList));
           } catch (err) {}
           syncAuthBadge();
           window.TravelSound?.play("waSend");
