@@ -196,6 +196,24 @@
             playTone(523.25, 523.25, 0.08, "triangle", 0.22);
             playTone(659.25, 659.25, 0.11, "triangle", 0.22, 0.06);
             break;
+          case "cta":
+            playTone(440, 587.33, 0.08, "triangle", 0.26, 0);
+            playTone(659.25, 880, 0.11, "sine", 0.22, 0.05);
+            break;
+          case "nav": {
+            const f = PENTATONIC[(opts.index || 0) % PENTATONIC.length];
+            playTone(f * 0.9, f * 1.05, 0.055, "sine", 0.24);
+            break;
+          }
+          case "sparkle":
+            playTone(587.33, 587.33, 0.06, "sine", 0.2, 0);
+            playTone(783.99, 783.99, 0.07, "sine", 0.2, 0.045);
+            playTone(1046.5, 1046.5, 0.12, "triangle", 0.22, 0.09);
+            break;
+          case "lock":
+            playTone(240, 170, 0.06, "square", 0.12, 0);
+            playTone(340, 420, 0.08, "triangle", 0.18, 0.05);
+            break;
         }
       } catch (e) {}
     }
@@ -207,7 +225,13 @@
     open: () => TravelSound.play("modalOpen"),
     close: () => TravelSound.play("modalClose"),
     mapPing: () => TravelSound.play("mapPing"),
-    success: () => TravelSound.play("toastOn")
+    success: () => TravelSound.play("toastOn"),
+    cta: () => TravelSound.play("cta"),
+    nav: (idx = 0) => TravelSound.play("nav", { index: idx }),
+    cardOpen: () => TravelSound.play("modalOpen"),
+    cardClose: () => TravelSound.play("modalClose"),
+    sparkle: () => TravelSound.play("sparkle"),
+    lock: () => TravelSound.play("lock")
   };
 
   document.addEventListener("DOMContentLoaded", () => {

@@ -625,9 +625,9 @@
       const open = menuDrop?.classList.toggle("open");
       menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
     });
-    document.querySelectorAll(".nav-jump-btn[data-jump]").forEach((btn) => {
+    document.querySelectorAll(".nav-jump-btn[data-jump]").forEach((btn, idx) => {
       btn.addEventListener("click", () => {
-        window.SFX?.tap?.();
+        window.SFX?.nav?.(idx);
         menuDrop?.classList.remove("open");
         menuBtn?.setAttribute("aria-expanded", "false");
         const target = document.getElementById(btn.getAttribute("data-jump"));
@@ -675,31 +675,37 @@
       );
       document.querySelectorAll(".reveal").forEach((el) => revObs.observe(el));
 
-      const railObs = new IntersectionObserver(
+      const expandObs = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const id = entry.target.id;
-              railDots.forEach((d) => d.classList.toggle("active", d.getAttribute("data-target") === id));
-              document.querySelectorAll(".tab-btn").forEach((t) => {
-                t.classList.toggle("active", t.getAttribute("data-target") === id);
-              });
-            }
+            entry.target.classList.toggle("is-expanded", entry.isIntersecting);
           });
         },
-        { rootMargin: "-35% 0px -45% 0px" }
+        { rootMargin: "-22% 0px -22% 0px", threshold: 0.2 }
       );
-      sections.forEach((s) => railObs.observe(s));
+      document.querySelectorAll(".reveal").forEach((el) => expandObs.observe(el));
     } else {
       document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
     }
 
-    // Tactile tap light-up on pointerdown
+    // Distinct Sound Voices + Visual Panel Highlight on Press
+    document.getElementById("topJoinBtn")?.addEventListener("click", () => window.SFX?.cta?.());
+    document.getElementById("pinnedWaBtn")?.addEventListener("click", () => window.SFX?.cta?.());
+    document.getElementById("openEmailModalBtn")?.addEventListener("click", () => window.SFX?.cta?.());
+    document.getElementById("authQuickBtn")?.addEventListener("click", () => window.SFX?.lock?.());
+    document.getElementById("copySiteLinkBtn")?.addEventListener("click", () => window.SFX?.sparkle?.());
+
     document.addEventListener("pointerdown", (e) => {
       const fx = e.target.closest(".tap-fx");
       if (!fx) return;
       fx.classList.add("is-lit");
-      setTimeout(() => fx.classList.remove("is-lit"), 240);
+      setTimeout(() => fx.classList.remove("is-lit"), 280);
+
+      const panel = fx.closest(".card, details.acc-card");
+      if (panel) {
+        panel.classList.add("is-pressed-panel");
+        setTimeout(() => panel.classList.remove("is-pressed-panel"), 360);
+      }
     });
   }
 
