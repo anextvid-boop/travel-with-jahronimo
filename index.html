@@ -616,6 +616,22 @@
       line-height: 1.2;
     }
 
+    /* Big Name Display Banner at Top */
+    .big-name-banner {
+      text-align: center;
+      padding: 6px 8px 2px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2.45rem, 8.5vw, 4.1rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.02;
+      color: var(--ink);
+      text-transform: uppercase;
+    }
+    .big-name-banner span {
+      color: var(--accent);
+    }
+
     /* Live Date Banner */
     .date-strip {
       display: flex;
@@ -1386,6 +1402,9 @@
   </header>
 
   <main class="container">
+
+    <!-- Big Name at the Top -->
+    <div class="big-name-banner">JAHRONIMO<span>.</span></div>
 
     <!-- Live Date & 2027 Goal Banner -->
     <div class="date-strip">
