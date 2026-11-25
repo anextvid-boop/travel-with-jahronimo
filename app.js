@@ -262,7 +262,7 @@
               <p class="connect-focus">${item.focus || ""}</p>
               <div class="connect-actions">
                 <a class="btn btn-teal btn-sm tap-fx" href="${waHref}" target="_blank" rel="noopener">WhatsApp</a>
-                <a class="btn btn-outline btn-sm tap-fx" href="mailto:${ADMIN_EMAIL}?subject=${encodeURIComponent("Connect: " + item.region)}">Email</a>
+                <a class="btn btn-outline btn-sm tap-fx" href="mailto:${ADMIN_EMAIL}?subject=${encodeURIComponent("[Travel With Jahronimo] Connect: " + item.region)}">Email</a>
               </div>
             </article>
           `;
