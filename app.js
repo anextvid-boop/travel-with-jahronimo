@@ -495,6 +495,31 @@
 
   // 9. Scroll Reveals, Panel Rail & Tactile Tap Light-Up
   function initMotionAndNav() {
+    // 3-Bar Hamburger Dropdown Fast-Jump Menu
+    const menuBtn = document.getElementById("navMenuBtn");
+    const menuDrop = document.getElementById("navMenuDropdown");
+    menuBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      window.SFX?.tap?.();
+      const open = menuDrop?.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    document.querySelectorAll(".nav-jump-btn[data-jump]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        window.SFX?.tap?.();
+        menuDrop?.classList.remove("open");
+        menuBtn?.setAttribute("aria-expanded", "false");
+        const target = document.getElementById(btn.getAttribute("data-jump"));
+        target?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+    document.addEventListener("click", (e) => {
+      if (menuDrop?.classList.contains("open") && !menuDrop.contains(e.target) && e.target !== menuBtn) {
+        menuDrop.classList.remove("open");
+        menuBtn?.setAttribute("aria-expanded", "false");
+      }
+    });
+
     // Top Tab Bar smooth scroll
     document.querySelectorAll(".tab-btn[data-target]").forEach((btn) => {
       btn.addEventListener("click", () => {

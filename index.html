@@ -122,26 +122,26 @@
     </div>
   </div>
 
-  <!-- Sticky Topbar -->
+  <!-- Sticky Topbar (Brand + Join on Left | 3-Bar Fast Jump on Right | No Sound in Middle) -->
   <header class="topbar">
     <div class="topbar-inner">
-      <div class="brand-wrap">
-        <span class="brand-dot" aria-hidden="true"></span>
-        <span class="brand-name">TRAVEL WITH JAHRONIMO</span>
+      <div class="topbar-left">
+        <div class="brand-wrap">
+          <span class="brand-dot" aria-hidden="true"></span>
+          <span class="brand-name">TRAVEL WITH JAHRONIMO</span>
+        </div>
+        <a id="topJoinBtn" class="top-join-btn tap-fx" href="#quick-whatsapp">Join</a>
       </div>
-      <div class="date-strip">
-        <span id="liveDateText">Loading date…</span>
-        <button id="soundToggleBtn" class="mini-pill tap-fx" type="button" title="Toggle Sound FX">🔊 SFX</button>
-        <button id="musicToggleBtn" class="mini-pill tap-fx" type="button" title="Toggle Lo-Fi Music">🎵 Lo-Fi</button>
-        <button id="authQuickBtn" class="mini-pill tap-fx" type="button" title="Admin Login">🔐 Admin</button>
-      </div>
+      <button id="navMenuBtn" class="hamburger-btn tap-fx" type="button" aria-label="Open areas menu" aria-expanded="false">☰</button>
+      <nav id="navMenuDropdown" class="nav-dropdown" aria-label="Fast jump areas">
+        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-hero">👤 Who I Am</button>
+        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-photos">📸 Photos</button>
+        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-map">🌍 3D World &amp; Countdowns</button>
+        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-info">🃏 Details &amp; FAQ</button>
+        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-connect">🗺️ Connect By Region</button>
+        <button class="nav-jump-btn tap-fx" type="button" data-jump="quick-whatsapp">💬 Join the Story</button>
+      </nav>
     </div>
-    <nav class="top-tab-bar" aria-label="Quick section tabs">
-      <button class="tab-btn active tap-fx" type="button" data-target="sec-hero">About</button>
-      <button class="tab-btn tap-fx" type="button" data-target="sec-map">Globe</button>
-      <button class="tab-btn tap-fx" type="button" data-target="sec-info">Cards</button>
-      <button class="tab-btn tap-fx" type="button" data-target="sec-connect">Connect</button>
-    </nav>
   </header>
 
   <!-- Right-Edge Panel Progress Rail -->
@@ -500,13 +500,19 @@
     </div>
   </section>
 
-  <!-- Pinned Bottom Controls (ONLY ONE WhatsApp Button) -->
-  <button id="openLangBtn" class="pinned-lang tap-fx" type="button" aria-label="Change language">
-    🌐 <span id="currentLangLabel">EN</span>
-  </button>
-  <a id="pinnedWaBtn" class="pinned-wa tap-fx" href="https://wa.me/447538068550" target="_blank" rel="noopener" data-i18n="pinnedWa">
-    💬 Message on WhatsApp
-  </a>
+  <!-- Pinned Bottom Controls: Sound Off Bottom-Left | Admin Login + WhatsApp Bottom-Right -->
+  <div class="pinned-left-group">
+    <button id="soundToggleBtn" class="pinned-sound tap-fx" type="button" aria-label="Toggle Sound">🔊 Sound</button>
+    <button id="openLangBtn" class="pinned-lang tap-fx" type="button" aria-label="Change language">
+      🌐 <span id="currentLangLabel">EN</span>
+    </button>
+  </div>
+  <div class="pinned-right-group">
+    <button id="authQuickBtn" class="pinned-admin tap-fx" type="button" aria-label="Admin Login">🔐 Admin</button>
+    <a id="pinnedWaBtn" class="pinned-wa tap-fx" href="https://wa.me/447538068550" target="_blank" rel="noopener" data-i18n="pinnedWa">
+      💬 WhatsApp
+    </a>
+  </div>
 
   <!-- 16-Language Startup & Picker Modal -->
   <div id="langModal" class="lang-modal-backdrop" role="dialog" aria-modal="true" aria-label="Language selection">
