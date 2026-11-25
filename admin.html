@@ -271,8 +271,9 @@
               <div class="kicker">TRAFFIC &amp; ENGAGEMENT</div>
               <h2 style="font-size:1.2rem;">Page View Analytics</h2>
             </div>
-            <div style="display:flex;gap:8px;">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
               <button type="button" class="btn btn-ghost" id="refreshAnalyticsBtn">↻ Refresh</button>
+              <button type="button" class="btn btn-primary" id="exportAnalyticsBtn">⬇ Save Log (.json)</button>
               <button type="button" class="btn btn-ghost" id="resetAnalyticsBtn">Reset Local</button>
             </div>
           </div>
@@ -288,7 +289,13 @@
           <div id="anDailyBars" style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;height:110px;padding:12px;border-radius:14px;background:var(--surface-soft);border:1px solid var(--line);margin-bottom:16px;"></div>
 
           <h3 style="font-size:0.95rem;margin-bottom:8px;">Top Tapped Areas &amp; Cards</h3>
-          <div id="anTopAreas" style="display:flex;flex-direction:column;gap:6px;font-size:0.86rem;"></div>
+          <div id="anTopAreas" style="display:flex;flex-direction:column;gap:6px;font-size:0.86rem;margin-bottom:16px;"></div>
+
+          <h3 style="font-size:0.95rem;margin-bottom:8px;">Where People Press (Page Tap Heatmap)</h3>
+          <div id="anHeatmapBox" style="position:relative;height:220px;border-radius:14px;background:linear-gradient(180deg,#f9e6cb 0%,#dceaf3 25%,#0b4f4a 50%,#d97742 75%,#c7e5d5 100%);border:1.5px solid var(--line);overflow:hidden;margin-bottom:16px;"></div>
+
+          <h3 style="font-size:0.95rem;margin-bottom:8px;">Recent Press Log (Saved for Later)</h3>
+          <div id="anTapLog" style="display:flex;flex-direction:column;gap:6px;max-height:240px;overflow-y:auto;font-size:0.8rem;"></div>
           <div id="anLastVisit" style="font-size:0.78rem;color:var(--muted);margin-top:12px;"></div>
         </div>
       </div>
@@ -846,12 +853,38 @@
       }
 
       if (areasEl) {
-        const sortedAreas = Object.entries(data.areas || {}).sort((a, b) => b[1] - a[1]);
+        const sortedAreas = Object.entries(data.areas || {}).sort((a, b) => b[1] - a[1]).slice(0, 12);
         areasEl.innerHTML = sortedAreas.length
           ? sortedAreas
-              .map(([name, cnt]) => `<div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:10px;background:var(--surface-soft);border:1px solid var(--line);"><strong>${name}</strong><span>${cnt} taps</span></div>`)
+              .map(([name, cnt]) => `<div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:10px;background:var(--surface-soft);border:1px solid var(--line);"><strong>${name}</strong><span>${cnt} presses</span></div>`)
               .join("")
-          : `<div style="color:var(--muted);">No area taps recorded on this device yet.</div>`;
+          : `<div style="color:var(--muted);">No presses recorded on this device yet.</div>`;
+      }
+
+      const heatEl = document.getElementById("anHeatmapBox");
+      if (heatEl) {
+        const logs = Array.isArray(data.tapLog) ? data.tapLog : [];
+        heatEl.innerHTML = logs.length
+          ? logs
+              .map(
+                (t) =>
+                  `<div title="${t.label} (${t.section})" style="position:absolute;left:${t.xPct}%;top:${t.yPct}%;width:18px;height:18px;transform:translate(-50%,-50%);border-radius:999px;background:radial-gradient(circle,rgba(239,68,68,0.88) 0%,rgba(245,158,11,0.45) 55%,transparent 100%);pointer-events:auto;"></div>`
+              )
+              .join("")
+          : `<div style="position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-weight:800;text-shadow:0 2px 6px rgba(0,0,0,0.5);">Tap around the main page to populate heatmap dots</div>`;
+      }
+
+      const logEl = document.getElementById("anTapLog");
+      if (logEl) {
+        const logs = Array.isArray(data.tapLog) ? data.tapLog.slice(0, 40) : [];
+        logEl.innerHTML = logs.length
+          ? logs
+              .map(
+                (t) =>
+                  `<div style="display:flex;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:10px;background:var(--surface-soft);border:1px solid var(--line);"><span><strong>${t.label}</strong> · ${t.section}</span><span style="color:var(--muted);white-space:nowrap;">${t.device} · ${t.lang?.toUpperCase() || "EN"} · ${new Date(t.at).toLocaleTimeString()}</span></div>`
+              )
+              .join("")
+          : `<div style="color:var(--muted);">No press history yet.</div>`;
       }
 
       if (lastEl) {
@@ -860,6 +893,15 @@
     }
 
     document.getElementById("refreshAnalyticsBtn")?.addEventListener("click", loadAnalyticsPanel);
+    document.getElementById("exportAnalyticsBtn")?.addEventListener("click", () => {
+      const raw = localStorage.getItem("twj_analytics_v1") || "{}";
+      const blob = new Blob([raw], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `twj-press-analytics-${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
     document.getElementById("resetAnalyticsBtn")?.addEventListener("click", () => {
       localStorage.removeItem("twj_analytics_v1");
       loadAnalyticsPanel();
@@ -924,12 +966,38 @@
       }
 
       if (areasEl) {
-        const sortedAreas = Object.entries(data.areas || {}).sort((a, b) => b[1] - a[1]);
+        const sortedAreas = Object.entries(data.areas || {}).sort((a, b) => b[1] - a[1]).slice(0, 12);
         areasEl.innerHTML = sortedAreas.length
           ? sortedAreas
-              .map(([name, cnt]) => `<div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:10px;background:var(--surface-soft);border:1px solid var(--line);"><strong>${name}</strong><span>${cnt} taps</span></div>`)
+              .map(([name, cnt]) => `<div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:10px;background:var(--surface-soft);border:1px solid var(--line);"><strong>${name}</strong><span>${cnt} presses</span></div>`)
               .join("")
-          : `<div style="color:var(--muted);">No area taps recorded on this device yet.</div>`;
+          : `<div style="color:var(--muted);">No presses recorded on this device yet.</div>`;
+      }
+
+      const heatEl = document.getElementById("anHeatmapBox");
+      if (heatEl) {
+        const logs = Array.isArray(data.tapLog) ? data.tapLog : [];
+        heatEl.innerHTML = logs.length
+          ? logs
+              .map(
+                (t) =>
+                  `<div title="${t.label} (${t.section})" style="position:absolute;left:${t.xPct}%;top:${t.yPct}%;width:18px;height:18px;transform:translate(-50%,-50%);border-radius:999px;background:radial-gradient(circle,rgba(239,68,68,0.88) 0%,rgba(245,158,11,0.45) 55%,transparent 100%);pointer-events:auto;"></div>`
+              )
+              .join("")
+          : `<div style="position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-weight:800;text-shadow:0 2px 6px rgba(0,0,0,0.5);">Tap around the main page to populate heatmap dots</div>`;
+      }
+
+      const logEl = document.getElementById("anTapLog");
+      if (logEl) {
+        const logs = Array.isArray(data.tapLog) ? data.tapLog.slice(0, 40) : [];
+        logEl.innerHTML = logs.length
+          ? logs
+              .map(
+                (t) =>
+                  `<div style="display:flex;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:10px;background:var(--surface-soft);border:1px solid var(--line);"><span><strong>${t.label}</strong> · ${t.section}</span><span style="color:var(--muted);white-space:nowrap;">${t.device} · ${t.lang?.toUpperCase() || "EN"} · ${new Date(t.at).toLocaleTimeString()}</span></div>`
+              )
+              .join("")
+          : `<div style="color:var(--muted);">No press history yet.</div>`;
       }
 
       if (lastEl) {
@@ -938,6 +1006,15 @@
     }
 
     document.getElementById("refreshAnalyticsBtn")?.addEventListener("click", loadAnalyticsPanel);
+    document.getElementById("exportAnalyticsBtn")?.addEventListener("click", () => {
+      const raw = localStorage.getItem("twj_analytics_v1") || "{}";
+      const blob = new Blob([raw], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `twj-press-analytics-${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
     document.getElementById("resetAnalyticsBtn")?.addEventListener("click", () => {
       localStorage.removeItem("twj_analytics_v1");
       loadAnalyticsPanel();

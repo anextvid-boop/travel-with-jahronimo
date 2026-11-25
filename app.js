@@ -589,8 +589,8 @@
     });
   }
 
-  // 10. Lightweight Page View & Interaction Analytics
-  function trackAnalyticsEvent(areaName) {
+  // 10. Lightweight Page View & Full Tap/Press Heatmap Analytics
+  function trackAnalyticsEvent(areaName, tapMeta) {
     try {
       const key = "twj_analytics_v1";
       const data = JSON.parse(localStorage.getItem(key) || "null") || {
@@ -599,8 +599,11 @@
         daily: {},
         langs: {},
         areas: {},
+        tapLog: [],
         lastVisit: null
       };
+      if (!Array.isArray(data.tapLog)) data.tapLog = [];
+
       if (areaName === "__pageview__") {
         data.views += 1;
         if (!sessionStorage.getItem("twj_counted_session")) {
@@ -611,13 +614,44 @@
         data.daily[day] = (data.daily[day] || 0) + 1;
         data.langs[currentLang] = (data.langs[currentLang] || 0) + 1;
         data.lastVisit = new Date().toISOString();
-        // Global hit counter (non-blocking)
         fetch("https://api.counterapi.dev/v1/travel-with-jahronimo/pageviews/up").catch(() => {});
       } else if (areaName) {
         data.areas[areaName] = (data.areas[areaName] || 0) + 1;
+        if (tapMeta) {
+          data.tapLog.unshift({
+            label: areaName,
+            section: tapMeta.section || "page",
+            xPct: tapMeta.xPct,
+            yPct: tapMeta.yPct,
+            device: window.innerWidth <= 720 ? "Mobile" : "Desktop",
+            lang: currentLang,
+            at: new Date().toISOString()
+          });
+          if (data.tapLog.length > 200) data.tapLog.length = 200;
+        }
       }
       localStorage.setItem(key, JSON.stringify(data));
     } catch (e) {}
+  }
+
+  function initGlobalTapTracker() {
+    document.addEventListener("click", (e) => {
+      const target = e.target.closest("a, button, summary, .photo-item img, .cd-card, .connect-card");
+      if (!target) return;
+      const sectionEl = target.closest("section[id], header, footer");
+      const section = sectionEl?.id || sectionEl?.tagName?.toLowerCase() || "overlay";
+      const rawText =
+        target.querySelector(".vbtn-title")?.textContent ||
+        target.getAttribute("aria-label") ||
+        target.textContent ||
+        target.id ||
+        "Element";
+      const label = rawText.replace(/\s+/g, " ").trim().slice(0, 48);
+      const xPct = Math.round((e.clientX / Math.max(1, window.innerWidth)) * 100);
+      const docH = Math.max(1, document.documentElement.scrollHeight);
+      const yPct = Math.round(((e.clientY + window.scrollY) / docH) * 100);
+      trackAnalyticsEvent(label, { section, xPct, yPct });
+    });
   }
 
   // Boot
@@ -632,14 +666,6 @@
     initMotionAndNav();
     loadRouteData();
     trackAnalyticsEvent("__pageview__");
-
-    document.getElementById("openWorldCardBtn")?.addEventListener("click", () => trackAnalyticsEvent("3D World Visualiser"));
-    document.getElementById("pinnedWaBtn")?.addEventListener("click", () => trackAnalyticsEvent("WhatsApp"));
-    document.querySelectorAll("details.acc-card summary").forEach((s) => {
-      s.addEventListener("click", () => {
-        const title = s.querySelector(".vbtn-title")?.textContent?.trim();
-        if (title) trackAnalyticsEvent(title);
-      });
-    });
+    initGlobalTapTracker();
   });
 })();
