@@ -63,7 +63,10 @@
       zoom: 2.1,
       pitch: 46,
       bearing: -12,
-      cooperativeGestures: true,
+      cooperativeGestures: false,
+      touchZoomRotate: true,
+      touchPitch: true,
+      dragRotate: true,
       attributionControl: true
     });
 
@@ -306,6 +309,54 @@
         exitFullscreen();
       }
     });
+
+    // Mobile 3-Finger Gestures inside Fullscreen 3D Globe:
+    // - 3-finger tap: Reset to Full World view
+    // - 3-finger swipe down: Exit Fullscreen
+    let threeFingerStartY = null;
+    let threeFingerStartTime = 0;
+
+    stageWrap?.addEventListener(
+      "touchstart",
+      (e) => {
+        if (!stageWrap.classList.contains("is-fullscreen")) return;
+        if (e.touches.length === 3) {
+          threeFingerStartY = (e.touches[0].clientY + e.touches[1].clientY + e.touches[2].clientY) / 3;
+          threeFingerStartTime = Date.now();
+        } else {
+          threeFingerStartY = null;
+        }
+      },
+      { passive: true }
+    );
+
+    stageWrap?.addEventListener(
+      "touchend",
+      (e) => {
+        if (threeFingerStartY === null || !stageWrap.classList.contains("is-fullscreen")) return;
+        if (e.touches.length === 0 && e.changedTouches.length > 0) {
+          const endY = e.changedTouches[0].clientY;
+          const dy = endY - threeFingerStartY;
+          const dt = Date.now() - threeFingerStartTime;
+          threeFingerStartY = null;
+
+          if (dy > 55) {
+            exitFullscreen();
+          } else if (dt < 450 && Math.abs(dy) < 30) {
+            window.SFX?.tap?.();
+            map.flyTo({
+              center: [22, 24],
+              zoom: 1.5,
+              pitch: is3D ? 42 : 0,
+              bearing: -10,
+              duration: 1100
+            });
+            setStatus("3-Finger Tap: Full World reset.");
+          }
+        }
+      },
+      { passive: true }
+    );
 
     // User GPS Pin Helper
     function updateUserPin(lng, lat, fly = true) {
