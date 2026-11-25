@@ -158,6 +158,8 @@
         <div class="stat-box"><div class="stat-num" id="statChat">0</div><div class="stat-lbl">Chatting</div></div>
         <div class="stat-box"><div class="stat-num" id="statBooked">0</div><div class="stat-lbl">Booked / Met</div></div>
         <div class="stat-box"><div class="stat-num" id="statEmailsSent">0</div><div class="stat-lbl">Emails Sent</div></div>
+        <div class="stat-box"><div class="stat-num" id="statFbPosts">0</div><div class="stat-lbl">FB Posts</div></div>
+        <div class="stat-box"><div class="stat-num" id="statFbComments">0</div><div class="stat-lbl">FB Comments</div></div>
       </div>
 
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;" role="tablist">
@@ -362,7 +364,16 @@ Jahronimo</textarea>
               <option value="booked">Booked</option>
             </select>
           </div>
-          <div id="outreachLogList" style="display:flex;flex-direction:column;gap:10px;"></div>
+          <details style="margin-bottom:12px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
+            <summary style="cursor:pointer;font-weight:700;color:var(--ink);" id="sentActionsSummary">📨 Sent Emails, FB Posts &amp; Comments (0)</summary>
+            <div id="outreachLogList" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
+            <div id="fbCommentsList" style="display:flex;flex-direction:column;gap:8px;margin-top:8px;"></div>
+          </details>
+
+          <details style="margin-bottom:12px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
+            <summary style="cursor:pointer;font-weight:700;color:var(--ink);" id="orgDirectorySummary">🏢 Organizations &amp; Emails by Area (0)</summary>
+            <div id="orgDirectoryAccordion" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
+          </details>
         </div>
 
         <div class="card">
@@ -373,8 +384,11 @@ Jahronimo</textarea>
             </div>
             <span id="fbGroupsBadge" class="c-badge">Loading...</span>
           </div>
-          <div id="fbAccountSummary" style="padding:12px 14px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);margin-bottom:14px;font-size:0.88rem;color:var(--ink);"></div>
-          <div id="fbGroupsList" style="display:flex;flex-direction:column;gap:10px;"></div>
+          <div id="fbAccountSummary" style="padding:12px 14px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);margin-bottom:12px;font-size:0.88rem;color:var(--ink);"></div>
+          <details style="border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
+            <summary style="cursor:pointer;font-weight:700;color:var(--ink);" id="fbGroupsSummary">📘 Connected Facebook Groups by Type (0)</summary>
+            <div id="fbGroupsList" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
+          </details>
         </div>
       </div>
 
@@ -757,14 +771,55 @@ Jahronimo</textarea>
       if (olDmsBack) olDmsBack.textContent = outreachFeed.stats?.dmsReplied ?? 0;
       const olFbPosts = document.getElementById("olFbPosts");
       if (olFbPosts) olFbPosts.textContent = outreachFeed.stats?.fbPostsLive ?? 0;
+      const topFbPosts = document.getElementById("statFbPosts");
+      if (topFbPosts) topFbPosts.textContent = outreachFeed.stats?.fbPostsLive ?? 0;
       const olFbComments = document.getElementById("olFbComments");
       if (olFbComments) olFbComments.textContent = outreachFeed.stats?.fbCommentsMade ?? 0;
+      const topFbComments = document.getElementById("statFbComments");
+      if (topFbComments) topFbComments.textContent = outreachFeed.stats?.fbCommentsMade ?? 0;
       const olReplyRate = document.getElementById("olReplyRate");
       if (olReplyRate) olReplyRate.textContent = (outreachFeed.stats?.replyRatePct ?? 0) + "%";
       const olDue = document.getElementById("olFollowUpsDue");
       if (olDue) olDue.textContent = outreachFeed.stats?.followUpsDue ?? 0;
       const olRem = document.getElementById("olRemaining");
       if (olRem) olRem.textContent = outreachFeed.stats?.remainingQueue ?? 0;
+
+      const sentSummary = document.getElementById("sentActionsSummary");
+      if (sentSummary) {
+        const fbTotal = (outreachFeed.stats?.fbPostsLive ?? 0) + (outreachFeed.stats?.fbCommentsMade ?? 0);
+        sentSummary.textContent = `📨 Sent Emails, FB Posts & Comments (${merged.length} Emails/DMs · ${fbTotal} FB Actions)`;
+      }
+
+      const orgAcc = document.getElementById("orgDirectoryAccordion");
+      const orgSum = document.getElementById("orgDirectorySummary");
+      if (orgAcc) {
+        const allLeads = outreachFeed.allLeads || [];
+        if (orgSum) orgSum.textContent = `🏢 Organizations & Emails by Area (${allLeads.length} Leads · ${allLeads.filter((l) => l.channel === "Email").length} Emails)`;
+        const byCat = {};
+        for (const l of allLeads) {
+          const cat = l.category || "Other";
+          if (!byCat[cat]) byCat[cat] = [];
+          byCat[cat].push(l);
+        }
+        orgAcc.innerHTML = Object.entries(byCat).map(([cat, items]) => {
+          const sentN = items.filter((i) => i.status !== "not_contacted").length;
+          return `
+            <details style="border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fff;">
+              <summary style="cursor:pointer;font-size:0.86rem;font-weight:700;color:var(--ink);">
+                ${escOutreach(cat)} <span class="c-badge" style="margin-left:6px;">${items.length} total · ${sentN} sent</span>
+              </summary>
+              <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;">
+                ${items.map((it) => `
+                  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;font-size:0.8rem;padding:6px 8px;border-radius:8px;background:var(--surface-soft);">
+                    <div><strong>${escOutreach(it.name)}</strong> · ${escOutreach(it.cityCountry)}</div>
+                    <div><code>${escOutreach(it.contact)}</code> <span class="c-badge" style="margin-left:4px;">${escOutreach(it.status)}</span></div>
+                  </div>
+                `).join("")}
+              </div>
+            </details>
+          `;
+        }).join("");
+      }
 
       const q = (document.getElementById("outreachSearch")?.value || "").toLowerCase();
       const st = document.getElementById("outreachStatusFilter")?.value || "ALL";
@@ -830,18 +885,52 @@ Jahronimo</textarea>
           `;
         }
         const groups = data.groups || [];
-        listEl.innerHTML = groups.map((g) => `
-          <div style="padding:12px 14px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center;">
-            <div>
-              <a href="${escOutreach(g.groupUrl)}" target="_blank" rel="noopener" style="font-weight:700;color:var(--ink);text-decoration:none;">${escOutreach(g.groupName)} ↗</a>
-              <span class="c-badge" style="margin-left:6px;">${escOutreach(g.status)}</span>
-              ${g.notes ? `<div style="font-size:0.8rem;color:var(--muted);margin-top:3px;">${escOutreach(g.notes)}</div>` : ""}
+        const comments = data.comments || [];
+        const fbSum = document.getElementById("fbGroupsSummary");
+        if (fbSum) fbSum.textContent = `📘 Connected Facebook Groups by Type (${groups.length} Groups · ${data.stats?.joinedCount ?? 0} Joined)`;
+
+        const fbCommentsEl = document.getElementById("fbCommentsList");
+        if (fbCommentsEl && comments.length) {
+          fbCommentsEl.innerHTML = comments.map((cm) => `
+            <div style="padding:10px 12px;border-radius:10px;background:#fff;border:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center;font-size:0.82rem;">
+              <div>
+                <strong>💬 FB Comment: ${escOutreach(cm.groupName)}</strong>
+                <span class="c-badge" style="margin-left:6px;">${escOutreach(cm.status)}</span>
+                <div><a href="${escOutreach(cm.commentUrl)}" target="_blank" rel="noopener">View Live Comment ↗</a></div>
+              </div>
+              <div style="color:var(--muted);">Posted: <strong>${escOutreach(cm.postedAt || "—")}</strong></div>
             </div>
-            <div style="text-align:right;font-size:0.8rem;color:var(--muted);">
-              <div>Posted: <strong>${escOutreach(g.postedAt || "Not yet")}</strong></div>
-              ${g.next48hCheck ? `<div>48h Check: ${escOutreach(g.next48hCheck)}</div>` : ""}
+          `).join("");
+        }
+
+        const byType = {};
+        for (const g of groups) {
+          const t = g.groupType || "General";
+          if (!byType[t]) byType[t] = [];
+          byType[t].push(g);
+        }
+        listEl.innerHTML = Object.entries(byType).map(([gType, items]) => `
+          <details style="border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fff;">
+            <summary style="cursor:pointer;font-size:0.86rem;font-weight:700;color:var(--ink);">
+              ${escOutreach(gType)} <span class="c-badge" style="margin-left:6px;">${items.length} groups</span>
+            </summary>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+              ${items.map((g) => `
+                <div style="padding:8px 10px;border-radius:8px;background:var(--surface-soft);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center;font-size:0.8rem;">
+                  <div>
+                    <a href="${escOutreach(g.groupUrl)}" target="_blank" rel="noopener" style="font-weight:700;color:var(--ink);text-decoration:none;">${escOutreach(g.groupName)} ↗</a>
+                    <span class="c-badge" style="margin-left:6px;">${escOutreach(g.status)}</span>
+                    ${g.postUrl ? `<div><a href="${escOutreach(g.postUrl)}" target="_blank" rel="noopener">View Post / Pending ↗</a></div>` : ""}
+                    ${g.notes ? `<div style="color:var(--muted);margin-top:2px;">${escOutreach(g.notes)}</div>` : ""}
+                  </div>
+                  <div style="text-align:right;color:var(--muted);">
+                    <div>Posted: <strong>${escOutreach(g.postedAt || "Not yet")}</strong></div>
+                    ${g.next48hCheck ? `<div>48h Check: ${escOutreach(g.next48hCheck)}</div>` : ""}
+                  </div>
+                </div>
+              `).join("")}
             </div>
-          </div>
+          </details>
         `).join("");
       } catch (e) {
         if (badge) badge.textContent = "Unavailable";

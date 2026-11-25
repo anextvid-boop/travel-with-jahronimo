@@ -1,17 +1,19 @@
 {
-  "updatedAt": "2026-11-25T16:25:46Z",
+  "updatedAt": "2026-11-25T16:28:45Z",
   "accountName": "Jahronimo Ellis",
   "accountEmail": "jahronimo1@hotmail.com",
   "profileUrl": "https://www.facebook.com/profile.php",
   "stats": {
     "totalGroups": 8,
     "joinedCount": 3,
-    "postedCount": 2
+    "postedCount": 2,
+    "commentsCount": 1
   },
   "groups": [
     {
       "id": "fb01",
       "groupName": "House and Pet Sitting Europe & UK",
+      "groupType": "House & Pet Sitting",
       "groupUrl": "https://www.facebook.com/groups/housesittingeurope/",
       "postUrl": "",
       "postedAt": "",
@@ -23,6 +25,7 @@
     {
       "id": "fb02",
       "groupName": "Expats in Malaga",
+      "groupType": "City Expats & Locals",
       "groupUrl": "https://www.facebook.com/groups/209440851259330/",
       "postUrl": "https://www.facebook.com/groups/209440851259330/posts/1437476018455801/",
       "postedAt": "2026-11-25",
@@ -34,6 +37,7 @@
     {
       "id": "fb03",
       "groupName": "Alicante Pet Sitters & Services (Costa Blanca)",
+      "groupType": "House & Pet Sitting",
       "groupUrl": "https://www.facebook.com/groups/1144770836998604/",
       "postUrl": "https://www.facebook.com/groups/1144770836998604/my_pending_content",
       "postedAt": "2026-11-25",
@@ -45,6 +49,7 @@
     {
       "id": "fb04",
       "groupName": "Tenerife / Canary Islands House Sitting",
+      "groupType": "House & Pet Sitting",
       "groupUrl": "https://www.facebook.com/search/groups/?q=Canary%20Islands%20House%20Sitting",
       "postUrl": "",
       "postedAt": "",
@@ -56,6 +61,7 @@
     {
       "id": "fb05",
       "groupName": "Seville Expats",
+      "groupType": "City Expats & Locals",
       "groupUrl": "https://www.facebook.com/search/groups/?q=Seville%20Expats",
       "postUrl": "",
       "postedAt": "",
@@ -67,6 +73,7 @@
     {
       "id": "fb06",
       "groupName": "Madrid Expats",
+      "groupType": "City Expats & Locals",
       "groupUrl": "https://www.facebook.com/search/groups/?q=Madrid%20Expats",
       "postUrl": "",
       "postedAt": "",
@@ -78,6 +85,7 @@
     {
       "id": "fb07",
       "groupName": "Valencia Expats",
+      "groupType": "City Expats & Locals",
       "groupUrl": "https://www.facebook.com/search/groups/?q=Valencia%20Expats",
       "postUrl": "",
       "postedAt": "",
@@ -89,6 +97,7 @@
     {
       "id": "fb08",
       "groupName": "Barcelona Expats",
+      "groupType": "City Expats & Locals",
       "groupUrl": "https://www.facebook.com/search/groups/?q=Barcelona%20Expats",
       "postUrl": "",
       "postedAt": "",
@@ -96,6 +105,14 @@
       "status": "ready_to_post",
       "responsesCount": 0,
       "notes": "100k+ members; check pinned WhatsApp chats"
+    }
+  ],
+  "comments": [
+    {
+      "groupName": "Expats in Malaga",
+      "commentUrl": "https://www.facebook.com/groups/209440851259330/posts/1434296595440410/?comment_id=1437481485121921",
+      "postedAt": "2026-11-25",
+      "status": "live"
     }
   ]
 }
