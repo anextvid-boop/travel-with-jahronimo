@@ -130,16 +130,16 @@
           <span class="brand-dot" aria-hidden="true"></span>
           <span class="brand-name">TRAVEL WITH JAHRONIMO</span>
         </div>
-        <a id="topJoinBtn" class="top-join-btn tap-fx" href="#quick-whatsapp">Join</a>
+        <a id="topJoinBtn" class="top-join-btn tap-fx" href="#quick-whatsapp" data-i18n="joinTop">Join</a>
       </div>
       <button id="navMenuBtn" class="hamburger-btn tap-fx" type="button" aria-label="Open areas menu" aria-expanded="false">☰</button>
       <nav id="navMenuDropdown" class="nav-dropdown" aria-label="Fast jump areas">
-        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-hero">👤 Who I Am</button>
-        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-photos">📸 Photos</button>
-        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-map">🌍 3D World &amp; Countdowns</button>
-        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-info">🃏 Details &amp; FAQ</button>
-        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-connect">🗺️ Connect By Region</button>
-        <button class="nav-jump-btn tap-fx" type="button" data-jump="quick-whatsapp">💬 Join the Story</button>
+        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-hero" data-i18n="navWho">👤 Who I Am</button>
+        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-photos" data-i18n="navPhotos">📸 Photos</button>
+        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-map" data-i18n="navWorld">🌍 3D World &amp; Countdowns</button>
+        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-info" data-i18n="navCards">🃏 Details &amp; FAQ</button>
+        <button class="nav-jump-btn tap-fx" type="button" data-jump="sec-connect" data-i18n="navConnect">🗺️ Connect By Region</button>
+        <button class="nav-jump-btn tap-fx" type="button" data-jump="quick-whatsapp" data-i18n="navJoin">💬 Join the Story</button>
       </nav>
     </div>
   </header>
@@ -170,13 +170,13 @@
             <h1 class="hero-title" data-i18n="heroTitle">One Carry-On. 13 Countries. Your Home &amp; Pets in Safe Hands.</h1>
             <p class="hero-sub" data-i18n="heroSub">I’m Jahronimo (36) — calm UK remote worker, video &amp; web creator, and trusted house &amp; pet sitter.</p>
             <div class="where-row">
-              <span class="where-pill"><strong>Now:</strong> <span id="whereNowText">Brighton, UK</span></span>
-              <span class="where-pill next"><strong>Next:</strong> <span id="whereNextText">Málaga, Spain (Dec 2026)</span></span>
+              <span class="where-pill"><strong data-i18n="nowLabel">Now:</strong> <span id="whereNowText">Brighton, UK</span></span>
+              <span class="where-pill next"><strong data-i18n="nextLabel">Next:</strong> <span id="whereNextText">Málaga, Spain (Dec 2026)</span></span>
             </div>
             <div class="cta-row">
-              <button id="openAboutHeroBtn" class="btn btn-teal tap-fx" type="button">👤 More About Me</button>
+              <button id="openAboutHeroBtn" class="btn btn-teal tap-fx" type="button" data-i18n="moreAboutBtn">👤 More About Me</button>
               <a class="btn btn-email tap-fx" href="mailto:jahronimo1@hotmail.com?subject=Travel%20With%20Jahronimo" data-i18n="emailBtn">Email Me</a>
-              <a class="btn btn-outline tap-fx" href="#sec-connect">🌍 Connect By Region</a>
+              <a class="btn btn-outline tap-fx" href="#sec-connect" data-i18n="connectRegionBtn">🌍 Connect By Region</a>
             </div>
           </div>
         </div>
@@ -216,7 +216,7 @@
           <figure class="photo-item"><img src="assets/g16.png" alt="Travel portrait 16" loading="lazy" /><figcaption class="photo-cap">Ready</figcaption></figure>
         </div>
         <div class="photo-nav-row">
-          <span>Tap any photo to zoom</span>
+          <span data-i18n="tapZoomHint">Tap any photo to zoom</span>
           <div style="display:flex;gap:8px;">
             <button id="photoPrevBtn" class="photo-nav-btn tap-fx" type="button" aria-label="Scroll photos left">←</button>
             <button id="photoNextBtn" class="photo-nav-btn tap-fx" type="button" aria-label="Scroll photos right">→</button>
@@ -239,12 +239,12 @@
           <img class="vbtn-bg" src="assets/win-world.jpg" alt="3D World Route Preview" style="--bg-pos: center center;" loading="lazy" />
           <div class="vbtn-scrim"></div>
           <div class="vbtn-top">
-            <span class="vbtn-tag">Interactive 3D Globe</span>
-            <span class="vbtn-open">Launch 3D +</span>
+            <span class="vbtn-tag" data-i18n="worldTag">Interactive 3D Globe</span>
+            <span class="vbtn-open" data-i18n="launch3dBtn">Launch 3D +</span>
           </div>
-          <div class="vbtn-title">🌍 Open 3D World Visualiser</div>
+          <div class="vbtn-title" data-i18n="openWorldTitle">🌍 Open 3D World Visualiser</div>
           <div class="vbtn-bottom">
-            <span class="vbtn-sub">1-finger spin · 2-finger pinch/tilt · 3-finger reset</span>
+            <span class="vbtn-sub" data-i18n="worldSub">1-finger spin · 2-finger pinch/tilt · 3-finger reset</span>
           </div>
         </button>
 
@@ -253,7 +253,7 @@
         <!-- Fullscreen-Only Map Container with Exit Fullscreen Button & Controls INSIDE it -->
         <div id="mapStageWrap" class="map-stage-wrap">
           <div id="worldMap3D"></div>
-          <button id="mapFsExitBtn" class="map-fs-exit tap-fx" type="button">✕ Exit Fullscreen</button>
+          <button id="mapFsExitBtn" class="map-fs-exit tap-fx" type="button" data-i18n="exitFsBtn">✕ Exit Fullscreen</button>
           <div style="position:absolute;top:18px;right:14px;z-index:998;padding:6px 12px;border-radius:999px;background:rgba(24,26,29,0.74);color:#fff;font-size:0.72rem;font-weight:700;backdrop-filter:blur(6px);pointer-events:none;">
             1F Spin · 2F Pinch/Tilt · 3F Tap Reset / Swipe ↓ Exit
           </div>
@@ -394,9 +394,9 @@
           <summary class="vbtn-summary" style="--bg-pos: center center;">
             <img class="vbtn-bg" src="assets/loc-malaga.jpg" alt="Spain &amp; Europe sits" loading="lazy" />
             <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag">Upcoming</span><span class="vbtn-open">Open +</span></div>
-            <div class="vbtn-title">Spain &amp; Europe Sits</div>
-            <div class="vbtn-bottom"><span class="vbtn-sub">Málaga · Valencia · Lisbon · Italy</span></div>
+            <div class="vbtn-top"><span class="vbtn-tag">Upcoming</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
+            <div class="vbtn-title" data-i18n="spainTitle">Spain &amp; Europe Sits</div>
+            <div class="vbtn-bottom"><span class="vbtn-sub" data-i18n="spainSub">Málaga · Valencia · Lisbon · Italy</span></div>
           </summary>
           <div class="acc-body">
             <ul>
@@ -413,8 +413,8 @@
           <summary class="vbtn-summary" style="--bg-pos: center center;">
             <img class="vbtn-bg" src="assets/win-email.jpg" alt="Email and media kit" loading="lazy" />
             <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag">Direct</span><span class="vbtn-open">Open +</span></div>
-            <div class="vbtn-title">Email &amp; Collaborations</div>
+            <div class="vbtn-top"><span class="vbtn-tag">Direct</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
+            <div class="vbtn-title" data-i18n="emailCardTitle">Email &amp; Collaborations</div>
             <div class="vbtn-bottom"><span class="vbtn-sub">jahronimo1@hotmail.com</span></div>
           </summary>
           <div class="acc-body">
@@ -432,9 +432,9 @@
           <summary class="vbtn-summary" style="--bg-pos: center center;">
             <img class="vbtn-bg" src="assets/win-faq.jpg" alt="FAQ" loading="lazy" />
             <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag">FAQ</span><span class="vbtn-open">Open +</span></div>
-            <div class="vbtn-title">Quick Questions &amp; Trust</div>
-            <div class="vbtn-bottom"><span class="vbtn-sub">ID, video call, Wi-Fi &amp; pet routine</span></div>
+            <div class="vbtn-top"><span class="vbtn-tag">FAQ</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
+            <div class="vbtn-title" data-i18n="faqTitle">Quick Questions &amp; Trust</div>
+            <div class="vbtn-bottom"><span class="vbtn-sub" data-i18n="faqSub">ID, video call, Wi-Fi &amp; pet routine</span></div>
           </summary>
           <div class="acc-body">
             <ul>
@@ -455,9 +455,9 @@
     <div class="band-inner">
       <div class="page-break"><span class="page-break-badge">Global Connect Sheet</span></div>
       <article class="card reveal">
-        <div class="section-kicker">Worldwide Availability</div>
-        <h2 class="section-title">Connect Sheet By Region</h2>
-        <p class="hero-sub" style="margin-bottom:14px;">Pick your region to message me with pre-filled dates and context.</p>
+        <div class="section-kicker" data-i18n="connectKicker">Worldwide Availability</div>
+        <h2 class="section-title" data-i18n="connectTitle">Connect Sheet By Region</h2>
+        <p class="hero-sub" style="margin-bottom:14px;" data-i18n="connectSub">Pick your region to message me with pre-filled dates and context.</p>
         <div id="connectGrid" class="connect-grid"></div>
       </article>
 
@@ -470,15 +470,15 @@
           <button class="stop-pill wa-topic-pill tap-fx" type="button" data-wa-msg="Hi Jahronimo! Want to collab on video or a website project:">🎬 Video / Web Collab</button>
           <button class="stop-pill wa-topic-pill tap-fx" type="button" data-wa-msg="Hi Jahronimo! Let’s grab a coffee/walk when you’re in town:">☕ Meet Along The Route</button>
         </div>
-        <input id="waCustomMsg" class="auth-field" type="text" placeholder="Type your message for WhatsApp…" />
+        <input id="waCustomMsg" class="auth-field" type="text" placeholder="Type your message for WhatsApp…" data-i18n-placeholder="waPlaceholder" />
         <div class="cta-row">
           <a id="sendWaCustomBtn" class="btn btn-wa tap-fx" href="https://wa.me/447538068550" target="_blank" rel="noopener" data-i18n="sendWaBtn">Open in WhatsApp</a>
         </div>
       </article>
 
       <article class="card reveal" style="text-align:center;">
-        <div class="section-kicker">Feedback</div>
-        <h3 class="section-title" style="font-size:1.1rem;">Rate This Travel Page</h3>
+        <div class="section-kicker" data-i18n="rateKicker">Feedback</div>
+        <h3 class="section-title" style="font-size:1.1rem;" data-i18n="rateTitle">Rate This Travel Page</h3>
         <div id="starRateRow" style="display:flex;justify-content:center;gap:8px;margin:10px 0;">
           <button class="star-btn tap-fx" type="button" data-star="1" aria-label="1 star">★</button>
           <button class="star-btn tap-fx" type="button" data-star="2" aria-label="2 stars">★</button>
@@ -486,7 +486,7 @@
           <button class="star-btn tap-fx" type="button" data-star="4" aria-label="4 stars">★</button>
           <button class="star-btn tap-fx" type="button" data-star="5" aria-label="5 stars">★</button>
         </div>
-        <div id="starRateMsg" style="font-size:0.84rem;color:var(--muted);font-weight:700;">Tap a star to rate</div>
+        <div id="starRateMsg" style="font-size:0.84rem;color:var(--muted);font-weight:700;" data-i18n="rateHint">Tap a star to rate</div>
       </article>
 
       <footer class="site-footer" style="text-align:center;padding:12px 0 80px;">
@@ -508,7 +508,7 @@
     </button>
   </div>
   <div class="pinned-right-group">
-    <button id="authQuickBtn" class="pinned-admin tap-fx" type="button" aria-label="Admin Login">🔐 Admin</button>
+    <button id="authQuickBtn" class="pinned-admin tap-fx" type="button" aria-label="Admin Login" data-i18n="adminBtnLabel">🔐 Admin</button>
     <a id="pinnedWaBtn" class="pinned-wa tap-fx" href="https://wa.me/447538068550" target="_blank" rel="noopener" data-i18n="pinnedWa">
       💬 WhatsApp
     </a>

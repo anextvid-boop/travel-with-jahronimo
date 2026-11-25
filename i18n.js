@@ -488,3 +488,206 @@ window.TRANSLATIONS = {
     waBoxKicker: "Hikayeye Katıl", waBoxTitle: "Hikayeye Katıl · WhatsApp", waBoxSub: "Bir konu seçin veya yazın.", sendWaBtn: "WhatsApp ile Gönder"
   }
 };
+
+(function mergeExtraTranslations() {
+  const EXTRA = {
+    en: {
+      joinTop: "Join", navWho: "👤 Who I Am", navPhotos: "📸 Photos", navWorld: "🌍 3D World & Countdowns",
+      navCards: "🃏 Details & FAQ", navConnect: "🗺️ Connect By Region", navJoin: "💬 Join the Story",
+      moreAboutBtn: "👤 More About Me", connectRegionBtn: "🌍 Connect By Region", nowLabel: "Now:", nextLabel: "Next:",
+      tapZoomHint: "Tap any photo to zoom", worldTag: "Interactive 3D Globe", launch3dBtn: "Launch 3D +",
+      openWorldTitle: "🌍 Open 3D World Visualiser", worldSub: "1-finger spin · 2-finger pinch/tilt · 3-finger reset",
+      exitFsBtn: "✕ Exit Fullscreen", openPlus: "Open +", spainTitle: "Spain & Europe Sits", spainSub: "Málaga · Valencia · Lisbon · Italy",
+      emailCardTitle: "Email & Collaborations", faqTitle: "Quick Questions & Trust", faqSub: "ID, video call, Wi-Fi & pet routine",
+      connectKicker: "Worldwide Availability", connectTitle: "Connect Sheet By Region", connectSub: "Pick your region to message me with pre-filled dates and context.",
+      rateKicker: "Feedback", rateTitle: "Rate This Travel Page", rateHint: "Tap a star to rate",
+      waPlaceholder: "Type your message for WhatsApp…", adminBtnLabel: "🔐 Admin"
+    },
+    es: {
+      joinTop: "Unirse", navWho: "👤 Sobre mí", navPhotos: "📸 Fotos", navWorld: "🌍 Globo 3D y Cuenta atrás",
+      navCards: "🃏 Detalles y FAQ", navConnect: "🗺️ Conectar por Región", navJoin: "💬 Únete a la Historia",
+      moreAboutBtn: "👤 Más sobre mí", connectRegionBtn: "🌍 Conectar por Región", nowLabel: "Ahora:", nextLabel: "Siguiente:",
+      tapZoomHint: "Toca cualquier foto para ampliar", worldTag: "Globo 3D Interactivo", launch3dBtn: "Abrir 3D +",
+      openWorldTitle: "🌍 Abrir Visualizador Mundial 3D", worldSub: "1 dedo girar · 2 dedos zoom/inclinación · 3 dedos reiniciar",
+      exitFsBtn: "✕ Salir de Pantalla Completa", openPlus: "Abrir +", spainTitle: "Cuidado en España y Europa", spainSub: "Málaga · Valencia · Lisboa · Italia",
+      emailCardTitle: "Email y Colaboraciones", faqTitle: "Preguntas Rápidas y Confianza", faqSub: "ID, videollamada, Wi-Fi y mascotas",
+      connectKicker: "Disponibilidad Mundial", connectTitle: "Hoja de Contacto por Región", connectSub: "Elige tu región para enviarme fechas y detalles.",
+      rateKicker: "Opinión", rateTitle: "Valora esta Página", rateHint: "Toca una estrella para valorar",
+      waPlaceholder: "Escribe tu mensaje para WhatsApp…", adminBtnLabel: "🔐 Admin"
+    },
+    pt: {
+      joinTop: "Participar", navWho: "👤 Quem Sou", navPhotos: "📸 Fotos", navWorld: "🌍 Globo 3D e Contagem",
+      navCards: "🃏 Detalhes e FAQ", navConnect: "🗺️ Conectar por Região", navJoin: "💬 Junte-se à História",
+      moreAboutBtn: "👤 Mais Sobre Mim", connectRegionBtn: "🌍 Conectar por Região", nowLabel: "Agora:", nextLabel: "Próximo:",
+      tapZoomHint: "Toque em qualquer foto para ampliar", worldTag: "Globo 3D Interativo", launch3dBtn: "Abrir 3D +",
+      openWorldTitle: "🌍 Abrir Visualizador Mundial 3D", worldSub: "1 dedo girar · 2 dedos zoom/inclinar · 3 dedos resetar",
+      exitFsBtn: "✕ Sair da Tela Cheia", openPlus: "Abrir +", spainTitle: "Estadias na Espanha e Europa", spainSub: "Málaga · Valência · Lisboa · Itália",
+      emailCardTitle: "Email e Colaborações", faqTitle: "Perguntas Rápidas e Confiança", faqSub: "ID, chamada de vídeo, Wi-Fi e pets",
+      connectKicker: "Disponibilidade Global", connectTitle: "Contato por Região", connectSub: "Escolha sua região para enviar datas e contexto.",
+      rateKicker: "Avaliação", rateTitle: "Avalie esta Página", rateHint: "Toque em uma estrela para avaliar",
+      waPlaceholder: "Digite sua mensagem para o WhatsApp…", adminBtnLabel: "🔐 Admin"
+    },
+    fr: {
+      joinTop: "Rejoindre", navWho: "👤 Qui je suis", navPhotos: "📸 Photos", navWorld: "🌍 Globe 3D et Décompte",
+      navCards: "🃏 Détails et FAQ", navConnect: "🗺️ Contact par Région", navJoin: "💬 Rejoindre l'Histoire",
+      moreAboutBtn: "👤 En savoir plus", connectRegionBtn: "🌍 Contact par Région", nowLabel: "Actuel :", nextLabel: "Suivant :",
+      tapZoomHint: "Touchez une photo pour zoomer", worldTag: "Globe 3D Interactif", launch3dBtn: "Lancer 3D +",
+      openWorldTitle: "🌍 Ouvrir le Globe 3D", worldSub: "1 doigt pivoter · 2 doigts zoom/incliner · 3 doigts réinitialiser",
+      exitFsBtn: "✕ Quitter Plein Écran", openPlus: "Ouvrir +", spainTitle: "Garde en Espagne & Europe", spainSub: "Málaga · Valence · Lisbonne · Italie",
+      emailCardTitle: "Email & Collaborations", faqTitle: "Questions & Confiance", faqSub: "Pièce d'identité, appel vidéo, Wi-Fi",
+      connectKicker: "Disponibilité Mondiale", connectTitle: "Fiche Contact par Région", connectSub: "Choisissez votre région pour m'écrire avec vos dates.",
+      rateKicker: "Avis", rateTitle: "Noter cette Page", rateHint: "Touchez une étoile pour noter",
+      waPlaceholder: "Écrivez votre message WhatsApp…", adminBtnLabel: "🔐 Admin"
+    },
+    ar: {
+      joinTop: "انضم", navWho: "👤 من أنا", navPhotos: "📸 الصور", navWorld: "🌍 الكرة 3D والعد التنازلي",
+      navCards: "🃏 التفاصيل والأسئلة", navConnect: "🗺️ تواصل حسب المنطقة", navJoin: "💬 انضم للقصة",
+      moreAboutBtn: "👤 المزيد عني", connectRegionBtn: "🌍 تواصل حسب المنطقة", nowLabel: "الآن:", nextLabel: "التالي:",
+      tapZoomHint: "اضغط على أي صورة للتكبير", worldTag: "كرة أرضية 3D تفاعلية", launch3dBtn: "فتح 3D +",
+      openWorldTitle: "🌍 فتح العارض العالمي 3D", worldSub: "إصبع واحد للتدوير · إصبعان للتكبير/الإمالة · 3 أصابع لإعادة الضبط",
+      exitFsBtn: "✕ الخروج من ملء الشاشة", openPlus: "فتح +", spainTitle: "إسبانيا وأوروبا", spainSub: "ملقة · فالنسيا · لشبونة · إيطاليا",
+      emailCardTitle: "البريد والتعاون", faqTitle: "أسئلة سريعة والثقة", faqSub: "الهوية، مكالمة فيديو، واي فاي",
+      connectKicker: "التوفر العالمي", connectTitle: "التواصل حسب المنطقة", connectSub: "اختر منطقتك لإرسال التواريخ والتفاصيل.",
+      rateKicker: "تقييم", rateTitle: "قيّم هذه الصفحة", rateHint: "اضغط على نجمة للتقييم",
+      waPlaceholder: "اكتب رسالتك لواتساب…", adminBtnLabel: "🔐 الإدارة"
+    },
+    id: {
+      joinTop: "Gabung", navWho: "👤 Tentang Saya", navPhotos: "📸 Foto", navWorld: "🌍 Globe 3D & Hitung Mundur",
+      navCards: "🃏 Detail & FAQ", navConnect: "🗺️ Hubungi per Wilayah", navJoin: "💬 Ikuti Cerita",
+      moreAboutBtn: "👤 Tentang Saya", connectRegionBtn: "🌍 Hubungi per Wilayah", nowLabel: "Sekarang:", nextLabel: "Berikutnya:",
+      tapZoomHint: "Ketuk foto untuk memperbesar", worldTag: "Globe 3D Interaktif", launch3dBtn: "Buka 3D +",
+      openWorldTitle: "🌍 Buka Visualiser Dunia 3D", worldSub: "1 jari putar · 2 jari zoom/miring · 3 jari reset",
+      exitFsBtn: "✕ Keluar Layar Penuh", openPlus: "Buka +", spainTitle: "Spanyol & Eropa", spainSub: "Málaga · Valencia · Lisbon · Italia",
+      emailCardTitle: "Email & Kolaborasi", faqTitle: "Pertanyaan & Kepercayaan", faqSub: "ID, video call, Wi-Fi & hewan",
+      connectKicker: "Ketersediaan Global", connectTitle: "Kontak per Wilayah", connectSub: "Pilih wilayah Anda untuk mengirim tanggal.",
+      rateKicker: "Ulasan", rateTitle: "Nilai Halaman Ini", rateHint: "Ketuk bintang untuk menilai",
+      waPlaceholder: "Tulis pesan WhatsApp Anda…", adminBtnLabel: "🔐 Admin"
+    },
+    th: {
+      joinTop: "เข้าร่วม", navWho: "👤 เกี่ยวกับฉัน", navPhotos: "📸 รูปภาพ", navWorld: "🌍 ลูกโลก 3D และนับถอยหลัง",
+      navCards: "🃏 รายละเอียด & FAQ", navConnect: "🗺️ ติดต่อตามภูมิภาค", navJoin: "💬 ร่วมเรื่องราว",
+      moreAboutBtn: "👤 ข้อมูลเพิ่มเติม", connectRegionBtn: "🌍 ติดต่อตามภูมิภาค", nowLabel: "ตอนนี้:", nextLabel: "ถัดไป:",
+      tapZoomHint: "แตะรูปเพื่อขยาย", worldTag: "ลูกโลก 3D โต้ตอบได้", launch3dBtn: "เปิด 3D +",
+      openWorldTitle: "🌍 เปิดตัวแสดงผลโลก 3D", worldSub: "1 นิ้วหมุน · 2 นิ้วซูม/เอียง · 3 นิ้วรีเซ็ต",
+      exitFsBtn: "✕ ออกจากเต็มหน้าจอ", openPlus: "เปิด +", spainTitle: "สเปนและยุโรป", spainSub: "มาลากา · บาเลนเซีย · ลิสบอน · อิตาลี",
+      emailCardTitle: "อีเมลและความร่วมมือ", faqTitle: "คำถามที่พบบ่อย", faqSub: "พาสปอร์ต วิดีโอคอล Wi-Fi",
+      connectKicker: "ความพร้อมทั่วโลก", connectTitle: "ติดต่อตามภูมิภาค", connectSub: "เลือกภูมิภาคของคุณเพื่อส่งวันที่",
+      rateKicker: "ให้คะแนน", rateTitle: "ให้คะแนนหน้านี้", rateHint: "แตะดาวเพื่อให้คะแนน",
+      waPlaceholder: "พิมพ์ข้อความสำหรับ WhatsApp…", adminBtnLabel: "🔐 แอดมิน"
+    },
+    vi: {
+      joinTop: "Tham gia", navWho: "👤 Giới thiệu", navPhotos: "📸 Ảnh", navWorld: "🌍 Địa cầu 3D & Đếm ngược",
+      navCards: "🃏 Chi tiết & FAQ", navConnect: "🗺️ Kết nối theo Khu vực", navJoin: "💬 Tham gia Hành trình",
+      moreAboutBtn: "👤 Xem thêm về tôi", connectRegionBtn: "🌍 Kết nối theo Khu vực", nowLabel: "Hiện tại:", nextLabel: "Tiếp theo:",
+      tapZoomHint: "Chạm vào ảnh để phóng to", worldTag: "Địa cầu 3D Tương tác", launch3dBtn: "Mở 3D +",
+      openWorldTitle: "🌍 Mở Trình xem Thế giới 3D", worldSub: "1 ngón xoay · 2 ngón phóng/nghiêng · 3 ngón đặt lại",
+      exitFsBtn: "✕ Thoát Toàn màn hình", openPlus: "Mở +", spainTitle: "Tây Ban Nha & Châu Âu", spainSub: "Málaga · Valencia · Lisbon · Ý",
+      emailCardTitle: "Email & Hợp tác", faqTitle: "Câu hỏi & Tin cậy", faqSub: "Hộ chiếu, video call, Wi-Fi",
+      connectKicker: "Lịch trình Toàn cầu", connectTitle: "Liên hệ theo Khu vực", connectSub: "Chọn khu vực của bạn để nhắn ngày.",
+      rateKicker: "Đánh giá", rateTitle: "Đánh giá Trang này", rateHint: "Chạm sao để đánh giá",
+      waPlaceholder: "Nhập tin nhắn WhatsApp…", adminBtnLabel: "🔐 Quản trị"
+    },
+    de: {
+      joinTop: "Mitmachen", navWho: "👤 Über mich", navPhotos: "📸 Fotos", navWorld: "🌍 3D-Globus & Countdown",
+      navCards: "🃏 Details & FAQ", navConnect: "🗺️ Kontakt nach Region", navJoin: "💬 Teil der Reise werden",
+      moreAboutBtn: "👤 Mehr über mich", connectRegionBtn: "🌍 Kontakt nach Region", nowLabel: "Jetzt:", nextLabel: "Nächster Halt:",
+      tapZoomHint: "Foto antippen zum Zoomen", worldTag: "Interaktiver 3D-Globus", launch3dBtn: "3D öffnen +",
+      openWorldTitle: "🌍 3D-Weltansicht öffnen", worldSub: "1 Finger drehen · 2 Finger zoomen/neigen · 3 Finger Reset",
+      exitFsBtn: "✕ Vollbild beenden", openPlus: "Öffnen +", spainTitle: "Spanien & Europa", spainSub: "Málaga · Valencia · Lissabon · Italien",
+      emailCardTitle: "E-Mail & Zusammenarbeit", faqTitle: "Fragen & Vertrauen", faqSub: "Ausweis, Videoanruf, WLAN",
+      connectKicker: "Weltweite Verfügbarkeit", connectTitle: "Kontakt nach Region", connectSub: "Wähle deine Region für eine direkte Nachricht.",
+      rateKicker: "Feedback", rateTitle: "Seite bewerten", rateHint: "Stern antippen",
+      waPlaceholder: "Nachricht für WhatsApp eingeben…", adminBtnLabel: "🔐 Admin"
+    },
+    it: {
+      joinTop: "Unisciti", navWho: "👤 Chi sono", navPhotos: "📸 Foto", navWorld: "🌍 Globo 3D e Conto alla rovescia",
+      navCards: "🃏 Dettagli e FAQ", navConnect: "🗺️ Contatta per Regione", navJoin: "💬 Unisciti alla Storia",
+      moreAboutBtn: "👤 Più su di me", connectRegionBtn: "🌍 Contatta per Regione", nowLabel: "Ora:", nextLabel: "Prossimo:",
+      tapZoomHint: "Tocca una foto per ingrandire", worldTag: "Globo 3D Interattivo", launch3dBtn: "Apri 3D +",
+      openWorldTitle: "🌍 Apri Visualizzatore Mondo 3D", worldSub: "1 dito ruota · 2 dita zoom/inclina · 3 dita reset",
+      exitFsBtn: "✕ Esci da Schermo Intero", openPlus: "Apri +", spainTitle: "Spagna & Europa", spainSub: "Málaga · Valencia · Lisbona · Italia",
+      emailCardTitle: "Email & Collaborazioni", faqTitle: "Domande & Fiducia", faqSub: "Documento, videochiamata, Wi-Fi",
+      connectKicker: "Disponibilità Globale", connectTitle: "Contatti per Regione", connectSub: "Scegli la tua regione per scrivermi le date.",
+      rateKicker: "Feedback", rateTitle: "Valuta questa Pagina", rateHint: "Tocca una stella per votare",
+      waPlaceholder: "Scrivi il tuo messaggio WhatsApp…", adminBtnLabel: "🔐 Admin"
+    },
+    nl: {
+      joinTop: "Meedoen", navWho: "👤 Wie ik ben", navPhotos: "📸 Foto's", navWorld: "🌍 3D Wereld & Aftellen",
+      navCards: "🃏 Details & FAQ", navConnect: "🗺️ Contact per Regio", navJoin: "💬 Doe mee",
+      moreAboutBtn: "👤 Meer over mij", connectRegionBtn: "🌍 Contact per Regio", nowLabel: "Nu:", nextLabel: "Volgende:",
+      tapZoomHint: "Tik op een foto om te zoomen", worldTag: "Interactieve 3D-Wereldbol", launch3dBtn: "Open 3D +",
+      openWorldTitle: "🌍 Open 3D Wereldweergave", worldSub: "1 vinger draaien · 2 vingers zoom/kantelen · 3 vingers reset",
+      exitFsBtn: "✕ Volledig scherm sluiten", openPlus: "Open +", spainTitle: "Spanje & Europa", spainSub: "Málaga · Valencia · Lissabon · Italië",
+      emailCardTitle: "E-mail & Samenwerking", faqTitle: "Vragen & Vertrouwen", faqSub: "ID, videogesprek, Wi-Fi",
+      connectKicker: "Wereldwijde Beschikbaarheid", connectTitle: "Contact per Regio", connectSub: "Kies je regio om data te sturen.",
+      rateKicker: "Feedback", rateTitle: "Beoordeel deze Pagina", rateHint: "Tik op een ster",
+      waPlaceholder: "Typ je WhatsApp-bericht…", adminBtnLabel: "🔐 Admin"
+    },
+    ja: {
+      joinTop: "参加", navWho: "👤 自己紹介", navPhotos: "📸 写真", navWorld: "🌍 3D地球儀 & カウントダウン",
+      navCards: "🃏 詳細 & FAQ", navConnect: "🗺️ 地域別連絡", navJoin: "💬 ストーリーに参加",
+      moreAboutBtn: "👤 詳しく見る", connectRegionBtn: "🌍 地域別に連絡", nowLabel: "現在:", nextLabel: "次:",
+      tapZoomHint: "写真をタップして拡大", worldTag: "インタラクティブ3D地球儀", launch3dBtn: "3Dを開く +",
+      openWorldTitle: "🌍 3Dワールドビジュアライザーを開く", worldSub: "1本指で回転 · 2本指で拡大/傾き · 3本指でリセット",
+      exitFsBtn: "✕ 全画面を終了", openPlus: "開く +", spainTitle: "スペイン & ヨーロッパ", spainSub: "マラガ · バレンシア · リスボン · イタリア",
+      emailCardTitle: "メール & コラボ", faqTitle: "よくある質問と信頼", faqSub: "ID・ビデオ通話・Wi-Fi",
+      connectKicker: "世界の対応エリア", connectTitle: "地域別コンタクト", connectSub: "地域を選んで日程をお送りください。",
+      rateKicker: "評価", rateTitle: "このページを評価", rateHint: "星をタップして評価",
+      waPlaceholder: "WhatsAppのメッセージを入力…", adminBtnLabel: "🔐 管理"
+    },
+    ko: {
+      joinTop: "참여", navWho: "👤 소개", navPhotos: "📸 사진", navWorld: "🌍 3D 지구본 & 카운트다운",
+      navCards: "🃏 상세 & FAQ", navConnect: "🗺️ 지역별 연락", navJoin: "💬 이야기 참여",
+      moreAboutBtn: "👤 더 알아보기", connectRegionBtn: "🌍 지역별 연락", nowLabel: "현재:", nextLabel: "다음:",
+      tapZoomHint: "사진을 탭하여 확대", worldTag: "인터랙티브 3D 지구본", launch3dBtn: "3D 열기 +",
+      openWorldTitle: "🌍 3D 월드 비주얼라이저 열기", worldSub: "한 손가락 회전 · 두 손가락 확대/기울기 · 세 손가락 초기화",
+      exitFsBtn: "✕ 전체화면 닫기", openPlus: "열기 +", spainTitle: "스페인 & 유럽", spainSub: "말라가 · 발렌시아 · 리스본 · 이탈리아",
+      emailCardTitle: "이메일 & 협업", faqTitle: "자주 묻는 질문", faqSub: "신분증 · 영상통화 · Wi-Fi",
+      connectKicker: "전 세계 일정", connectTitle: "지역별 연락처", connectSub: "지역을 선택해 일정을 보내주세요.",
+      rateKicker: "피드백", rateTitle: "페이지 평가하기", rateHint: "별을 탭해 평가",
+      waPlaceholder: "WhatsApp 메시지 입력…", adminBtnLabel: "🔐 관리자"
+    },
+    zh: {
+      joinTop: "加入", navWho: "👤 关于我", navPhotos: "📸 照片", navWorld: "🌍 3D地球与倒计时",
+      navCards: "🃏 详情与问答", navConnect: "🗺️ 按地区联系", navJoin: "💬 加入故事",
+      moreAboutBtn: "👤 更多介绍", connectRegionBtn: "🌍 按地区联系", nowLabel: "当前:", nextLabel: "下一站:",
+      tapZoomHint: "点击任意照片放大", worldTag: "交互式 3D 地球仪", launch3dBtn: "打开 3D +",
+      openWorldTitle: "🌍 打开 3D 世界视图", worldSub: "单指旋转 · 双指缩放/倾斜 · 三指重置",
+      exitFsBtn: "✕ 退出全屏", openPlus: "打开 +", spainTitle: "西班牙与欧洲看房", spainSub: "马拉加 · 瓦伦西亚 · 里斯本 · 意大利",
+      emailCardTitle: "邮件与合作", faqTitle: "常见问题与信任", faqSub: "证件 · 视频通话 · Wi-Fi",
+      connectKicker: "全球行程", connectTitle: "按地区联系", connectSub: "选择您的地区发送日期与详情。",
+      rateKicker: "反馈", rateTitle: "为本页评分", rateHint: "点击星星评分",
+      waPlaceholder: "输入 WhatsApp 消息…", adminBtnLabel: "🔐 管理"
+    },
+    hi: {
+      joinTop: "जुड़ें", navWho: "👤 मेरे बारे में", navPhotos: "📸 तस्वीरें", navWorld: "🌍 3D ग्लोब और काउंटडाउन",
+      navCards: "🃏 विवरण और FAQ", navConnect: "🗺️ क्षेत्र के अनुसार जुड़ें", navJoin: "💬 कहानी से जुड़ें",
+      moreAboutBtn: "👤 मेरे बारे में और", connectRegionBtn: "🌍 क्षेत्र के अनुसार जुड़ें", nowLabel: "अभी:", nextLabel: "अगला:",
+      tapZoomHint: "ज़ूम करने के लिए फ़ोटो टैप करें", worldTag: "इंटरैक्टिव 3D ग्लोब", launch3dBtn: "3D खोलें +",
+      openWorldTitle: "🌍 3D वर्ल्ड विज़ुअलाइज़र खोलें", worldSub: "1 उंगली घुमाएं · 2 उंगली ज़ूम/झुकाव · 3 उंगली रीसेट",
+      exitFsBtn: "✕ फ़ुलस्क्रीन बंद करें", openPlus: "खोलें +", spainTitle: "स्पेन और यूरोप", spainSub: "मलागा · वालेंसिया · लिस्बन · इटली",
+      emailCardTitle: "ईमेल और सहयोग", faqTitle: "त्वरित प्रश्न और भरोसा", faqSub: "ID, वीडियो कॉल, Wi-Fi",
+      connectKicker: "वैश्विक उपलब्धता", connectTitle: "क्षेत्र के अनुसार संपर्क", connectSub: "तारीखें भेजने के लिए अपना क्षेत्र चुनें।",
+      rateKicker: "प्रतिक्रिया", rateTitle: "इस पेज को रेट करें", rateHint: "रेट करने के लिए स्टार टैप करें",
+      waPlaceholder: "WhatsApp के लिए संदेश लिखें…", adminBtnLabel: "🔐 एडमिन"
+    },
+    tr: {
+      joinTop: "Katıl", navWho: "👤 Hakkımda", navPhotos: "📸 Fotoğraflar", navWorld: "🌍 3D Küre ve Geri Sayım",
+      navCards: "🃏 Detaylar & SSS", navConnect: "🗺️ Bölgeye Göre Bağlan", navJoin: "💬 Hikayeye Katıl",
+      moreAboutBtn: "👤 Hakkımda Daha Fazla", connectRegionBtn: "🌍 Bölgeye Göre Bağlan", nowLabel: "Şimdi:", nextLabel: "Sonraki:",
+      tapZoomHint: "Büyütmek için fotoğrafa dokunun", worldTag: "Etkileşimli 3D Küre", launch3dBtn: "3D Aç +",
+      openWorldTitle: "🌍 3D Dünya Görünümünü Aç", worldSub: "1 parmak döndür · 2 parmak yakınlaştır/eğ · 3 parmak sıfırla",
+      exitFsBtn: "✕ Tam Ekrandan Çık", openPlus: "Aç +", spainTitle: "İspanya & Avrupa", spainSub: "Málaga · Valensiya · Lizbon · İtalya",
+      emailCardTitle: "E-posta & İş Birliği", faqTitle: "Hızlı Sorular & Güven", faqSub: "Kimlik, görüntülü arama, Wi-Fi",
+      connectKicker: "Küresel Uygunluk", connectTitle: "Bölgeye Göre İletişim", connectSub: "Tarih göndermek için bölgenizi seçin.",
+      rateKicker: "Geri Bildirim", rateTitle: "Bu Sayfayı Puanla", rateHint: "Puanlamak için yıldıza dokunun",
+      waPlaceholder: "WhatsApp mesajınızı yazın…", adminBtnLabel: "🔐 Yönetici"
+    }
+  };
+
+  Object.keys(EXTRA).forEach((lang) => {
+    if (window.TRANSLATIONS && window.TRANSLATIONS[lang]) {
+      Object.assign(window.TRANSLATIONS[lang], EXTRA[lang]);
+    }
+  });
+})();

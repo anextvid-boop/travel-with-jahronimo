@@ -75,6 +75,13 @@
       }
     });
 
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-placeholder");
+      if (key && dict[key]) {
+        el.setAttribute("placeholder", dict[key]);
+      }
+    });
+
     const label = document.getElementById("currentLangLabel");
     if (label && dict.code) label.textContent = dict.code;
 
