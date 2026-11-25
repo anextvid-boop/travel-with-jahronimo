@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T21:44:26Z",
+  "updatedAt": "2026-11-25T21:54:00Z",
   "stats": {
     "totalLeads": 270,
     "readyPool": 260,
@@ -141,6 +141,188 @@
       "lastFollowUpAt": "",
       "status": "sent",
       "notes": "Commercial cabin & route launch films"
+    }
+  ],
+  "nextBatch": [
+    {
+      "id": "27",
+      "organization": "Malaysia Airlines",
+      "category": "Airline",
+      "region": "Malaysia / Global",
+      "email": "mktg_maa@malaysiaairlines.com",
+      "priority": "High",
+      "contactRole": "Marketing"
+    },
+    {
+      "id": "32",
+      "organization": "Vietnam Airlines",
+      "category": "Airline",
+      "region": "Vietnam / Global",
+      "email": "public-relations@vietnamairlines.com",
+      "priority": "High",
+      "contactRole": "Public Relations"
+    },
+    {
+      "id": "37",
+      "organization": "Eurostar",
+      "category": "Rail & Coach",
+      "region": "UK / Europe",
+      "email": "collaboration@eurostar.com",
+      "priority": "High",
+      "contactRole": "Brand Collaborations"
+    },
+    {
+      "id": "38",
+      "organization": "Eurostar",
+      "category": "Rail & Coach",
+      "region": "UK / Europe",
+      "email": "partnerships@eurostar.com",
+      "priority": "High",
+      "contactRole": "Partnerships"
+    },
+    {
+      "id": "40",
+      "organization": "FlixBus",
+      "category": "Rail & Coach",
+      "region": "Europe / Global",
+      "email": "marketing@flixbus.com",
+      "priority": "High",
+      "contactRole": "Marketing"
+    },
+    {
+      "id": "41",
+      "organization": "FlixBus",
+      "category": "Rail & Coach",
+      "region": "Europe / Global",
+      "email": "comarketing@flixbus.com",
+      "priority": "High",
+      "contactRole": "Co-Marketing"
+    },
+    {
+      "id": "44",
+      "organization": "Trainline",
+      "category": "Rail & Coach",
+      "region": "UK / Europe",
+      "email": "partnership@thetrainline.com",
+      "priority": "High",
+      "contactRole": "Partnerships"
+    },
+    {
+      "id": "45",
+      "organization": "Trainline",
+      "category": "Rail & Coach",
+      "region": "UK / Europe",
+      "email": "trainlinemedia@thetrainline.com",
+      "priority": "High",
+      "contactRole": "Media Solutions"
+    },
+    {
+      "id": "47",
+      "organization": "Omio",
+      "category": "Rail & Coach",
+      "region": "Europe / Global",
+      "email": "press@omio.com",
+      "priority": "High",
+      "contactRole": "Press / Media"
+    },
+    {
+      "id": "48",
+      "organization": "Meli\u00e1 Hotels International",
+      "category": "Hotel & Resort",
+      "region": "Spain / Global",
+      "email": "influencermarketingprogram@melia.com",
+      "priority": "High",
+      "contactRole": "Influencer Marketing"
+    },
+    {
+      "id": "49",
+      "organization": "Meli\u00e1 Hotels International",
+      "category": "Hotel & Resort",
+      "region": "Spain / Global",
+      "email": "publicidad@melia.com",
+      "priority": "High",
+      "contactRole": "Advertising / Marketing"
+    },
+    {
+      "id": "51",
+      "organization": "NH Hotel Group / Minor",
+      "category": "Hotel & Resort",
+      "region": "Spain / Europe",
+      "email": "communication@nh-hotels.com",
+      "priority": "High",
+      "contactRole": "Corporate Comms"
+    },
+    {
+      "id": "52",
+      "organization": "NH Hotel Group (Spain)",
+      "category": "Hotel & Resort",
+      "region": "Spain",
+      "email": "nh.spain@nh-hotels.com",
+      "priority": "High",
+      "contactRole": "Spain Business Unit"
+    },
+    {
+      "id": "53",
+      "organization": "Minor Hotels (EU & Americas)",
+      "category": "Hotel & Resort",
+      "region": "Europe / Americas",
+      "email": "ai.fernandez@minor-hotels.com",
+      "priority": "High",
+      "contactRole": "PR & Comms"
+    },
+    {
+      "id": "54",
+      "organization": "Barcel\u00f3 Hotel Group",
+      "category": "Hotel & Resort",
+      "region": "Spain / Global",
+      "email": "comunicacion@barcelo.com",
+      "priority": "High",
+      "contactRole": "Corporate Comms / PR"
+    },
+    {
+      "id": "55",
+      "organization": "Iberostar Hotels & Resorts",
+      "category": "Hotel & Resort",
+      "region": "Spain / Global",
+      "email": "prensa@iberostar.com",
+      "priority": "High",
+      "contactRole": "Press / Prensa"
+    },
+    {
+      "id": "57",
+      "organization": "Palladium Hotel Group",
+      "category": "Hotel & Resort",
+      "region": "Ibiza / Madrid",
+      "email": "sandra.polo@palladiumhotelgroup.com",
+      "priority": "High",
+      "contactRole": "Corporate PR"
+    },
+    {
+      "id": "58",
+      "organization": "Palladium Hotel Group",
+      "category": "Hotel & Resort",
+      "region": "Ibiza / Madrid",
+      "email": "elena.garcia@palladiumhotelgroup.com",
+      "priority": "High",
+      "contactRole": "Corporate PR"
+    },
+    {
+      "id": "60",
+      "organization": "Room Mate Hotels",
+      "category": "Hotel & Resort",
+      "region": "Spain / Europe",
+      "email": "comunicacion@room-matehotels.com",
+      "priority": "High",
+      "contactRole": "Corporate Comms"
+    },
+    {
+      "id": "61",
+      "organization": "Room Mate Hotels",
+      "category": "Hotel & Resort",
+      "region": "Spain / Europe",
+      "email": "s.przybisch@room-matehotels.com",
+      "priority": "High",
+      "contactRole": "PR Contact"
     }
   ]
 }

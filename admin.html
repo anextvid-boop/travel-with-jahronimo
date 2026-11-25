@@ -147,6 +147,7 @@
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;">
           <a href="index.html" class="btn btn-ghost">← Public Site</a>
+          <button type="button" class="btn btn-primary" id="refreshAllOutreachBtn">↻ Refresh Outreach</button>
           <button type="button" class="btn btn-ghost" id="exportCsvBtn">⬇ Export CSV</button>
           <button type="button" class="btn btn-ghost" id="logoutBtn">Log Out</button>
         </div>
@@ -162,6 +163,7 @@
         <div class="stat-box"><div class="stat-num" id="statWebMsgs">0</div><div class="stat-lbl">Web Messages</div></div>
         <div class="stat-box"><div class="stat-num" id="statFbPosts">0</div><div class="stat-lbl">FB Posts</div></div>
         <div class="stat-box"><div class="stat-num" id="statFbComments">0</div><div class="stat-lbl">FB Comments</div></div>
+        <div class="stat-box"><div class="stat-num" id="statDmsSent">0</div><div class="stat-lbl">DMs Sent</div></div>
       </div>
 
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;" role="tablist">
@@ -447,9 +449,13 @@ Jahronimo</textarea>
             <div class="stat-box"><div class="stat-num" id="poBooked">0</div><div class="stat-lbl">Booked</div></div>
             <div class="stat-box"><div class="stat-num" id="poReady">0</div><div class="stat-lbl">Ready Pool</div></div>
           </div>
-          <details open style="border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
+          <details open style="margin-bottom:12px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
             <summary style="cursor:pointer;font-weight:700;color:var(--ink);" id="paidOutreachSummary">💼 Confirmed Paid Emails Sent (0)</summary>
             <div id="paidOutreachList" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
+          </details>
+          <details style="border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
+            <summary style="cursor:pointer;font-weight:700;color:var(--ink);" id="paidQueuedSummary">📋 Next 20 Queued Paid Leads (0)</summary>
+            <div id="paidQueuedList" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
           </details>
         </div>
       </div>
@@ -993,8 +999,12 @@ Jahronimo</textarea>
       if (olEmails) olEmails.textContent = emailCount;
       const olEmailsBack = document.getElementById("olEmailsBack");
       if (olEmailsBack) olEmailsBack.textContent = outreachFeed.stats?.emailsReplied ?? 0;
+      const dmChan = (outreachFeed.dailyPlan?.channels || []).find((c) => c.key === "dms");
+      const totalDms = dmChan ? Number(dmChan.finalTotal ?? 0) : Number(outreachFeed.stats?.totalPlatformSent ?? 0);
+      const statDms = document.getElementById("statDmsSent");
+      if (statDms) statDms.textContent = totalDms;
       const olPlat = document.getElementById("olPlatformSent");
-      if (olPlat) olPlat.textContent = platformCount;
+      if (olPlat) olPlat.textContent = totalDms;
       const olDmsBack = document.getElementById("olDmsBack");
       if (olDmsBack) olDmsBack.textContent = outreachFeed.stats?.dmsReplied ?? 0;
       const olFbPosts = document.getElementById("olFbPosts");
@@ -1115,6 +1125,27 @@ Jahronimo</textarea>
         setTxt("poReady", st.readyPool ?? 0);
         setTxt("statPaidEmails", st.confirmedEmailsSent ?? confirmed.length);
         if (sumEl) sumEl.textContent = `💼 Confirmed Paid Emails Sent (${confirmed.length})`;
+        const qListEl = document.getElementById("paidQueuedList");
+        const qSumEl = document.getElementById("paidQueuedSummary");
+        const nextBatch = paidFeed.nextBatch || [];
+        if (qSumEl) qSumEl.textContent = `📋 Next ${nextBatch.length} Queued Paid Leads (${st.readyPool ?? 0} total ready)`;
+        if (qListEl) {
+          qListEl.innerHTML = nextBatch.length
+            ? nextBatch.map((l, idx) => `
+              <div style="padding:8px 12px;border-radius:10px;background:#fff;border:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center;">
+                <div>
+                  <strong>#${idx + 1} ${escOutreach(l.organization)}</strong>
+                  <span class="c-badge" style="margin-left:6px;">${escOutreach(l.category)}</span>
+                  <span class="c-badge" style="margin-left:4px;">${escOutreach(l.priority)}</span>
+                  <div style="font-size:0.8rem;color:var(--muted);margin-top:2px;">
+                    ${escOutreach(l.region)} · <code>${escOutreach(l.email)}</code> (${escOutreach(l.contactRole || "Marketing")})
+                  </div>
+                </div>
+                <span class="c-badge">Queued</span>
+              </div>
+            `).join("")
+            : `<p style="color:var(--muted);font-size:0.88rem;">No queued paid leads remaining.</p>`;
+        }
         if (listEl) {
           listEl.innerHTML = confirmed.length
             ? confirmed.map((r) => `
@@ -1220,6 +1251,9 @@ Jahronimo</textarea>
     document.getElementById("refreshMessagesBtn")?.addEventListener("click", () => {
       loadOutreachHistory();
     });
+    document.getElementById("refreshAllOutreachBtn")?.addEventListener("click", () => {
+      loadOutreachHistory();
+    });
 
     async function loadFacebookGroups() {
       const badge = document.getElementById("fbGroupsBadge");
@@ -1243,7 +1277,7 @@ Jahronimo</textarea>
               &nbsp;·&nbsp; <strong>Posts Sent:</strong> ${data.stats?.postedCount ?? 0}
               &nbsp;·&nbsp; <strong>Dynamic Rotation:</strong> ${rot.dailyTarget ?? 15} comments/day · ${rot.dailyDmTarget ?? 10} DMs/day across ${rot.totalPages ?? 0} pages (${rot.cycleDays ?? 0}-day cycle)
             </div>
-            ${todaysHtml ? `<div style="margin-top:8px;"><strong>Today's 5-Page Queue (Mixed Types):</strong><div style="margin-top:4px;">${todaysHtml}</div></div>` : ""}
+            ${todaysHtml ? `<div style="margin-top:8px;"><strong>Today's ${(rot.todaysBatch || []).length}-Page Queue (Mixed Types):</strong><div style="margin-top:4px;">${todaysHtml}</div></div>` : ""}
           `;
         }
         const groups = data.groups || [];
