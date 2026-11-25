@@ -1,0 +1,47 @@
+{
+  "currentStopKey": "brighton",
+  "nextStopKey": "malaga",
+  "countriesVisited": 2,
+  "countriesGoal": 13,
+  "stops": [
+    { "key": "brighton", "name": "Brighton, UK", "flag": "🇬🇧", "coords": [-0.1372, 50.8225], "zoom": 4.8, "status": "Current", "date": "Now", "targetIso": "", "photo": "assets/loc-brighton.jpg" },
+    { "key": "malaga", "name": "Málaga, Spain", "flag": "🇪🇸", "coords": [-4.4214, 36.7213], "zoom": 5.4, "status": "Next", "date": "Dec 5, 2026", "targetIso": "2026-12-05T09:00:00Z", "photo": "assets/loc-malaga.jpg" },
+    { "key": "valencia", "name": "Valencia, Spain", "flag": "🇪🇸", "coords": [-0.3763, 39.4699], "zoom": 5.4, "status": "Planned", "date": "Dec 18, 2026", "targetIso": "2026-12-18T09:00:00Z", "photo": "assets/loc-valencia.jpg" },
+    { "key": "portugal", "name": "Portugal", "flag": "🇵🇹", "coords": [-9.1393, 38.7223], "zoom": 5.2, "status": "Planned", "date": "Dec 2026", "targetIso": "", "photo": "" },
+    { "key": "morocco", "name": "Morocco", "flag": "🇲🇦", "coords": [-7.9811, 31.6295], "zoom": 4.8, "status": "Planned", "date": "Dec 2026", "targetIso": "", "photo": "" },
+    { "key": "italy", "name": "Italy", "flag": "🇮🇹", "coords": [12.4964, 41.9028], "zoom": 5.0, "status": "Planned", "date": "2027", "targetIso": "", "photo": "" },
+    { "key": "greece", "name": "Greece", "flag": "🇬🇷", "coords": [23.7275, 37.9838], "zoom": 5.0, "status": "Planned", "date": "2027", "targetIso": "", "photo": "" },
+    { "key": "turkey", "name": "Turkey", "flag": "🇹🇷", "coords": [28.9784, 41.0082], "zoom": 4.8, "status": "Planned", "date": "2027", "targetIso": "", "photo": "" },
+    { "key": "thailand", "name": "Thailand", "flag": "🇹🇭", "coords": [100.5018, 13.7563], "zoom": 4.6, "status": "Planned", "date": "Jan 10, 2027", "targetIso": "2027-01-10T09:00:00Z", "photo": "assets/loc-thailand.jpg" },
+    { "key": "malaysia", "name": "Malaysia", "flag": "🇲🇾", "coords": [101.6869, 3.1390], "zoom": 4.8, "status": "Planned", "date": "2027", "targetIso": "", "photo": "" },
+    { "key": "vietnam", "name": "Vietnam", "flag": "🇻🇳", "coords": [105.8342, 21.0278], "zoom": 4.8, "status": "Planned", "date": "2027", "targetIso": "", "photo": "" },
+    { "key": "bali", "name": "Bali, Indonesia", "flag": "🇮🇩", "coords": [115.1889, -8.4095], "zoom": 5.8, "status": "Planned", "date": "Feb 1, 2027", "targetIso": "2027-02-01T09:00:00Z", "photo": "assets/loc-bali.jpg" },
+    { "key": "japan", "name": "Japan", "flag": "🇯🇵", "coords": [139.6917, 35.6895], "zoom": 4.8, "status": "Planned", "date": "2027", "targetIso": "", "photo": "" }
+  ],
+  "connectSheet": [
+    {
+      "region": "🇬🇧 UK & Europe",
+      "cities": "Brighton · London · Sussex · Italy · Greece",
+      "openTo": "House & pet sitting, paid video/web gigs, short-notice local sits.",
+      "waText": "Hi Jahronimo! Reaching out from the UK / Europe regarding:"
+    },
+    {
+      "region": "🇪🇸 Spain & Portugal",
+      "cities": "Málaga · Valencia · Madrid · Lisbon · Algarve",
+      "openTo": "Spanish language exchange, fair-rate rooms, hostel reels/websites, house sits.",
+      "waText": "Hola Jahronimo! Connecting from Spain/Portugal about:"
+    },
+    {
+      "region": "🌴 Southeast Asia",
+      "cities": "Thailand · Bali · Vietnam · Malaysia · Japan",
+      "openTo": "Villa/pet sits, creative collabs with retreats & cafes, remote-friendly bases.",
+      "waText": "Hi Jahronimo! Reaching out from Asia about:"
+    },
+    {
+      "region": "💻 Remote / Worldwide",
+      "cities": "100% Online · Any Timezone",
+      "openTo": "Video editing, short-form reels, websites, SEO & AI automation projects.",
+      "waText": "Hi Jahronimo! Interested in working together remotely on:"
+    }
+  ]
+}

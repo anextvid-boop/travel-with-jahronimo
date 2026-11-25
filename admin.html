@@ -133,6 +133,7 @@
 
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;" role="tablist">
         <button type="button" class="btn btn-primary admin-tab-btn" data-tab="tabCrm">📋 CRM &amp; Contacts</button>
+        <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabRoute">🗺️ Route &amp; Where Next</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabEmergency">🚨 Emergency Protocol</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabBackup">💾 Backup &amp; Restore</button>
       </div>
@@ -260,6 +261,37 @@
         </div>
         <div id="notionSyncBody" style="font-size:0.86rem;color:var(--muted);line-height:1.6;"></div>
       </div>
+      </div>
+
+      <div id="tabRoute" class="admin-tab-panel" style="display:none;">
+        <div class="card">
+          <div class="kicker">LIVE ROUTE &amp; WHERE NEXT</div>
+          <h2 style="font-size:1.2rem;margin-bottom:6px;">Update Current Location, Next Stop &amp; 13-Country Progress</h2>
+          <p style="font-size:0.84rem;color:var(--muted);margin-bottom:14px;">
+            Saves live to this browser (<code>twj_route_override</code>) so the public page &amp; 3D Globe update immediately. Download <code>stops.json</code> to commit changes permanently to GitHub.
+          </p>
+          <div class="row" style="margin-bottom:12px;">
+            <div>
+              <label style="font-size:0.78rem;font-weight:800;">📍 Current Base</label>
+              <select id="rtCurrentStop"></select>
+            </div>
+            <div>
+              <label style="font-size:0.78rem;font-weight:800;">🧭 Where Next</label>
+              <select id="rtNextStop"></select>
+            </div>
+            <div>
+              <label style="font-size:0.78rem;font-weight:800;">🌍 Countries Visited (of 13)</label>
+              <input id="rtVisitedCount" type="number" min="0" max="13" value="2" />
+            </div>
+          </div>
+          <div id="rtStopsList" style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;"></div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+            <button type="button" class="btn btn-primary" id="saveRouteBtn">Save Live Override</button>
+            <button type="button" class="btn btn-ghost" id="downloadStopsJsonBtn">⬇ Download stops.json</button>
+            <button type="button" class="btn btn-ghost" id="resetRouteBtn">Reset to Repo Default</button>
+          </div>
+          <div id="routeSaveStatus" style="font-size:0.82rem;font-weight:700;color:var(--accent-dark);margin-top:10px;"></div>
+        </div>
       </div>
 
       <div id="tabBackup" class="admin-tab-panel" style="display:none;">
@@ -622,7 +654,7 @@
       p.type = p.type === "password" ? "text" : "password";
     });
 
-    // 3-Tab Switching
+    // 4-Tab Switching
     document.querySelectorAll(".admin-tab-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".admin-tab-btn").forEach((b) => {
@@ -637,6 +669,102 @@
         });
       });
     });
+
+    // Route & Where Next Editor
+    const ROUTE_OVERRIDE_KEY = "twj_route_override";
+    let adminRouteData = null;
+
+    async function initRouteEditor() {
+      try {
+        const res = await fetch("data/stops.json?v=" + Date.now());
+        if (res.ok) adminRouteData = await res.json();
+      } catch (e) {}
+      if (!adminRouteData) return;
+
+      try {
+        const ov = JSON.parse(localStorage.getItem(ROUTE_OVERRIDE_KEY) || "null");
+        if (ov && Array.isArray(ov.stops)) adminRouteData = { ...adminRouteData, ...ov };
+      } catch (e) {}
+
+      renderRouteEditor();
+    }
+
+    function renderRouteEditor() {
+      if (!adminRouteData) return;
+      const curSel = document.getElementById("rtCurrentStop");
+      const nxtSel = document.getElementById("rtNextStop");
+      const visInp = document.getElementById("rtVisitedCount");
+      const listEl = document.getElementById("rtStopsList");
+      if (!curSel || !nxtSel || !listEl) return;
+
+      const optsHtml = adminRouteData.stops
+        .map((s) => `<option value="${s.key}">${s.label} (${s.dates || ""})</option>`)
+        .join("");
+      curSel.innerHTML = optsHtml;
+      nxtSel.innerHTML = optsHtml;
+      curSel.value = adminRouteData.currentStopKey || adminRouteData.stops[0]?.key || "";
+      nxtSel.value = adminRouteData.nextStopKey || adminRouteData.stops[1]?.key || "";
+      if (visInp) visInp.value = adminRouteData.countriesVisited ?? 2;
+
+      listEl.innerHTML = adminRouteData.stops
+        .map(
+          (s, idx) => `
+          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px;align-items:center;padding:8px 10px;border-radius:10px;background:var(--surface);border:1px solid var(--line);">
+            <strong style="font-size:0.84rem;">${s.label}</strong>
+            <select data-rt-status="${idx}" style="margin:0;">
+              <option value="current" ${s.status === "current" ? "selected" : ""}>📍 Current</option>
+              <option value="next" ${s.status === "next" ? "selected" : ""}>🧭 Next</option>
+              <option value="visited" ${s.status === "visited" ? "selected" : ""}>✅ Visited</option>
+              <option value="planned" ${s.status === "planned" ? "selected" : ""}>🗺️ Planned</option>
+            </select>
+            <input data-rt-dates="${idx}" type="text" value="${(s.dates || "").replace(/"/g, "&quot;")}" placeholder="Dates" style="margin:0;" />
+          </div>`
+        )
+        .join("");
+    }
+
+    function collectRouteFromForm() {
+      if (!adminRouteData) return null;
+      adminRouteData.currentStopKey = document.getElementById("rtCurrentStop").value;
+      adminRouteData.nextStopKey = document.getElementById("rtNextStop").value;
+      adminRouteData.countriesVisited = Number(document.getElementById("rtVisitedCount").value || 2);
+      document.querySelectorAll("[data-rt-status]").forEach((sel) => {
+        const i = Number(sel.getAttribute("data-rt-status"));
+        if (adminRouteData.stops[i]) adminRouteData.stops[i].status = sel.value;
+      });
+      document.querySelectorAll("[data-rt-dates]").forEach((inp) => {
+        const i = Number(inp.getAttribute("data-rt-dates"));
+        if (adminRouteData.stops[i]) adminRouteData.stops[i].dates = inp.value.trim();
+      });
+      return adminRouteData;
+    }
+
+    document.getElementById("saveRouteBtn")?.addEventListener("click", () => {
+      const updated = collectRouteFromForm();
+      if (!updated) return;
+      localStorage.setItem(ROUTE_OVERRIDE_KEY, JSON.stringify(updated));
+      document.getElementById("routeSaveStatus").textContent = "✅ Live route override saved! Public page & 3D Globe updated.";
+    });
+
+    document.getElementById("downloadStopsJsonBtn")?.addEventListener("click", () => {
+      const updated = collectRouteFromForm();
+      if (!updated) return;
+      const blob = new Blob([JSON.stringify(updated, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "stops.json";
+      a.click();
+      URL.revokeObjectURL(a.href);
+      document.getElementById("routeSaveStatus").textContent = "⬇ Downloaded stops.json — replace mini-site/data/stops.json and push to GitHub.";
+    });
+
+    document.getElementById("resetRouteBtn")?.addEventListener("click", () => {
+      localStorage.removeItem(ROUTE_OVERRIDE_KEY);
+      initRouteEditor();
+      document.getElementById("routeSaveStatus").textContent = "Reset to repository data/stops.json.";
+    });
+
+    initRouteEditor();
 
     // Full JSON Backup & Restore
     document.getElementById("exportJsonBtn")?.addEventListener("click", () => {
