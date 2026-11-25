@@ -311,20 +311,25 @@
     </div>
   </section>
 
-  <!-- BAND 4: TERRACOTTA SAND — 8 VISUAL-BUTTON CARDS (OPEN IN FOCUS WINDOW) -->
+  <!-- BAND 4: TERRACOTTA SAND — ONE UNIFIED EXPANDABLE GUIDE (ABOUT, ITINERARY, SKILLS, GOALS, FAQ) -->
   <section id="sec-info" class="band band-sand">
     <div class="band-inner">
-      <div class="page-break"><span class="page-break-badge">Tap Any Card To Open</span></div>
       <div class="vbtn-grid">
-        <details class="acc-card reveal tap-fx">
-          <summary class="vbtn-summary" style="--bg-pos: center 30%;">
-            <img class="vbtn-bg" src="assets/win-about.jpg" alt="About Jahronimo" loading="lazy" />
+        <details class="acc-card goal-featured reveal tap-fx">
+          <summary class="vbtn-summary" style="--bg-pos: center 30%; min-height: 230px;">
+            <img class="vbtn-bg" src="assets/win-about.jpg" alt="About Jahronimo — Full Guide" loading="lazy" />
             <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag" data-i18n="tagProfile">Profile</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
-            <div class="vbtn-title" data-i18n="aboutKicker">About Me</div>
-            <div class="vbtn-bottom"><span class="vbtn-sub" data-i18n="aboutSub">Remote worker, non-smoker, pet-friendly</span></div>
+            <div class="vbtn-top">
+              <span class="vbtn-tag" data-i18n="tagProfile">Profile · Itinerary · Skills · 2027</span>
+              <span class="vbtn-open" data-i18n="openPlus">Open Full Guide +</span>
+            </div>
+            <div class="vbtn-title" data-i18n="aboutKicker">About Me, Routes &amp; Full Guide</div>
+            <div class="vbtn-bottom">
+              <span class="vbtn-sub" data-i18n="aboutSub">Tap to open profile, itinerary, skills, 13-country goals &amp; FAQ in one page</span>
+            </div>
           </summary>
           <div class="acc-body">
+            <h4 style="font-size:1.05rem;margin-bottom:8px;color:var(--accent-dark);">👤 About Me &amp; Profile</h4>
             <ul>
               <li data-i18n="chip1">🇬🇧 UK Passport (Brighton Base)</li>
               <li data-i18n="chip2">🚭 Non-Smoker &amp; Quiet Lifestyle</li>
@@ -335,38 +340,18 @@
             </ul>
             <p data-i18n="aboutBody">I’m Jahronimo, 36, from Brighton on the UK South Coast. I work remotely in video production, editing, and modern web design while house and pet sitting across Europe, North Africa, and Southeast Asia on my 2027 mission to visit 13 countries.</p>
             <p>Because I work quietly from home during the day, pets get calm, consistent company, regular walks, and zero disruption to their routine. Hosts receive daily photo and video updates, spotless home care, garden/pool checks, and reliable communication from start to finish.</p>
-            <p>Outside of work and pet care, I keep an active, grounded routine—coastal walks, gym training, cooking healthy meals, practising Spanish, and capturing clean travel &amp; lifestyle visuals.</p>
-          </div>
-        </details>
 
-        <details class="acc-card reveal tap-fx">
-          <summary class="vbtn-summary" style="--bg-pos: center center;">
-            <img class="vbtn-bg" src="assets/win-routes.jpg" alt="Travel routes" loading="lazy" />
-            <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag" data-i18n="tagItinerary">Itinerary</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
-            <div class="vbtn-title" data-i18n="routesTitle">Travel Routes</div>
-            <div class="vbtn-bottom"><span class="vbtn-sub" data-i18n="routesSub">Brighton · Málaga · Valencia · Thailand · Bali</span></div>
-          </summary>
-          <div class="acc-body">
+            <hr style="border:none;border-top:1.5px solid var(--line);margin:16px 0;" />
+            <h4 style="font-size:1.05rem;margin-bottom:8px;color:var(--accent-dark);" data-i18n="routesTitle">🗺️ Itinerary &amp; Travel Routes</h4>
             <ul>
-              <li><strong data-i18n="r1Date">Dec 2026:</strong> <span data-i18n="r1Places">Spain · Portugal · Morocco</span> — <span data-i18n="r1Note">House sits &amp; creative sprints</span></li>
+              <li><strong data-i18n="r1Date">Dec 2026:</strong> <span data-i18n="r1Places">Spain · Portugal · Morocco</span> — <span data-i18n="r1Note">House sits &amp; creative sprints (Málaga, Valencia, Lisbon)</span></li>
               <li><strong data-i18n="r2Date">Jan–Feb 2027:</strong> <span data-i18n="r2Places">Thailand · Bali · Vietnam</span> — <span data-i18n="r2Note">Villa care &amp; coastal stays</span></li>
               <li><strong data-i18n="r3Date">Ongoing:</strong> <span data-i18n="r3Places">UK (Brighton)</span> — <span data-i18n="r3Note">Home base</span></li>
             </ul>
-            <p>Every route is updated live in the 3D World Globe above and synced with my travel schedule.</p>
             <p>Flexible windows for 1-week to 6-week sits along Europe, North Africa, and Southeast Asia.</p>
-          </div>
-        </details>
 
-        <details class="acc-card reveal tap-fx">
-          <summary class="vbtn-summary" style="--bg-pos: center center;">
-            <img class="vbtn-bg" src="assets/win-skills.jpg" alt="Skills and hobbies" loading="lazy" />
-            <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag" data-i18n="tagValue">Value</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
-            <div class="vbtn-title" data-i18n="skillsGroupTitle">Interests &amp; Skills</div>
-            <div class="vbtn-bottom"><span class="vbtn-sub" data-i18n="skillsGroupSub">Pet care, home upkeep, video &amp; web</span></div>
-          </summary>
-          <div class="acc-body">
+            <hr style="border:none;border-top:1.5px solid var(--line);margin:16px 0;" />
+            <h4 style="font-size:1.05rem;margin-bottom:8px;color:var(--accent-dark);" data-i18n="skillsGroupTitle">🛠️ Interests, Values &amp; Skills</h4>
             <ul>
               <li data-i18n="s1">🐾 Cat &amp; dog feeding, walks, meds</li>
               <li data-i18n="s2">🌿 Garden, plants &amp; pool checks</li>
@@ -374,108 +359,34 @@
               <li data-i18n="s4">🎬 Video editing &amp; modern websites</li>
               <li data-i18n="s5">⛵ Boat / yacht deck &amp; marina help</li>
             </ul>
-            <p>Need a short promo reel, Airbnb photo refresh, or website fix while I sit? Happy to collaborate.</p>
-            <p>Active daily routine: coastal walks, gym training, healthy cooking, and Spanish practice.</p>
-          </div>
-        </details>
+            <p>Active daily routine: coastal walks, gym training, cooking healthy meals, practising Spanish, and capturing clean travel &amp; lifestyle visuals.</p>
 
-        <details class="acc-card reveal tap-fx">
-          <summary class="vbtn-summary" style="--bg-pos: center center;">
-            <img class="vbtn-bg" src="assets/win-goals.jpg" alt="2027 13 Countries Goal" loading="lazy" />
-            <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag" data-i18n="tagTracker">2027 Tracker</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
-            <div class="vbtn-title" data-i18n="goalsTitle">2027 Goals · 13 Countries</div>
-            <div class="vbtn-bottom"><span class="vbtn-sub" id="countriesProgressText">2 / 13 Countries</span></div>
-          </summary>
-          <div class="acc-body">
-            <div class="goal-progress-wrap" style="margin-bottom:14px;">
-              <div style="font-weight:800;margin-bottom:6px;" data-i18n="goalMainLabel">🌍 2027 Mission: 13 Different Countries</div>
+            <hr style="border:none;border-top:1.5px solid var(--line);margin:16px 0;" />
+            <h4 style="font-size:1.05rem;margin-bottom:8px;color:var(--accent-dark);" data-i18n="goalsTitle">🎯 2027 Goals · 13 Countries</h4>
+            <div class="goal-progress-wrap" style="margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;font-weight:800;margin-bottom:6px;">
+                <span data-i18n="goalMainLabel">🌍 2027 Mission: 13 Different Countries</span>
+                <span id="countriesProgressText">2 / 13 Countries</span>
+              </div>
               <div style="height:12px;border-radius:999px;background:#e5eee9;overflow:hidden;border:1px solid #cbd5e1;">
                 <div id="countriesProgressFill" style="height:100%;width:15%;background:#0f766e;border-radius:999px;transition:width 0.5s ease;"></div>
               </div>
             </div>
             <ul>
               <li><strong data-i18n="g1Title">🗺️ 13 Countries:</strong> <span data-i18n="g1Desc">Europe, North Africa &amp; Asia.</span></li>
-              <li><strong data-i18n="g2Title">🏡 House Sits:</strong> <span data-i18n="g2Desc">5-star host references.</span></li>
+              <li><strong data-i18n="g2Title">🏡 House Sits:</strong> <span data-i18n="g2Desc">5-star host references &amp; daily updates.</span></li>
               <li><strong data-i18n="g3Title">🎬 Video &amp; Web:</strong> <span data-i18n="g3Desc">Host creative collaborations.</span></li>
               <li><strong data-i18n="g4Title">🗣️ Spanish:</strong> <span data-i18n="g4Desc">Conversational fluency.</span></li>
             </ul>
-            <p>Travelling slowly with one carry-on keeps logistics light and commitments reliable.</p>
-          </div>
-        </details>
 
-        <details class="acc-card reveal tap-fx">
-          <summary class="vbtn-summary" style="--bg-pos: center 35%;">
-            <img class="vbtn-bg" src="assets/win-people.jpg" alt="People met" loading="lazy" />
-            <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag" data-i18n="tagCommunity">Community</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
-            <div class="vbtn-title" data-i18n="peopleTitle">People Along The Way</div>
-            <div class="vbtn-bottom"><span class="vbtn-sub" data-i18n="peopleSub">Hosts, friends &amp; stories</span></div>
-          </summary>
-          <div class="acc-body">
+            <hr style="border:none;border-top:1.5px solid var(--line);margin:16px 0;" />
+            <h4 style="font-size:1.05rem;margin-bottom:8px;color:var(--accent-dark);" data-i18n="faqTitle">🤝 People, Trust &amp; Direct Contact</h4>
             <ul>
-              <li><strong data-i18n="tagHome">Base:</strong> Brighton, UK — <span data-i18n="p1Note">Home base on the South Coast.</span></li>
-              <li><strong data-i18n="p2Name">Join My Story:</strong> <span data-i18n="p2Note">Your home, pet, or creative chapter could be next!</span></li>
+              <li>✅ Full UK Passport &amp; verifiable ID shown on 5-min WhatsApp video call</li>
+              <li>✅ <strong>★★★★★ Host Trust Highlights:</strong> Calm daytime presence, daily pet updates, spotless home handover</li>
+              <li>📧 Email: <a href="mailto:jahronimo1@hotmail.com?subject=%5BTravel%20With%20Jahronimo%5D%20Collaboration%20%2F%20House%20Sit">jahronimo1@hotmail.com</a></li>
+              <li>💼 LinkedIn: <a href="https://www.linkedin.com/in/jahronimo-ellis-aa6863437/" target="_blank" rel="noopener">Jahronimo Ellis</a> · 📸 Instagram: <a href="https://instagram.com/Jahronimooo" target="_blank" rel="noopener">@Jahronimooo</a></li>
             </ul>
-            <p>Every sit and collaboration builds lasting friendships across borders.</p>
-            <p>References and live video intros available on request before any commitment.</p>
-          </div>
-        </details>
-
-        <details class="acc-card reveal tap-fx">
-          <summary class="vbtn-summary" style="--bg-pos: center center;">
-            <img class="vbtn-bg" src="assets/loc-malaga.jpg" alt="Spain &amp; Europe sits" loading="lazy" />
-            <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag">Upcoming</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
-            <div class="vbtn-title" data-i18n="spainTitle">Spain &amp; Europe Sits</div>
-            <div class="vbtn-bottom"><span class="vbtn-sub" data-i18n="spainSub">Málaga · Valencia · Lisbon · Italy</span></div>
-          </summary>
-          <div class="acc-body">
-            <ul>
-              <li>📍 Costa del Sol (Málaga / Marbella) — Dec 2026</li>
-              <li>📍 Valencia &amp; East Coast — Jan 2027</li>
-              <li>📍 Lisbon / Algarve &amp; Morocco — Late Jan 2027</li>
-            </ul>
-            <p>Ideal for winter pet sits, coastal villas, and remote-friendly apartments.</p>
-            <p>Fast, direct communication on WhatsApp or email with flexible arrival dates.</p>
-          </div>
-        </details>
-
-        <details class="acc-card reveal tap-fx">
-          <summary class="vbtn-summary" style="--bg-pos: center center;">
-            <img class="vbtn-bg" src="assets/win-email.jpg" alt="Email and media kit" loading="lazy" />
-            <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag">Direct</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
-            <div class="vbtn-title" data-i18n="emailCardTitle">Email &amp; Collaborations</div>
-            <div class="vbtn-bottom"><span class="vbtn-sub">jahronimo1@hotmail.com</span></div>
-          </summary>
-          <div class="acc-body">
-            <ul>
-              <li>📧 Direct Email: <a href="mailto:jahronimo1@hotmail.com?subject=%5BTravel%20With%20Jahronimo%5D%20Collaboration%20%2F%20House%20Sit">jahronimo1@hotmail.com</a></li>
-              <li>💼 LinkedIn: <a href="https://www.linkedin.com/in/jahronimo-ellis-aa6863437/" target="_blank" rel="noopener">Jahronimo Ellis</a></li>
-              <li>📸 Instagram: <a href="https://instagram.com/Jahronimooo" target="_blank" rel="noopener">@Jahronimooo</a></li>
-            </ul>
-            <p>Best for formal house-sit briefs, creative production quotes, and long-term stays.</p>
-            <p>Replies typically within a few hours across UK and European time zones.</p>
-          </div>
-        </details>
-
-        <details class="acc-card reveal tap-fx">
-          <summary class="vbtn-summary" style="--bg-pos: center center;">
-            <img class="vbtn-bg" src="assets/win-faq.jpg" alt="FAQ" loading="lazy" />
-            <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag">FAQ</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
-            <div class="vbtn-title" data-i18n="faqTitle">Quick Questions &amp; Trust</div>
-            <div class="vbtn-bottom"><span class="vbtn-sub" data-i18n="faqSub">ID, video call, Wi-Fi &amp; pet routine</span></div>
-          </summary>
-          <div class="acc-body">
-            <ul>
-              <li>✅ Full UK Passport &amp; verifiable ID shown on video call</li>
-              <li>✅ Non-smoker, clean, quiet, respectful of neighbours</li>
-              <li>✅ Experienced with rescue dogs, indoor cats, &amp; medication</li>
-            </ul>
-            <p><strong>★★★★★ Host Trust Highlights:</strong> Calm daytime presence for pets, daily WhatsApp photo/video updates, and spotless home handover.</p>
-            <p>Always happy to jump on a 5-minute WhatsApp video call so you feel 100% confident — direct communication from day one.</p>
           </div>
         </details>
       </div>
