@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T17:53:20Z",
+  "updatedAt": "2026-11-25T21:34:17Z",
   "stats": {
     "totalLeads": 147,
     "totalOutreachSent": 2,
@@ -13,6 +13,12 @@
     "replyRatePct": 0.0,
     "followUpsDue": 0,
     "remainingQueue": 145
+  },
+  "dailyPlan": {
+    "freeOutreachPerDay": 15,
+    "paidEmailsPerDay": 20,
+    "fbCommentsPerDay": 15,
+    "dmsPerDay": 10
   },
   "emailedRecords": [
     {

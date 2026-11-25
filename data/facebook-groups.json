@@ -1,12 +1,13 @@
 {
-  "updatedAt": "2026-11-25T17:53:20Z",
+  "updatedAt": "2026-11-25T21:34:17Z",
   "accountName": "Jahronimo Ellis",
   "accountEmail": "jahronimo1@hotmail.com",
   "profileUrl": "https://www.facebook.com/profile.php",
   "rotation": {
-    "dailyTarget": 5,
+    "dailyTarget": 15,
+    "dailyDmTarget": 10,
     "totalPages": 125,
-    "cycleDays": 25,
+    "cycleDays": 9,
     "todaysBatch": [
       {
         "id": "fb01",
@@ -52,6 +53,96 @@
         "city": "Lisbon",
         "status": "ready_to_join",
         "groupUrl": "https://www.facebook.com/search/groups/?q=Lisbon%20Digital%20Nomads%20Expats"
+      },
+      {
+        "id": "fb30",
+        "groupName": "Sailboat Hitchhiker's & Crew Worldwide",
+        "groupType": "Boat Crew, Rideshare & Vans",
+        "country": "Global / Worldwide",
+        "city": "Country-Wide / Multi-City",
+        "status": "ready_to_join",
+        "groupUrl": "https://www.facebook.com/search/groups/?q=Sailboat%20Hitchhikers%20Crew"
+      },
+      {
+        "id": "fb04",
+        "groupName": "Pet Sitting in Europe (Canaries / Spain)",
+        "groupType": "House & Pet Sitting",
+        "country": "Spain",
+        "city": "Canary Islands",
+        "status": "joined_ready_to_post",
+        "groupUrl": "https://www.facebook.com/groups/1792977621542372/"
+      },
+      {
+        "id": "fb06",
+        "groupName": "Madrid Expats Group - Internationals",
+        "groupType": "City Expats & Locals",
+        "country": "Spain",
+        "city": "Madrid",
+        "status": "joined_ready_to_post",
+        "groupUrl": "https://www.facebook.com/groups/madridexpatsgroup/"
+      },
+      {
+        "id": "fb11",
+        "groupName": "Valencia Digital Nomads & Remote Workers",
+        "groupType": "Digital Nomads & Skill Swaps",
+        "country": "Spain",
+        "city": "Valencia",
+        "status": "ready_to_join",
+        "groupUrl": "https://www.facebook.com/search/groups/?q=Valencia%20Digital%20Nomads"
+      },
+      {
+        "id": "fb14",
+        "groupName": "Intercambio de idiomas Valencia",
+        "groupType": "Language Exchange",
+        "country": "Spain",
+        "city": "Valencia",
+        "status": "ready_to_join",
+        "groupUrl": "https://www.facebook.com/search/groups/?q=Intercambio%20de%20idiomas%20Valencia"
+      },
+      {
+        "id": "fb26",
+        "groupName": "Sri Lanka Expats & Digital Nomads",
+        "groupType": "Hostel & Work Exchange",
+        "country": "Sri Lanka",
+        "city": "Colombo / Weligama",
+        "status": "ready_to_join",
+        "groupUrl": "https://www.facebook.com/search/groups/?q=Sri%20Lanka%20Digital%20Nomads"
+      },
+      {
+        "id": "fb31",
+        "groupName": "Rideshare Europe",
+        "groupType": "Boat Crew, Rideshare & Vans",
+        "country": "Europe (Multi-Country)",
+        "city": "Country-Wide / Multi-City",
+        "status": "ready_to_join",
+        "groupUrl": "https://www.facebook.com/search/groups/?q=Rideshare%20Europe"
+      },
+      {
+        "id": "fb09",
+        "groupName": "Granada Expats",
+        "groupType": "House & Pet Sitting",
+        "country": "Spain",
+        "city": "Granada",
+        "status": "ready_to_join",
+        "groupUrl": "https://www.facebook.com/search/groups/?q=Granada%20Expats"
+      },
+      {
+        "id": "fb07",
+        "groupName": "Expats Valencia",
+        "groupType": "City Expats & Locals",
+        "country": "Spain",
+        "city": "Valencia",
+        "status": "joined_ready_to_post",
+        "groupUrl": "https://www.facebook.com/groups/1411999335713930/"
+      },
+      {
+        "id": "fb12",
+        "groupName": "Madrid Digital Nomads",
+        "groupType": "Digital Nomads & Skill Swaps",
+        "country": "Spain",
+        "city": "Madrid",
+        "status": "ready_to_join",
+        "groupUrl": "https://www.facebook.com/search/groups/?q=Madrid%20Digital%20Nomads"
       }
     ]
   },
