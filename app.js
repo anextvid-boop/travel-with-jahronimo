@@ -571,7 +571,7 @@
     });
     document.getElementById("copySiteLinkBtn")?.addEventListener("click", async () => {
       try {
-        await navigator.clipboard.writeText("https://anextvid-boop.github.io/travel-with-jahronimo/");
+        await navigator.clipboard.writeText("https://travelwithjahronimo.pages.dev/");
         window.SFX?.success?.();
         if (qrStatus) qrStatus.textContent = "✅ Link copied!";
       } catch (e) {}
@@ -582,7 +582,7 @@
           await navigator.share({
             title: "Travel With Jahronimo",
             text: "House Sitting, Remote Video & Web | 13 Countries 2027",
-            url: "https://anextvid-boop.github.io/travel-with-jahronimo/"
+            url: "https://travelwithjahronimo.pages.dev/"
           });
         } catch (e) {}
       } else if (qrStatus) {

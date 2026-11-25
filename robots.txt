@@ -23,4 +23,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://anextvid-boop.github.io/travel-with-jahronimo/sitemap.xml
+Sitemap: https://travelwithjahronimo.pages.dev/sitemap.xml
