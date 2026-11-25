@@ -295,7 +295,7 @@
       window.SFX?.open?.();
       lbImg.src = heroImg.src;
       lbImg.alt = heroImg.alt || "";
-      if (lbCap) lbCap.textContent = "Jahronimo — Explorer Edition (Brighton, UK)";
+      if (lbCap) lbCap.textContent = "Jahronimo — Brighton, UK";
       lb.classList.add("open");
     });
 
