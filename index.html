@@ -348,20 +348,23 @@
         <div id="mapStageWrap" class="map-stage-wrap">
           <div id="worldMap3D"></div>
           <button id="mapFsExitBtn" class="map-fs-exit tap-fx" type="button" data-i18n="exitFsBtn">✕ Exit Fullscreen</button>
-          <div style="position:absolute;top:18px;right:14px;z-index:998;padding:6px 12px;border-radius:999px;background:rgba(24,26,29,0.74);color:#fff;font-size:0.72rem;font-weight:700;backdrop-filter:blur(6px);pointer-events:none;">
-            1F Spin · 2F Pinch/Tilt · 3F Tap Reset / Swipe ↓ Exit
+          <div style="position:absolute;top:18px;right:14px;z-index:998;padding:6px 12px;border-radius:999px;background:rgba(24,26,29,0.78);color:#fff;font-size:0.7rem;font-weight:700;backdrop-filter:blur(6px);pointer-events:none;max-width:56vw;text-align:right;">
+            1F Spin · 2F Pinch/Tilt/Tap-Out · 3F Tap World / ↓ Exit / ↔ Tour
           </div>
-          <div id="mapFsHudText" style="position:absolute;top:64px;left:16px;z-index:998;padding:6px 12px;border-radius:999px;background:rgba(11,79,74,0.88);color:#fff;font-size:0.76rem;font-weight:800;backdrop-filter:blur(6px);pointer-events:none;border:1px solid rgba(255,255,255,0.28);">
+          <div id="mapFsHudText" style="position:absolute;top:66px;left:16px;z-index:998;padding:6px 12px;border-radius:999px;background:rgba(11,79,74,0.9);color:#fff;font-size:0.76rem;font-weight:800;backdrop-filter:blur(6px);pointer-events:none;border:1px solid rgba(255,255,255,0.32);">
             📍 Brighton, UK → 13 Countries
           </div>
           <div class="map-fs-toolbar">
             <button id="btn3d" class="map-btn active tap-fx" type="button" data-i18n="btn3D">3D Globe</button>
             <button id="btn2d" class="map-btn tap-fx" type="button" data-i18n="btn2D">2D Map</button>
-            <button id="mapNextStopHudBtn" class="map-btn tap-fx" type="button">🧭 Next Stop</button>
-            <button id="mapTiltBtn" class="map-btn tap-fx" type="button">📐 +15° Tilt</button>
-            <button id="mapWorldBtn" class="map-btn tap-fx" type="button">🧭 Full World</button>
-            <button id="connectLocBtn" class="map-btn geo tap-fx" type="button" data-i18n="btnPhoneLoc">📍 Connect Phone</button>
-            <button id="mapFollowBtn" class="map-btn geo tap-fx" type="button">📡 Follow Me</button>
+            <button id="mapPrevStopHudBtn" class="map-btn tap-fx" type="button">⏮ Prev</button>
+            <button id="mapNextStopHudBtn" class="map-btn tap-fx" type="button">Next ⏭</button>
+            <button id="mapTiltBtn" class="map-btn tap-fx" type="button">📐 +15°</button>
+            <button id="mapNorthHudBtn" class="map-btn tap-fx" type="button">🧭 North</button>
+            <button id="mapRouteToggleBtn" class="map-btn active tap-fx" type="button">🛣️ Route</button>
+            <button id="mapWorldBtn" class="map-btn tap-fx" type="button">🌍 World</button>
+            <button id="connectLocBtn" class="map-btn geo tap-fx" type="button" data-i18n="btnPhoneLoc">📍 GPS</button>
+            <button id="mapFollowBtn" class="map-btn geo tap-fx" type="button">📡 Follow</button>
             <button id="mapFsExitBtn2" class="map-btn tap-fx" type="button" style="background:#dc2626;color:#fff;border-color:#dc2626;">✕ Close</button>
           </div>
         </div>
@@ -671,7 +674,7 @@
   <script src="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.js"></script>
   <script src="sound.js?v=6"></script>
   <script src="i18n.js?v=3"></script>
-  <script src="map.js?v=2"></script>
+  <script src="map.js?v=3"></script>
   <script src="app.js?v=5"></script>
 </body>
 </html>

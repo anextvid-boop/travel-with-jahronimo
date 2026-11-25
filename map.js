@@ -194,10 +194,31 @@
       return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
     }
 
-    document.getElementById("mapNextStopHudBtn")?.addEventListener("click", () => {
+    let currentTourIdx = Math.max(0, stops.findIndex((s) => s.key === currentStop.key));
+    let routeVisible = true;
+
+    function stepTour(delta) {
+      if (!stops.length) return;
+      currentTourIdx = (currentTourIdx + delta + stops.length) % stops.length;
+      window.SFX?.nav?.(currentTourIdx);
+      flyToStop(stops[currentTourIdx].key);
+    }
+
+    document.getElementById("mapPrevStopHudBtn")?.addEventListener("click", () => stepTour(-1));
+    document.getElementById("mapNextStopHudBtn")?.addEventListener("click", () => stepTour(1));
+    document.getElementById("mapNorthHudBtn")?.addEventListener("click", () => {
       window.SFX?.tap?.();
-      const nxt = stops.find((s) => s.key === routeData?.nextStopKey) || stops.find((s) => s.status === "next") || stops[1];
-      if (nxt) flyToStop(nxt.key);
+      map.easeTo({ bearing: 0, pitch: is3D ? 46 : 0, duration: 600 });
+      setStatus("Compass reset to North.");
+    });
+    document.getElementById("mapRouteToggleBtn")?.addEventListener("click", (e) => {
+      window.SFX?.tap?.();
+      routeVisible = !routeVisible;
+      e.currentTarget.classList.toggle("active", routeVisible);
+      const vis = routeVisible ? "visible" : "none";
+      if (map.getLayer("travel-route-line")) map.setLayoutProperty("travel-route-line", "visibility", vis);
+      if (map.getLayer("travel-route-glow")) map.setLayoutProperty("travel-route-glow", "visibility", vis);
+      setStatus(routeVisible ? "Route path visible." : "Route path hidden.");
     });
 
     map.on("load", () => {
@@ -318,11 +339,16 @@
     [fsExitBtn, document.getElementById("mapFsExitBtn2")].forEach((btn) => {
       if (!btn) return;
       ["pointerdown", "touchstart"].forEach((evt) => {
-        btn.addEventListener(evt, (e) => e.stopPropagation(), { passive: true });
+        btn.addEventListener(evt, (e) => {
+          e.stopPropagation();
+        }, { passive: true });
       });
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        exitFullscreen();
+      ["click", "touchend"].forEach((evt) => {
+        btn.addEventListener(evt, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          exitFullscreen();
+        });
       });
     });
 
@@ -339,21 +365,26 @@
       }
     });
 
-    // Mobile 3-Finger Gestures inside Fullscreen 3D Globe:
-    // - 3-finger tap: Reset to Full World view
-    // - 3-finger swipe down: Exit Fullscreen
-    let threeFingerStartY = null;
-    let threeFingerStartTime = 0;
+    // Mobile 1F, 2F & 3F Gestures inside Fullscreen 3D Globe:
+    // - 1-Finger: Spin/pan, double-tap zoom, pin tap
+    // - 2-Finger: Pinch zoom, twist bearing, vertical drag tilt, quick 2-finger tap = zoom out
+    // - 3-Finger: Tap = Full World reset | Swipe Down = Exit Fullscreen | Swipe Left/Right = Next/Prev Stop
+    let multiStart = null;
 
     stageWrap?.addEventListener(
       "touchstart",
       (e) => {
         if (!stageWrap.classList.contains("is-fullscreen")) return;
-        if (e.touches.length === 3) {
-          threeFingerStartY = (e.touches[0].clientY + e.touches[1].clientY + e.touches[2].clientY) / 3;
-          threeFingerStartTime = Date.now();
+        const n = e.touches.length;
+        if (n === 2 || n === 3) {
+          let sx = 0, sy = 0;
+          for (let i = 0; i < n; i++) {
+            sx += e.touches[i].clientX;
+            sy += e.touches[i].clientY;
+          }
+          multiStart = { fingers: n, x: sx / n, y: sy / n, t: Date.now() };
         } else {
-          threeFingerStartY = null;
+          multiStart = null;
         }
       },
       { passive: true }
@@ -362,25 +393,38 @@
     stageWrap?.addEventListener(
       "touchend",
       (e) => {
-        if (threeFingerStartY === null || !stageWrap.classList.contains("is-fullscreen")) return;
+        if (!multiStart || !stageWrap.classList.contains("is-fullscreen")) return;
         if (e.touches.length === 0 && e.changedTouches.length > 0) {
+          const endX = e.changedTouches[0].clientX;
           const endY = e.changedTouches[0].clientY;
-          const dy = endY - threeFingerStartY;
-          const dt = Date.now() - threeFingerStartTime;
-          threeFingerStartY = null;
+          const dx = endX - multiStart.x;
+          const dy = endY - multiStart.y;
+          const dt = Date.now() - multiStart.t;
+          const fingers = multiStart.fingers;
+          multiStart = null;
 
-          if (dy > 55) {
-            exitFullscreen();
-          } else if (dt < 450 && Math.abs(dy) < 30) {
-            window.SFX?.tap?.();
-            map.flyTo({
-              center: [22, 24],
-              zoom: 1.5,
-              pitch: is3D ? 42 : 0,
-              bearing: -10,
-              duration: 1100
-            });
-            setStatus("3-Finger Tap: Full World reset.");
+          if (fingers === 2) {
+            if (dt < 320 && Math.hypot(dx, dy) < 22) {
+              window.SFX?.tap?.();
+              map.zoomTo(Math.max(1.2, map.getZoom() - 1.4), { duration: 420 });
+              setStatus("2-Finger Tap: Zoomed out.");
+            }
+          } else if (fingers === 3) {
+            if (dy > 48 && Math.abs(dy) > Math.abs(dx)) {
+              exitFullscreen();
+            } else if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) {
+              stepTour(dx < 0 ? 1 : -1);
+            } else if (dt < 450 && Math.hypot(dx, dy) < 28) {
+              window.SFX?.tap?.();
+              map.flyTo({
+                center: [22, 24],
+                zoom: 1.5,
+                pitch: is3D ? 42 : 0,
+                bearing: -10,
+                duration: 1100
+              });
+              setStatus("3-Finger Tap: Full World reset.");
+            }
           }
         }
       },
