@@ -1120,21 +1120,42 @@ Jahronimo</textarea>
       nxtSel.value = adminRouteData.nextStopKey || adminRouteData.stops[1]?.key || "";
       if (visInp) visInp.value = adminRouteData.countriesVisited ?? 2;
 
-      listEl.innerHTML = adminRouteData.stops
-        .map(
-          (s, idx) => `
-          <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px;align-items:center;padding:8px 10px;border-radius:10px;background:var(--surface);border:1px solid var(--line);">
-            <strong style="font-size:0.84rem;">${s.label}</strong>
-            <select data-rt-status="${idx}" style="margin:0;">
-              <option value="current" ${s.status === "current" ? "selected" : ""}>📍 Current</option>
-              <option value="next" ${s.status === "next" ? "selected" : ""}>🧭 Next</option>
-              <option value="visited" ${s.status === "visited" ? "selected" : ""}>✅ Visited</option>
-              <option value="planned" ${s.status === "planned" ? "selected" : ""}>🗺️ Planned</option>
-            </select>
-            <input data-rt-dates="${idx}" type="text" value="${(s.dates || "").replace(/"/g, "&quot;")}" placeholder="Dates" style="margin:0;" />
-          </div>`
-        )
-        .join("");
+      const curObj = adminRouteData.stops.find((s) => s.key === curSel.value);
+      const nxtObj = adminRouteData.stops.find((s) => s.key === nxtSel.value);
+      const chainText = adminRouteData.stops
+        .map((s) => {
+          const span = s.fromDate && s.toDate ? `${s.fromDate} → ${s.toDate}` : s.dates || "Planned";
+          return `${s.country || s.label} (${span})`;
+        })
+        .join("  →  ");
+
+      listEl.innerHTML =
+        `<div style="padding:10px 12px;border-radius:12px;background:var(--accent-soft);border:1px solid var(--line);font-size:0.82rem;line-height:1.5;margin-bottom:6px;">
+          <strong>🗺️ Route Chain (${curObj?.country || curObj?.label || "Current"} → ${nxtObj?.country || nxtObj?.label || "Next"}):</strong><br/>
+          <span style="color:var(--accent-dark);font-weight:700;">${chainText}</span>
+        </div>` +
+        adminRouteData.stops
+          .map((s, idx) => {
+            const parts = (s.dates || "").split(/→|–|-/).map((p) => p.trim());
+            const fromVal = s.fromDate ?? (parts[0] || "");
+            const toVal = s.toDate ?? (parts[1] || "");
+            return `
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);">
+              <div>
+                <div style="font-weight:800;font-size:0.88rem;color:var(--accent-dark);">${s.country || s.label}</div>
+                <div style="font-size:0.76rem;color:var(--muted);">${s.label}</div>
+              </div>
+              <select data-rt-status="${idx}" style="margin:0;">
+                <option value="current" ${s.status === "current" ? "selected" : ""}>📍 Current</option>
+                <option value="next" ${s.status === "next" ? "selected" : ""}>🧭 Next</option>
+                <option value="visited" ${s.status === "visited" ? "selected" : ""}>✅ Visited</option>
+                <option value="planned" ${s.status === "planned" ? "selected" : ""}>🗺️ Planned</option>
+              </select>
+              <input data-rt-from="${idx}" type="text" value="${fromVal.replace(/"/g, "&quot;")}" placeholder="From (e.g. Dec 1)" style="margin:0;" />
+              <input data-rt-to="${idx}" type="text" value="${toVal.replace(/"/g, "&quot;")}" placeholder="To (e.g. Dec 22)" style="margin:0;" />
+            </div>`;
+          })
+          .join("");
     }
 
     function collectRouteFromForm() {
@@ -1146,9 +1167,18 @@ Jahronimo</textarea>
         const i = Number(sel.getAttribute("data-rt-status"));
         if (adminRouteData.stops[i]) adminRouteData.stops[i].status = sel.value;
       });
-      document.querySelectorAll("[data-rt-dates]").forEach((inp) => {
-        const i = Number(inp.getAttribute("data-rt-dates"));
-        if (adminRouteData.stops[i]) adminRouteData.stops[i].dates = inp.value.trim();
+      document.querySelectorAll("[data-rt-from]").forEach((inp) => {
+        const i = Number(inp.getAttribute("data-rt-from"));
+        if (adminRouteData.stops[i]) adminRouteData.stops[i].fromDate = inp.value.trim();
+      });
+      document.querySelectorAll("[data-rt-to]").forEach((inp) => {
+        const i = Number(inp.getAttribute("data-rt-to"));
+        if (adminRouteData.stops[i]) {
+          adminRouteData.stops[i].toDate = inp.value.trim();
+          const f = adminRouteData.stops[i].fromDate || "";
+          const t = adminRouteData.stops[i].toDate || "";
+          adminRouteData.stops[i].dates = f && t ? `${f} → ${t}` : f || t || adminRouteData.stops[i].dates;
+        }
       });
       return adminRouteData;
     }
