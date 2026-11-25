@@ -271,16 +271,39 @@
       <!-- Filter & List -->
       <div class="card">
         <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-bottom:14px;">
-          <input class="field" id="searchInput" type="search" placeholder="Search name, city, offer, notes..." style="max-width:340px;margin:0;" />
-          <select class="field" id="statusFilter" style="max-width:180px;margin:0;">
-            <option value="ALL">All Statuses</option>
-            <option value="New">New</option>
-            <option value="Chatting">Chatting</option>
-            <option value="Booked">Booked</option>
-            <option value="Met">Met</option>
-          </select>
+          <input class="field" id="searchInput" type="search" placeholder="Search name, city, offer, notes..." style="max-width:300px;margin:0;" />
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+            <button type="button" class="btn btn-ghost" id="selectAllCrmBtn" style="padding:7px 12px;font-size:0.8rem;">☑ Select All</button>
+            <button type="button" class="btn btn-ghost" id="clearSelCrmBtn" style="padding:7px 12px;font-size:0.8rem;">Clear</button>
+            <select class="field" id="statusFilter" style="max-width:160px;margin:0;">
+              <option value="ALL">All Statuses</option>
+              <option value="New">New</option>
+              <option value="Chatting">Chatting</option>
+              <option value="Booked">Booked</option>
+              <option value="Met">Met</option>
+            </select>
+          </div>
         </div>
         <div class="crm-grid" id="crmGrid"></div>
+      </div>
+
+      <!-- Bulk & Direct Email Sender -->
+      <div class="card">
+        <div class="kicker">EMAIL ROUTER &amp; BULK SENDER</div>
+        <h2 style="font-size:1.15rem;margin-bottom:6px;">Send Direct or Bulk Email (BCC) to Contacts</h2>
+        <p id="bulkSelectedCount" style="font-size:0.84rem;color:var(--muted);margin-bottom:10px;">Select contacts above using checkboxes to send a bulk email.</p>
+        <input class="field" id="bulkEmailSubj" type="text" value="[Travel With Jahronimo] Quick Update &amp; Availability" placeholder="Email Subject" />
+        <textarea class="field" id="bulkEmailBody" rows="3" placeholder="Write your message to selected contacts...">Hi there,
+
+Just sharing a quick update on my upcoming travel &amp; house-sitting dates. Let me know if you'd like to connect!
+
+Best,
+Jahronimo</textarea>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+          <button type="button" class="btn btn-primary" id="sendBulkEmailBtn">📨 Send Bulk Email (BCC)</button>
+          <input class="field" id="mailerWebhookUrl" type="url" placeholder="Optional Backend Mailer Webhook URL (for silent server-side send)" style="flex:1;min-width:220px;margin:0;" />
+        </div>
+        <div id="bulkEmailStatus" style="font-size:0.82rem;font-weight:700;color:var(--accent-dark);margin-top:8px;"></div>
       </div>
 
       <!-- Notion 24h Synced Travel Details -->
@@ -438,25 +461,110 @@
         return;
       }
 
+      const selectedIds = new Set(Array.from(document.querySelectorAll(".crm-sel-cb:checked")).map((cb) => cb.value));
       grid.innerHTML = filtered.map((c) => `
         <div class="contact-card">
           <div class="c-head">
-            <span class="c-name">${c.name}</span>
+            <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;">
+              <input type="checkbox" class="crm-sel-cb" value="${c.id}" ${selectedIds.has(c.id) ? "checked" : ""} style="width:16px;height:16px;margin:0;" />
+              <span class="c-name">${c.name}</span>
+            </label>
             <span class="c-badge">${c.status || "New"}</span>
           </div>
           <div class="c-meta">📍 ${c.city} · ${c.offer}</div>
           <div class="c-meta">✉️ ${c.contact}</div>
           ${c.notes ? `<div class="c-meta">📝 ${c.notes}</div>` : ""}
+          ${c.lastEmailed ? `<div class="c-meta" style="color:var(--accent-dark);font-weight:700;">📨 Last Emailed: ${c.lastEmailed}</div>` : ""}
           <div class="c-actions">
             <select class="field" data-id="${c.id}" onchange="updateStatus(this)" style="width:auto;padding:5px 8px;font-size:0.78rem;margin:0;">
               ${["New","Chatting","Booked","Met"].map((s) => `<option value="${s}" ${c.status === s ? "selected" : ""}>${s}</option>`).join("")}
             </select>
-            ${c.contact.includes("@") ? `<a class="btn btn-ghost" href="mailto:${c.contact}?subject=Travel%20With%20Jahronimo">Email</a>` : ""}
+            ${c.contact.includes("@") ? `<button type="button" class="btn btn-primary" onclick="sendSingleEmail('${c.id}')">✉ Send Email</button>` : ""}
             <button type="button" class="btn btn-ghost" onclick="deleteContact('${c.id}')" style="color:#b91c1c;">Delete</button>
           </div>
         </div>
       `).join("");
+      updateBulkSelectedCount();
     }
+
+    function updateBulkSelectedCount() {
+      const checked = document.querySelectorAll(".crm-sel-cb:checked");
+      const el = document.getElementById("bulkSelectedCount");
+      if (el) el.textContent = `Selected: ${checked.length} contact(s) for bulk email.`;
+    }
+    document.getElementById("crmGrid")?.addEventListener("change", (e) => {
+      if (e.target.classList.contains("crm-sel-cb")) updateBulkSelectedCount();
+    });
+    document.getElementById("selectAllCrmBtn")?.addEventListener("click", () => {
+      document.querySelectorAll(".crm-sel-cb").forEach((cb) => (cb.checked = true));
+      updateBulkSelectedCount();
+    });
+    document.getElementById("clearSelCrmBtn")?.addEventListener("click", () => {
+      document.querySelectorAll(".crm-sel-cb").forEach((cb) => (cb.checked = false));
+      updateBulkSelectedCount();
+    });
+
+    window.sendSingleEmail = async function (id) {
+      const list = loadContacts();
+      const c = list.find((x) => x.id === id);
+      if (!c || !c.contact.includes("@")) return;
+      const nowStr = new Date().toLocaleString();
+      c.lastEmailed = nowStr;
+      if (c.status === "New") c.status = "Chatting";
+      saveContacts(list);
+      renderCRM();
+
+      const webhook = (document.getElementById("mailerWebhookUrl")?.value || "").trim();
+      const subject = `[Travel With Jahronimo] Re: ${c.offer}`;
+      const body = `Hi ${c.name},\n\nThanks for reaching out!\n\nBest,\nJahronimo`;
+      if (webhook) {
+        try {
+          await fetch(webhook, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ to: c.contact, subject, body })
+          });
+          document.getElementById("bulkEmailStatus").textContent = `✅ Sent email via webhook to ${c.contact}`;
+          return;
+        } catch (e) {}
+      }
+      window.location.href = `mailto:${c.contact}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    };
+
+    document.getElementById("sendBulkEmailBtn")?.addEventListener("click", async () => {
+      const ids = new Set(Array.from(document.querySelectorAll(".crm-sel-cb:checked")).map((cb) => cb.value));
+      const list = loadContacts();
+      const targets = list.filter((c) => ids.has(c.id) && c.contact.includes("@"));
+      const statusEl = document.getElementById("bulkEmailStatus");
+      if (!targets.length) {
+        if (statusEl) statusEl.textContent = "Select at least one contact with an email address first.";
+        return;
+      }
+      const subject = document.getElementById("bulkEmailSubj").value.trim() || "[Travel With Jahronimo] Update";
+      const body = document.getElementById("bulkEmailBody").value.trim();
+      const nowStr = new Date().toLocaleString();
+      targets.forEach((c) => {
+        c.lastEmailed = nowStr;
+      });
+      saveContacts(list);
+      renderCRM();
+
+      const emails = targets.map((t) => t.contact);
+      const webhook = (document.getElementById("mailerWebhookUrl")?.value || "").trim();
+      if (webhook) {
+        try {
+          await fetch(webhook, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ bcc: emails, subject, body })
+          });
+          if (statusEl) statusEl.textContent = `✅ Bulk email dispatched via webhook to ${emails.length} contact(s)!`;
+          return;
+        } catch (e) {}
+      }
+      window.location.href = `mailto:?bcc=${emails.join(",")}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      if (statusEl) statusEl.textContent = `📨 Opened BCC bulk email to ${emails.length} contact(s) & logged Last Emailed.`;
+    });
 
     window.updateStatus = function (sel) {
       const id = sel.getAttribute("data-id");

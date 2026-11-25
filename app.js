@@ -508,6 +508,53 @@
 
   // 9. Scroll Reveals, Panel Rail & Tactile Tap Light-Up
   function initMotionAndNav() {
+    // Website Email Router -> Saves into Admin CRM (twj_crm_contacts) + Mailto
+    const emailModal = document.getElementById("emailContactModal");
+    document.getElementById("openEmailModalBtn")?.addEventListener("click", () => {
+      window.SFX?.open?.();
+      emailModal?.classList.add("open");
+    });
+    document.getElementById("emailModalCloseBtn")?.addEventListener("click", () => {
+      window.SFX?.close?.();
+      emailModal?.classList.remove("open");
+    });
+    emailModal?.addEventListener("click", (e) => {
+      if (e.target === emailModal) emailModal.classList.remove("open");
+    });
+    document.getElementById("siteEmailForm")?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("seName").value.trim();
+      const email = document.getElementById("seEmail").value.trim();
+      const city = document.getElementById("seCity").value.trim() || "Not specified";
+      const offer = document.getElementById("seOffer").value;
+      const msg = document.getElementById("seMsg").value.trim();
+      if (!name || !email || !msg) return;
+
+      try {
+        const list = JSON.parse(localStorage.getItem("twj_crm_contacts") || "[]");
+        list.unshift({
+          id: String(Date.now()),
+          name,
+          city,
+          contact: email,
+          offer,
+          notes: msg,
+          status: "New",
+          source: "Website Email",
+          createdAt: new Date().toISOString().slice(0, 10)
+        });
+        localStorage.setItem("twj_crm_contacts", JSON.stringify(list));
+      } catch (err) {}
+
+      window.SFX?.success?.();
+      const statusEl = document.getElementById("seStatus");
+      if (statusEl) statusEl.textContent = "✅ Routed to Jahronimo's CRM & opening email client…";
+      const subject = encodeURIComponent(`[Travel With Jahronimo] ${offer} — ${name} (${city})`);
+      const body = encodeURIComponent(`From: ${name} (${email})\nLocation: ${city}\nTopic: ${offer}\n\n${msg}`);
+      window.location.href = `mailto:${ADMIN_EMAIL}?subject=${subject}&body=${body}`;
+      setTimeout(() => emailModal?.classList.remove("open"), 900);
+    });
+
     // QR Share Modal
     const qrModal = document.getElementById("qrShareModal");
     const qrStatus = document.getElementById("qrShareStatus");

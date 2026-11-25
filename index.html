@@ -195,7 +195,7 @@
             </div>
             <div class="cta-row">
               <button id="openAboutHeroBtn" class="btn btn-teal tap-fx" type="button" data-i18n="moreAboutBtn">👤 More About Me</button>
-              <a class="btn btn-email tap-fx" href="mailto:jahronimo1@hotmail.com?subject=%5BTravel%20With%20Jahronimo%5D%20General%20Enquiry" data-i18n="emailBtn">Email Me</a>
+              <button id="openEmailModalBtn" class="btn btn-email tap-fx" type="button" data-i18n="emailBtn">Email Me</button>
             </div>
           </div>
         </div>
@@ -513,6 +513,29 @@
         <button id="nativeShareBtn" class="btn btn-outline btn-sm tap-fx" type="button">📤 Share</button>
       </div>
       <div id="qrShareStatus" style="font-size:0.8rem;font-weight:700;color:var(--accent-dark);margin-top:8px;"></div>
+    </div>
+  </div>
+
+  <!-- Website Email Router Modal (Saves to Admin CRM + Opens Mail) -->
+  <div id="emailContactModal" class="lang-modal-backdrop" role="dialog" aria-modal="true" aria-label="Send Email to Jahronimo">
+    <div class="lang-modal" style="max-width:480px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <h2 style="font-size:1.12rem;font-weight:800;">✉️ Send Email to Jahronimo</h2>
+        <button id="emailModalCloseBtn" class="focus-close-btn tap-fx" type="button" aria-label="Close">✕</button>
+      </div>
+      <form id="siteEmailForm">
+        <input id="seName" class="auth-field" type="text" placeholder="Your Name" required />
+        <input id="seEmail" class="auth-field" type="email" placeholder="Your Email Address" required />
+        <input id="seCity" class="auth-field" type="text" placeholder="City / Country (optional)" />
+        <select id="seOffer" class="auth-field">
+          <option value="House / Pet Sit">🏡 House / Pet Sit</option>
+          <option value="Paid Video / Web">🎬 Video / Web Collab</option>
+          <option value="Coffee / Local">☕ Meet Along The Route</option>
+        </select>
+        <textarea id="seMsg" class="auth-field" rows="3" placeholder="Dates, pets, or project details…" required></textarea>
+        <div id="seStatus" style="font-size:0.82rem;font-weight:700;color:var(--accent-dark);margin-bottom:8px;"></div>
+        <button class="btn btn-teal tap-fx" type="submit" style="width:100%;justify-content:center;">✉️ Send &amp; Route to Jahronimo</button>
+      </form>
     </div>
   </div>
 
