@@ -149,6 +149,10 @@
       const stop = stops.find((s) => s.key === stopKey);
       if (!stop || !Array.isArray(stop.coords)) return;
 
+      if (!stageWrap?.classList.contains("is-fullscreen")) {
+        enterFullscreen();
+      }
+
       map.flyTo({
         center: stop.coords,
         zoom: stop.key === "brighton" ? 6.2 : 5.2,
@@ -257,8 +261,8 @@
       setStatus("Full World view · All 13 target countries on the 2027 horizon.");
     });
 
-    // Fullscreen Toggle (with iOS Safari .is-fullscreen fallback + visible #mapFsExitBtn inside #mapStageWrap)
-    const fsBtn = document.getElementById("mapFsBtn");
+    // Fullscreen Toggle (launched from #openWorldCardBtn or stop pills)
+    const openCardBtn = document.getElementById("openWorldCardBtn");
     const fsExitBtn = document.getElementById("mapFsExitBtn");
 
     function applyFullscreenState(active) {
@@ -267,18 +271,15 @@
       document.body.style.overflow = active ? "hidden" : "";
       if (active) {
         map.scrollZoom.enable();
+        setTimeout(() => map.resize(), 60);
+        setTimeout(() => map.resize(), 280);
       }
-      setTimeout(() => map.resize(), 120);
-      setTimeout(() => map.resize(), 360);
     }
 
     function enterFullscreen() {
       window.SFX?.open?.();
       applyFullscreenState(true);
-      if (stageWrap?.requestFullscreen) {
-        stageWrap.requestFullscreen().catch(() => {});
-      }
-      setStatus("Fullscreen Globe active · Tap ✕ Exit Fullscreen (top-right) to return.");
+      setStatus("3D World Visualiser open · Tap ✕ Exit Fullscreen (top-left) to return.");
     }
 
     function exitFullscreen() {
@@ -287,10 +288,10 @@
       if (document.fullscreenElement && document.exitFullscreen) {
         document.exitFullscreen().catch(() => {});
       }
-      setStatus("Returned to inline 3D Globe view.");
+      setStatus("Tap the World Card or any stop pill below to open the 3D World Visualiser.");
     }
 
-    fsBtn?.addEventListener("click", enterFullscreen);
+    openCardBtn?.addEventListener("click", enterFullscreen);
     fsExitBtn?.addEventListener("click", exitFullscreen);
 
     document.addEventListener("fullscreenchange", () => {

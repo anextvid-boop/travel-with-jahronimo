@@ -233,26 +233,34 @@
         <div class="section-kicker" data-i18n="mapKicker">Live Route Map</div>
         <h2 class="section-title" data-i18n="mapTitle">2D &amp; 3D Travel Map · Starting From Brighton</h2>
 
-        <div class="map-toolbar">
-          <div class="map-controls-group">
+        <!-- Pressable Image Card to Launch 3D World Visualiser (keeps page scroll smooth) -->
+        <button id="openWorldCardBtn" class="world-launcher-btn tap-fx" type="button" aria-label="Open 3D World Visualiser">
+          <img class="vbtn-bg" src="assets/win-routes.jpg" alt="3D World Route Preview" style="--bg-pos: center center;" loading="lazy" />
+          <div class="vbtn-scrim"></div>
+          <div class="vbtn-top">
+            <span class="vbtn-tag">Interactive 3D Globe</span>
+            <span class="vbtn-open">Launch 3D +</span>
+          </div>
+          <div class="vbtn-title">🌍 Open 3D World Visualiser</div>
+          <div class="vbtn-bottom">
+            <span class="vbtn-sub">13 Countries · Tap to spin, zoom, &amp; connect phone GPS</span>
+          </div>
+        </button>
+
+        <div id="mapStatus" class="map-status-note" data-i18n="mapStatusDefault">Tap the World Card or any stop pill below to open the 3D World Visualiser.</div>
+
+        <!-- Fullscreen-Only Map Container with Exit Fullscreen Button & Controls INSIDE it -->
+        <div id="mapStageWrap" class="map-stage-wrap">
+          <div id="worldMap3D"></div>
+          <button id="mapFsExitBtn" class="map-fs-exit tap-fx" type="button">✕ Exit Fullscreen</button>
+          <div class="map-fs-toolbar">
             <button id="btn3d" class="map-btn active tap-fx" type="button" data-i18n="btn3D">3D Globe</button>
             <button id="btn2d" class="map-btn tap-fx" type="button" data-i18n="btn2D">2D Map</button>
             <button id="mapTiltBtn" class="map-btn tap-fx" type="button">📐 +15° Tilt</button>
             <button id="mapWorldBtn" class="map-btn tap-fx" type="button">🧭 Full World</button>
-          </div>
-          <div class="map-controls-group">
             <button id="connectLocBtn" class="map-btn geo tap-fx" type="button" data-i18n="btnPhoneLoc">📍 Connect Phone</button>
             <button id="mapFollowBtn" class="map-btn geo tap-fx" type="button">📡 Follow Me</button>
-            <button id="mapFsBtn" class="map-btn tap-fx" type="button">⤢ Fullscreen</button>
           </div>
-        </div>
-
-        <div id="mapStatus" class="map-status-note" data-i18n="mapStatusDefault">Starting in Brighton, UK · Tap a pin or connect your phone location.</div>
-
-        <!-- Map Container with Exit Fullscreen Button INSIDE it at z-index 999 -->
-        <div id="mapStageWrap" class="map-stage-wrap">
-          <div id="worldMap3D"></div>
-          <button id="mapFsExitBtn" class="map-fs-exit tap-fx" type="button">✕ Exit Fullscreen</button>
         </div>
 
         <div id="stopPills" class="stop-pills"></div>
