@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T21:34:17Z",
+  "updatedAt": "2026-11-25T21:44:07Z",
   "stats": {
     "totalLeads": 147,
     "totalOutreachSent": 2,
@@ -15,10 +15,49 @@
     "remainingQueue": 145
   },
   "dailyPlan": {
+    "date": "2026-11-25",
     "freeOutreachPerDay": 15,
     "paidEmailsPerDay": 20,
     "fbCommentsPerDay": 15,
-    "dmsPerDay": 10
+    "dmsPerDay": 10,
+    "channels": [
+      {
+        "key": "paid_emails",
+        "label": "Paid Client Outreach Emails",
+        "sentToday": 10,
+        "dailyTarget": 20,
+        "remainingToday": 10,
+        "finalTotal": 10,
+        "note": "anextvid@gmail.com (+ due 4-day follow-ups)"
+      },
+      {
+        "key": "free_outreach",
+        "label": "Free / Skill-Swap Outreach",
+        "sentToday": 2,
+        "dailyTarget": 15,
+        "remainingToday": 13,
+        "finalTotal": 2,
+        "note": "147 leads tracked (+ due 3d/7d follow-ups)"
+      },
+      {
+        "key": "fb_comments",
+        "label": "Facebook Comments / Posts",
+        "sentToday": 3,
+        "dailyTarget": 15,
+        "remainingToday": 12,
+        "finalTotal": 3,
+        "note": "1 comments + 2 posts today (9-day cycle)"
+      },
+      {
+        "key": "dms",
+        "label": "DMs (FB / IG / WhatsApp)",
+        "sentToday": 0,
+        "dailyTarget": 10,
+        "remainingToday": 10,
+        "finalTotal": 0,
+        "note": "Paired with FB comments + IG/WhatsApp follow-ups"
+      }
+    ]
   },
   "emailedRecords": [
     {

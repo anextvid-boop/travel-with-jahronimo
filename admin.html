@@ -365,6 +365,17 @@ Jahronimo</textarea>
       </div>
 
       <div id="tabOutreach" class="admin-tab-panel" style="display:none;">
+        <div class="card" id="dailyTargetsCard">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;">
+            <div>
+              <div class="kicker">DAILY OUTREACH QUOTA &amp; PROGRESS (24H SYNC)</div>
+              <h2 style="font-size:1.2rem;">Daily Targets: Sent Today vs. Remaining vs. Final Total</h2>
+            </div>
+            <span id="dailyTargetsBadge" class="c-badge">Loading...</span>
+          </div>
+          <div id="dailyTargetsTableWrap" style="overflow-x:auto;"></div>
+        </div>
+
         <div class="card">
           <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;">
             <div>
@@ -844,7 +855,84 @@ Jahronimo</textarea>
       return String(s || "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
     }
 
+    function renderDailyTargets() {
+      const wrap = document.getElementById("dailyTargetsTableWrap");
+      const badge = document.getElementById("dailyTargetsBadge");
+      if (!wrap) return;
+      const plan = outreachFeed.dailyPlan || {};
+      const channels = Array.isArray(plan.channels) && plan.channels.length ? plan.channels : [
+        { label: "Paid Client Outreach Emails", sentToday: Number(paidFeed.stats?.sentToday ?? 0), dailyTarget: 20, remainingToday: Math.max(0, 20 - Number(paidFeed.stats?.sentToday ?? 0)), finalTotal: Number(paidFeed.stats?.confirmedEmailsSent ?? 0), note: "anextvid@gmail.com (+ due 4-day follow-ups)" },
+        { label: "Free / Skill-Swap Outreach", sentToday: 0, dailyTarget: 15, remainingToday: 15, finalTotal: Number(outreachFeed.stats?.totalOutreachSent ?? 0), note: "147 leads tracked (+ due 3d/7d follow-ups)" },
+        { label: "Facebook Comments / Posts", sentToday: 0, dailyTarget: 15, remainingToday: 15, finalTotal: Number(outreachFeed.stats?.fbCommentsMade ?? 0) + Number(outreachFeed.stats?.fbPostsLive ?? 0), note: "Dynamic group rotation" },
+        { label: "DMs (FB / IG / WhatsApp)", sentToday: 0, dailyTarget: 10, remainingToday: 10, finalTotal: Number(outreachFeed.stats?.totalPlatformSent ?? 0), note: "Paired with FB comments + IG/WhatsApp follow-ups" },
+      ];
+
+      let totSent = 0, totTarget = 0, totRem = 0, totFinal = 0;
+      const rowsHtml = channels.map((ch) => {
+        const sent = Number(ch.sentToday ?? 0);
+        const target = Number(ch.dailyTarget ?? 0);
+        const rem = Number(ch.remainingToday ?? Math.max(0, target - sent));
+        const finalT = Number(ch.finalTotal ?? 0);
+        totSent += sent;
+        totTarget += target;
+        totRem += rem;
+        totFinal += finalT;
+        const pct = target > 0 ? Math.min(100, Math.round((sent / target) * 100)) : 100;
+        const done = rem === 0;
+        const remColor = done ? "#166534" : "#b45309";
+        const remBg = done ? "#dcfce7" : "#fef3c7";
+        return `
+          <tr style="border-bottom:1px solid var(--line);">
+            <td style="padding:10px 8px;">
+              <div style="font-weight:700;color:var(--ink);">${escOutreach(ch.label)}</div>
+              <div style="font-size:0.76rem;color:var(--muted);">${escOutreach(ch.note || "")}</div>
+            </td>
+            <td style="padding:10px 8px;text-align:center;font-weight:800;font-size:1rem;color:var(--ink);">${sent}</td>
+            <td style="padding:10px 8px;text-align:center;font-weight:700;color:var(--muted);">${target}</td>
+            <td style="padding:10px 8px;text-align:center;">
+              <span style="display:inline-block;padding:3px 10px;border-radius:999px;font-weight:800;font-size:0.84rem;background:${remBg};color:${remColor};">
+                ${done ? "✅ 0 left" : `${rem} left`}
+              </span>
+              <div style="margin-top:4px;height:4px;background:var(--line);border-radius:999px;overflow:hidden;">
+                <div style="width:${pct}%;height:100%;background:${done ? "#16a34a" : "var(--accent)"};"></div>
+              </div>
+            </td>
+            <td style="padding:10px 8px;text-align:center;font-weight:800;font-size:1rem;color:var(--accent-dark);">${finalT}</td>
+          </tr>
+        `;
+      }).join("");
+
+      if (badge) {
+        badge.textContent = `${plan.date || "Today"} · ${totSent} / ${totTarget} done`;
+      }
+
+      wrap.innerHTML = `
+        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--line);text-align:left;color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.04em;">
+              <th style="padding:8px;">Channel</th>
+              <th style="padding:8px;text-align:center;">Sent Today</th>
+              <th style="padding:8px;text-align:center;">Daily Target</th>
+              <th style="padding:8px;text-align:center;">Remaining Today</th>
+              <th style="padding:8px;text-align:center;">Final Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rowsHtml}
+            <tr style="background:var(--surface-soft);font-weight:800;">
+              <td style="padding:10px 8px;color:var(--ink);">Total Daily Outbound</td>
+              <td style="padding:10px 8px;text-align:center;color:var(--ink);">${totSent}</td>
+              <td style="padding:10px 8px;text-align:center;color:var(--muted);">${totTarget}</td>
+              <td style="padding:10px 8px;text-align:center;color:${totRem === 0 ? "#166534" : "#b45309"};">${totRem} left</td>
+              <td style="padding:10px 8px;text-align:center;color:var(--accent-dark);">${totFinal}</td>
+            </tr>
+          </tbody>
+        </table>
+      `;
+    }
+
     function renderOutreachLog() {
+      renderDailyTargets();
       const listEl = document.getElementById("outreachLogList");
       if (!listEl) return;
       const localEmailed = loadContacts()
@@ -1131,7 +1219,7 @@ Jahronimo</textarea>
               <strong>Facebook Account:</strong> <a href="${escOutreach(data.profileUrl || "https://www.facebook.com/profile.php")}" target="_blank" rel="noopener">${escOutreach(data.accountName || "Jahronimo Ellis")}</a>
               &nbsp;·&nbsp; <strong>Linked Email:</strong> <code>${escOutreach(data.accountEmail || "jahronimo1@hotmail.com")}</code>
               &nbsp;·&nbsp; <strong>Posts Sent:</strong> ${data.stats?.postedCount ?? 0}
-              &nbsp;·&nbsp; <strong>Dynamic Rotation:</strong> ${rot.dailyTarget ?? 5}/day across ${rot.totalPages ?? 0} pages (${rot.cycleDays ?? 0}-day cycle)
+              &nbsp;·&nbsp; <strong>Dynamic Rotation:</strong> ${rot.dailyTarget ?? 15} comments/day · ${rot.dailyDmTarget ?? 10} DMs/day across ${rot.totalPages ?? 0} pages (${rot.cycleDays ?? 0}-day cycle)
             </div>
             ${todaysHtml ? `<div style="margin-top:8px;"><strong>Today's 5-Page Queue (Mixed Types):</strong><div style="margin-top:4px;">${todaysHtml}</div></div>` : ""}
           `;

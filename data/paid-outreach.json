@@ -1,9 +1,10 @@
 {
-  "updatedAt": "2026-11-25T21:34:17Z",
+  "updatedAt": "2026-11-25T21:44:07Z",
   "stats": {
     "totalLeads": 270,
     "readyPool": 260,
     "confirmedEmailsSent": 10,
+    "sentToday": 10,
     "repliedCount": 0,
     "bookedCount": 0,
     "byCategory": {
