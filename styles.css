@@ -263,6 +263,23 @@ h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.18; }
 .stop-pill { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface-soft); font-size: 0.78rem; font-weight: 700; cursor: pointer; }
 .stop-pill.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
+/* Collapsible Next Stops & Countdowns */
+.next-stops-collapse {
+  margin-top: 14px; border: 1.5px solid var(--line); border-radius: 16px;
+  background: var(--surface-soft); padding: 4px 14px; box-shadow: var(--shadow-sm);
+}
+.next-stops-summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center;
+  justify-content: space-between; gap: 10px; padding: 10px 2px; font-weight: 800; font-size: 0.94rem;
+}
+.next-stops-summary::-webkit-details-marker { display: none; }
+.next-stops-summary::after {
+  content: "Open +"; padding: 4px 11px; border-radius: 999px; background: var(--accent);
+  color: #fff; font-size: 0.74rem; font-weight: 800; flex-shrink: 0;
+}
+.next-stops-collapse[open] .next-stops-summary::after { content: "Close −"; background: var(--ink); }
+.next-stops-body { padding: 4px 0 14px; }
+
 /* Countdowns */
 .countdown-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 12px; }
 .cd-card { padding: 14px; border-radius: 16px; background: var(--surface-soft); border: 1.5px solid var(--line); box-shadow: var(--shadow-sm); }
