@@ -117,50 +117,46 @@ h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.18; }
 }
 .nav-jump-btn:hover { background: var(--accent-soft); color: var(--accent-dark); }
 
-/* Colored Full-Width Background Panels with Travel Textures */
-.band { position: relative; padding: 36px 16px; border-top: 2px solid rgba(24, 26, 29, 0.08); border-bottom: 3px solid rgba(24, 26, 29, 0.14); }
+/* Colored Full-Width Background Panels with Real Travel Photography */
+.band {
+  position: relative; padding: 36px 16px;
+  border-top: 2px solid rgba(24, 26, 29, 0.08); border-bottom: 3px solid rgba(24, 26, 29, 0.14);
+  background-size: cover; background-position: center;
+}
 .band-cream {
   background-color: #f4d8b3;
   background-image:
-    url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40 Q40 10 80 40 T160 40 M0 90 Q40 60 80 90 T160 90 M0 140 Q40 110 80 140 T160 140' fill='none' stroke='%23c2650b' stroke-opacity='0.14' stroke-width='1.5'/%3E%3C/svg%3E"),
-    radial-gradient(circle at 18% 20%, rgba(255, 253, 248, 0.55), transparent 55%),
-    linear-gradient(180deg, #f9e6cb 0%, #f1d2aa 100%);
+    linear-gradient(180deg, rgba(249, 230, 203, 0.72) 0%, rgba(241, 210, 170, 0.80) 100%),
+    url("assets/bg-travel.jpg");
   border-bottom-color: #d9b07e;
 }
 .band-ivory {
   background-color: #cde2ef;
   background-image:
-    radial-gradient(rgba(15, 118, 110, 0.16) 1.5px, transparent 1.5px),
-    radial-gradient(circle at 85% 25%, rgba(255, 255, 255, 0.55), transparent 50%),
-    linear-gradient(180deg, #dceaf3 0%, #c6deec 100%);
-  background-size: 22px 22px, 100% 100%, 100% 100%;
+    linear-gradient(180deg, rgba(220, 234, 243, 0.78) 0%, rgba(198, 222, 236, 0.84) 100%),
+    url("assets/win-about.jpg");
   border-bottom-color: #9ec2d8;
 }
 .band-teal {
   background-color: #08413d;
   background-image:
-    url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='60' cy='60' r='52' fill='none' stroke='%23ffffff' stroke-opacity='0.07' stroke-width='1.2'/%3E%3Cpath d='M0 60 H120 M60 0 V120' stroke='%2314b8a6' stroke-opacity='0.12' stroke-width='1' stroke-dasharray='4 4'/%3E%3C/svg%3E"),
-    radial-gradient(circle at 50% 0%, rgba(20, 184, 166, 0.28), transparent 65%),
-    linear-gradient(180deg, #0b4f4a 0%, #073834 100%);
+    linear-gradient(180deg, rgba(11, 79, 74, 0.80) 0%, rgba(7, 56, 52, 0.88) 100%),
+    url("assets/loc-thailand.jpg");
   color: #fff;
   border-bottom-color: #052623;
 }
 .band-sand {
   background-color: #cb6633;
   background-image:
-    repeating-linear-gradient(-45deg, rgba(255, 253, 248, 0.08) 0px, rgba(255, 253, 248, 0.08) 2px, transparent 2px, transparent 18px),
-    radial-gradient(circle at 12% 85%, rgba(251, 191, 36, 0.25), transparent 50%),
-    linear-gradient(180deg, #d97742 0%, #be5b29 100%);
+    linear-gradient(180deg, rgba(217, 119, 66, 0.78) 0%, rgba(190, 91, 41, 0.84) 100%),
+    url("assets/loc-malaga.jpg");
   border-bottom-color: #964219;
 }
 .band-mint {
   background-color: #b7dec9;
   background-image:
-    linear-gradient(to right, rgba(15, 118, 110, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 118, 110, 0.08) 1px, transparent 1px),
-    radial-gradient(circle at 80% 15%, rgba(255, 253, 248, 0.5), transparent 55%),
-    linear-gradient(180deg, #c7e5d5 0%, #a8d6be 100%);
-  background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%;
+    linear-gradient(180deg, rgba(199, 229, 213, 0.80) 0%, rgba(168, 214, 190, 0.86) 100%),
+    url("assets/loc-bali.jpg");
   border-bottom-color: #7eb89a;
 }
 .band-inner { max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
