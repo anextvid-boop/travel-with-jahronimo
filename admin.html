@@ -165,9 +165,9 @@
       </div>
 
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;" role="tablist">
-        <button type="button" class="btn btn-primary admin-tab-btn" data-tab="tabCrm">📋 CRM &amp; Contacts</button>
+        <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabCrm">📋 CRM &amp; Contacts</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabMessages">💬 Messages &amp; Digest</button>
-        <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabOutreach">📨 Outreach Log</button>
+        <button type="button" class="btn btn-primary admin-tab-btn" data-tab="tabOutreach">📨 Outreach Log</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabAnalytics">📊 Analytics</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabRoute">🗺️ Route &amp; Where Next</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabOps">🧳 Trip Prep &amp; SEO</button>
@@ -264,7 +264,7 @@
 
       </div>
 
-      <div id="tabCrm" class="admin-tab-panel">
+      <div id="tabCrm" class="admin-tab-panel" style="display:none;">
       <!-- Add Contact Form -->
       <div class="card">
         <div class="kicker">ADD CONTACT</div>
@@ -364,7 +364,7 @@ Jahronimo</textarea>
         </div>
       </div>
 
-      <div id="tabOutreach" class="admin-tab-panel" style="display:none;">
+      <div id="tabOutreach" class="admin-tab-panel" style="display:block;">
         <div class="card" id="dailyTargetsCard">
           <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;">
             <div>
@@ -405,7 +405,7 @@ Jahronimo</textarea>
               <option value="booked">Booked</option>
             </select>
           </div>
-          <details style="margin-bottom:12px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
+          <details open style="margin-bottom:12px;border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
             <summary style="cursor:pointer;font-weight:700;color:var(--ink);" id="sentActionsSummary">📨 Sent Emails, FB Posts &amp; Comments (0)</summary>
             <div id="outreachLogList" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
             <div id="fbCommentsList" style="display:flex;flex-direction:column;gap:8px;margin-top:8px;"></div>
@@ -427,7 +427,7 @@ Jahronimo</textarea>
           </div>
           <div id="fbAccountSummary" style="padding:12px 14px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);margin-bottom:12px;font-size:0.88rem;color:var(--ink);"></div>
           <div id="fbCoverageGraphs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:14px;"></div>
-          <details style="border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
+          <details open style="border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
             <summary style="cursor:pointer;font-weight:700;color:var(--ink);" id="fbGroupsSummary">📘 Connected Facebook Groups by Type (0)</summary>
             <div id="fbGroupsList" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
           </details>
@@ -447,7 +447,7 @@ Jahronimo</textarea>
             <div class="stat-box"><div class="stat-num" id="poBooked">0</div><div class="stat-lbl">Booked</div></div>
             <div class="stat-box"><div class="stat-num" id="poReady">0</div><div class="stat-lbl">Ready Pool</div></div>
           </div>
-          <details style="border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
+          <details open style="border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
             <summary style="cursor:pointer;font-weight:700;color:var(--ink);" id="paidOutreachSummary">💼 Confirmed Paid Emails Sent (0)</summary>
             <div id="paidOutreachList" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
           </details>
@@ -906,7 +906,29 @@ Jahronimo</textarea>
         badge.textContent = `${plan.date || "Today"} · ${totSent} / ${totTarget} done`;
       }
 
+      const graphBars = channels.map((ch) => {
+        const sent = Number(ch.sentToday ?? 0);
+        const target = Number(ch.dailyTarget ?? 0);
+        const pct = target > 0 ? Math.min(100, Math.round((sent / target) * 100)) : 100;
+        const done = sent >= target;
+        return `
+          <div style="margin-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:4px;">
+              <span style="font-weight:700;color:var(--ink);">${escOutreach(ch.label)}</span>
+              <span style="font-weight:800;color:${done ? "#166534" : "var(--ink)"};">${sent} / ${target} (${pct}%) · Total: ${Number(ch.finalTotal ?? 0)}</span>
+            </div>
+            <div style="height:12px;background:var(--line);border-radius:999px;overflow:hidden;">
+              <div style="width:${pct}%;height:100%;background:${done ? "#16a34a" : "var(--accent)"};border-radius:999px;transition:width .3s ease;"></div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
       wrap.innerHTML = `
+        <div style="padding:14px 16px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);margin-bottom:14px;">
+          <div style="font-size:0.78rem;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted);margin-bottom:10px;">📊 Daily Goal Progress Graph (${totSent} / ${totTarget} today)</div>
+          ${graphBars}
+        </div>
         <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
           <thead>
             <tr style="border-bottom:2px solid var(--line);text-align:left;color:var(--muted);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.04em;">
