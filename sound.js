@@ -1,4 +1,4 @@
-// Travel With Jahronimo — Web Audio SFX + 10-Track Rotating Chill Lo-Fi Autoplay
+// Travel With Jahronimo — Web Audio UI SFX + 10 Real Chill Lo-Fi MP3 Autoplay
 (function () {
   "use strict";
 
@@ -11,7 +11,6 @@
   let lofiWanted = true;
   let lofiPlaying = false;
   let lofiAudio = null;
-  let synthTimer = null;
   let activeTrackIdx = 0;
 
   try {
@@ -21,21 +20,21 @@
     if (savedLofi === "false") lofiWanted = false;
   } catch (e) {}
 
-  // 10 Chill Lo-Fi Tracks (Track 0 = lofi.mp3, Tracks 1-9 = distinct warm Web Audio Lo-Fi grooves)
+  // 10 Real Recorded Chill Lo-Fi MP3 Tracks (No synthesized music)
   const TRACKS = [
-    { name: "Chill Days (MP3)", type: "mp3", src: "assets/lofi.mp3" },
-    { name: "Brighton Mist", type: "synth", bpm: 74, wave: "sine", bassWave: "triangle", chords: [[261.63, 329.63, 392.0, 493.88], [220.0, 261.63, 329.63, 392.0], [174.61, 220.0, 261.63, 329.63], [196.0, 246.94, 293.66, 349.23]] },
-    { name: "Málaga Sunset", type: "synth", bpm: 78, wave: "triangle", bassWave: "sine", chords: [[293.66, 349.23, 440.0, 523.25], [246.94, 293.66, 349.23, 440.0], [261.63, 329.63, 392.0, 493.88], [220.0, 261.63, 329.63, 392.0]] },
-    { name: "Valencia Breeze", type: "synth", bpm: 80, wave: "sine", bassWave: "sine", chords: [[329.63, 392.0, 493.88, 587.33], [261.63, 329.63, 392.0, 493.88], [293.66, 349.23, 440.0, 523.25], [246.94, 293.66, 392.0, 440.0]] },
-    { name: "Lisbon Tram", type: "synth", bpm: 72, wave: "triangle", bassWave: "triangle", chords: [[220.0, 261.63, 329.63, 392.0], [174.61, 220.0, 261.63, 349.23], [196.0, 246.94, 293.66, 392.0], [164.81, 196.0, 246.94, 329.63]] },
-    { name: "Atlas Dusk", type: "synth", bpm: 76, wave: "sine", bassWave: "triangle", chords: [[246.94, 293.66, 369.99, 440.0], [220.0, 261.63, 329.63, 415.3], [196.0, 246.94, 293.66, 369.99], [164.81, 196.0, 246.94, 329.63]] },
-    { name: "Chiang Mai Rain", type: "synth", bpm: 70, wave: "sine", bassWave: "sine", chords: [[261.63, 311.13, 392.0, 466.16], [233.08, 293.66, 349.23, 440.0], [207.65, 261.63, 311.13, 392.0], [196.0, 233.08, 293.66, 392.0]] },
-    { name: "Ubud Morning", type: "synth", bpm: 82, wave: "triangle", bassWave: "sine", chords: [[349.23, 440.0, 523.25, 659.25], [293.66, 349.23, 440.0, 523.25], [261.63, 329.63, 392.0, 493.88], [220.0, 293.66, 349.23, 440.0]] },
-    { name: "Hanoi Lanterns", type: "synth", bpm: 75, wave: "sine", bassWave: "triangle", chords: [[233.08, 293.66, 349.23, 440.0], [196.0, 233.08, 293.66, 349.23], [174.61, 220.0, 261.63, 329.63], [196.0, 246.94, 293.66, 349.23]] },
-    { name: "Tokyo Midnight", type: "synth", bpm: 84, wave: "triangle", bassWave: "sine", chords: [[261.63, 329.63, 392.0, 493.88], [246.94, 293.66, 369.99, 440.0], [220.0, 261.63, 329.63, 392.0], [196.0, 246.94, 293.66, 392.0]] }
+    { name: "Snoozy Beats — Chill Days", src: "assets/lofi.mp3" },
+    { name: "Slxt Sync — Shuttle", src: "assets/lofi-2.mp3" },
+    { name: "Slxt Sync — Green Background", src: "assets/lofi-3.mp3" },
+    { name: "Slxt Sync — Full Moon", src: "assets/lofi-4.mp3" },
+    { name: "Slxt Sync — Elevation", src: "assets/lofi-5.mp3" },
+    { name: "Slxt Sync — Chill Carpet", src: "assets/lofi-6.mp3" },
+    { name: "Janevo — LoFi Chill Hip Hop", src: "assets/lofi-7.mp3" },
+    { name: "Centz — Bonjour", src: "assets/lofi-8.mp3" },
+    { name: "Centz — The London Underground", src: "assets/lofi-9.mp3" },
+    { name: "Centz — Go Home With You", src: "assets/lofi-10.mp3" }
   ];
 
-  // Pick a different track on every launch
+  // Pick a different real MP3 track on every launch
   (function pickLaunchTrack() {
     let last = -1;
     try {
@@ -83,81 +82,33 @@
     osc.stop(now + duration + 0.02);
   }
 
-  function playSoftChord(track, stepIdx) {
-    const c = getCtx();
-    if (!c || !lofiPlaying) return;
-    const chord = track.chords[stepIdx % track.chords.length];
-    const barSec = (60 / track.bpm) * 2;
-    const now = c.currentTime;
-
-    chord.forEach((freq, i) => {
-      const osc = c.createOscillator();
-      const gain = c.createGain();
-      const filter = c.createBiquadFilter();
-      filter.type = "lowpass";
-      filter.frequency.setValueAtTime(950, now);
-
-      osc.type = i === 0 ? track.bassWave : track.wave;
-      osc.frequency.setValueAtTime(i === 0 ? freq / 2 : freq, now);
-
-      gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.linearRampToValueAtTime(i === 0 ? 0.055 : 0.026, now + 0.14);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + barSec * 0.95);
-
-      osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(c.destination);
-      osc.start(now);
-      osc.stop(now + barSec);
-    });
-  }
-
-  function startSynthLoop(track) {
-    stopSynthLoop();
-    let step = 0;
-    const intervalMs = Math.round(((60 / track.bpm) * 2) * 1000);
-    playSoftChord(track, step++);
-    synthTimer = setInterval(() => {
-      if (!lofiPlaying) return;
-      playSoftChord(track, step++);
-    }, intervalMs);
-  }
-
-  function stopSynthLoop() {
-    if (synthTimer) {
-      clearInterval(synthTimer);
-      synthTimer = null;
-    }
-  }
-
-  function ensureLofiAudio(src) {
+  function ensureLofiAudio() {
+    const track = TRACKS[activeTrackIdx] || TRACKS[0];
     if (!lofiAudio) {
-      lofiAudio = new Audio(src);
-      lofiAudio.loop = true;
+      lofiAudio = new Audio(track.src);
       lofiAudio.preload = "auto";
-      lofiAudio.volume = 0.34;
+      lofiAudio.volume = 0.36;
+      lofiAudio.addEventListener("ended", () => {
+        activeTrackIdx = (activeTrackIdx + 1) % TRACKS.length;
+        try { localStorage.setItem(LAST_TRACK_KEY, String(activeTrackIdx)); } catch (e) {}
+        lofiAudio.src = TRACKS[activeTrackIdx].src;
+        if (lofiWanted && enabled) {
+          lofiAudio.play().catch(() => {});
+          TravelSound.syncButtons();
+        }
+      });
     }
     return lofiAudio;
   }
 
   function startLofi() {
-    const track = TRACKS[activeTrackIdx] || TRACKS[0];
+    const audio = ensureLofiAudio();
     lofiWanted = true;
     lofiPlaying = true;
-
-    if (track.type === "mp3") {
-      stopSynthLoop();
-      const audio = ensureLofiAudio(track.src);
-      audio.play().catch(() => {
-        lofiPlaying = false;
-        TravelSound.syncButtons();
-      });
-    } else {
-      if (lofiAudio) lofiAudio.pause();
-      getCtx();
-      startSynthLoop(track);
-    }
-
+    audio.play().catch(() => {
+      lofiPlaying = false;
+      TravelSound.syncButtons();
+    });
     try { localStorage.setItem(LOFI_KEY, "true"); } catch (e) {}
     TravelSound.syncButtons();
   }
@@ -165,16 +116,14 @@
   function stopLofi() {
     lofiWanted = false;
     lofiPlaying = false;
-    stopSynthLoop();
     if (lofiAudio) lofiAudio.pause();
     try { localStorage.setItem(LOFI_KEY, "false"); } catch (e) {}
     TravelSound.syncButtons();
   }
 
-  // Unlock autoplay on first user gesture if browser blocked initial play
   function unlockOnFirstGesture() {
     if (!enabled || !lofiWanted) return;
-    if (!lofiPlaying || (ctx && ctx.state === "suspended")) {
+    if (!lofiPlaying || (lofiAudio && lofiAudio.paused)) {
       startLofi();
     }
   }
@@ -183,13 +132,11 @@
   });
 
   document.addEventListener("visibilitychange", () => {
-    const track = TRACKS[activeTrackIdx] || TRACKS[0];
+    if (!lofiAudio) return;
     if (document.hidden) {
-      stopSynthLoop();
-      if (lofiAudio) lofiAudio.pause();
+      lofiAudio.pause();
     } else if (lofiWanted && enabled) {
-      if (track.type === "mp3" && lofiAudio) lofiAudio.play().catch(() => {});
-      else if (track.type === "synth") startSynthLoop(track);
+      lofiAudio.play().catch(() => {});
     }
   });
 
@@ -199,11 +146,6 @@
     isEnabled: () => enabled,
     isLofiPlaying: () => lofiPlaying,
     getTrackName: () => (TRACKS[activeTrackIdx] || TRACKS[0]).name,
-    toggleLofi() {
-      if (lofiPlaying) stopLofi();
-      else startLofi();
-      return lofiPlaying;
-    },
     setEnabled(val) {
       enabled = !!val;
       try { localStorage.setItem(STORAGE_KEY, String(enabled)); } catch (e) {}
