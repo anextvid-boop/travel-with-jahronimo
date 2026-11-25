@@ -559,6 +559,44 @@
       display: block;
     }
 
+    .auth-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .auth-tab {
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      font-weight: 800;
+      font-size: 0.88rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+    .auth-tab.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .auth-field {
+      width: 100%;
+      padding: 11px 13px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .auth-field:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.14);
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -1425,6 +1463,10 @@
         <span>TRAVEL WITH JAHRONIMO</span>
       </div>
       <div style="display:flex;align-items:center;gap:8px;">
+        <button class="lang-trigger tap-fx" id="openAuthBtn" type="button" aria-label="Sign up or log in to help">
+          <span>🤝</span>
+          <span id="authBtnLabel">Help / Join</span>
+        </button>
         <button class="lang-trigger" id="lofiToggleBtn" type="button" aria-label="Toggle Lo-Fi background music" aria-pressed="false" title="Lo-Fi Hip-Hop Beat">
           <span>🎵</span>
           <span class="lofi-lbl">Lo-Fi</span>
@@ -2010,6 +2052,41 @@
     </section>
 
   </main>
+
+  <!-- Who Can Help? Sign Up / Log In Modal -->
+  <div class="lang-modal-backdrop" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+    <div class="lang-modal" style="text-align:left;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div class="section-kicker" style="margin-bottom:0;">WHO CAN HELP?</div>
+        <button class="focus-close-btn tap-fx" id="closeAuthBtn" type="button" aria-label="Close">✕</button>
+      </div>
+      <h2 id="authModalTitle" style="margin-bottom:6px;">Sign Up or Log In to Help</h2>
+      <p style="margin-bottom:14px;">Offer a house/pet sit, paid video/web work, a fair-rate room, coffee, or local tips.</p>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active tap-fx" id="tabSignup">Sign Up</button>
+        <button type="button" class="auth-tab tap-fx" id="tabLogin">Log In</button>
+      </div>
+
+      <form id="authForm">
+        <div id="signupOnlyFields">
+          <input class="auth-field" id="authName" type="text" placeholder="Your Name (e.g. Maria)" />
+          <input class="auth-field" id="authCity" type="text" placeholder="City / Country (e.g. Málaga, Spain)" />
+          <select class="auth-field" id="authOffer">
+            <option value="House / Pet Sit">🏡 House / Pet Sit</option>
+            <option value="Paid Video / Web Work">🎬 Paid Video / Web Work</option>
+            <option value="Fair-Rate Room / Stay">🛏️ Fair-Rate Room / Stay</option>
+            <option value="Coffee / Local Tips">☕ Coffee / Local Tips</option>
+            <option value="Language Exchange">🗣️ Language Exchange</option>
+          </select>
+        </div>
+        <input class="auth-field" id="authEmail" type="email" placeholder="Email (or WhatsApp handle)" required />
+        <input class="auth-field" id="authPin" type="password" placeholder="Quick Passcode" required />
+        <div id="authMsg" style="font-size:0.82rem;color:var(--accent-dark);font-weight:700;margin-bottom:10px;min-height:18px;"></div>
+        <button type="submit" class="btn btn-wa tap-fx" style="width:100%;" id="authSubmitBtn">Sign Up &amp; Send to Jahronimo</button>
+      </form>
+    </div>
+  </div>
 
   <!-- Focus Window Floating Modal -->
   <div class="focus-backdrop" id="focusBackdrop" role="dialog" aria-modal="true" aria-labelledby="focusWindowTitle">
@@ -3029,6 +3106,92 @@
       focusCloseBtn.addEventListener("click", closeFocusWindow);
       window.addEventListener("keydown", (e) => {
         if (e.key === "Escape") closeFocusWindow();
+      });
+
+      // 8. Who Can Help? Sign Up / Log In Modal
+      const authModal = document.getElementById("authModal");
+      const openAuthBtn = document.getElementById("openAuthBtn");
+      const closeAuthBtn = document.getElementById("closeAuthBtn");
+      const authBtnLabel = document.getElementById("authBtnLabel");
+      const tabSignup = document.getElementById("tabSignup");
+      const tabLogin = document.getElementById("tabLogin");
+      const signupFields = document.getElementById("signupOnlyFields");
+      const authSubmitBtn = document.getElementById("authSubmitBtn");
+      const authMsg = document.getElementById("authMsg");
+      let authMode = "signup";
+
+      function syncAuthBadge() {
+        try {
+          const user = JSON.parse(localStorage.getItem("twj_helper_user") || "null");
+          if (user && user.name) {
+            authBtnLabel.textContent = user.name;
+          } else {
+            authBtnLabel.textContent = "Help / Join";
+          }
+        } catch (e) {}
+      }
+      syncAuthBadge();
+
+      function setAuthMode(mode) {
+        authMode = mode;
+        tabSignup.classList.toggle("active", mode === "signup");
+        tabLogin.classList.toggle("active", mode === "login");
+        signupFields.style.display = mode === "signup" ? "block" : "none";
+        authSubmitBtn.textContent = mode === "signup" ? "Sign Up & Send to Jahronimo" : "Log In";
+        authMsg.textContent = "";
+      }
+
+      tabSignup.addEventListener("click", () => setAuthMode("signup"));
+      tabLogin.addEventListener("click", () => setAuthMode("login"));
+      openAuthBtn.addEventListener("click", () => {
+        authModal.classList.add("open");
+        window.TravelSound?.play("modalOpen");
+      });
+      closeAuthBtn.addEventListener("click", () => {
+        authModal.classList.remove("open");
+        window.TravelSound?.play("modalClose");
+      });
+      authModal.addEventListener("click", (e) => {
+        if (e.target === authModal) {
+          authModal.classList.remove("open");
+          window.TravelSound?.play("modalClose");
+        }
+      });
+
+      document.getElementById("authForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("authEmail").value.trim();
+        const pin = document.getElementById("authPin").value.trim();
+        if (authMode === "signup") {
+          const name = document.getElementById("authName").value.trim() || "Friend";
+          const city = document.getElementById("authCity").value.trim() || "Anywhere";
+          const offer = document.getElementById("authOffer").value;
+          const profile = { name, city, offer, email, pin };
+          try {
+            localStorage.setItem("twj_helper_user", JSON.stringify(profile));
+            localStorage.setItem("twj_helper_" + email.toLowerCase(), JSON.stringify(profile));
+          } catch (err) {}
+          syncAuthBadge();
+          window.TravelSound?.play("waSend");
+          authMsg.textContent = `Welcome ${name}! Opening WhatsApp to connect...`;
+          const waText = `Hi Jahronimo! I just signed up on your page (${name} in ${city} — ${offer}). Email: ${email}`;
+          setTimeout(() => {
+            window.open(`https://wa.me/447538068550?text=${encodeURIComponent(waText)}`, "_blank", "noopener");
+            authModal.classList.remove("open");
+          }, 550);
+        } else {
+          let stored = null;
+          try { stored = JSON.parse(localStorage.getItem("twj_helper_" + email.toLowerCase()) || "null"); } catch (err) {}
+          if (stored && stored.pin === pin) {
+            try { localStorage.setItem("twj_helper_user", JSON.stringify(stored)); } catch (err) {}
+            syncAuthBadge();
+            window.TravelSound?.play("toastOn");
+            authMsg.textContent = `Welcome back, ${stored.name} (${stored.city})!`;
+            setTimeout(() => authModal.classList.remove("open"), 750);
+          } else {
+            authMsg.textContent = "Account not found on this device — switch to Sign Up!";
+          }
+        }
       });
     })();
   </script>
