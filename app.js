@@ -282,6 +282,16 @@
       strip?.scrollBy({ left: 240, behavior: "smooth" });
     });
 
+    document.getElementById("heroAvatarBtn")?.addEventListener("click", () => {
+      const heroImg = document.querySelector("#heroAvatarBtn img");
+      if (!heroImg) return;
+      window.SFX?.open?.();
+      lbImg.src = heroImg.src;
+      lbImg.alt = heroImg.alt || "";
+      if (lbCap) lbCap.textContent = "Jahronimo — Explorer Edition (Brighton, UK)";
+      lb.classList.add("open");
+    });
+
     document.querySelectorAll(".photo-item img").forEach((img) => {
       img.addEventListener("click", () => {
         window.SFX?.open?.();

@@ -145,10 +145,23 @@ h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.18; }
 .goal-badge-top { background: var(--amber-soft); color: #92400e; padding: 4px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 800; }
 
 /* Hero Card */
-.hero-top { display: flex; align-items: center; gap: 22px; }
+.hero-top { display: flex; align-items: center; gap: 24px; }
+.hero-avatar-btn {
+  position: relative; padding: 0; border: 3px solid var(--surface); border-radius: 28px;
+  background: transparent; cursor: pointer; flex-shrink: 0; overflow: hidden;
+  box-shadow: 0 12px 28px rgba(15, 118, 110, 0.22), 0 4px 10px rgba(0, 0, 0, 0.14);
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.18s ease;
+}
+.hero-avatar-btn:hover { transform: translateY(-2px) scale(1.02); }
+.hero-avatar-btn:active { transform: translateY(2px) scale(0.97); }
 .hero-avatar {
-  width: 124px; height: 124px; border-radius: 26px; object-fit: cover; object-position: center 20%;
-  border: 3px solid var(--surface); box-shadow: var(--shadow-sm); flex-shrink: 0;
+  width: clamp(168px, 28vw, 220px); height: clamp(190px, 32vw, 244px);
+  object-fit: cover; object-position: center 20%; display: block;
+}
+.hero-avatar-badge {
+  position: absolute; right: 10px; bottom: 10px; padding: 4px 10px; border-radius: 999px;
+  background: rgba(24, 26, 29, 0.78); color: #fff; font-size: 0.7rem; font-weight: 800;
+  letter-spacing: 0.04em; backdrop-filter: blur(4px); pointer-events: none;
 }
 .pill-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 10px; }
 .status-pill {
