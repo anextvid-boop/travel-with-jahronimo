@@ -617,6 +617,52 @@
       box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.14);
     }
 
+    /* Horizontal Side-by-Side Photo Scrolling Window */
+    .photo-scroll-wrap {
+      position: relative;
+      margin-top: 14px;
+    }
+    .photo-scroll-strip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 2px 12px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) var(--surface-soft);
+    }
+    .photo-scroll-strip::-webkit-scrollbar { height: 6px; }
+    .photo-scroll-strip::-webkit-scrollbar-track { background: var(--surface-soft); border-radius: 999px; }
+    .photo-scroll-strip::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 999px; }
+    .photo-scroll-strip .photo-item {
+      flex: 0 0 185px;
+      scroll-snap-align: start;
+    }
+    .photo-nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .photo-nav-btns { display: inline-flex; gap: 6px; }
+    .photo-nav-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      color: var(--ink);
+      font-weight: 800;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+    }
+    .photo-nav-btn:hover { border-color: var(--accent); background: var(--accent-soft); }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -1554,32 +1600,13 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         <span data-i18n="photosKicker">Photos</span>
       </div>
-      <h2 data-i18n="photosTitle">A quick look at who you're hosting</h2>
-      <div class="photo-grid">
-        <div class="photo-item">
-          <img src="assets/hero.jpg" alt="Jahronimo headshot" loading="lazy" />
-          <div class="photo-cap" data-i18n="cap1">Brighton, UK</div>
-        </div>
-        <div class="photo-item">
-          <img src="assets/outdoors.jpg" alt="Jahronimo outdoors with camera" loading="lazy" />
-          <div class="photo-cap" data-i18n="cap2">Outdoors &amp; Travel</div>
-        </div>
-        <div class="photo-item">
-          <img src="assets/camera.png" alt="Jahronimo filming on location" loading="lazy" />
-          <div class="photo-cap" data-i18n="cap3">Video &amp; Photo</div>
-        </div>
-        <div class="photo-item">
-          <img src="assets/interior.png" alt="Jahronimo relaxed portrait" loading="lazy" />
-          <div class="photo-cap" data-i18n="cap4">Quiet &amp; Reliable</div>
-        </div>
-      </div>
-
-      <details style="margin-top:14px;">
-        <summary style="cursor:pointer;font-weight:700;font-size:0.88rem;color:var(--accent-dark);list-style:none;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:999px;background:var(--accent-soft);">
-          <span>📸</span>
-          <span>View All 16 Media Kit Photos</span>
-        </summary>
-        <div class="photo-grid" style="margin-top:12px;">
+      <h2 data-i18n="photosTitle">Meet Jahronimo — on the road &amp; at work</h2>
+      <div class="photo-scroll-wrap">
+        <div class="photo-scroll-strip" id="photoScrollStrip">
+          <div class="photo-item"><img src="assets/hero.jpg" alt="Jahronimo headshot" loading="lazy" /><div class="photo-cap" data-i18n="cap1">Brighton, UK</div></div>
+          <div class="photo-item"><img src="assets/outdoors.jpg" alt="Jahronimo outdoors with camera" loading="lazy" /><div class="photo-cap" data-i18n="cap2">Outdoors &amp; Travel</div></div>
+          <div class="photo-item"><img src="assets/camera.png" alt="Jahronimo filming on location" loading="lazy" /><div class="photo-cap" data-i18n="cap3">Video &amp; Photo</div></div>
+          <div class="photo-item"><img src="assets/interior.png" alt="Jahronimo relaxed portrait" loading="lazy" /><div class="photo-cap" data-i18n="cap4">Quiet &amp; Reliable</div></div>
           <div class="photo-item"><img src="assets/g05.jpg" alt="Jahronimo portrait 5" loading="lazy" /></div>
           <div class="photo-item"><img src="assets/g06.jpg" alt="Jahronimo portrait 6" loading="lazy" /></div>
           <div class="photo-item"><img src="assets/g07.jpg" alt="Jahronimo portrait 7" loading="lazy" /></div>
@@ -1593,7 +1620,14 @@
           <div class="photo-item"><img src="assets/g15.png" alt="Jahronimo studio 15" loading="lazy" /></div>
           <div class="photo-item"><img src="assets/g16.png" alt="Jahronimo studio 16" loading="lazy" /></div>
         </div>
-      </details>
+        <div class="photo-nav-row">
+          <span>Swipe or scroll sideways · 16 photos</span>
+          <div class="photo-nav-btns">
+            <button type="button" class="photo-nav-btn tap-fx" id="photoPrevBtn" aria-label="Scroll photos left">‹</button>
+            <button type="button" class="photo-nav-btn tap-fx" id="photoNextBtn" aria-label="Scroll photos right">›</button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Page Break 1: Route & Maps -->
@@ -2900,6 +2934,17 @@
     document.getElementById("sendCustomWaBtn").addEventListener("click", () => {
       const msg = (waTextarea.value || "Hi Jahronimo!").trim();
       window.open(`https://wa.me/447538068550?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+    });
+
+    // Photo Strip Horizontal Buttons
+    const photoStrip = document.getElementById("photoScrollStrip");
+    document.getElementById("photoPrevBtn")?.addEventListener("click", () => {
+      photoStrip?.scrollBy({ left: -220, behavior: "smooth" });
+      window.TravelSound?.play("tap");
+    });
+    document.getElementById("photoNextBtn")?.addEventListener("click", () => {
+      photoStrip?.scrollBy({ left: 220, behavior: "smooth" });
+      window.TravelSound?.play("tap");
     });
 
     // Photo Lightbox
