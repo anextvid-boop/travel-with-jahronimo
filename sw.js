@@ -1,9 +1,9 @@
 // Travel With Jahronimo — Lightweight Offline Cache Service Worker
-const CACHE_NAME = "twj-cache-v2";
+const CACHE_NAME = "twj-cache-v3";
 const CORE_ASSETS = [
   "./",
   "index.html",
-  "styles.css?v=2",
+  "styles.css?v=4",
   "sound.js?v=4",
   "i18n.js?v=2",
   "map.js?v=2",
