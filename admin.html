@@ -328,6 +328,19 @@
             <button type="button" class="btn btn-ghost" id="resetRouteBtn">Reset to Repo Default</button>
           </div>
           <div id="routeSaveStatus" style="font-size:0.82rem;font-weight:700;color:var(--accent-dark);margin-top:10px;"></div>
+
+          <hr style="border:none;border-top:1.5px solid var(--line);margin:18px 0;" />
+          <div class="kicker">📱 PHONE GPS → LIVE WEBSITE (EVERY 3 DAYS)</div>
+          <h3 style="font-size:1.05rem;margin-bottom:6px;">Connect Phone (+44 7538 068550) Location to Public Site</h3>
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:10px;">
+            Saves a GitHub token <strong>only on this phone</strong> (<code>localStorage</code>). Tap once every 3 days (or trigger via iPhone Shortcuts) to push your real GPS city &amp; coordinates straight to <code>data/stops.json</code>.
+          </p>
+          <div id="gpsSyncDueBadge" style="font-size:0.82rem;font-weight:800;margin-bottom:10px;color:var(--accent-dark);"></div>
+          <div class="row" style="margin-bottom:10px;">
+            <input id="ghPatInput" type="password" placeholder="GitHub Fine-Grained Token (Contents: Read/Write)" style="margin:0;" />
+            <button type="button" class="btn btn-primary" id="pushPhoneGpsLiveBtn">📍 Push Phone GPS to Live Website</button>
+          </div>
+          <div id="gpsLivePushStatus" style="font-size:0.82rem;font-weight:700;color:var(--accent-dark);"></div>
         </div>
       </div>
 
@@ -798,6 +811,118 @@
     document.getElementById("resetRouteBtn")?.addEventListener("click", () => {
       localStorage.removeItem(ROUTE_OVERRIDE_KEY);
       initRouteEditor();
+      document.getElementById("routeSaveStatus").textContent = "Reset to repository data/stops.json.";
+    });
+
+    initRouteEditor();
+
+    // 3-Day Phone GPS -> GitHub Live Site Sync
+    const GH_PAT_KEY = "twj_gh_pat";
+    const LAST_GPS_PUSH_KEY = "twj_last_gps_push";
+    const patInput = document.getElementById("ghPatInput");
+    const dueBadge = document.getElementById("gpsSyncDueBadge");
+    const pushStatus = document.getElementById("gpsLivePushStatus");
+
+    try {
+      const savedPat = localStorage.getItem(GH_PAT_KEY);
+      if (savedPat && patInput) patInput.value = savedPat;
+    } catch (e) {}
+
+    function refreshGpsDueBadge() {
+      if (!dueBadge) return;
+      const lastIso = localStorage.getItem(LAST_GPS_PUSH_KEY);
+      if (!lastIso) {
+        dueBadge.textContent = "⏳ No live GPS push recorded yet — tap below to sync now (repeats every 3 days).";
+        return;
+      }
+      const days = (Date.now() - new Date(lastIso).getTime()) / 86400000;
+      dueBadge.textContent =
+        days >= 3
+          ? `⚠️ Last synced ${days.toFixed(1)} days ago — 3-day location update due!`
+          : `✅ Live site synced ${days < 0.05 ? "just now" : days.toFixed(1) + "d ago"} · Next 3-day check-in in ${(3 - days).toFixed(1)}d.`;
+    }
+    refreshGpsDueBadge();
+
+    document.getElementById("pushPhoneGpsLiveBtn")?.addEventListener("click", () => {
+      if (!navigator.geolocation) {
+        if (pushStatus) pushStatus.textContent = "Geolocation not supported on this browser.";
+        return;
+      }
+      const pat = (patInput?.value || "").trim();
+      if (pat) {
+        try { localStorage.setItem(GH_PAT_KEY, pat); } catch (e) {}
+      }
+      if (pushStatus) pushStatus.textContent = "Reading phone GPS…";
+
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          const lat = Number(pos.coords.latitude.toFixed(4));
+          const lon = Number(pos.coords.longitude.toFixed(4));
+          let cityLabel = `${lat}, ${lon}`;
+          try {
+            const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
+            if (geoRes.ok) {
+              const g = await geoRes.json();
+              const city = g.address?.city || g.address?.town || g.address?.village || g.address?.county || "";
+              const country = g.address?.country || "";
+              if (city || country) cityLabel = [city, country].filter(Boolean).join(", ");
+            }
+          } catch (e) {}
+
+          if (adminRouteData && Array.isArray(adminRouteData.stops)) {
+            const cur = adminRouteData.stops.find((s) => s.key === adminRouteData.currentStopKey) || adminRouteData.stops[0];
+            if (cur) {
+              cur.label = cityLabel;
+              cur.coords = [lon, lat];
+              cur.notes = `Live phone GPS check-in (${new Date().toLocaleDateString()})`;
+            }
+            adminRouteData.lastPhoneGpsSync = new Date().toISOString();
+            localStorage.setItem(ROUTE_OVERRIDE_KEY, JSON.stringify(adminRouteData));
+            renderRouteEditor();
+          }
+
+          if (!pat) {
+            localStorage.setItem(LAST_GPS_PUSH_KEY, new Date().toISOString());
+            refreshGpsDueBadge();
+            if (pushStatus) pushStatus.textContent = `✅ Updated locally to ${cityLabel}! Add a GitHub token above to also push live to all visitors.`;
+            return;
+          }
+
+          try {
+            if (pushStatus) pushStatus.textContent = `Publishing ${cityLabel} to GitHub…`;
+            const apiUrl = "https://api.github.com/repos/anextvid-boop/travel-with-jahronimo/contents/data/stops.json";
+            const getRes = await fetch(apiUrl, { headers: { Authorization: `Bearer ${pat}` } });
+            const getJson = await getRes.json();
+            const contentB64 = btoa(unescape(encodeURIComponent(JSON.stringify(adminRouteData, null, 2))));
+            const putRes = await fetch(apiUrl, {
+              method: "PUT",
+              headers: {
+                Authorization: `Bearer ${pat}`,
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                message: `3-day phone GPS location update: ${cityLabel}`,
+                content: contentB64,
+                sha: getJson.sha
+              })
+            });
+            if (putRes.ok) {
+              localStorage.setItem(LAST_GPS_PUSH_KEY, new Date().toISOString());
+              refreshGpsDueBadge();
+              if (pushStatus) pushStatus.textContent = `🚀 Live website updated to ${cityLabel}! (Pages deploys in ~60s)`;
+            } else {
+              if (pushStatus) pushStatus.textContent = `⚠️ GitHub API returned ${putRes.status}. Check token permissions (Contents: Read & Write).`;
+            }
+          } catch (err) {
+            if (pushStatus) pushStatus.textContent = `⚠️ Network error pushing to GitHub: ${err.message}`;
+          }
+        },
+        (err) => {
+          if (pushStatus) pushStatus.textContent = `GPS error: ${err.message}`;
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
+    });
 
     // Page View Analytics Loader
     async function loadAnalyticsPanel() {
@@ -907,10 +1032,6 @@
       loadAnalyticsPanel();
     });
     loadAnalyticsPanel();
-      document.getElementById("routeSaveStatus").textContent = "Reset to repository data/stops.json.";
-    });
-
-    initRouteEditor();
 
     // Page View Analytics Loader
     async function loadAnalyticsPanel() {
