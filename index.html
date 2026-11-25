@@ -437,6 +437,26 @@
       transition: background 0.15s, transform 0.15s;
     }
     .focus-close-btn:hover { background: var(--accent-soft); transform: scale(1.06); }
+    .panel-expand-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 4;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface-soft);
+      color: var(--accent-dark);
+      font-size: 0.74rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s, border-color 0.15s, background 0.15s;
+    }
+    .panel-expand-btn:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-1px); }
 
     /* Launch Intro (Animated SVG World Before Page Launches) */
     @keyframes spinSlow { to { transform: rotate(360deg); } }
@@ -2765,6 +2785,7 @@
       });
 
       map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), "top-right");
+      window.__travelMap = map;
 
       let originMarker = null;
 
@@ -3089,6 +3110,58 @@
           focusBackdrop.classList.add("open");
           document.body.style.overflow = "hidden";
           window.TravelSound?.play("modalOpen");
+        });
+      });
+
+      // 7b. Make Every .card Panel Expandable into the Focus Window Modal
+      document.querySelectorAll("main.container > section.card").forEach((card) => {
+        const expBtn = document.createElement("button");
+        expBtn.type = "button";
+        expBtn.className = "panel-expand-btn tap-fx";
+        expBtn.innerHTML = "⤢ Expand";
+        expBtn.setAttribute("aria-label", "Expand panel");
+        card.appendChild(expBtn);
+
+        expBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (activeDetails) closeFocusWindow();
+          const placeholder = document.createElement("div");
+          placeholder.style.display = "none";
+          card.parentNode.insertBefore(placeholder, card);
+
+          const titleEl = card.querySelector("h1, h2");
+          focusHeadLeft.innerHTML = `<div class="acc-title">${titleEl ? titleEl.textContent : "Panel"}</div>`;
+          expBtn.style.display = "none";
+
+          const origRestore = () => {
+            expBtn.style.display = "";
+            placeholder.parentNode.insertBefore(card, placeholder);
+            placeholder.remove();
+            if (card.querySelector("#worldMap3D") && window.__travelMap) {
+              setTimeout(() => window.__travelMap.resize(), 60);
+            }
+          };
+
+          focusSlot.innerHTML = "";
+          focusSlot.appendChild(card);
+          card.style.transform = "none";
+          card.style.margin = "0";
+          card.style.border = "none";
+          card.style.boxShadow = "none";
+          activeDetails = { appendChild: () => {
+            card.style.margin = "";
+            card.style.border = "";
+            card.style.boxShadow = "";
+            origRestore();
+          }};
+          activeBody = card;
+
+          focusBackdrop.classList.add("open");
+          document.body.style.overflow = "hidden";
+          window.TravelSound?.play("modalOpen");
+          if (card.querySelector("#worldMap3D") && window.__travelMap) {
+            setTimeout(() => window.__travelMap.resize(), 80);
+          }
         });
       });
 
