@@ -436,6 +436,88 @@
     }
     .focus-close-btn:hover { background: var(--accent-soft); transform: scale(1.06); }
 
+    /* Launch Intro (Animated SVG World Before Page Launches) */
+    @keyframes spinSlow { to { transform: rotate(360deg); } }
+    @keyframes worldPop {
+      0% { opacity: 0; transform: scale(0.84) translateY(14px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes tagFadeUp {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .launch-intro {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      opacity: 1;
+      transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .launch-intro.is-exiting { opacity: 0; pointer-events: none; }
+    .launch-intro.is-done { display: none; }
+    .launch-intro-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(15, 118, 110, 0.2) 0%, rgba(180, 83, 9, 0.08) 32%, transparent 62%);
+      pointer-events: none;
+    }
+    .launch-intro-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 0 20px;
+      animation: worldPop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .launch-world-svg {
+      width: min(260px, 68vw);
+      height: auto;
+      display: block;
+      margin: 0 auto 14px;
+      filter: drop-shadow(0 18px 36px rgba(15, 118, 110, 0.22));
+      overflow: visible;
+    }
+    .launch-orbit {
+      transform-origin: 120px 120px;
+      animation: spinSlow 16s linear infinite;
+    }
+    .launch-intro-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.25rem, 4vw, 1.7rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+    }
+    .launch-intro-tagline {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      color: var(--accent-dark);
+      opacity: 0;
+      animation: tagFadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards;
+    }
+    .launch-intro-skip {
+      position: fixed;
+      top: 20px;
+      right: 22px;
+      z-index: 2;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .launch-intro-skip:hover { border-color: var(--accent); transform: translateY(-1px); }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -1199,6 +1281,53 @@
   </style>
 </head>
 <body>
+
+  <!-- Animated SVG World Launch Intro -->
+  <div id="launchIntro" class="launch-intro" aria-hidden="true">
+    <div class="launch-intro-glow"></div>
+    <div class="launch-intro-inner">
+      <svg class="launch-world-svg" viewBox="0 0 240 240" fill="none">
+        <!-- Orbiting Dashed Ring & Plane -->
+        <g class="launch-orbit">
+          <circle cx="120" cy="120" r="102" stroke="#0f766e" stroke-width="1.6" stroke-dasharray="6 6" opacity="0.5"/>
+          <circle cx="222" cy="120" r="4" fill="#b45309"/>
+          <circle cx="18" cy="120" r="3" fill="#0f766e"/>
+        </g>
+
+        <!-- Cream & Teal Globe -->
+        <circle cx="120" cy="120" r="78" fill="#e5eee9" stroke="#0f766e" stroke-width="2.5"/>
+        <ellipse cx="120" cy="120" rx="38" ry="78" stroke="#0f766e" stroke-width="1" opacity="0.25"/>
+        <line x1="42" y1="120" x2="198" y2="120" stroke="#0f766e" stroke-width="1" opacity="0.25"/>
+        <path d="M52 88 Q120 100 188 88" stroke="#0f766e" stroke-width="1" opacity="0.22"/>
+        <path d="M52 152 Q120 140 188 152" stroke="#0f766e" stroke-width="1" opacity="0.22"/>
+
+        <!-- Stylized Continents -->
+        <path d="M84 68 L112 62 L124 84 L106 102 L82 96 Z" fill="#dfd2bc" stroke="#c5b499" stroke-width="1.2"/>
+        <path d="M132 76 L174 84 L178 118 L154 134 L126 110 Z" fill="#dfd2bc" stroke="#c5b499" stroke-width="1.2"/>
+        <path d="M88 112 L118 116 L124 156 L102 174 L84 146 Z" fill="#dfd2bc" stroke="#c5b499" stroke-width="1.2"/>
+        <path d="M148 144 L176 146 L182 164 L158 168 Z" fill="#dfd2bc" stroke="#c5b499" stroke-width="1.2"/>
+
+        <!-- Animated Flight Arc Across the World -->
+        <path id="introFlightArc" class="route-arc" d="M 94 82 Q 130 56 162 114 Q 168 138 166 156" stroke="#b45309" stroke-width="2.8"/>
+        <g fill="#b45309">
+          <path d="M-6 -2.8 L7 0 L-6 2.8 L-3.5 0 Z">
+            <animateMotion dur="2.2s" repeatCount="indefinite" rotate="auto">
+              <mpath href="#introFlightArc"/>
+            </animateMotion>
+          </path>
+        </g>
+
+        <!-- Pulsing Destination Beacons -->
+        <circle class="pin-pulse" cx="94" cy="82" r="7"/>
+        <circle cx="94" cy="82" r="5" fill="#16a34a" stroke="#fff" stroke-width="2"/>
+        <circle cx="162" cy="114" r="4.5" fill="#0f766e" stroke="#fff" stroke-width="2"/>
+        <circle cx="166" cy="156" r="5" fill="#b45309" stroke="#fff" stroke-width="2"/>
+      </svg>
+      <div class="launch-intro-title">TRAVEL WITH JAHRONIMO</div>
+      <div class="launch-intro-tagline">BRIGHTON · SPAIN · THAILAND · BALI · 13 COUNTRIES</div>
+    </div>
+    <button type="button" id="skipIntroBtn" class="launch-intro-skip tap-fx" aria-label="Skip intro">Skip →</button>
+  </div>
 
   <!-- Scroll Progress Rail -->
   <div class="nav-progress" id="navProgress" aria-hidden="true"></div>
@@ -2453,6 +2582,31 @@
         waBoxKicker: "Hikayeye Katıl", waBoxTitle: "Hikayeye Katıl · WhatsApp", waBoxSub: "Bir konu seçin veya yazın.", sendWaBtn: "WhatsApp ile Gönder"
       }
     };
+
+    // Launch Intro Controller (runs before page launches, skip anytime)
+    (function initLaunchIntro() {
+      const intro = document.getElementById("launchIntro");
+      const skipBtn = document.getElementById("skipIntroBtn");
+      if (!intro) return;
+
+      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduce) {
+        intro.classList.add("is-done");
+        return;
+      }
+
+      let closed = false;
+      function closeIntro(withSound = false) {
+        if (closed) return;
+        closed = true;
+        if (withSound) window.TravelSound?.play("toastOn");
+        intro.classList.add("is-exiting");
+        setTimeout(() => intro.classList.add("is-done"), 460);
+      }
+
+      skipBtn?.addEventListener("click", () => closeIntro(true));
+      setTimeout(() => closeIntro(false), 2400);
+    })();
 
     // Language Modal & Switcher
     const modal = document.getElementById("langModal");
