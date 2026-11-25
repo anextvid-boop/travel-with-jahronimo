@@ -315,7 +315,16 @@
     }
 
     openCardBtn?.addEventListener("click", enterFullscreen);
-    fsExitBtn?.addEventListener("click", exitFullscreen);
+    [fsExitBtn, document.getElementById("mapFsExitBtn2")].forEach((btn) => {
+      if (!btn) return;
+      ["pointerdown", "touchstart"].forEach((evt) => {
+        btn.addEventListener(evt, (e) => e.stopPropagation(), { passive: true });
+      });
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        exitFullscreen();
+      });
+    });
 
     document.addEventListener("fullscreenchange", () => {
       const fsActive = document.fullscreenElement === stageWrap;
