@@ -7,6 +7,8 @@
   <meta name="description" content="Jahronimo (36, Brighton UK) — calm remote video &amp; web creator and trusted house/pet sitter travelling with one carry-on across 13 countries in 2027." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <link rel="canonical" href="https://anextvid-boop.github.io/travel-with-jahronimo/" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b4f4a" />
 
   <!-- Geo & Local Discovery -->
   <meta name="geo.region" content="GB-BNH" />
@@ -95,6 +97,31 @@
             "acceptedAnswer": { "@type": "Answer", "text": "Yes. He works quietly from home producing video and web projects, giving pets calm daytime company." }
           }
         ]
+      },
+      {
+        "@type": "Place",
+        "name": "Brighton, United Kingdom",
+        "geo": { "@type": "GeoCoordinates", "latitude": 50.8225, "longitude": -0.1372 }
+      },
+      {
+        "@type": "Place",
+        "name": "Málaga, Spain",
+        "geo": { "@type": "GeoCoordinates", "latitude": 36.7213, "longitude": -4.4214 }
+      },
+      {
+        "@type": "Place",
+        "name": "Valencia, Spain",
+        "geo": { "@type": "GeoCoordinates", "latitude": 39.4699, "longitude": -0.3763 }
+      },
+      {
+        "@type": "Place",
+        "name": "Chiang Mai & Bangkok, Thailand",
+        "geo": { "@type": "GeoCoordinates", "latitude": 18.7883, "longitude": 98.9853 }
+      },
+      {
+        "@type": "Place",
+        "name": "Ubud, Bali, Indonesia",
+        "geo": { "@type": "GeoCoordinates", "latitude": -8.5069, "longitude": 115.2625 }
       }
     ]
   }
@@ -257,9 +284,13 @@
           <div style="position:absolute;top:18px;right:14px;z-index:998;padding:6px 12px;border-radius:999px;background:rgba(24,26,29,0.74);color:#fff;font-size:0.72rem;font-weight:700;backdrop-filter:blur(6px);pointer-events:none;">
             1F Spin · 2F Pinch/Tilt · 3F Tap Reset / Swipe ↓ Exit
           </div>
+          <div id="mapFsHudText" style="position:absolute;top:64px;left:16px;z-index:998;padding:6px 12px;border-radius:999px;background:rgba(11,79,74,0.88);color:#fff;font-size:0.76rem;font-weight:800;backdrop-filter:blur(6px);pointer-events:none;border:1px solid rgba(255,255,255,0.28);">
+            📍 Brighton, UK → 13 Countries
+          </div>
           <div class="map-fs-toolbar">
             <button id="btn3d" class="map-btn active tap-fx" type="button" data-i18n="btn3D">3D Globe</button>
             <button id="btn2d" class="map-btn tap-fx" type="button" data-i18n="btn2D">2D Map</button>
+            <button id="mapNextStopHudBtn" class="map-btn tap-fx" type="button">🧭 Next Stop</button>
             <button id="mapTiltBtn" class="map-btn tap-fx" type="button">📐 +15° Tilt</button>
             <button id="mapWorldBtn" class="map-btn tap-fx" type="button">🧭 Full World</button>
             <button id="connectLocBtn" class="map-btn geo tap-fx" type="button" data-i18n="btnPhoneLoc">📍 Connect Phone</button>
@@ -288,7 +319,7 @@
           <summary class="vbtn-summary" style="--bg-pos: center 30%;">
             <img class="vbtn-bg" src="assets/win-about.jpg" alt="About Jahronimo" loading="lazy" />
             <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag">Profile</span><span class="vbtn-open">Open +</span></div>
+            <div class="vbtn-top"><span class="vbtn-tag" data-i18n="tagProfile">Profile</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
             <div class="vbtn-title" data-i18n="aboutKicker">About Me</div>
             <div class="vbtn-bottom"><span class="vbtn-sub" data-i18n="aboutSub">Remote worker, non-smoker, pet-friendly</span></div>
           </summary>
@@ -311,7 +342,7 @@
           <summary class="vbtn-summary" style="--bg-pos: center center;">
             <img class="vbtn-bg" src="assets/win-routes.jpg" alt="Travel routes" loading="lazy" />
             <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag">Itinerary</span><span class="vbtn-open">Open +</span></div>
+            <div class="vbtn-top"><span class="vbtn-tag" data-i18n="tagItinerary">Itinerary</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
             <div class="vbtn-title" data-i18n="routesTitle">Travel Routes</div>
             <div class="vbtn-bottom"><span class="vbtn-sub" data-i18n="routesSub">Brighton · Málaga · Valencia · Thailand · Bali</span></div>
           </summary>
@@ -330,7 +361,7 @@
           <summary class="vbtn-summary" style="--bg-pos: center center;">
             <img class="vbtn-bg" src="assets/win-skills.jpg" alt="Skills and hobbies" loading="lazy" />
             <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag">Value</span><span class="vbtn-open">Open +</span></div>
+            <div class="vbtn-top"><span class="vbtn-tag" data-i18n="tagValue">Value</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
             <div class="vbtn-title" data-i18n="skillsGroupTitle">Interests &amp; Skills</div>
             <div class="vbtn-bottom"><span class="vbtn-sub" data-i18n="skillsGroupSub">Pet care, home upkeep, video &amp; web</span></div>
           </summary>
@@ -351,7 +382,7 @@
           <summary class="vbtn-summary" style="--bg-pos: center center;">
             <img class="vbtn-bg" src="assets/win-goals.jpg" alt="2027 13 Countries Goal" loading="lazy" />
             <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag">2027 Tracker</span><span class="vbtn-open">Open +</span></div>
+            <div class="vbtn-top"><span class="vbtn-tag" data-i18n="tagTracker">2027 Tracker</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
             <div class="vbtn-title" data-i18n="goalsTitle">2027 Goals · 13 Countries</div>
             <div class="vbtn-bottom"><span class="vbtn-sub" id="countriesProgressText">2 / 13 Countries</span></div>
           </summary>
@@ -376,7 +407,7 @@
           <summary class="vbtn-summary" style="--bg-pos: center 35%;">
             <img class="vbtn-bg" src="assets/win-people.jpg" alt="People met" loading="lazy" />
             <div class="vbtn-scrim"></div>
-            <div class="vbtn-top"><span class="vbtn-tag">Community</span><span class="vbtn-open">Open +</span></div>
+            <div class="vbtn-top"><span class="vbtn-tag" data-i18n="tagCommunity">Community</span><span class="vbtn-open" data-i18n="openPlus">Open +</span></div>
             <div class="vbtn-title" data-i18n="peopleTitle">People Along The Way</div>
             <div class="vbtn-bottom"><span class="vbtn-sub" data-i18n="peopleSub">Hosts, friends &amp; stories</span></div>
           </summary>
@@ -442,8 +473,8 @@
               <li>✅ Non-smoker, clean, quiet, respectful of neighbours</li>
               <li>✅ Experienced with rescue dogs, indoor cats, &amp; medication</li>
             </ul>
-            <p>Always happy to jump on a 5-minute WhatsApp video call so you feel 100% confident.</p>
-            <p>No agencies or middlemen — direct, personal communication from day one.</p>
+            <p><strong>★★★★★ Host Trust Highlights:</strong> Calm daytime presence for pets, daily WhatsApp photo/video updates, and spotless home handover.</p>
+            <p>Always happy to jump on a 5-minute WhatsApp video call so you feel 100% confident — direct communication from day one.</p>
           </div>
         </details>
       </div>
@@ -473,6 +504,7 @@
         <input id="waCustomMsg" class="auth-field" type="text" placeholder="Type your message for WhatsApp…" data-i18n-placeholder="waPlaceholder" />
         <div class="cta-row">
           <a id="sendWaCustomBtn" class="btn btn-wa tap-fx" href="https://wa.me/447538068550" target="_blank" rel="noopener" data-i18n="sendWaBtn">Open in WhatsApp</a>
+          <button id="openQrShareBtn" class="btn btn-outline tap-fx" type="button" data-i18n="shareQrBtn">📱 Share / QR Code</button>
         </div>
       </article>
 
@@ -571,6 +603,23 @@
         <button id="focusCloseBtn" class="focus-close-btn tap-fx" type="button" aria-label="Close">✕</button>
       </div>
       <div id="focusBody" class="acc-body" style="padding:18px 22px 24px;"></div>
+    </div>
+  </div>
+
+  <!-- QR Code & Share Modal -->
+  <div id="qrShareModal" class="lang-modal-backdrop" role="dialog" aria-modal="true" aria-label="Share or Scan QR Code">
+    <div class="lang-modal" style="max-width:420px;text-align:center;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <h2 style="font-size:1.1rem;font-weight:800;" data-i18n="shareQrTitle">📱 Scan or Share This Page</h2>
+        <button id="qrCloseBtn" class="focus-close-btn tap-fx" type="button" aria-label="Close">✕</button>
+      </div>
+      <p style="font-size:0.86rem;color:var(--muted);margin-bottom:14px;" data-i18n="shareQrSub">Point any phone camera here to open Travel With Jahronimo.</p>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fanextvid-boop.github.io%2Ftravel-with-jahronimo%2F" alt="QR Code for Travel With Jahronimo" width="220" height="220" style="border-radius:16px;border:2px solid var(--line);padding:8px;background:#fff;margin:0 auto 14px;display:block;" loading="lazy" />
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+        <button id="copySiteLinkBtn" class="btn btn-teal btn-sm tap-fx" type="button">📋 Copy Link</button>
+        <button id="nativeShareBtn" class="btn btn-outline btn-sm tap-fx" type="button">📤 Share</button>
+      </div>
+      <div id="qrShareStatus" style="font-size:0.8rem;font-weight:700;color:var(--accent-dark);margin-top:8px;"></div>
     </div>
   </div>
 

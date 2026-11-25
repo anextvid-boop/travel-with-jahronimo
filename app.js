@@ -217,15 +217,17 @@
       });
     }
 
-    // Live Countdowns
-    const cdGrid = document.getElementById("countdownGrid");
-    if (cdGrid) {
+    // Live Countdowns (ticks every 60s)
+    function updateCountdowns() {
+      const cdGrid = document.getElementById("countdownGrid");
+      if (!cdGrid) return;
       const targetStops = stops.filter((s) => s.targetIso).slice(0, 4);
       cdGrid.innerHTML = targetStops
         .map((s) => {
           const diffMs = Math.max(0, new Date(s.targetIso).getTime() - Date.now());
           const days = Math.floor(diffMs / 86400000);
           const hrs = Math.floor((diffMs % 86400000) / 3600000);
+          const mins = Math.floor((diffMs % 3600000) / 60000);
           return `
             <div class="cd-card tap-fx" data-stop-jump="${s.key}">
               ${s.photo ? `<img class="cd-photo" src="${s.photo}" alt="${s.label}" loading="lazy" />` : ""}
@@ -233,7 +235,7 @@
                 <div class="cd-place">${s.label}</div>
                 <div class="cd-target">${s.dates || ""}</div>
               </div>
-              <div class="cd-timer">${days}d ${hrs}h</div>
+              <div class="cd-timer">${days}d ${hrs}h ${mins}m</div>
             </div>
           `;
         })
@@ -243,11 +245,13 @@
         card.addEventListener("click", () => {
           window.SFX?.tap?.();
           const key = card.getAttribute("data-stop-jump");
-          document.getElementById("sec-map")?.scrollIntoView({ behavior: "smooth" });
-          setTimeout(() => mapApi?.flyToStop?.(key), 400);
+          mapApi?.flyToStop?.(key);
         });
       });
     }
+    updateCountdowns();
+    if (window.__twjCdTimer) clearInterval(window.__twjCdTimer);
+    window.__twjCdTimer = setInterval(updateCountdowns, 60000);
 
     // Global Connect Sheet
     const connectGrid = document.getElementById("connectGrid");
@@ -503,6 +507,41 @@
 
   // 9. Scroll Reveals, Panel Rail & Tactile Tap Light-Up
   function initMotionAndNav() {
+    // QR Share Modal
+    const qrModal = document.getElementById("qrShareModal");
+    const qrStatus = document.getElementById("qrShareStatus");
+    document.getElementById("openQrShareBtn")?.addEventListener("click", () => {
+      window.SFX?.open?.();
+      qrModal?.classList.add("open");
+    });
+    document.getElementById("qrCloseBtn")?.addEventListener("click", () => {
+      window.SFX?.close?.();
+      qrModal?.classList.remove("open");
+    });
+    qrModal?.addEventListener("click", (e) => {
+      if (e.target === qrModal) qrModal.classList.remove("open");
+    });
+    document.getElementById("copySiteLinkBtn")?.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("https://anextvid-boop.github.io/travel-with-jahronimo/");
+        window.SFX?.success?.();
+        if (qrStatus) qrStatus.textContent = "✅ Link copied!";
+      } catch (e) {}
+    });
+    document.getElementById("nativeShareBtn")?.addEventListener("click", async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: "Travel With Jahronimo",
+            text: "House Sitting, Remote Video & Web | 13 Countries 2027",
+            url: "https://anextvid-boop.github.io/travel-with-jahronimo/"
+          });
+        } catch (e) {}
+      } else if (qrStatus) {
+        qrStatus.textContent = "Use Copy Link above to share.";
+      }
+    });
+
     // 3-Bar Hamburger Dropdown Fast-Jump Menu
     const menuBtn = document.getElementById("navMenuBtn");
     const menuDrop = document.getElementById("navMenuDropdown");
@@ -668,5 +707,8 @@
     loadRouteData();
     trackAnalyticsEvent("__pageview__");
     initGlobalTapTracker();
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    }
   });
 })();

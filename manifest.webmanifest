@@ -1,0 +1,16 @@
+{
+  "name": "Travel With Jahronimo",
+  "short_name": "Jahronimo",
+  "description": "House Sitting, Remote Video & Web | 13 Countries 2027",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6efe2",
+  "theme_color": "#0b4f4a",
+  "icons": [
+    {
+      "src": "assets/hero.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

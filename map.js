@@ -178,7 +178,27 @@
       });
 
       setStatus(`${STATUS_LABELS[stop.status] || "📍"} · ${stop.label} (${stop.dates || "Planned"}) — ${stop.notes || ""}`);
+      const hudEl = document.getElementById("mapFsHudText");
+      if (hudEl && currentStop?.coords && stop.coords) {
+        const km = haversineKm(currentStop.coords, stop.coords);
+        hudEl.textContent = stop.key === currentStop.key ? `📍 Base: ${stop.label}` : `✈️ ${stop.label} · ${km.toLocaleString()} km from ${currentStop.label}`;
+      }
     }
+
+    function haversineKm(c1, c2) {
+      const toRad = (d) => (d * Math.PI) / 180;
+      const R = 6371;
+      const dLat = toRad(c2[1] - c1[1]);
+      const dLon = toRad(c2[0] - c1[0]);
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(c1[1])) * Math.cos(toRad(c2[1])) * Math.sin(dLon / 2) ** 2;
+      return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+    }
+
+    document.getElementById("mapNextStopHudBtn")?.addEventListener("click", () => {
+      window.SFX?.tap?.();
+      const nxt = stops.find((s) => s.key === routeData?.nextStopKey) || stops.find((s) => s.status === "next") || stops[1];
+      if (nxt) flyToStop(nxt.key);
+    });
 
     map.on("load", () => {
       try {

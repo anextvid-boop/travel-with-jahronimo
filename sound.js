@@ -86,7 +86,7 @@
     const track = TRACKS[activeTrackIdx] || TRACKS[0];
     if (!lofiAudio) {
       lofiAudio = new Audio(track.src);
-      lofiAudio.preload = "auto";
+      lofiAudio.preload = "metadata";
       lofiAudio.volume = 0.36;
       lofiAudio.addEventListener("ended", () => {
         activeTrackIdx = (activeTrackIdx + 1) % TRACKS.length;
@@ -215,6 +215,10 @@
       btn.addEventListener("click", () => TravelSound.toggle());
     });
     TravelSound.syncButtons();
-    if (enabled && lofiWanted) startLofi();
+    if (enabled && lofiWanted) {
+      setTimeout(() => {
+        if (enabled && lofiWanted && !lofiPlaying) startLofi();
+      }, 2200);
+    }
   });
 })();

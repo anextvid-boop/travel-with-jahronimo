@@ -690,4 +690,29 @@ window.TRANSLATIONS = {
       Object.assign(window.TRANSLATIONS[lang], EXTRA[lang]);
     }
   });
+
+  const EXTRA_TAGS = {
+    en: { tagProfile: "Profile", tagItinerary: "Itinerary", tagValue: "Value", tagTracker: "2027 Tracker", tagCommunity: "Community", tagUpcoming: "Upcoming", tagDirect: "Direct", tagFaq: "FAQ", shareQrBtn: "📱 Share / QR Code", shareQrTitle: "📱 Scan or Share This Page", shareQrSub: "Point any phone camera here to open Travel With Jahronimo." },
+    es: { tagProfile: "Perfil", tagItinerary: "Ruta", tagValue: "Valor", tagTracker: "Meta 2027", tagCommunity: "Comunidad", tagUpcoming: "Próximo", tagDirect: "Directo", tagFaq: "FAQ", shareQrBtn: "📱 Compartir / QR", shareQrTitle: "📱 Escanea o Comparte", shareQrSub: "Apunta la cámara de cualquier móvil para abrir la página." },
+    pt: { tagProfile: "Perfil", tagItinerary: "Roteiro", tagValue: "Valor", tagTracker: "Meta 2027", tagCommunity: "Comunidade", tagUpcoming: "Em breve", tagDirect: "Direto", tagFaq: "FAQ", shareQrBtn: "📱 Partilhar / QR", shareQrTitle: "📱 Digitalize ou Partilhe", shareQrSub: "Aponte a câmara de qualquer telemóvel." },
+    fr: { tagProfile: "Profil", tagItinerary: "Itinéraire", tagValue: "Atouts", tagTracker: "Objectif 2027", tagCommunity: "Communauté", tagUpcoming: "À venir", tagDirect: "Direct", tagFaq: "FAQ", shareQrBtn: "📱 Partager / QR", shareQrTitle: "📱 Scannez ou Partagez", shareQrSub: "Scannez avec l'appareil photo d'un téléphone." },
+    ar: { tagProfile: "الملف", tagItinerary: "المسار", tagValue: "المهارات", tagTracker: "هدف 2027", tagCommunity: "المجتمع", tagUpcoming: "قريباً", tagDirect: "مباشر", tagFaq: "الأسئلة", shareQrBtn: "📱 مشاركة / QR", shareQrTitle: "📱 امسح الرمز للمشاركة", shareQrSub: "وجّه كاميرا الهاتف لفتح الصفحة." },
+    id: { tagProfile: "Profil", tagItinerary: "Rute", tagValue: "Keahlian", tagTracker: "Target 2027", tagCommunity: "Komunitas", tagUpcoming: "Segera", tagDirect: "Langsung", tagFaq: "FAQ", shareQrBtn: "📱 Bagikan / QR", shareQrTitle: "📱 Pindai atau Bagikan", shareQrSub: "Arahkan kamera ponsel ke kode QR ini." },
+    th: { tagProfile: "โปรไฟล์", tagItinerary: "เส้นทาง", tagValue: "ทักษะ", tagTracker: "เป้าหมาย 2027", tagCommunity: "ผู้คน", tagUpcoming: "เร็วๆ นี้", tagDirect: "ติดต่อตรง", tagFaq: "คำถาม", shareQrBtn: "📱 แชร์ / QR โค้ด", shareQrTitle: "📱 สแกนหรือแชร์หน้านี้", shareQrSub: "ใช้กล้องมือถือสแกนเพื่อเปิดหน้านี้" },
+    vi: { tagProfile: "Hồ sơ", tagItinerary: "Lộ trình", tagValue: "Kỹ năng", tagTracker: "Mục tiêu 2027", tagCommunity: "Cộng đồng", tagUpcoming: "Sắp tới", tagDirect: "Trực tiếp", tagFaq: "FAQ", shareQrBtn: "📱 Chia sẻ / QR", shareQrTitle: "📱 Quét hoặc Chia sẻ", shareQrSub: "Hướng camera điện thoại vào mã QR này." },
+    de: { tagProfile: "Profil", tagItinerary: "Route", tagValue: "Stärken", tagTracker: "Ziel 2027", tagCommunity: "Menschen", tagUpcoming: "Demnächst", tagDirect: "Direkt", tagFaq: "FAQ", shareQrBtn: "📱 Teilen / QR-Code", shareQrTitle: "📱 Scannen oder Teilen", shareQrSub: "Mit jeder Handykamera scannen." },
+    it: { tagProfile: "Profilo", tagItinerary: "Itinerario", tagValue: "Valore", tagTracker: "Obiettivo 2027", tagCommunity: "Persone", tagUpcoming: "In arrivo", tagDirect: "Diretto", tagFaq: "FAQ", shareQrBtn: "📱 Condividi / QR", shareQrTitle: "📱 Scansiona o Condividi", shareQrSub: "Inquadra con la fotocamera dello smartphone." },
+    nl: { tagProfile: "Profiel", tagItinerary: "Route", tagValue: "Vaardigheden", tagTracker: "Doel 2027", tagCommunity: "Mensen", tagUpcoming: "Binnenkort", tagDirect: "Direct", tagFaq: "FAQ", shareQrBtn: "📱 Delen / QR-code", shareQrTitle: "📱 Scan of Deel", shareQrSub: "Richt een telefooncamera op deze QR-code." },
+    ja: { tagProfile: "プロフィール", tagItinerary: "ルート", tagValue: "スキル", tagTracker: "2027目標", tagCommunity: "出会い", tagUpcoming: "予定", tagDirect: "連絡", tagFaq: "FAQ", shareQrBtn: "📱 共有 / QRコード", shareQrTitle: "📱 スキャンまたは共有", shareQrSub: "スマホのカメラで読み取れます。" },
+    ko: { tagProfile: "프로필", tagItinerary: "경로", tagValue: "스킬", tagTracker: "2027 목표", tagCommunity: "사람들", tagUpcoming: "예정", tagDirect: "직접 연락", tagFaq: "FAQ", shareQrBtn: "📱 공유 / QR 코드", shareQrTitle: "📱 스캔 또는 공유", shareQrSub: "휴대폰 카메라로 스캔하세요." },
+    zh: { tagProfile: "个人简介", tagItinerary: "路线", tagValue: "技能", tagTracker: "2027目标", tagCommunity: "旅途人物", tagUpcoming: "即将前往", tagDirect: "直连", tagFaq: "问答", shareQrBtn: "📱 分享 / 二维码", shareQrTitle: "📱 扫码或分享", shareQrSub: "用手机相机扫描即可打开此页面。" },
+    hi: { tagProfile: "प्रोफ़ाइल", tagItinerary: "रूट", tagValue: "कौशल", tagTracker: "2027 लक्ष्य", tagCommunity: "लोग", tagUpcoming: "आगामी", tagDirect: "सीधा संपर्क", tagFaq: "FAQ", shareQrBtn: "📱 शेयर / QR कोड", shareQrTitle: "📱 स्कैन या शेयर करें", shareQrSub: "इस पेज को खोलने के लिए कैमरा पॉइंट करें।" },
+    tr: { tagProfile: "Profil", tagItinerary: "Rota", tagValue: "Beceriler", tagTracker: "2027 Hedefi", tagCommunity: "İnsanlar", tagUpcoming: "Yakında", tagDirect: "Doğrudan", tagFaq: "SSS", shareQrBtn: "📱 Paylaş / QR Kod", shareQrTitle: "📱 Tara veya Paylaş", shareQrSub: "Sayfayı açmak için telefon kamerasını tutun." }
+  };
+
+  Object.keys(EXTRA_TAGS).forEach((lang) => {
+    if (window.TRANSLATIONS && window.TRANSLATIONS[lang]) {
+      Object.assign(window.TRANSLATIONS[lang], EXTRA_TAGS[lang]);
+    }
+  });
 })();
