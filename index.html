@@ -1421,10 +1421,18 @@
     }
 
     @media (max-width: 720px) {
+      .topbar-inner { flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+      .topbar-inner > div { justify-content: center; flex-wrap: wrap; }
       .date-strip { justify-content: center; text-align: center; }
       .hero-top { flex-direction: column; align-items: center; text-align: center; }
+      .hero-top > div > div:first-child { justify-content: center; }
       .card { text-align: center; }
-      .section-kicker { justify-content: center; }
+      .section-kicker, .cta-row, .social-logos-bar { justify-content: center; }
+      .photo-nav-row { flex-direction: column; gap: 8px; justify-content: center; text-align: center; }
+      details.acc-card > summary { flex-direction: column; align-items: center; text-align: center; gap: 10px; }
+      .acc-head-left { flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+      .goal-summary-top { flex-direction: column; align-items: center; text-align: center; }
+      .goal-summary-top > div:last-child { text-align: center !important; }
       .map-toolbar, .map-controls-group, .stop-pills, .trust-grid, .chip-row { justify-content: center; }
       .photo-grid { grid-template-columns: repeat(2, 1fr); }
       .mini-maps-grid, .countdown-grid, .two-col, .goals-grid, .people-grid { grid-template-columns: 1fr; }
@@ -1435,6 +1443,7 @@
       .bullet-list { text-align: left; display: inline-flex; margin-inline: auto; }
       .map-stage-wrap { height: 290px; }
       .card, details.acc-card > summary, .acc-body { padding-inline: 18px; }
+      .panel-expand-btn { position: static; margin: 12px auto 0; }
       .pinned-wa { max-width: calc(100vw - 32px); padding: 14px 20px; font-size: 0.96rem; }
     }
   </style>
