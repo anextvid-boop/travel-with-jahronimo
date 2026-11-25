@@ -286,7 +286,7 @@ h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.18; }
 }
 .travel-marquee-track {
   display: flex; width: max-content; gap: 26px; align-items: center;
-  animation: marqueeScroll 240s linear infinite; will-change: transform;
+  animation: marqueeScroll 300s linear infinite; will-change: transform;
   font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; font-weight: 800;
   letter-spacing: 0.1em; color: #fff; padding-left: 26px; white-space: nowrap;
 }
