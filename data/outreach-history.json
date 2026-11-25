@@ -1,0 +1,47 @@
+{
+  "updatedAt": "2026-11-25T16:24:18Z",
+  "stats": {
+    "totalLeads": 94,
+    "totalOutreachSent": 2,
+    "totalEmailsSent": 2,
+    "emailsReplied": 0,
+    "totalPlatformSent": 0,
+    "dmsReplied": 0,
+    "fbPostsLive": 2,
+    "fbCommentsMade": 1,
+    "bookedCount": 0,
+    "replyRatePct": 0.0,
+    "followUpsDue": 0,
+    "remainingQueue": 92
+  },
+  "emailedRecords": [
+    {
+      "id": "b468ddab83",
+      "name": "AIL Madrid",
+      "category": "Category 1: \u00a30 Language Immersions & English Academies (Spain)",
+      "cityCountry": "Madrid",
+      "channel": "Email",
+      "contact": "info@ailmadrid.com",
+      "status": "sent",
+      "firstSentAt": "2026-11-25",
+      "lastContactedAt": "2026-11-25",
+      "followUpDue": "2026-11-27",
+      "followUpCount": 0,
+      "notes": "Spanish language school"
+    },
+    {
+      "id": "10384ea3e6",
+      "name": "Cactus Coliving",
+      "category": "Category 2: Coliving & Remote-Work Hubs (Video / Web Dev / Community Swaps)",
+      "cityCountry": "Spain \u2014 Tenerife",
+      "channel": "Email",
+      "contact": "info@cactuscoliving.com",
+      "status": "sent",
+      "firstSentAt": "2026-11-25",
+      "lastContactedAt": "2026-11-25",
+      "followUpDue": "2026-11-27",
+      "followUpCount": 0,
+      "notes": "@cactuscoliving \u00b7 cactuscoliving.com | Pitch video walkthroughs, web/SEO, or community support"
+    }
+  ]
+}

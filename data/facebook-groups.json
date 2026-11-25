@@ -1,0 +1,101 @@
+{
+  "updatedAt": "2026-11-25T16:24:18Z",
+  "accountName": "Jahronimo Ellis",
+  "accountEmail": "jahronimo1@hotmail.com",
+  "profileUrl": "https://www.facebook.com/profile.php",
+  "stats": {
+    "totalGroups": 8,
+    "joinedCount": 3,
+    "postedCount": 2
+  },
+  "groups": [
+    {
+      "id": "fb01",
+      "groupName": "House and Pet Sitting Europe & UK",
+      "groupUrl": "https://www.facebook.com/groups/housesittingeurope/",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "joined_ready_to_post",
+      "responsesCount": 0,
+      "notes": "754.8K members \u00b7 40+ posts/day (accept participant rules before posting)"
+    },
+    {
+      "id": "fb02",
+      "groupName": "Expats in Malaga",
+      "groupUrl": "https://www.facebook.com/groups/209440851259330/",
+      "postUrl": "https://www.facebook.com/groups/209440851259330/posts/1437476018455801/",
+      "postedAt": "2026-11-25",
+      "next48hCheck": "2026-11-27",
+      "status": "posted",
+      "responsesCount": 1,
+      "notes": "Live post + 1 verified comment (https://www.facebook.com/groups/209440851259330/posts/1434296595440410/?comment_id=1437481485121921)"
+    },
+    {
+      "id": "fb03",
+      "groupName": "Alicante Pet Sitters & Services (Costa Blanca)",
+      "groupUrl": "https://www.facebook.com/groups/1144770836998604/",
+      "postUrl": "https://www.facebook.com/groups/1144770836998604/my_pending_content",
+      "postedAt": "2026-11-25",
+      "next48hCheck": "2026-11-27",
+      "status": "posted",
+      "responsesCount": 0,
+      "notes": "Pending admin approval (submitted 2026-11-25)"
+    },
+    {
+      "id": "fb04",
+      "groupName": "Tenerife / Canary Islands House Sitting",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Canary%20Islands%20House%20Sitting",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_post",
+      "responsesCount": 0,
+      "notes": "Winter-sun sits"
+    },
+    {
+      "id": "fb05",
+      "groupName": "Seville Expats",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Seville%20Expats",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_post",
+      "responsesCount": 0,
+      "notes": "Use Language/Homestay or Skill Swap post"
+    },
+    {
+      "id": "fb06",
+      "groupName": "Madrid Expats",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Madrid%20Expats",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_post",
+      "responsesCount": 0,
+      "notes": "Great for language & creative swaps"
+    },
+    {
+      "id": "fb07",
+      "groupName": "Valencia Expats",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Valencia%20Expats",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_post",
+      "responsesCount": 0,
+      "notes": "Slowmad sublets & language exchanges"
+    },
+    {
+      "id": "fb08",
+      "groupName": "Barcelona Expats",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Barcelona%20Expats",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_post",
+      "responsesCount": 0,
+      "notes": "100k+ members; check pinned WhatsApp chats"
+    }
+  ]
+}

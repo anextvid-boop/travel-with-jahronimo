@@ -157,10 +157,12 @@
         <div class="stat-box"><div class="stat-num" id="statNew">0</div><div class="stat-lbl">New Leads</div></div>
         <div class="stat-box"><div class="stat-num" id="statChat">0</div><div class="stat-lbl">Chatting</div></div>
         <div class="stat-box"><div class="stat-num" id="statBooked">0</div><div class="stat-lbl">Booked / Met</div></div>
+        <div class="stat-box"><div class="stat-num" id="statEmailsSent">0</div><div class="stat-lbl">Emails Sent</div></div>
       </div>
 
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;" role="tablist">
         <button type="button" class="btn btn-primary admin-tab-btn" data-tab="tabCrm">📋 CRM &amp; Contacts</button>
+        <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabOutreach">📨 Outreach Log</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabAnalytics">📊 Analytics</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabRoute">🗺️ Route &amp; Where Next</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabEmergency">🚨 Emergency Protocol</button>
@@ -328,6 +330,52 @@ Jahronimo</textarea>
         </div>
         <div id="notionSyncBody" style="font-size:0.86rem;color:var(--muted);line-height:1.6;"></div>
       </div>
+      </div>
+
+      <div id="tabOutreach" class="admin-tab-panel" style="display:none;">
+        <div class="card">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;">
+            <div>
+              <div class="kicker">24H AUTOMATED OUTREACH TRACKER</div>
+              <h2 style="font-size:1.2rem;">Who Has Been Emailed &amp; Messaged</h2>
+            </div>
+            <span id="outreachSyncBadge" class="c-badge">Loading...</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px;">
+            <div class="stat-box"><div class="stat-num" id="olEmailsSent">0</div><div class="stat-lbl">Emails Sent</div></div>
+            <div class="stat-box"><div class="stat-num" id="olEmailsBack">0</div><div class="stat-lbl">Emails Back</div></div>
+            <div class="stat-box"><div class="stat-num" id="olPlatformSent">0</div><div class="stat-lbl">DMs Sent</div></div>
+            <div class="stat-box"><div class="stat-num" id="olDmsBack">0</div><div class="stat-lbl">DMs Back</div></div>
+            <div class="stat-box"><div class="stat-num" id="olFbPosts">0</div><div class="stat-lbl">FB Posts Live</div></div>
+            <div class="stat-box"><div class="stat-num" id="olFbComments">0</div><div class="stat-lbl">FB Comments</div></div>
+            <div class="stat-box"><div class="stat-num" id="olReplyRate">0%</div><div class="stat-lbl">Reply Rate</div></div>
+            <div class="stat-box"><div class="stat-num" id="olFollowUpsDue">0</div><div class="stat-lbl">Follow-Ups Due</div></div>
+            <div class="stat-box"><div class="stat-num" id="olRemaining">0</div><div class="stat-lbl">Uncontacted Queue</div></div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-bottom:14px;">
+            <input class="field" id="outreachSearch" type="search" placeholder="Search emailed person, city, email..." style="max-width:320px;margin:0;" />
+            <select class="field" id="outreachStatusFilter" style="max-width:180px;margin:0;">
+              <option value="ALL">All Sent Statuses</option>
+              <option value="sent">Sent</option>
+              <option value="followed_up">Followed Up</option>
+              <option value="replied">Replied</option>
+              <option value="booked">Booked</option>
+            </select>
+          </div>
+          <div id="outreachLogList" style="display:flex;flex-direction:column;gap:10px;"></div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;">
+            <div>
+              <div class="kicker">FACEBOOK ACCOUNT &amp; CONNECTED GROUPS DATABASE</div>
+              <h2 style="font-size:1.2rem;">Active Facebook Account &amp; Group Connections</h2>
+            </div>
+            <span id="fbGroupsBadge" class="c-badge">Loading...</span>
+          </div>
+          <div id="fbAccountSummary" style="padding:12px 14px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);margin-bottom:14px;font-size:0.88rem;color:var(--ink);"></div>
+          <div id="fbGroupsList" style="display:flex;flex-direction:column;gap:10px;"></div>
+        </div>
       </div>
 
       <div id="tabAnalytics" class="admin-tab-panel" style="display:none;">
@@ -586,6 +634,7 @@ Jahronimo</textarea>
       if (c.status === "New") c.status = "Chatting";
       saveContacts(list);
       renderCRM();
+      renderOutreachLog();
 
       const webhook = (document.getElementById("mailerWebhookUrl")?.value || "").trim();
       const subject = `[Travel With Jahronimo] Re: ${c.offer}`;
@@ -621,6 +670,7 @@ Jahronimo</textarea>
       });
       saveContacts(list);
       renderCRM();
+      renderOutreachLog();
 
       const emails = targets.map((t) => t.contact);
       const webhook = (document.getElementById("mailerWebhookUrl")?.value || "").trim();
@@ -656,7 +706,150 @@ Jahronimo</textarea>
       document.getElementById("crmApp").style.display = "block";
       renderCRM();
       loadNotionSync();
+      loadOutreachHistory();
     }
+
+    let outreachFeed = { stats: {}, emailedRecords: [] };
+    function escOutreach(s) {
+      return String(s || "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+    }
+
+    function renderOutreachLog() {
+      const listEl = document.getElementById("outreachLogList");
+      if (!listEl) return;
+      const localEmailed = loadContacts()
+        .filter((c) => c.lastEmailed)
+        .map((c) => ({
+          id: c.id,
+          name: c.name,
+          category: c.offer || "Admin CRM",
+          cityCountry: c.city || "",
+          channel: (c.contact || "").includes("@") ? "Email" : "WhatsApp/DM",
+          contact: c.contact || "",
+          status: c.status === "Booked" ? "booked" : (c.status === "Chatting" ? "replied" : "sent"),
+          firstSentAt: c.lastEmailed,
+          lastContactedAt: c.lastEmailed,
+          followUpDue: "",
+          followUpCount: 0,
+          notes: c.notes || ""
+        }));
+
+      const seen = new Set();
+      const merged = [];
+      for (const r of [...(outreachFeed.emailedRecords || []), ...localEmailed]) {
+        const key = `${(r.contact || "").toLowerCase()}|${(r.name || "").toLowerCase()}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        merged.push(r);
+      }
+
+      const emailCount = merged.filter((r) => (r.channel || "").toLowerCase() === "email").length;
+      const platformCount = merged.length - emailCount;
+      const statTop = document.getElementById("statEmailsSent");
+      if (statTop) statTop.textContent = emailCount;
+      const olEmails = document.getElementById("olEmailsSent");
+      if (olEmails) olEmails.textContent = emailCount;
+      const olEmailsBack = document.getElementById("olEmailsBack");
+      if (olEmailsBack) olEmailsBack.textContent = outreachFeed.stats?.emailsReplied ?? 0;
+      const olPlat = document.getElementById("olPlatformSent");
+      if (olPlat) olPlat.textContent = platformCount;
+      const olDmsBack = document.getElementById("olDmsBack");
+      if (olDmsBack) olDmsBack.textContent = outreachFeed.stats?.dmsReplied ?? 0;
+      const olFbPosts = document.getElementById("olFbPosts");
+      if (olFbPosts) olFbPosts.textContent = outreachFeed.stats?.fbPostsLive ?? 0;
+      const olFbComments = document.getElementById("olFbComments");
+      if (olFbComments) olFbComments.textContent = outreachFeed.stats?.fbCommentsMade ?? 0;
+      const olReplyRate = document.getElementById("olReplyRate");
+      if (olReplyRate) olReplyRate.textContent = (outreachFeed.stats?.replyRatePct ?? 0) + "%";
+      const olDue = document.getElementById("olFollowUpsDue");
+      if (olDue) olDue.textContent = outreachFeed.stats?.followUpsDue ?? 0;
+      const olRem = document.getElementById("olRemaining");
+      if (olRem) olRem.textContent = outreachFeed.stats?.remainingQueue ?? 0;
+
+      const q = (document.getElementById("outreachSearch")?.value || "").toLowerCase();
+      const st = document.getElementById("outreachStatusFilter")?.value || "ALL";
+      const filtered = merged.filter((r) => {
+        const matchSt = st === "ALL" || r.status === st;
+        const txt = `${r.name} ${r.cityCountry} ${r.contact} ${r.channel} ${r.notes}`.toLowerCase();
+        return matchSt && (!q || txt.includes(q));
+      });
+
+      if (!filtered.length) {
+        listEl.innerHTML = `<p style="color:var(--muted);font-size:0.9rem;">No emails or outreach messages logged yet. Once the 9:00 AM automation or your manual sends run, everyone contacted will appear here.</p>`;
+        return;
+      }
+
+      listEl.innerHTML = filtered.map((r) => `
+        <div style="padding:12px 14px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center;">
+          <div>
+            <strong style="color:var(--ink);">${escOutreach(r.name)}</strong>
+            <span class="c-badge" style="margin-left:6px;">${escOutreach(r.channel)}</span>
+            <span class="c-badge" style="margin-left:4px;">${escOutreach(r.status)}</span>
+            <div style="font-size:0.84rem;color:var(--muted);margin-top:3px;">
+              ${escOutreach(r.cityCountry)} · <code>${escOutreach(r.contact)}</code>
+            </div>
+            ${r.notes ? `<div style="font-size:0.8rem;color:var(--muted);margin-top:2px;">${escOutreach(r.notes)}</div>` : ""}
+          </div>
+          <div style="text-align:right;font-size:0.8rem;color:var(--muted);">
+            <div>Sent: <strong>${escOutreach(r.firstSentAt || r.lastContactedAt || "—")}</strong></div>
+            ${r.followUpDue ? `<div>Follow-up: ${escOutreach(r.followUpDue)} (#${r.followUpCount || 0})</div>` : ""}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    async function loadOutreachHistory() {
+      const badge = document.getElementById("outreachSyncBadge");
+      try {
+        const res = await fetch("data/outreach-history.json?t=" + Date.now());
+        if (!res.ok) throw new Error("Not found");
+        outreachFeed = await res.json();
+        if (badge) badge.textContent = "Synced: " + (outreachFeed.updatedAt || "").slice(0, 10);
+      } catch (e) {
+        if (badge) badge.textContent = "Local CRM Only";
+      }
+      renderOutreachLog();
+      loadFacebookGroups();
+    }
+
+    async function loadFacebookGroups() {
+      const badge = document.getElementById("fbGroupsBadge");
+      const accEl = document.getElementById("fbAccountSummary");
+      const listEl = document.getElementById("fbGroupsList");
+      if (!listEl) return;
+      try {
+        const res = await fetch("data/facebook-groups.json?t=" + Date.now());
+        if (!res.ok) throw new Error("Not found");
+        const data = await res.json();
+        if (badge) badge.textContent = `${data.stats?.joinedCount ?? 0} Joined · ${data.stats?.totalGroups ?? 0} Tracked`;
+        if (accEl) {
+          accEl.innerHTML = `
+            <strong>Facebook Account:</strong> <a href="${escOutreach(data.profileUrl || "https://www.facebook.com/profile.php")}" target="_blank" rel="noopener">${escOutreach(data.accountName || "Jahronimo Ellis")}</a>
+            &nbsp;·&nbsp; <strong>Linked Email:</strong> <code>${escOutreach(data.accountEmail || "jahronimo1@hotmail.com")}</code>
+            &nbsp;·&nbsp; <strong>Posts Sent:</strong> ${data.stats?.postedCount ?? 0}
+          `;
+        }
+        const groups = data.groups || [];
+        listEl.innerHTML = groups.map((g) => `
+          <div style="padding:12px 14px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center;">
+            <div>
+              <a href="${escOutreach(g.groupUrl)}" target="_blank" rel="noopener" style="font-weight:700;color:var(--ink);text-decoration:none;">${escOutreach(g.groupName)} ↗</a>
+              <span class="c-badge" style="margin-left:6px;">${escOutreach(g.status)}</span>
+              ${g.notes ? `<div style="font-size:0.8rem;color:var(--muted);margin-top:3px;">${escOutreach(g.notes)}</div>` : ""}
+            </div>
+            <div style="text-align:right;font-size:0.8rem;color:var(--muted);">
+              <div>Posted: <strong>${escOutreach(g.postedAt || "Not yet")}</strong></div>
+              ${g.next48hCheck ? `<div>48h Check: ${escOutreach(g.next48hCheck)}</div>` : ""}
+            </div>
+          </div>
+        `).join("");
+      } catch (e) {
+        if (badge) badge.textContent = "Unavailable";
+      }
+    }
+
+    document.getElementById("outreachSearch")?.addEventListener("input", renderOutreachLog);
+    document.getElementById("outreachStatusFilter")?.addEventListener("change", renderOutreachLog);
 
     async function loadNotionSync() {
       const badge = document.getElementById("notionSyncBadge");
