@@ -3122,8 +3122,8 @@
         expBtn.setAttribute("aria-label", "Expand panel");
         card.appendChild(expBtn);
 
-        expBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
+        const openCardModal = (e) => {
+          if (e) e.stopPropagation();
           if (activeDetails) closeFocusWindow();
           const placeholder = document.createElement("div");
           placeholder.style.display = "none";
@@ -3162,6 +3162,14 @@
           if (card.querySelector("#worldMap3D") && window.__travelMap) {
             setTimeout(() => window.__travelMap.resize(), 80);
           }
+        };
+
+        expBtn.addEventListener("click", openCardModal);
+        card.style.cursor = "pointer";
+        card.addEventListener("click", (e) => {
+          if (activeBody === card) return;
+          if (e.target.closest("a, button, input, select, textarea, img, .map-stage-wrap, .stop-pill")) return;
+          openCardModal(e);
         });
       });
 
