@@ -7,6 +7,7 @@
   let compressor = null;
   let enabled = true;
   let lofiPlaying = false;
+  let lofiWanted = true;
   let lofiAudio = null;
 
   try {
@@ -15,6 +16,12 @@
       enabled = saved === "true";
     } else if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       enabled = false;
+    }
+    const savedLofi = localStorage.getItem(LOFI_KEY);
+    if (savedLofi !== null) {
+      lofiWanted = savedLofi === "true";
+    } else if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      lofiWanted = false;
     }
   } catch (e) {}
 
@@ -38,11 +45,14 @@
     return ctx;
   }
 
-  // Unlock AudioContext on first user gesture (iOS Safari / WebKit)
+  // Unlock AudioContext & start default Lo-Fi on first user gesture (iOS Safari / Chrome autoplay policy)
   ["pointerdown", "touchend", "keydown"].forEach((evt) => {
     window.addEventListener(evt, () => {
       if (ctx && ctx.state === "suspended") {
         ctx.resume().catch(() => {});
+      }
+      if (lofiWanted && !lofiPlaying) {
+        startLofi();
       }
     }, { once: true, passive: true });
   });
@@ -79,6 +89,7 @@
 
   function startLofi() {
     const audio = ensureLofiAudio();
+    lofiWanted = true;
     lofiPlaying = true;
     audio.play().catch(() => {
       lofiPlaying = false;
@@ -89,6 +100,7 @@
   }
 
   function stopLofi() {
+    lofiWanted = false;
     lofiPlaying = false;
     if (lofiAudio) {
       lofiAudio.pause();
@@ -190,5 +202,8 @@
   };
 
   window.TravelSound = TravelSound;
-  document.addEventListener("DOMContentLoaded", () => TravelSound.syncButtons());
+  document.addEventListener("DOMContentLoaded", () => {
+    TravelSound.syncButtons();
+    if (lofiWanted) startLofi();
+  });
 })();
