@@ -248,6 +248,18 @@
         </div>
         <div class="crm-grid" id="crmGrid"></div>
       </div>
+
+      <!-- Notion 24h Synced Travel Details -->
+      <div class="card">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px;">
+          <div>
+            <div class="kicker">NOTION AUTO-SYNC (EVERY 24H)</div>
+            <h2 style="font-size:1.15rem;">Synced Travel Notes &amp; Price Baselines</h2>
+          </div>
+          <span id="notionSyncBadge" class="c-badge">Loading...</span>
+        </div>
+        <div id="notionSyncBody" style="font-size:0.86rem;color:var(--muted);line-height:1.6;"></div>
+      </div>
       </div>
 
       <div id="tabBackup" class="admin-tab-panel" style="display:none;">
@@ -348,6 +360,29 @@
       document.getElementById("loginCard").style.display = "none";
       document.getElementById("crmApp").style.display = "block";
       renderCRM();
+      loadNotionSync();
+    }
+
+    async function loadNotionSync() {
+      const badge = document.getElementById("notionSyncBadge");
+      const body = document.getElementById("notionSyncBody");
+      try {
+        const res = await fetch("data/travel-sync.json?t=" + Date.now());
+        if (!res.ok) throw new Error("Not found");
+        const data = await res.json();
+        badge.textContent = "Synced: " + (data.syncedAt || "").slice(0, 10);
+        body.innerHTML = (data.pages || []).map((p) => `
+          <div style="margin-bottom:10px;padding:12px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);">
+            <strong style="color:var(--ink);display:block;margin-bottom:6px;">${p.title}</strong>
+            <ul style="padding-left:18px;margin:0;">
+              ${(p.items || []).slice(0, 8).map((it) => `<li>${it.text}</li>`).join("")}
+            </ul>
+          </div>
+        `).join("") || "No synced pages yet.";
+      } catch (e) {
+        badge.textContent = "Awaiting Sync";
+        body.textContent = "Connect NOTION_TOKEN in GitHub Repository Secrets to activate 24-hour sync.";
+      }
     }
 
     if (sessionStorage.getItem(SESSION_KEY) === ADMIN_HASH) {

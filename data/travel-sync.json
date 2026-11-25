@@ -1,0 +1,18 @@
+{
+  "syncedAt": "2026-11-25T02:12:00Z",
+  "schedule": "Every 24 hours (06:00 UTC)",
+  "privacy": "Public-safe travel summaries only (sensitive patterns filtered)",
+  "pages": [
+    {
+      "id": "420c964a-136c-8101-9122-f055a454174e",
+      "title": "Price Recommendations (Top 10)",
+      "lastEdited": "2026-11-25T02:12:00Z",
+      "items": [
+        {
+          "type": "paragraph",
+          "text": "Add NOTION_TOKEN in GitHub Repository Secrets to enable live 24-hour Notion syncing."
+        }
+      ]
+    }
+  ]
+}

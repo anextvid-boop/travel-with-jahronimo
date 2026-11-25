@@ -1,0 +1,39 @@
+name: Sync Public Notion Travel Data (24h)
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # Runs daily at 06:00 UTC (every 24 hours)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Pull public-safe travel data from Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_PAGE_IDS: ${{ secrets.NOTION_PAGE_IDS || '420c964a-136c-8101-9122-f055a454174e' }}
+        run: node scripts/sync-notion.mjs
+
+      - name: Commit updated travel-sync.json if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/travel-sync.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: sync public Notion travel data"
+            git push
+          else
+            echo "No Notion changes to commit."
+          fi
