@@ -467,7 +467,7 @@
       }
     }
 
-    if (sessionStorage.getItem(SESSION_KEY) === ADMIN_HASH) {
+    if (sessionStorage.getItem(SESSION_KEY) === ADMIN_HASH || sessionStorage.getItem("twj_admin_auth") === "1") {
       showCRM();
     }
 
@@ -486,6 +486,7 @@
 
     document.getElementById("logoutBtn").addEventListener("click", () => {
       sessionStorage.removeItem(SESSION_KEY);
+      sessionStorage.removeItem("twj_admin_auth");
       location.reload();
     });
 

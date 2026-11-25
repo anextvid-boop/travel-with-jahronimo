@@ -481,6 +481,7 @@
         window.SFX?.success?.();
         try {
           sessionStorage.setItem("twj_admin_auth", "1");
+          sessionStorage.setItem("twj_admin_session", ADMIN_HASH);
           localStorage.setItem("twj_admin_auth", "1");
         } catch (err) {}
         if (statusEl) {
