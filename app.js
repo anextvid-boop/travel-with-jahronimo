@@ -423,6 +423,8 @@
     document.querySelectorAll(".wa-topic-pill").forEach((pill) => {
       pill.addEventListener("click", () => {
         window.SFX?.tap?.();
+        document.querySelectorAll(".wa-topic-pill").forEach((p) => p.classList.remove("active"));
+        pill.classList.add("active");
         const msg = pill.getAttribute("data-wa-msg") || pill.textContent;
         if (input) input.value = msg;
         updateWaHref(msg);
