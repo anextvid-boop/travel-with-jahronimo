@@ -370,7 +370,7 @@
 
     // Unified Mobile 1F, 2F & 3F Gestures inside Fullscreen 3D Globe:
     // - 1-Finger: MapLibre dragPan rotates/spins the 3D world
-    // - 2-Finger: Pinch in/out to zoom + pan together
+    // - 2-Finger: Pinch in/out zoom + twist clockwise/anticlockwise rotate + pan
     // - 3-Finger: 3D camera rotation (bearing & pitch), quick 3-finger tap = Full World reset
     let touchState = null;
 
@@ -384,10 +384,28 @@
       const cx = sx / n;
       const cy = sy / n;
       let dist = 0;
+      let angle = 0;
       if (n >= 2) {
-        dist = Math.hypot(touches[1].clientX - touches[0].clientX, touches[1].clientY - touches[0].clientY);
+        const dx = touches[1].clientX - touches[0].clientX;
+        const dy = touches[1].clientY - touches[0].clientY;
+        dist = Math.hypot(dx, dy);
+        angle = Math.atan2(dy, dx);
       }
-      return { cx, cy, dist };
+      return { cx, cy, dist, angle };
+    }
+
+    function syncTouchState(touches) {
+      const n = touches.length;
+      const m = getTouchMetrics(touches);
+      touchState = {
+        fingers: n,
+        lastX: m.cx,
+        lastY: m.cy,
+        lastDist: m.dist || 1,
+        lastAngle: m.angle || 0,
+        moved: 0,
+        t: Date.now()
+      };
     }
 
     container.addEventListener(
@@ -399,16 +417,9 @@
           map.dragPan.enable();
           touchState = null;
         } else if (n === 2 || n === 3) {
+          e.preventDefault();
           map.dragPan.disable();
-          const m = getTouchMetrics(e.touches);
-          touchState = {
-            fingers: n,
-            lastX: m.cx,
-            lastY: m.cy,
-            lastDist: m.dist || 1,
-            moved: 0,
-            t: Date.now()
-          };
+          syncTouchState(e.touches);
         }
       },
       { passive: false }
@@ -417,10 +428,15 @@
     container.addEventListener(
       "touchmove",
       (e) => {
-        if (!touchState || !stageWrap?.classList.contains("is-fullscreen")) return;
+        if (!stageWrap?.classList.contains("is-fullscreen")) return;
         const n = e.touches.length;
-        if (n !== touchState.fingers) return;
+        if (n < 2) return;
         e.preventDefault();
+
+        if (!touchState || n !== touchState.fingers) {
+          syncTouchState(e.touches);
+          return;
+        }
 
         const m = getTouchMetrics(e.touches);
         const dx = m.cx - touchState.lastX;
@@ -428,7 +444,17 @@
         touchState.moved += Math.hypot(dx, dy);
 
         if (n === 2) {
-          // 2-Finger Pinch In/Out Zoom + 2-Finger Pan
+          // 2-Finger Twist Rotation (clockwise & anticlockwise)
+          const dAngleRad = Math.atan2(
+            Math.sin(m.angle - touchState.lastAngle),
+            Math.cos(m.angle - touchState.lastAngle)
+          );
+          const dAngleDeg = (dAngleRad * 180) / Math.PI;
+          if (Math.abs(dAngleDeg) > 0.15) {
+            map.setBearing(map.getBearing() - dAngleDeg);
+          }
+
+          // 2-Finger Pinch In/Out Zoom
           if (m.dist > 10 && touchState.lastDist > 10) {
             const zoomDelta = Math.log2(m.dist / touchState.lastDist);
             if (Math.abs(zoomDelta) > 0.002) {
@@ -436,29 +462,37 @@
               map.setZoom(nextZoom);
             }
           }
+
+          // 2-Finger Pan
           if (Math.abs(dx) > 0.3 || Math.abs(dy) > 0.3) {
             map.panBy([-dx, -dy], { animate: false });
           }
         } else if (n === 3) {
-          // 3-Finger 3D Rotation (Bearing + Pitch)
-          map.setBearing(map.getBearing() - dx * 0.4);
-          map.setPitch(Math.max(0, Math.min(60, map.getPitch() - dy * 0.3)));
+          // 3-Finger 3D Rotation (Bearing left/right + Pitch up/down)
+          map.setBearing(map.getBearing() - dx * 0.55);
+          map.setPitch(Math.max(0, Math.min(60, map.getPitch() - dy * 0.4)));
         }
 
         touchState.lastX = m.cx;
         touchState.lastY = m.cy;
         touchState.lastDist = m.dist || touchState.lastDist;
+        touchState.lastAngle = m.angle;
       },
       { passive: false }
     );
 
     function handleTouchLift(e) {
       if (!stageWrap?.classList.contains("is-fullscreen")) return;
-      if (e.touches.length <= 1) {
+      const n = e.touches.length;
+      if (n >= 2) {
+        syncTouchState(e.touches);
+        return;
+      }
+      if (n <= 1) {
         map.dragPan.enable();
       }
       if (!touchState) return;
-      if (e.touches.length === 0) {
+      if (n === 0) {
         const dt = Date.now() - touchState.t;
         const moved = touchState.moved;
         const fingers = touchState.fingers;
