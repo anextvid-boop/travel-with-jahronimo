@@ -106,13 +106,13 @@ h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.18; }
 }
 .top-tab-bar .tab-btn.active { background: var(--accent); color: #fff; }
 
-/* Colored Full-Width Bands */
-.band { padding: 28px 16px; border-bottom: 1.5px solid rgba(24, 26, 29, 0.08); }
-.band-cream { background: var(--bg-cream); }
-.band-ivory { background: var(--bg-ivory); }
-.band-teal { background: var(--bg-teal); color: #fff; }
-.band-sand { background: var(--bg-sand); }
-.band-mint { background: var(--bg-mint); }
+/* Colored Full-Width Background Panels */
+.band { padding: 36px 16px; border-top: 2px solid rgba(24, 26, 29, 0.08); border-bottom: 3px solid rgba(24, 26, 29, 0.14); }
+.band-cream { background: linear-gradient(180deg, #f9e6cb 0%, #f1d2aa 100%); border-bottom-color: #d9b07e; }
+.band-ivory { background: linear-gradient(180deg, #dceaf3 0%, #c6deec 100%); border-bottom-color: #9ec2d8; }
+.band-teal { background: linear-gradient(180deg, #0b4f4a 0%, #073834 100%); color: #fff; border-bottom-color: #052623; }
+.band-sand { background: linear-gradient(180deg, #d97742 0%, #be5b29 100%); border-bottom-color: #964219; }
+.band-mint { background: linear-gradient(180deg, #c7e5d5 0%, #a8d6be 100%); border-bottom-color: #7eb89a; }
 .band-inner { max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
 
 /* Typography */
