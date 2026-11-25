@@ -589,6 +589,37 @@
     });
   }
 
+  // 10. Lightweight Page View & Interaction Analytics
+  function trackAnalyticsEvent(areaName) {
+    try {
+      const key = "twj_analytics_v1";
+      const data = JSON.parse(localStorage.getItem(key) || "null") || {
+        views: 0,
+        sessions: 0,
+        daily: {},
+        langs: {},
+        areas: {},
+        lastVisit: null
+      };
+      if (areaName === "__pageview__") {
+        data.views += 1;
+        if (!sessionStorage.getItem("twj_counted_session")) {
+          data.sessions += 1;
+          sessionStorage.setItem("twj_counted_session", "1");
+        }
+        const day = new Date().toISOString().slice(0, 10);
+        data.daily[day] = (data.daily[day] || 0) + 1;
+        data.langs[currentLang] = (data.langs[currentLang] || 0) + 1;
+        data.lastVisit = new Date().toISOString();
+        // Global hit counter (non-blocking)
+        fetch("https://api.counterapi.dev/v1/travel-with-jahronimo/pageviews/up").catch(() => {});
+      } else if (areaName) {
+        data.areas[areaName] = (data.areas[areaName] || 0) + 1;
+      }
+      localStorage.setItem(key, JSON.stringify(data));
+    } catch (e) {}
+  }
+
   // Boot
   document.addEventListener("DOMContentLoaded", () => {
     initLaunchIntro();
@@ -600,5 +631,15 @@
     initAuthModal();
     initMotionAndNav();
     loadRouteData();
+    trackAnalyticsEvent("__pageview__");
+
+    document.getElementById("openWorldCardBtn")?.addEventListener("click", () => trackAnalyticsEvent("3D World Visualiser"));
+    document.getElementById("pinnedWaBtn")?.addEventListener("click", () => trackAnalyticsEvent("WhatsApp"));
+    document.querySelectorAll("details.acc-card summary").forEach((s) => {
+      s.addEventListener("click", () => {
+        const title = s.querySelector(".vbtn-title")?.textContent?.trim();
+        if (title) trackAnalyticsEvent(title);
+      });
+    });
   });
 })();

@@ -133,6 +133,7 @@
 
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;" role="tablist">
         <button type="button" class="btn btn-primary admin-tab-btn" data-tab="tabCrm">📋 CRM &amp; Contacts</button>
+        <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabAnalytics">📊 Analytics</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabRoute">🗺️ Route &amp; Where Next</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabEmergency">🚨 Emergency Protocol</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabBackup">💾 Backup &amp; Restore</button>
@@ -261,6 +262,35 @@
         </div>
         <div id="notionSyncBody" style="font-size:0.86rem;color:var(--muted);line-height:1.6;"></div>
       </div>
+      </div>
+
+      <div id="tabAnalytics" class="admin-tab-panel" style="display:none;">
+        <div class="card">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;">
+            <div>
+              <div class="kicker">TRAFFIC &amp; ENGAGEMENT</div>
+              <h2 style="font-size:1.2rem;">Page View Analytics</h2>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <button type="button" class="btn btn-ghost" id="refreshAnalyticsBtn">↻ Refresh</button>
+              <button type="button" class="btn btn-ghost" id="resetAnalyticsBtn">Reset Local</button>
+            </div>
+          </div>
+
+          <div class="stats" style="margin-bottom:14px;">
+            <div class="stat-box"><div class="stat-num" id="anGlobalViews">…</div><div class="stat-lbl">Global Views</div></div>
+            <div class="stat-box"><div class="stat-num" id="anLocalViews">0</div><div class="stat-lbl">This Device Views</div></div>
+            <div class="stat-box"><div class="stat-num" id="anSessions">0</div><div class="stat-lbl">Sessions</div></div>
+            <div class="stat-box"><div class="stat-num" id="anTopLang">EN</div><div class="stat-lbl">Top Language</div></div>
+          </div>
+
+          <h3 style="font-size:0.95rem;margin-bottom:8px;">Last 7 Days (This Device)</h3>
+          <div id="anDailyBars" style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;height:110px;padding:12px;border-radius:14px;background:var(--surface-soft);border:1px solid var(--line);margin-bottom:16px;"></div>
+
+          <h3 style="font-size:0.95rem;margin-bottom:8px;">Top Tapped Areas &amp; Cards</h3>
+          <div id="anTopAreas" style="display:flex;flex-direction:column;gap:6px;font-size:0.86rem;"></div>
+          <div id="anLastVisit" style="font-size:0.78rem;color:var(--muted);margin-top:12px;"></div>
+        </div>
       </div>
 
       <div id="tabRoute" class="admin-tab-panel" style="display:none;">
@@ -761,10 +791,158 @@
     document.getElementById("resetRouteBtn")?.addEventListener("click", () => {
       localStorage.removeItem(ROUTE_OVERRIDE_KEY);
       initRouteEditor();
+
+    // Page View Analytics Loader
+    async function loadAnalyticsPanel() {
+      const globalEl = document.getElementById("anGlobalViews");
+      const localEl = document.getElementById("anLocalViews");
+      const sessEl = document.getElementById("anSessions");
+      const langEl = document.getElementById("anTopLang");
+      const barsEl = document.getElementById("anDailyBars");
+      const areasEl = document.getElementById("anTopAreas");
+      const lastEl = document.getElementById("anLastVisit");
+
+      try {
+        const res = await fetch("https://api.counterapi.dev/v1/travel-with-jahronimo/pageviews");
+        if (res.ok) {
+          const json = await res.json();
+          if (globalEl) globalEl.textContent = json.count ?? "0";
+        } else if (globalEl) {
+          globalEl.textContent = "—";
+        }
+      } catch (e) {
+        if (globalEl) globalEl.textContent = "Offline";
+      }
+
+      let data = { views: 0, sessions: 0, daily: {}, langs: {}, areas: {}, lastVisit: null };
+      try {
+        const raw = JSON.parse(localStorage.getItem("twj_analytics_v1") || "null");
+        if (raw) data = raw;
+      } catch (e) {}
+
+      if (localEl) localEl.textContent = data.views || 0;
+      if (sessEl) sessEl.textContent = data.sessions || 0;
+
+      const topLang = Object.entries(data.langs || {}).sort((a, b) => b[1] - a[1])[0];
+      if (langEl) langEl.textContent = topLang ? topLang[0].toUpperCase() : "EN";
+
+      if (barsEl) {
+        const days = [];
+        for (let i = 6; i >= 0; i--) {
+          const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
+          days.push({ label: d.slice(5), count: (data.daily && data.daily[d]) || 0 });
+        }
+        const maxC = Math.max(1, ...days.map((x) => x.count));
+        barsEl.innerHTML = days
+          .map((x) => {
+            const h = Math.max(8, Math.round((x.count / maxC) * 64));
+            return `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <span style="font-size:0.72rem;font-weight:800;">${x.count}</span>
+              <div style="width:100%;height:${h}px;border-radius:6px;background:var(--accent);"></div>
+              <span style="font-size:0.68rem;color:var(--muted);font-weight:700;">${x.label}</span>
+            </div>`;
+          })
+          .join("");
+      }
+
+      if (areasEl) {
+        const sortedAreas = Object.entries(data.areas || {}).sort((a, b) => b[1] - a[1]);
+        areasEl.innerHTML = sortedAreas.length
+          ? sortedAreas
+              .map(([name, cnt]) => `<div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:10px;background:var(--surface-soft);border:1px solid var(--line);"><strong>${name}</strong><span>${cnt} taps</span></div>`)
+              .join("")
+          : `<div style="color:var(--muted);">No area taps recorded on this device yet.</div>`;
+      }
+
+      if (lastEl) {
+        lastEl.textContent = data.lastVisit ? `Last recorded view: ${new Date(data.lastVisit).toLocaleString()}` : "No views recorded yet.";
+      }
+    }
+
+    document.getElementById("refreshAnalyticsBtn")?.addEventListener("click", loadAnalyticsPanel);
+    document.getElementById("resetAnalyticsBtn")?.addEventListener("click", () => {
+      localStorage.removeItem("twj_analytics_v1");
+      loadAnalyticsPanel();
+    });
+    loadAnalyticsPanel();
       document.getElementById("routeSaveStatus").textContent = "Reset to repository data/stops.json.";
     });
 
     initRouteEditor();
+
+    // Page View Analytics Loader
+    async function loadAnalyticsPanel() {
+      const globalEl = document.getElementById("anGlobalViews");
+      const localEl = document.getElementById("anLocalViews");
+      const sessEl = document.getElementById("anSessions");
+      const langEl = document.getElementById("anTopLang");
+      const barsEl = document.getElementById("anDailyBars");
+      const areasEl = document.getElementById("anTopAreas");
+      const lastEl = document.getElementById("anLastVisit");
+
+      try {
+        const res = await fetch("https://api.counterapi.dev/v1/travel-with-jahronimo/pageviews");
+        if (res.ok) {
+          const json = await res.json();
+          if (globalEl) globalEl.textContent = json.count ?? "0";
+        } else if (globalEl) {
+          globalEl.textContent = "—";
+        }
+      } catch (e) {
+        if (globalEl) globalEl.textContent = "Offline";
+      }
+
+      let data = { views: 0, sessions: 0, daily: {}, langs: {}, areas: {}, lastVisit: null };
+      try {
+        const raw = JSON.parse(localStorage.getItem("twj_analytics_v1") || "null");
+        if (raw) data = raw;
+      } catch (e) {}
+
+      if (localEl) localEl.textContent = data.views || 0;
+      if (sessEl) sessEl.textContent = data.sessions || 0;
+
+      const topLang = Object.entries(data.langs || {}).sort((a, b) => b[1] - a[1])[0];
+      if (langEl) langEl.textContent = topLang ? topLang[0].toUpperCase() : "EN";
+
+      if (barsEl) {
+        const days = [];
+        for (let i = 6; i >= 0; i--) {
+          const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
+          days.push({ label: d.slice(5), count: (data.daily && data.daily[d]) || 0 });
+        }
+        const maxC = Math.max(1, ...days.map((x) => x.count));
+        barsEl.innerHTML = days
+          .map((x) => {
+            const h = Math.max(8, Math.round((x.count / maxC) * 64));
+            return `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <span style="font-size:0.72rem;font-weight:800;">${x.count}</span>
+              <div style="width:100%;height:${h}px;border-radius:6px;background:var(--accent);"></div>
+              <span style="font-size:0.68rem;color:var(--muted);font-weight:700;">${x.label}</span>
+            </div>`;
+          })
+          .join("");
+      }
+
+      if (areasEl) {
+        const sortedAreas = Object.entries(data.areas || {}).sort((a, b) => b[1] - a[1]);
+        areasEl.innerHTML = sortedAreas.length
+          ? sortedAreas
+              .map(([name, cnt]) => `<div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:10px;background:var(--surface-soft);border:1px solid var(--line);"><strong>${name}</strong><span>${cnt} taps</span></div>`)
+              .join("")
+          : `<div style="color:var(--muted);">No area taps recorded on this device yet.</div>`;
+      }
+
+      if (lastEl) {
+        lastEl.textContent = data.lastVisit ? `Last recorded view: ${new Date(data.lastVisit).toLocaleString()}` : "No views recorded yet.";
+      }
+    }
+
+    document.getElementById("refreshAnalyticsBtn")?.addEventListener("click", loadAnalyticsPanel);
+    document.getElementById("resetAnalyticsBtn")?.addEventListener("click", () => {
+      localStorage.removeItem("twj_analytics_v1");
+      loadAnalyticsPanel();
+    });
+    loadAnalyticsPanel();
 
     // Full JSON Backup & Restore
     document.getElementById("exportJsonBtn")?.addEventListener("click", () => {
