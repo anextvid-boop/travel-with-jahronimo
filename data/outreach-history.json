@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-25T16:53:26Z",
+  "updatedAt": "2026-11-25T16:55:33Z",
   "stats": {
-    "totalLeads": 108,
+    "totalLeads": 120,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,7 +12,7 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 106
+    "remainingQueue": 118
   },
   "emailedRecords": [
     {
@@ -394,6 +394,18 @@
       "followUpDue": ""
     },
     {
+      "id": "dc35509727",
+      "tier": "Tier 2",
+      "name": "Koba Hostel",
+      "category": "Category 3: Hostels & Guesthouses (Direct Email / WhatsApp / IG)",
+      "cityCountry": "San Sebasti\u00e1n",
+      "channel": "Email",
+      "contact": "info@kobahostel.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "db92dad435",
       "tier": "Tier 2",
       "name": "La Banda Rooftop Hostel",
@@ -413,6 +425,30 @@
       "cityCountry": "Tenerife (Costa Adeje)",
       "channel": "Email",
       "contact": "latortuga.tenerife@gmail.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "de14389bbf",
+      "tier": "Tier 2",
+      "name": "Laberint Coliving",
+      "category": "Category 2: Coliving & Remote-Work Hubs (Video / Web Dev / Community Swaps)",
+      "cityCountry": "Spain \u2014 Palma, Mallorca",
+      "channel": "Email",
+      "contact": "hello@laberintcoliving.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "a6dcdfedd8",
+      "tier": "Tier 2",
+      "name": "Livensa Studios",
+      "category": "Category 2: Coliving & Remote-Work Hubs (Video / Web Dev / Community Swaps)",
+      "cityCountry": "Spain \u2014 San Sebasti\u00e1n",
+      "channel": "Email",
+      "contact": "living@livensaliving.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -526,6 +562,18 @@
       "followUpDue": ""
     },
     {
+      "id": "ee3eb960ed",
+      "tier": "Tier 2",
+      "name": "Residencia Tom\u00e1s Alfaro",
+      "category": "Category 3: Hostels & Guesthouses (Direct Email / WhatsApp / IG)",
+      "cityCountry": "Bilbao / Vitoria",
+      "channel": "Email",
+      "contact": "alfaro@resa.es",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "46421ac396",
       "tier": "Tier 2",
       "name": "Rising Cock Hostel",
@@ -545,6 +593,18 @@
       "cityCountry": "Valencia",
       "channel": "Email",
       "contact": "info@russafayouthhostel.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "9cf9b3edff",
+      "tier": "Tier 2",
+      "name": "Sa Vinyeta Youth Hostel",
+      "category": "Category 3: Hostels & Guesthouses (Direct Email / WhatsApp / IG)",
+      "cityCountry": "Ciutadella, Menorca",
+      "channel": "Email",
+      "contact": "info@injovemenorca.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -610,6 +670,18 @@
       "followUpDue": ""
     },
     {
+      "id": "bde33d8350",
+      "tier": "Tier 2",
+      "name": "SOMOS Coliving",
+      "category": "Category 2: Coliving & Remote-Work Hubs (Video / Web Dev / Community Swaps)",
+      "cityCountry": "Spain \u2014 Palma, Mallorca",
+      "channel": "Email",
+      "contact": "info@somoscoliving.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "2dcbc8eef2",
       "tier": "Tier 2",
       "name": "Sun and Co.",
@@ -617,6 +689,18 @@
       "cityCountry": "Spain \u2014 J\u00e1vea, Alicante",
       "channel": "Email",
       "contact": "info@sun-and-co.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "f56707158c",
+      "tier": "Tier 2",
+      "name": "The Boc Hostel",
+      "category": "Category 3: Hostels & Guesthouses (Direct Email / WhatsApp / IG)",
+      "cityCountry": "Palma, Mallorca",
+      "channel": "Email",
+      "contact": "bocpalma@thebocstay.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -737,6 +821,18 @@
       "cityCountry": "Thailand \u2014 Chiang Mai",
       "channel": "Email",
       "contact": "whatsupchiangmai@hotmail.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "8156315fd9",
+      "tier": "Tier 2",
+      "name": "Y Hostel",
+      "category": "Category 3: Hostels & Guesthouses (Direct Email / WhatsApp / IG)",
+      "cityCountry": "Palma, Mallorca",
+      "channel": "Email",
+      "contact": "Info@y-hostel.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -970,6 +1066,18 @@
       "followUpDue": ""
     },
     {
+      "id": "75e021c68c",
+      "tier": "Tier 3",
+      "name": "Jho'La Surf Camp & Yoga",
+      "category": "Category 4: Surf Camps, Yoga & Wellness Retreats",
+      "cityCountry": "Portugal \u2014 Praia da Luz, Algarve",
+      "channel": "Email",
+      "contact": "info@jholasurfcamp.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "4f3e1410a4",
       "tier": "Tier 3",
       "name": "Kima Surf Camp",
@@ -1193,6 +1301,42 @@
       "cityCountry": "Sri Lanka \u2014 Ahangama",
       "channel": "WhatsApp",
       "contact": "WhatsApp +94 76 359 4730 \u00b7 +94 76 359 4732",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "c1b3520667",
+      "tier": "Tier 3",
+      "name": "Surf & Yoga Fuerteventura",
+      "category": "Category 4: Surf Camps, Yoga & Wellness Retreats",
+      "cityCountry": "Spain \u2014 Fuerteventura",
+      "channel": "Email",
+      "contact": "hello@surfnyogafuerteventura.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "757fa3266e",
+      "tier": "Tier 3",
+      "name": "Surf & Yoga Retreats Portugal",
+      "category": "Category 4: Surf Camps, Yoga & Wellness Retreats",
+      "cityCountry": "Portugal \u2014 Aljezur, Algarve",
+      "channel": "Email",
+      "contact": "hello@surfnyogaportugal.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "d7351703d5",
+      "tier": "Tier 3",
+      "name": "Surf Camp Ribadesella",
+      "category": "Category 4: Surf Camps, Yoga & Wellness Retreats",
+      "cityCountry": "Spain \u2014 Asturias",
+      "channel": "Email",
+      "contact": "info@surfcampribadesella.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""

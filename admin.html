@@ -386,6 +386,7 @@ Jahronimo</textarea>
             <span id="fbGroupsBadge" class="c-badge">Loading...</span>
           </div>
           <div id="fbAccountSummary" style="padding:12px 14px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);margin-bottom:12px;font-size:0.88rem;color:var(--ink);"></div>
+          <div id="fbCoverageGraphs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:14px;"></div>
           <details style="border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
             <summary style="cursor:pointer;font-weight:700;color:var(--ink);" id="fbGroupsSummary">📘 Connected Facebook Groups by Type (0)</summary>
             <div id="fbGroupsList" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
@@ -915,16 +916,58 @@ Jahronimo</textarea>
         const data = await res.json();
         if (badge) badge.textContent = `${data.stats?.joinedCount ?? 0} Joined · ${data.stats?.totalGroups ?? 0} Tracked`;
         if (accEl) {
+          const rot = data.rotation || {};
+          const todaysHtml = (rot.todaysBatch || []).map((b) =>
+            `<a href="${escOutreach(b.groupUrl)}" target="_blank" rel="noopener" class="c-badge" style="text-decoration:none;margin:2px 4px 2px 0;display:inline-block;">${escOutreach(b.groupName)} (${escOutreach(b.groupType)}) ↗</a>`
+          ).join("");
           accEl.innerHTML = `
-            <strong>Facebook Account:</strong> <a href="${escOutreach(data.profileUrl || "https://www.facebook.com/profile.php")}" target="_blank" rel="noopener">${escOutreach(data.accountName || "Jahronimo Ellis")}</a>
-            &nbsp;·&nbsp; <strong>Linked Email:</strong> <code>${escOutreach(data.accountEmail || "jahronimo1@hotmail.com")}</code>
-            &nbsp;·&nbsp; <strong>Posts Sent:</strong> ${data.stats?.postedCount ?? 0}
+            <div>
+              <strong>Facebook Account:</strong> <a href="${escOutreach(data.profileUrl || "https://www.facebook.com/profile.php")}" target="_blank" rel="noopener">${escOutreach(data.accountName || "Jahronimo Ellis")}</a>
+              &nbsp;·&nbsp; <strong>Linked Email:</strong> <code>${escOutreach(data.accountEmail || "jahronimo1@hotmail.com")}</code>
+              &nbsp;·&nbsp; <strong>Posts Sent:</strong> ${data.stats?.postedCount ?? 0}
+              &nbsp;·&nbsp; <strong>Dynamic Rotation:</strong> ${rot.dailyTarget ?? 5}/day across ${rot.totalPages ?? 0} pages (${rot.cycleDays ?? 0}-day cycle)
+            </div>
+            ${todaysHtml ? `<div style="margin-top:8px;"><strong>Today's 5-Page Queue (Mixed Types):</strong><div style="margin-top:4px;">${todaysHtml}</div></div>` : ""}
           `;
         }
         const groups = data.groups || [];
         const comments = data.comments || [];
         const fbSum = document.getElementById("fbGroupsSummary");
         if (fbSum) fbSum.textContent = `📘 Connected Facebook Groups by Type (${groups.length} Groups · ${data.stats?.joinedCount ?? 0} Joined)`;
+
+        const graphsEl = document.getElementById("fbCoverageGraphs");
+        if (graphsEl) {
+          const renderBarCard = (title, obj, color) => {
+            const entries = Object.entries(obj || {});
+            const maxVal = entries.reduce((m, [, v]) => Math.max(m, v), 1);
+            const rowsHtml = entries.slice(0, 12).map(([label, val]) => {
+              const pct = Math.max(6, Math.round((val / maxVal) * 100));
+              return `
+                <div style="margin-bottom:6px;">
+                  <div style="display:flex;justify-content:space-between;font-size:0.78rem;margin-bottom:2px;">
+                    <span style="color:var(--ink);font-weight:600;">${escOutreach(label)}</span>
+                    <span style="color:var(--muted);font-weight:700;">${val}</span>
+                  </div>
+                  <div style="height:7px;border-radius:999px;background:#e2e8f0;overflow:hidden;">
+                    <div style="height:100%;width:${pct}%;background:${color};border-radius:999px;"></div>
+                  </div>
+                </div>
+              `;
+            }).join("");
+            return `
+              <div style="padding:12px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);">
+                <div style="font-size:0.82rem;font-weight:800;color:var(--ink);margin-bottom:8px;">${escOutreach(title)}</div>
+                ${rowsHtml || '<div style="font-size:0.78rem;color:var(--muted);">No data yet</div>'}
+              </div>
+            `;
+          };
+          graphsEl.innerHTML = [
+            renderBarCard("🌍 Groups by Country", data.stats?.byCountry, "#0ea5e9"),
+            renderBarCard("🏙️ Top Cities & Regions", data.stats?.byCity, "#6366f1"),
+            renderBarCard("🎯 Groups by Purpose / Type", data.stats?.byPurpose, "#10b981"),
+            renderBarCard("🔗 Connection Status", data.stats?.byStatus, "#f59e0b"),
+          ].join("");
+        }
 
         const fbCommentsEl = document.getElementById("fbCommentsList");
         if (fbCommentsEl && comments.length) {
