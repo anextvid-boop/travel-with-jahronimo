@@ -417,7 +417,6 @@
       const msg = (text || "").trim() || "Hi Jahronimo! I saw Travel With Jahronimo and want to connect.";
       const url = `${WA_BASE}?text=${encodeURIComponent(msg)}`;
       if (pinnedWa) pinnedWa.href = url;
-      if (sendBtn) sendBtn.href = url;
     }
 
     input?.addEventListener("input", () => updateWaHref(input.value));
