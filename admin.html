@@ -103,9 +103,17 @@
     .c-meta { font-size: 0.85rem; color: var(--muted); }
     .c-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
     .c-actions .btn { padding: 7px 11px; font-size: 0.78rem; }
-    @media (max-width: 640px) {
+    @media (max-width: 720px) {
+      body { padding: 14px 12px 64px; }
+      .topbar { flex-direction: column; align-items: center; text-align: center; }
+      .topbar > div { justify-content: center !important; }
+      [role="tablist"] { justify-content: center !important; }
+      [role="tablist"] .btn { flex: 1 1 auto; min-width: 130px; }
       .stats-row, .stats { grid-template-columns: repeat(2, 1fr); }
-      .card { padding: 18px 16px; }
+      .card { padding: 18px 14px; text-align: center; }
+      .card [style*="display:flex"] { justify-content: center !important; }
+      .c-head, .c-actions { justify-content: center; }
+      .btn { justify-content: center; }
     }
   </style>
 </head>
