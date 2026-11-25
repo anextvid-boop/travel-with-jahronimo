@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-25T16:41:02Z",
+  "updatedAt": "2026-11-25T16:53:26Z",
   "stats": {
-    "totalLeads": 94,
+    "totalLeads": 108,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,7 +12,7 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 92
+    "remainingQueue": 106
   },
   "emailedRecords": [
     {
@@ -113,6 +113,18 @@
       "cityCountry": "Valencia",
       "channel": "Email",
       "contact": "info@aipidiomas.es",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "3dabd70605",
+      "tier": "Tier 1",
+      "name": "C\u00e1diz Idiomas (Spanish in C\u00e1diz)",
+      "category": "Category 1: \u00a30 Language Immersions & English Academies (Spain)",
+      "cityCountry": "C\u00e1diz",
+      "channel": "Email",
+      "contact": "administracion@spanishincadiz.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -250,6 +262,42 @@
       "followUpDue": ""
     },
     {
+      "id": "48ee6e022b",
+      "tier": "Tier 2",
+      "name": "Destination Hostels",
+      "category": "Category 3: Hostels & Guesthouses (Direct Email / WhatsApp / IG)",
+      "cityCountry": "Portugal \u2014 Lisbon / Ericeira",
+      "channel": "Email",
+      "contact": "lisbon@destinationhostels.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "c8fb94c59d",
+      "tier": "Tier 2",
+      "name": "Draper Startup House",
+      "category": "Category 2: Coliving & Remote-Work Hubs (Video / Web Dev / Community Swaps)",
+      "cityCountry": "Vietnam \u2014 Da Nang",
+      "channel": "Email",
+      "contact": "aaron@draperstartuphouse.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "03b794e0f7",
+      "tier": "Tier 2",
+      "name": "Eco Hostel Granada",
+      "category": "Category 3: Hostels & Guesthouses (Direct Email / WhatsApp / IG)",
+      "cityCountry": "Granada",
+      "channel": "Email",
+      "contact": "info@ecohostel.es",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "2119e31ad2",
       "tier": "Tier 2",
       "name": "Endless Summer Hostel",
@@ -262,6 +310,18 @@
       "followUpDue": ""
     },
     {
+      "id": "aaf2ae69db",
+      "tier": "Tier 2",
+      "name": "Feels Like Home (FLH)",
+      "category": "Category 3: Hostels & Guesthouses (Direct Email / WhatsApp / IG)",
+      "cityCountry": "Portugal \u2014 Lisbon / Porto / Madeira",
+      "channel": "Email",
+      "contact": "info@feelslikehome.pt",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "d1f76aeadc",
       "tier": "Tier 2",
       "name": "Goodmorning Solo Traveller",
@@ -269,6 +329,42 @@
       "cityCountry": "Portugal \u2014 Lisbon",
       "channel": "Email",
       "contact": "lisbon@goodmorninghostel.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "6813e65100",
+      "tier": "Tier 2",
+      "name": "Granada Old Town Hostel",
+      "category": "Category 3: Hostels & Guesthouses (Direct Email / WhatsApp / IG)",
+      "cityCountry": "Granada",
+      "channel": "Email",
+      "contact": "hola@granadaoldtownhostel.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "6264515db6",
+      "tier": "Tier 2",
+      "name": "Gravina Hostel & Flats",
+      "category": "Category 3: Hostels & Guesthouses (Direct Email / WhatsApp / IG)",
+      "cityCountry": "Tarifa (C\u00e1diz)",
+      "channel": "Email",
+      "contact": "reservas@gravina.es",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "9df8832f86",
+      "tier": "Tier 2",
+      "name": "Hostal El Levante",
+      "category": "Category 3: Hostels & Guesthouses (Direct Email / WhatsApp / IG)",
+      "cityCountry": "Tarifa (C\u00e1diz)",
+      "channel": "Email",
+      "contact": "info@hoteldulcenombre.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -334,6 +430,18 @@
       "followUpDue": ""
     },
     {
+      "id": "db91847a94",
+      "tier": "Tier 2",
+      "name": "Macaw25 Coliving",
+      "category": "Category 2: Coliving & Remote-Work Hubs (Video / Web Dev / Community Swaps)",
+      "cityCountry": "Spain \u2014 Las Palmas, Gran Canaria",
+      "channel": "Email",
+      "contact": "info@macaw25.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "5c91fa0e2b",
       "tier": "Tier 2",
       "name": "Nine Coliving",
@@ -377,6 +485,18 @@
       "cityCountry": "Spain (BCN/Girona) & Portugal (Ericeira)",
       "channel": "Web Portal / Form",
       "contact": "Web contact form",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "084bcce471",
+      "tier": "Tier 2",
+      "name": "Planeta C\u00e1diz Hostel",
+      "category": "Category 3: Hostels & Guesthouses (Direct Email / WhatsApp / IG)",
+      "cityCountry": "C\u00e1diz",
+      "channel": "Email",
+      "contact": "reservas@planetacadizhostel.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -521,6 +641,18 @@
       "cityCountry": "Seville",
       "channel": "Email",
       "contact": "hello@thenomadhostel.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "177577bd0d",
+      "tier": "Tier 2",
+      "name": "The Paica Coliving",
+      "category": "Category 2: Coliving & Remote-Work Hubs (Video / Web Dev / Community Swaps)",
+      "cityCountry": "Bali \u2014 Ubud",
+      "channel": "Email",
+      "contact": "info@thepaica.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -838,6 +970,18 @@
       "followUpDue": ""
     },
     {
+      "id": "4f3e1410a4",
+      "tier": "Tier 3",
+      "name": "Kima Surf Camp",
+      "category": "Category 4: Surf Camps, Yoga & Wellness Retreats",
+      "cityCountry": "Bali \u2014 Canggu",
+      "channel": "Email",
+      "contact": "info@kimasurf.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "94fe920192",
       "tier": "Tier 3",
       "name": "Lanzasurf",
@@ -982,6 +1126,18 @@
       "followUpDue": ""
     },
     {
+      "id": "2a74a8457d",
+      "tier": "Tier 3",
+      "name": "Pro Surf School Bali",
+      "category": "Category 4: Surf Camps, Yoga & Wellness Retreats",
+      "cityCountry": "Bali",
+      "channel": "Email",
+      "contact": "info@prosurfschool.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "ca7d9f783e",
       "tier": "Tier 3",
       "name": "Red Star Surf & Lodge",
@@ -1049,6 +1205,18 @@
       "cityCountry": "Spain \u2014 Famara, Lanzarote",
       "channel": "Email",
       "contact": "info@surfschoolanzarote.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "f2f891fbec",
+      "tier": "Tier 3",
+      "name": "SurfWG Surf Camp",
+      "category": "Category 4: Surf Camps, Yoga & Wellness Retreats",
+      "cityCountry": "Bali \u2014 Canggu",
+      "channel": "Email",
+      "contact": "info@surfwg.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
