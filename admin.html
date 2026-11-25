@@ -151,12 +151,14 @@
         <!-- 1. Last Known Location Tracker -->
         <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line);margin-bottom:12px;">
           <div>
-            <div style="font-weight:800;font-size:0.9rem;">📍 Last Known Location</div>
+            <div style="font-weight:800;font-size:0.9rem;">📍 Last Known Location · Phone: +44 7538 068550</div>
             <div id="lastLocText" style="font-size:0.82rem;color:var(--muted);">No GPS check-in recorded yet.</div>
+            <div id="gpsPermStatus" style="font-size:0.76rem;font-weight:700;color:var(--accent-dark);margin-top:2px;"></div>
           </div>
           <div style="display:flex;flex-wrap:wrap;gap:8px;">
-            <button type="button" class="btn btn-primary" id="updateGpsBtn">Update Live GPS</button>
+            <button type="button" class="btn btn-primary" id="updateGpsBtn">📍 Ask Permission &amp; Update GPS</button>
             <a id="openMapsLocBtn" href="#" target="_blank" rel="noopener" class="btn btn-ghost" style="display:none;">Open Maps</a>
+            <a id="sendGpsPhoneBtn" href="#" target="_blank" rel="noopener" class="btn btn-ghost" style="display:none;">💬 Text Pin to +44 7538 068550</a>
           </div>
         </div>
 
@@ -565,21 +567,59 @@
     }
     renderLastLocation();
 
+    async function checkGpsPermissionState() {
+      const permEl = document.getElementById("gpsPermStatus");
+      if (!permEl || !navigator.permissions) return;
+      try {
+        const res = await navigator.permissions.query({ name: "geolocation" });
+        const mapMsg = {
+          granted: "✅ Location permission granted for this site.",
+          prompt: "🔔 Tap 'Ask Permission & Update GPS' to allow Location access.",
+          denied: "⚠️ Location blocked — enable Location for this site in Browser/iPhone Settings."
+        };
+        permEl.textContent = mapMsg[res.state] || "";
+        res.onchange = () => {
+          permEl.textContent = mapMsg[res.state] || "";
+        };
+      } catch (e) {}
+    }
+    checkGpsPermissionState();
+
     document.getElementById("updateGpsBtn").addEventListener("click", () => {
       const txt = document.getElementById("lastLocText");
-      if (!navigator.geolocation) { txt.textContent = "Geolocation not supported."; return; }
-      txt.textContent = "Acquiring live GPS...";
-      navigator.geolocation.getCurrentPosition((pos) => {
-        const data = {
-          lat: pos.coords.latitude.toFixed(5),
-          lon: pos.coords.longitude.toFixed(5),
-          time: new Date().toLocaleString()
-        };
-        try { localStorage.setItem(LOC_KEY, JSON.stringify(data)); } catch (e) {}
-        renderLastLocation();
-      }, () => {
-        txt.textContent = "Location permission denied.";
-      }, { enableHighAccuracy: true, timeout: 8000 });
+      const phoneBtn = document.getElementById("sendGpsPhoneBtn");
+      if (!navigator.geolocation) {
+        txt.textContent = "Geolocation not supported on this browser.";
+        return;
+      }
+      txt.textContent = "Requesting GPS permission & reading coordinates…";
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const data = {
+            lat: pos.coords.latitude.toFixed(5),
+            lon: pos.coords.longitude.toFixed(5),
+            phone: "+447538068550",
+            time: new Date().toLocaleString()
+          };
+          try { localStorage.setItem(LOC_KEY, JSON.stringify(data)); } catch (e) {}
+          renderLastLocation();
+          checkGpsPermissionState();
+          if (phoneBtn) {
+            const msg = `Live GPS Check-In (${data.time}): https://maps.google.com/?q=${data.lat},${data.lon}`;
+            phoneBtn.href = `https://wa.me/447538068550?text=${encodeURIComponent(msg)}`;
+            phoneBtn.style.display = "inline-flex";
+          }
+        },
+        (err) => {
+          checkGpsPermissionState();
+          if (err && err.code === 1) {
+            txt.textContent = "Location permission denied — tap the lock/AA icon in your address bar or Settings → Location to Allow.";
+          } else {
+            txt.textContent = `GPS unavailable (${err?.message || "timeout"}). Try again outdoors or check Location Services.`;
+          }
+        },
+        { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 }
+      );
     });
 
     // Passport Photo & Vault (Device-only localStorage)
