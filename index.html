@@ -177,20 +177,38 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.css" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=6" />
 </head>
 <body>
   <!-- Animated SVG Logo Launch Intro (runs on every launch, skip anytime) -->
   <div id="launchIntro" class="launch-intro" aria-label="Travel With Jahronimo Launch Animation">
     <div class="launch-logo-box">
-      <svg class="launch-svg" viewBox="0 0 140 140" width="124" height="124" aria-hidden="true">
-        <circle class="svg-globe" cx="70" cy="70" r="52" fill="none" stroke="#0f766e" stroke-width="3.5" />
-        <ellipse class="svg-orbit" cx="70" cy="70" rx="52" ry="20" fill="none" stroke="#c2410c" stroke-width="2.5" stroke-dasharray="6 4" />
-        <path class="svg-arc" d="M22,74 Q70,18 118,64" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" />
-        <circle class="svg-plane" cx="118" cy="64" r="5.5" fill="#c2410c" />
+      <svg class="launch-svg" viewBox="0 0 180 180" width="146" height="146" aria-hidden="true">
+        <defs>
+          <linearGradient id="twjGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fbbf24" />
+            <stop offset="100%" stop-color="#f97316" />
+          </linearGradient>
+        </defs>
+        <circle class="svg-compass-ring" cx="90" cy="90" r="76" fill="none" stroke="rgba(255,253,248,0.22)" stroke-width="2" stroke-dasharray="5 7" />
+        <circle class="svg-globe" cx="90" cy="90" r="56" fill="rgba(15,118,110,0.28)" stroke="#14b8a6" stroke-width="3.5" />
+        <ellipse class="svg-meridian" cx="90" cy="90" rx="28" ry="56" fill="none" stroke="rgba(255,253,248,0.35)" stroke-width="1.8" />
+        <line x1="34" y1="90" x2="146" y2="90" stroke="rgba(255,253,248,0.3)" stroke-width="1.5" />
+        <ellipse class="svg-orbit" cx="90" cy="90" rx="68" ry="24" fill="none" stroke="url(#twjGoldGrad)" stroke-width="2.5" stroke-dasharray="6 5" />
+        <path class="svg-arc" d="M36,96 Q90,22 142,80" fill="none" stroke="#fbbf24" stroke-width="3.5" stroke-linecap="round" />
+        <circle class="svg-pin-pulse" cx="36" cy="96" r="6" fill="#22c55e" stroke="#fff" stroke-width="2" />
+        <g class="svg-plane-group">
+          <path d="M136,74 L148,80 L137,87 L140,80 Z" fill="#fbbf24" stroke="#fff" stroke-width="1.2" />
+        </g>
+        <text x="90" y="96" text-anchor="middle" fill="#fffdf8" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="18" letter-spacing="2">TWJ</text>
       </svg>
       <div class="launch-wordmark">TRAVEL WITH JAHRONIMO</div>
       <div class="launch-sub">One Carry-On · 13 Countries · 2027</div>
+      <div class="launch-badges">
+        <span>🏡 House &amp; Pet Sit</span>
+        <span>🎬 Video &amp; Web</span>
+        <span>🇬🇧 UK Base</span>
+      </div>
       <button id="skipIntroBtn" class="skip-intro-btn tap-fx" type="button">Skip Intro →</button>
     </div>
   </div>
@@ -203,7 +221,7 @@
           <span class="brand-dot" aria-hidden="true"></span>
           <span class="brand-name">TRAVEL WITH JAHRONIMO</span>
         </div>
-        <a id="topJoinBtn" class="top-join-btn tap-fx" href="#quick-whatsapp" data-i18n="joinTop">Join</a>
+        <a id="topJoinBtn" class="top-join-btn tap-fx" href="#quick-whatsapp" data-i18n="joinTop">Book / Chat</a>
       </div>
       <div class="topbar-right">
         <button id="authQuickBtn" class="top-admin-btn tap-fx" type="button" aria-label="Admin Login" data-i18n="adminBtnLabel">🔐 Admin</button>
@@ -241,8 +259,13 @@
               <span class="where-pill next"><strong data-i18n="nextLabel">Next:</strong> <span id="whereNextText">Málaga, Spain (Dec 2026)</span></span>
             </div>
             <div class="cta-row">
-              <button id="openAboutHeroBtn" class="btn btn-teal tap-fx" type="button" data-i18n="moreAboutBtn">👤 More About Me</button>
+              <button id="openAboutHeroBtn" class="btn btn-teal tap-fx" type="button" data-i18n="moreAboutBtn">👤 Full Profile &amp; Route</button>
               <button id="openEmailModalBtn" class="btn btn-email tap-fx" type="button" data-i18n="emailBtn">Email Me</button>
+            </div>
+            <div class="how-strip">
+              <span data-i18n="how1">1. Check My Route</span>
+              <span data-i18n="how2">2. 5-Min Video Call</span>
+              <span data-i18n="how3">3. Daily Pet &amp; Home Care</span>
             </div>
           </div>
         </div>
@@ -305,7 +328,7 @@
           <div class="vbtn-scrim"></div>
           <div class="vbtn-top">
             <span class="vbtn-tag" data-i18n="worldTag">Interactive 3D Globe</span>
-            <span class="vbtn-open" data-i18n="launch3dBtn">Launch 3D +</span>
+            <span class="vbtn-open" data-i18n="launch3dBtn">Spin 3D Globe →</span>
           </div>
           <div class="vbtn-title" data-i18n="openWorldTitle">🌍 Open 3D World Visualiser</div>
           <div class="vbtn-bottom">
@@ -359,7 +382,7 @@
             <div class="vbtn-scrim"></div>
             <div class="vbtn-top">
               <span class="vbtn-tag" data-i18n="tagProfile">Profile · Itinerary · Skills · 2027</span>
-              <span class="vbtn-open" data-i18n="openPlus">Open Full Guide +</span>
+              <span class="vbtn-open" data-i18n="openPlus">Read Profile &amp; FAQ →</span>
             </div>
             <div class="vbtn-title" data-i18n="aboutKicker">About Me, Routes &amp; Full Guide</div>
             <div class="vbtn-bottom">
@@ -439,9 +462,9 @@
         <h2 class="section-title" data-i18n="waBoxTitle">Join the Story · Message on WhatsApp</h2>
         <p class="hero-sub" style="margin-bottom:12px;" data-i18n="waBoxSub">Pick a topic or write your own message — it syncs directly to the WhatsApp button.</p>
         <div class="pill-row" style="margin-bottom:12px;">
-          <button class="stop-pill wa-topic-pill tap-fx" type="button" data-wa-msg="Hi Jahronimo! Looking for a house/pet sitter — here are my dates:">🏡 House / Pet Sit</button>
-          <button class="stop-pill wa-topic-pill tap-fx" type="button" data-wa-msg="Hi Jahronimo! Want to collab on video or a website project:">🎬 Video / Web Collab</button>
-          <button class="stop-pill wa-topic-pill tap-fx" type="button" data-wa-msg="Hi Jahronimo! Let’s grab a coffee/walk when you’re in town:">☕ Meet Along The Route</button>
+          <button class="stop-pill wa-topic-pill tap-fx" type="button" data-wa-msg="Hi Jahronimo! Looking for a house/pet sitter — here are my dates:">🏡 Need a House/Pet Sitter</button>
+          <button class="stop-pill wa-topic-pill tap-fx" type="button" data-wa-msg="Hi Jahronimo! Want to collab on video or a website project:">🎬 Video / Website Help</button>
+          <button class="stop-pill wa-topic-pill tap-fx" type="button" data-wa-msg="Hi Jahronimo! Let’s grab a coffee/walk when you’re in town:">☕ Meet on the Route</button>
         </div>
         <input id="waCustomMsg" class="auth-field" type="text" placeholder="Type your message for WhatsApp…" data-i18n-placeholder="waPlaceholder" />
         <div class="cta-row">
@@ -615,9 +638,9 @@
   </div>
 
   <script src="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.js"></script>
-  <script src="sound.js?v=4"></script>
-  <script src="i18n.js?v=2"></script>
+  <script src="sound.js?v=5"></script>
+  <script src="i18n.js?v=3"></script>
   <script src="map.js?v=2"></script>
-  <script src="app.js?v=2"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>

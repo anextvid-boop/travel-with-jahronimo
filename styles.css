@@ -67,8 +67,21 @@ h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.18; }
 .launch-intro.is-exiting { opacity: 0; pointer-events: none; }
 .launch-intro.is-done { display: none; }
 .launch-logo-box, .launch-intro-inner { text-align: center; padding: 0 20px; animation: worldPop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
-.launch-svg, .launch-world-svg { width: min(160px, 44vw); height: auto; display: block; margin: 0 auto 14px; filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.38)); overflow: visible; }
-.launch-orbit { transform-origin: 120px 120px; animation: spinSlow 14s linear infinite; }
+.launch-svg, .launch-world-svg { width: min(176px, 46vw); height: auto; display: block; margin: 0 auto 14px; filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.38)); overflow: visible; }
+.svg-compass-ring { transform-origin: 90px 90px; animation: spinSlow 24s linear infinite; }
+.svg-orbit, .launch-orbit { transform-origin: 90px 90px; animation: spinSlow 12s linear infinite reverse; }
+.svg-arc { stroke-dasharray: 180; stroke-dashoffset: 180; animation: drawArc 1.25s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards; }
+.svg-pin-pulse { animation: pulsePin 1.6s ease-in-out infinite; }
+.launch-badges {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 12px;
+  opacity: 0; animation: tagFadeUp 0.45s ease 0.45s forwards;
+}
+.launch-badges span {
+  padding: 4px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 800;
+  background: rgba(255, 253, 248, 0.12); border: 1px solid rgba(255, 253, 248, 0.28); color: #fffdf8;
+}
+@keyframes drawArc { to { stroke-dashoffset: 0; } }
+@keyframes pulsePin { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.22); } }
 .launch-wordmark, .launch-intro-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.3rem, 4.2vw, 1.8rem); font-weight: 800; letter-spacing: 0.08em; }
 .launch-sub, .launch-intro-tagline { margin-top: 6px; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.12em; color: #fcd34d; }
 .skip-intro-btn, .launch-intro-skip {
@@ -543,8 +556,27 @@ summary.vbtn-summary:hover .vbtn-bg { transform: scale(1.05); }
     border-color: var(--accent);
     box-shadow: 0 14px 28px rgba(15, 118, 110, 0.25);
   }
-  .btn:hover, .mini-pill:hover, .top-join-btn:hover, .pinned-sound:hover, .pinned-lang:hover, .pinned-admin:hover, .pinned-wa:hover, .star-btn:hover {
+  .btn:hover, .mini-pill:hover, .top-join-btn:hover, .top-admin-btn:hover, .hamburger-btn:hover, .photo-nav-btn:hover, .pinned-sound:hover, .pinned-lang:hover, .pinned-admin:hover, .pinned-wa:hover, .star-btn:hover, .wa-topic-pill:hover {
     transform: translateY(-2px);
     box-shadow: 0 14px 28px rgba(15, 118, 110, 0.26), 0 0 0 3px rgba(15, 118, 110, 0.14);
   }
+  .btn-teal, .pinned-wa, .top-join-btn { position: relative; overflow: hidden; }
+  .btn-teal::before, .pinned-wa::before, .top-join-btn::before {
+    content: ""; position: absolute; inset: 0; width: 45%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.34), transparent);
+    transform: translateX(-160%) skewX(-20deg); pointer-events: none;
+  }
+  .btn-teal:hover::before, .pinned-wa:hover::before, .top-join-btn:hover::before {
+    animation: foilSweep 0.85s ease forwards;
+  }
+}
+
+/* 3-Step How It Works Strip */
+.how-strip {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding-top: 12px;
+  border-top: 1.5px dashed var(--line); font-size: 0.78rem; font-weight: 800; color: var(--accent-dark);
+}
+.how-strip span {
+  padding: 5px 11px; border-radius: 999px; background: var(--surface-soft);
+  border: 1px solid var(--line); box-shadow: var(--shadow-sm);
 }

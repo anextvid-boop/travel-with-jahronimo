@@ -715,4 +715,29 @@ window.TRANSLATIONS = {
       Object.assign(window.TRANSLATIONS[lang], EXTRA_TAGS[lang]);
     }
   });
+
+  const HOW_STEPS = {
+    en: { joinTop: "Book / Chat", moreAboutBtn: "👤 Full Profile & Route", launch3dBtn: "Spin 3D Globe →", openPlus: "Read Profile & FAQ →", how1: "1. Check My Route", how2: "2. 5-Min Video Call", how3: "3. Daily Pet & Home Care" },
+    es: { how1: "1. Mira mi ruta", how2: "2. Videollamada 5 min", how3: "3. Cuidado diario" },
+    pt: { how1: "1. Veja a rota", how2: "2. Chamada de 5 min", how3: "3. Cuidado diário" },
+    fr: { how1: "1. Voir l'itinéraire", how2: "2. Appel vidéo 5 min", how3: "3. Soins quotidiens" },
+    ar: { how1: "1. شاهد المسار", how2: "2. مكالمة 5 دقائق", how3: "3. رعاية يومية" },
+    id: { how1: "1. Cek Rute", how2: "2. Video Call 5 Menit", how3: "3. Perawatan Harian" },
+    th: { how1: "1. ดูเส้นทาง", how2: "2. วิดีโอคอล 5 นาที", how3: "3. ดูแลทุกวัน" },
+    vi: { how1: "1. Xem lộ trình", how2: "2. Gọi video 5 phút", how3: "3. Chăm sóc mỗi ngày" },
+    de: { how1: "1. Route prüfen", how2: "2. 5-Min Video-Call", how3: "3. Tägliche Pflege" },
+    it: { how1: "1. Vedi percorso", how2: "2. Videochiamata 5 min", how3: "3. Cura quotidiana" },
+    nl: { how1: "1. Bekijk route", how2: "2. 5-min videogesprek", how3: "3. Dagelijkse zorg" },
+    ja: { how1: "1. ルート確認", how2: "2. 5分ビデオ通話", how3: "3. 毎日のケア" },
+    ko: { how1: "1. 경로 확인", how2: "2. 5분 영상통화", how3: "3. 매일 돌봄" },
+    zh: { how1: "1. 查看路线", how2: "2. 5分钟视频", how3: "3. 每日照看" },
+    hi: { how1: "1. रूट देखें", how2: "2. 5-मिनट वीडियो कॉल", how3: "3. दैनिक देखभाल" },
+    tr: { how1: "1. Rotayı Gör", how2: "2. 5 Dk Görüntülü", how3: "3. Günlük Bakım" }
+  };
+
+  Object.keys(HOW_STEPS).forEach((lang) => {
+    if (window.TRANSLATIONS && window.TRANSLATIONS[lang]) {
+      Object.assign(window.TRANSLATIONS[lang], HOW_STEPS[lang]);
+    }
+  });
 })();

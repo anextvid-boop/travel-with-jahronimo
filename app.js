@@ -10,15 +10,19 @@
   let mapApi = null;
   let routeData = null;
 
-  // 1. Launch Intro Controller (runs on every launch, skip anytime)
+  // 1. Launch Intro Controller (runs on every launch, then opens Language Prompt)
   function initLaunchIntro() {
     const intro = document.getElementById("launchIntro");
     const skipBtn = document.getElementById("skipIntroBtn");
-    if (!intro) return;
+    if (!intro) {
+      document.dispatchEvent(new CustomEvent("twj:introClosed"));
+      return;
+    }
 
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
       intro.classList.add("is-done");
+      document.dispatchEvent(new CustomEvent("twj:introClosed"));
       return;
     }
 
@@ -28,9 +32,10 @@
       closed = true;
       if (withSound) window.SFX?.open?.();
       intro.classList.add("is-done");
+      document.dispatchEvent(new CustomEvent("twj:introClosed"));
       setTimeout(() => {
         intro.style.display = "none";
-      }, 480);
+      }, 420);
     }
 
     skipBtn?.addEventListener("click", (e) => {
@@ -133,13 +138,14 @@
       applyLanguage(savedLang);
     } else {
       applyLanguage("en");
-      // Startup prompt on first visit after launch intro settles
-      setTimeout(() => {
-        if (modal && !localStorage.getItem("twj_lang")) {
-          modal.classList.add("open");
-        }
-      }, 2350);
     }
+
+    // Ask language on EVERY launch right after the title intro finishes
+    document.addEventListener("twj:introClosed", () => {
+      if (modal && !modal.classList.contains("open")) {
+        setTimeout(() => modal.classList.add("open"), 180);
+      }
+    }, { once: true });
   }
 
   // 3. Route Data Loader (stops.json + localStorage twj_route_override from admin.html)
