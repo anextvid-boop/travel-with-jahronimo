@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-25T16:55:33Z",
+  "updatedAt": "2026-11-25T17:03:02Z",
   "stats": {
-    "totalLeads": 120,
+    "totalLeads": 131,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,7 +12,7 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 118
+    "remainingQueue": 129
   },
   "emailedRecords": [
     {
@@ -886,6 +886,18 @@
       "followUpDue": ""
     },
     {
+      "id": "c3eadce608",
+      "tier": "Tier 3",
+      "name": "BarcelonaExpats (Admin)",
+      "category": "Category 9: Facebook Group Extracted Leads (Emails, WhatsApp & Direct Posts)",
+      "cityCountry": "Barcelona \u2014 Barcelona Expats",
+      "channel": "Email",
+      "contact": "hola@barcelonaexpats.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "80c5e0cd6e",
       "tier": "Tier 3",
       "name": "Basundari Retreat",
@@ -905,6 +917,30 @@
       "cityCountry": "Bali \u2014 Ubud / Bali-wide",
       "channel": "Email",
       "contact": "info@bawabali.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "3c2961e17b",
+      "tier": "Tier 3",
+      "name": "Birte Pfitzner",
+      "category": "Category 9: Facebook Group Extracted Leads (Emails, WhatsApp & Direct Posts)",
+      "cityCountry": "M\u00e1laga \u2014 Expats in Malaga",
+      "channel": "Web Portal / Form",
+      "contact": "https://www.facebook.com/groups/209440851259330/posts/1432178998985503/",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "202a51f3c2",
+      "tier": "Tier 3",
+      "name": "Brendan Chaplin",
+      "category": "Category 9: Facebook Group Extracted Leads (Emails, WhatsApp & Direct Posts)",
+      "cityCountry": "Barcelona (Castelldefels) \u2014 Barcelona Expats",
+      "channel": "Web Portal / Form",
+      "contact": "https://www.facebook.com/groups/barcelonaexpatsgroup/search/?q=video%20editor",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -1006,6 +1042,18 @@
       "followUpDue": ""
     },
     {
+      "id": "cf3a276afe",
+      "tier": "Tier 3",
+      "name": "Fernando (Street Spanish School)",
+      "category": "Category 9: Facebook Group Extracted Leads (Emails, WhatsApp & Direct Posts)",
+      "cityCountry": "Valencia \u2014 Expats Valencia",
+      "channel": "Web Portal / Form",
+      "contact": "https://chat.whatsapp.com/CSxRvzbMoCX8eqeGyTEIUc",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "ac1fcf7304",
       "tier": "Tier 3",
       "name": "Findacrew / Crewseekers",
@@ -1066,6 +1114,18 @@
       "followUpDue": ""
     },
     {
+      "id": "a3767205b9",
+      "tier": "Tier 3",
+      "name": "Irene Fern\u00e1ndez \u00c1lvarez",
+      "category": "Category 9: Facebook Group Extracted Leads (Emails, WhatsApp & Direct Posts)",
+      "cityCountry": "Valencia \u2014 Expats Valencia",
+      "channel": "Web Portal / Form",
+      "contact": "WhatsApp +34 621 366 346",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "75e021c68c",
       "tier": "Tier 3",
       "name": "Jho'La Surf Camp & Yoga",
@@ -1078,6 +1138,18 @@
       "followUpDue": ""
     },
     {
+      "id": "5608a1e291",
+      "tier": "Tier 3",
+      "name": "Jolanda Jojo",
+      "category": "Category 9: Facebook Group Extracted Leads (Emails, WhatsApp & Direct Posts)",
+      "cityCountry": "Valencia (Ll\u00edria/Chulilla) \u2014 Expats Valencia",
+      "channel": "Web Portal / Form",
+      "contact": "https://www.facebook.com/groups/1411999335713930/posts/4812664772314019/",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "4f3e1410a4",
       "tier": "Tier 3",
       "name": "Kima Surf Camp",
@@ -1085,6 +1157,18 @@
       "cityCountry": "Bali \u2014 Canggu",
       "channel": "Email",
       "contact": "info@kimasurf.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "05ec1e4b6b",
+      "tier": "Tier 3",
+      "name": "Ksenia Trefilova",
+      "category": "Category 9: Facebook Group Extracted Leads (Emails, WhatsApp & Direct Posts)",
+      "cityCountry": "Barcelona \u2014 Barcelona Expats",
+      "channel": "Web Portal / Form",
+      "contact": "https://www.facebook.com/groups/barcelonaexpatsgroup/posts/28403513685934004/",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -1121,6 +1205,18 @@
       "cityCountry": "Sri Lanka \u2014 Weligama",
       "channel": "WhatsApp",
       "contact": "WhatsApp +94 76 276 6116 \u00b7 +94 76 630 0126",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "6d32d61b6a",
+      "tier": "Tier 3",
+      "name": "Lead / Contact",
+      "category": "Category 9: Facebook Group Extracted Leads (Emails, WhatsApp & Direct Posts)",
+      "cityCountry": "City & Group",
+      "channel": "Web Portal / Form",
+      "contact": "Email / WhatsApp / Post",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -1169,6 +1265,18 @@
       "cityCountry": "House & Pet Sitting",
       "channel": "Web Portal / Form",
       "contact": "~\u00a323/yr",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "7976986f9d",
+      "tier": "Tier 3",
+      "name": "Mona Sharma",
+      "category": "Category 9: Facebook Group Extracted Leads (Emails, WhatsApp & Direct Posts)",
+      "cityCountry": "Barcelona \u2014 Barcelona Expats",
+      "channel": "Web Portal / Form",
+      "contact": "https://www.facebook.com/groups/barcelonaexpatsgroup/posts/24163039626648119/",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -1229,6 +1337,18 @@
       "cityCountry": "Malaysia \u2014 Petaling Jaya (KL)",
       "channel": "WhatsApp",
       "contact": "+60 17 284 7500 \u00b7 +60 11 2193 5651",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "e4da4ed47d",
+      "tier": "Tier 3",
+      "name": "Pearl Ngwenya (M\u00e1laga Filmmakers Club)",
+      "category": "Category 9: Facebook Group Extracted Leads (Emails, WhatsApp & Direct Posts)",
+      "cityCountry": "M\u00e1laga \u2014 Expats in Malaga",
+      "channel": "WhatsApp",
+      "contact": "Filmmakers & video editors WhatsApp community",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -1481,6 +1601,18 @@
       "cityCountry": "Work Exchanges",
       "channel": "Web Portal / Form",
       "contact": "~\u00a347\u2013\u00a350/yr",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "577ed22570",
+      "tier": "Tier 3",
+      "name": "YouExpats Portal",
+      "category": "Category 9: Facebook Group Extracted Leads (Emails, WhatsApp & Direct Posts)",
+      "cityCountry": "Barcelona \u2014 Barcelona Expats",
+      "channel": "Email",
+      "contact": "hello@youexpats.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
