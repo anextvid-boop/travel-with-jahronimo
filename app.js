@@ -521,7 +521,7 @@
     emailModal?.addEventListener("click", (e) => {
       if (e.target === emailModal) emailModal.classList.remove("open");
     });
-    document.getElementById("siteEmailForm")?.addEventListener("submit", (e) => {
+    document.getElementById("siteEmailForm")?.addEventListener("submit", async (e) => {
       e.preventDefault();
       const name = document.getElementById("seName").value.trim();
       const email = document.getElementById("seEmail").value.trim();
@@ -529,6 +529,9 @@
       const offer = document.getElementById("seOffer").value;
       const msg = document.getElementById("seMsg").value.trim();
       if (!name || !email || !msg) return;
+
+      const statusEl = document.getElementById("seStatus");
+      if (statusEl) statusEl.textContent = "Sending message…";
 
       try {
         const list = JSON.parse(localStorage.getItem("twj_crm_contacts") || "[]");
@@ -546,13 +549,30 @@
         localStorage.setItem("twj_crm_contacts", JSON.stringify(list));
       } catch (err) {}
 
+      let deliveredToServer = false;
+      try {
+        const res = await fetch("/api/messages", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, city, offer, message: msg })
+        });
+        if (res.ok) {
+          deliveredToServer = true;
+        }
+      } catch (err) {}
+
       window.SFX?.success?.();
-      const statusEl = document.getElementById("seStatus");
-      if (statusEl) statusEl.textContent = "✅ Routed to Jahronimo's CRM & opening email client…";
-      const subject = encodeURIComponent(`[Travel With Jahronimo] ${offer} — ${name} (${city})`);
-      const body = encodeURIComponent(`From: ${name} (${email})\nLocation: ${city}\nTopic: ${offer}\n\n${msg}`);
-      window.location.href = `mailto:${ADMIN_EMAIL}?subject=${subject}&body=${body}`;
-      setTimeout(() => emailModal?.classList.remove("open"), 900);
+      if (deliveredToServer) {
+        if (statusEl) statusEl.textContent = "✅ Message delivered to Jahronimo's inbox!";
+        document.getElementById("siteEmailForm")?.reset();
+        setTimeout(() => emailModal?.classList.remove("open"), 1100);
+      } else {
+        if (statusEl) statusEl.textContent = "✅ Saved locally & opening email client…";
+        const subject = encodeURIComponent(`[Travel With Jahronimo] ${offer} — ${name} (${city})`);
+        const body = encodeURIComponent(`From: ${name} (${email})\nLocation: ${city}\nTopic: ${offer}\n\n${msg}`);
+        window.location.href = `mailto:${ADMIN_EMAIL}?subject=${subject}&body=${body}`;
+        setTimeout(() => emailModal?.classList.remove("open"), 900);
+      }
     });
 
     // QR Share Modal

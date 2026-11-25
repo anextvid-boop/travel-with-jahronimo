@@ -158,12 +158,15 @@
         <div class="stat-box"><div class="stat-num" id="statChat">0</div><div class="stat-lbl">Chatting</div></div>
         <div class="stat-box"><div class="stat-num" id="statBooked">0</div><div class="stat-lbl">Booked / Met</div></div>
         <div class="stat-box"><div class="stat-num" id="statEmailsSent">0</div><div class="stat-lbl">Emails Sent</div></div>
+        <div class="stat-box"><div class="stat-num" id="statPaidEmails">0</div><div class="stat-lbl">Paid Emails</div></div>
+        <div class="stat-box"><div class="stat-num" id="statWebMsgs">0</div><div class="stat-lbl">Web Messages</div></div>
         <div class="stat-box"><div class="stat-num" id="statFbPosts">0</div><div class="stat-lbl">FB Posts</div></div>
         <div class="stat-box"><div class="stat-num" id="statFbComments">0</div><div class="stat-lbl">FB Comments</div></div>
       </div>
 
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;" role="tablist">
         <button type="button" class="btn btn-primary admin-tab-btn" data-tab="tabCrm">📋 CRM &amp; Contacts</button>
+        <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabMessages">💬 Messages &amp; Digest</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabOutreach">📨 Outreach Log</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabAnalytics">📊 Analytics</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabRoute">🗺️ Route &amp; Where Next</button>
@@ -335,6 +338,32 @@ Jahronimo</textarea>
       </div>
       </div>
 
+      <div id="tabMessages" class="admin-tab-panel" style="display:none;">
+        <div class="card">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;">
+            <div>
+              <div class="kicker">EASY-TO-READ BACKEND DIGEST (CONFIRMED ONLY)</div>
+              <h2 style="font-size:1.2rem;">What Is Confirmed &amp; Sent Right Now</h2>
+            </div>
+            <button type="button" class="btn btn-ghost" id="refreshMessagesBtn">↻ Refresh Live</button>
+          </div>
+          <div id="backendDigestBox" style="padding:14px 16px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);font-size:0.92rem;line-height:1.65;color:var(--ink);">
+            Loading confirmed backend summary…
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;">
+            <div>
+              <div class="kicker">CLOUDFLARE PAGES INBOX (/api/messages)</div>
+              <h2 style="font-size:1.2rem;">Website Visitor Messages</h2>
+            </div>
+            <span id="webMessagesBadge" class="c-badge">Loading…</span>
+          </div>
+          <div id="webMessagesList" style="display:flex;flex-direction:column;gap:10px;"></div>
+        </div>
+      </div>
+
       <div id="tabOutreach" class="admin-tab-panel" style="display:none;">
         <div class="card">
           <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;">
@@ -390,6 +419,26 @@ Jahronimo</textarea>
           <details style="border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
             <summary style="cursor:pointer;font-weight:700;color:var(--ink);" id="fbGroupsSummary">📘 Connected Facebook Groups by Type (0)</summary>
             <div id="fbGroupsList" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
+          </details>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;">
+            <div>
+              <div class="kicker">ANEXTVID PAID OUTREACH (CONFIRMED SENT ONLY)</div>
+              <h2 style="font-size:1.2rem;">Paid Video &amp; Brand Pitch Emails</h2>
+            </div>
+            <span id="paidOutreachBadge" class="c-badge">Loading...</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px;">
+            <div class="stat-box"><div class="stat-num" id="poSent">0</div><div class="stat-lbl">Confirmed Sent</div></div>
+            <div class="stat-box"><div class="stat-num" id="poReplied">0</div><div class="stat-lbl">Replied</div></div>
+            <div class="stat-box"><div class="stat-num" id="poBooked">0</div><div class="stat-lbl">Booked</div></div>
+            <div class="stat-box"><div class="stat-num" id="poReady">0</div><div class="stat-lbl">Ready Pool</div></div>
+          </div>
+          <details style="border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface-soft);">
+            <summary style="cursor:pointer;font-weight:700;color:var(--ink);" id="paidOutreachSummary">💼 Confirmed Paid Emails Sent (0)</summary>
+            <div id="paidOutreachList" style="display:flex;flex-direction:column;gap:8px;margin-top:12px;"></div>
           </details>
         </div>
       </div>
@@ -762,6 +811,35 @@ Jahronimo</textarea>
     }
 
     let outreachFeed = { stats: {}, emailedRecords: [] };
+    let paidFeed = { stats: {}, confirmedRecords: [] };
+    let webMessagesState = { ok: false, totalCount: 0, unreadCount: 0, messages: [], error: "" };
+
+    function renderBackendDigest() {
+      const box = document.getElementById("backendDigestBox");
+      if (!box) return;
+      const confirmedFreeEmails = Number(outreachFeed.stats?.totalEmailsSent ?? 0);
+      const confirmedPaidEmails = Number(paidFeed.stats?.confirmedEmailsSent ?? 0);
+      const totalConfirmedEmails = confirmedFreeEmails + confirmedPaidEmails;
+      const confirmedDms = Number(outreachFeed.stats?.totalPlatformSent ?? 0);
+      const fbPostsLive = Number(outreachFeed.stats?.fbPostsLive ?? 0);
+      const fbComments = Number(outreachFeed.stats?.fbCommentsMade ?? 0);
+      const emailReplies = Number(outreachFeed.stats?.emailsReplied ?? 0) + Number(paidFeed.stats?.repliedCount ?? 0);
+      const dmReplies = Number(outreachFeed.stats?.dmsReplied ?? 0);
+      const webMsgs = webMessagesState.ok
+        ? `${webMessagesState.totalCount} received (${webMessagesState.unreadCount} unread)`
+        : "Waiting for Cloudflare KV binding (TWJ_MESSAGES)";
+
+      box.innerHTML = `
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;">
+          <div>✅ <strong>Confirmed Emails Sent:</strong> ${totalConfirmedEmails} <span style="color:var(--muted);">(${confirmedFreeEmails} exchange + ${confirmedPaidEmails} paid)</span></div>
+          <div>💬 <strong>Confirmed DMs Sent:</strong> ${confirmedDms}</div>
+          <div>📘 <strong>Confirmed FB Posts Live:</strong> ${fbPostsLive} <span style="color:var(--muted);">· ${fbComments} comments</span></div>
+          <div>📩 <strong>Confirmed Replies:</strong> ${emailReplies} email · ${dmReplies} DM</div>
+          <div>🌐 <strong>Website Visitor Messages:</strong> ${escOutreach(webMsgs)}</div>
+          <div>🕒 <strong>Last Sync:</strong> ${escOutreach((outreachFeed.updatedAt || paidFeed.updatedAt || "—").slice(0, 16).replace("T", " "))}</div>
+        </div>
+      `;
+    }
     function escOutreach(s) {
       return String(s || "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
     }
@@ -786,9 +864,11 @@ Jahronimo</textarea>
           notes: c.notes || ""
         }));
 
+      const confirmedStatuses = new Set(["sent", "followed_up", "replied", "booked"]);
       const seen = new Set();
       const merged = [];
       for (const r of [...(outreachFeed.emailedRecords || []), ...localEmailed]) {
+        if (!confirmedStatuses.has((r.status || "").toLowerCase())) continue;
         const key = `${(r.contact || "").toLowerCase()}|${(r.name || "").toLowerCase()}`;
         if (seen.has(key)) continue;
         seen.add(key);
@@ -903,7 +983,133 @@ Jahronimo</textarea>
       }
       renderOutreachLog();
       loadFacebookGroups();
+      loadPaidOutreach();
+      loadWebsiteMessages();
     }
+
+    async function loadPaidOutreach() {
+      const badge = document.getElementById("paidOutreachBadge");
+      const listEl = document.getElementById("paidOutreachList");
+      const sumEl = document.getElementById("paidOutreachSummary");
+      try {
+        const res = await fetch("data/paid-outreach.json?t=" + Date.now());
+        if (!res.ok) throw new Error("Not found");
+        paidFeed = await res.json();
+        const st = paidFeed.stats || {};
+        const confirmed = paidFeed.confirmedRecords || [];
+        if (badge) badge.textContent = "Synced: " + (paidFeed.updatedAt || "").slice(0, 10);
+        const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+        setTxt("poSent", st.confirmedEmailsSent ?? confirmed.length);
+        setTxt("poReplied", st.repliedCount ?? 0);
+        setTxt("poBooked", st.bookedCount ?? 0);
+        setTxt("poReady", st.readyPool ?? 0);
+        setTxt("statPaidEmails", st.confirmedEmailsSent ?? confirmed.length);
+        if (sumEl) sumEl.textContent = `💼 Confirmed Paid Emails Sent (${confirmed.length})`;
+        if (listEl) {
+          listEl.innerHTML = confirmed.length
+            ? confirmed.map((r) => `
+              <div style="padding:10px 12px;border-radius:10px;background:#fff;border:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center;">
+                <div>
+                  <strong>${escOutreach(r.organization)}</strong>
+                  <span class="c-badge" style="margin-left:6px;">${escOutreach(r.category)}</span>
+                  <span class="c-badge" style="margin-left:4px;">${escOutreach(r.status)}</span>
+                  <div style="font-size:0.82rem;color:var(--muted);margin-top:2px;">
+                    ${escOutreach(r.region)} · <code>${escOutreach(r.email)}</code>
+                  </div>
+                  <div style="font-size:0.78rem;color:var(--muted);margin-top:2px;">${escOutreach(r.subject)}</div>
+                </div>
+                <div style="text-align:right;font-size:0.78rem;color:var(--muted);">
+                  <div>Sent: <strong>${escOutreach((r.sentAt || "").slice(0, 10))}</strong></div>
+                  <div>Follow-ups: #${r.followUpCount || 0}</div>
+                </div>
+              </div>
+            `).join("")
+            : `<p style="color:var(--muted);font-size:0.88rem;">No confirmed paid outreach emails sent yet.</p>`;
+        }
+      } catch (e) {
+        if (badge) badge.textContent = "Not Synced Yet";
+      }
+      renderBackendDigest();
+    }
+
+    async function updateMessageStatus(id, status) {
+      const token = sessionStorage.getItem(SESSION_KEY) || ADMIN_HASH;
+      try {
+        const res = await fetch("/api/messages", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Admin-Session": token,
+          },
+          body: JSON.stringify({ id, status }),
+        });
+        if (res.ok) {
+          loadWebsiteMessages();
+        }
+      } catch (e) {}
+    }
+
+    async function loadWebsiteMessages() {
+      const badge = document.getElementById("webMessagesBadge");
+      const listEl = document.getElementById("webMessagesList");
+      const topStat = document.getElementById("statWebMsgs");
+      if (!listEl) return;
+
+      const token = sessionStorage.getItem(SESSION_KEY) || ADMIN_HASH;
+      try {
+        const res = await fetch("/api/messages?t=" + Date.now(), {
+          headers: { "X-Admin-Session": token },
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) {
+          webMessagesState = { ok: false, totalCount: 0, unreadCount: 0, messages: [], error: data.error || "UNAVAILABLE" };
+          if (badge) badge.textContent = data.error === "KV_NOT_BOUND" ? "Setup Needed (KV)" : "Unavailable";
+          listEl.innerHTML = `
+            <div style="padding:12px 14px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);font-size:0.86rem;color:var(--muted);">
+              <strong>Live inbox is ready in code</strong> (<code>functions/api/messages.js</code>). Bind a Cloudflare KV namespace named <code>TWJ_MESSAGES</code> in <strong>Cloudflare Pages → Settings → Functions</strong> to receive &amp; view visitor messages across devices.
+            </div>
+          `;
+          renderBackendDigest();
+          return;
+        }
+
+        webMessagesState = data;
+        if (topStat) topStat.textContent = data.totalCount ?? 0;
+        if (badge) badge.textContent = `${data.totalCount ?? 0} Total · ${data.unreadCount ?? 0} Unread`;
+        const msgs = data.messages || [];
+        listEl.innerHTML = msgs.length
+          ? msgs.map((m) => `
+            <div style="padding:12px 14px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center;">
+                <div>
+                  <strong>${escOutreach(m.name)}</strong>
+                  <span class="c-badge" style="margin-left:6px;">${escOutreach(m.offer)}</span>
+                  <span class="c-badge" style="margin-left:4px;">${escOutreach(m.status)}</span>
+                </div>
+                <div style="font-size:0.78rem;color:var(--muted);">${escOutreach((m.createdAt || "").slice(0, 16).replace("T", " "))}</div>
+              </div>
+              <div style="font-size:0.84rem;color:var(--muted);">
+                <code>${escOutreach(m.email)}</code> · ${escOutreach(m.city || "Not specified")}
+              </div>
+              <div style="font-size:0.9rem;color:var(--ink);white-space:pre-wrap;">${escOutreach(m.message)}</div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+                <a class="btn btn-primary" style="padding:5px 10px;font-size:0.78rem;" href="mailto:${encodeURIComponent(m.email)}?subject=${encodeURIComponent("Re: " + (m.offer || "Travel With Jahronimo"))}">Reply via Email</a>
+                ${m.status === "received" ? `<button type="button" class="btn btn-ghost" style="padding:5px 10px;font-size:0.78rem;" onclick="updateMessageStatus('${escOutreach(m.id)}','read')">Mark Read</button>` : ""}
+                ${m.status !== "replied" ? `<button type="button" class="btn btn-ghost" style="padding:5px 10px;font-size:0.78rem;" onclick="updateMessageStatus('${escOutreach(m.id)}','replied')">Mark Replied</button>` : ""}
+              </div>
+            </div>
+          `).join("")
+          : `<p style="color:var(--muted);font-size:0.88rem;">No website visitor messages yet. When someone submits the contact form on the site, it will appear here.</p>`;
+      } catch (e) {
+        if (badge) badge.textContent = "Offline / Local Preview";
+        listEl.innerHTML = `<p style="color:var(--muted);font-size:0.86rem;">Could not reach <code>/api/messages</code> (normal when previewing locally without Wrangler/Cloudflare Pages).</p>`;
+      }
+      renderBackendDigest();
+    }
+
+    document.getElementById("refreshMessagesBtn")?.addEventListener("click", () => {
+      loadOutreachHistory();
+    });
 
     async function loadFacebookGroups() {
       const badge = document.getElementById("fbGroupsBadge");

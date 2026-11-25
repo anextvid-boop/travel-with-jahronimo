@@ -1,0 +1,145 @@
+{
+  "updatedAt": "2026-11-25T17:47:47Z",
+  "stats": {
+    "totalLeads": 270,
+    "readyPool": 260,
+    "confirmedEmailsSent": 10,
+    "repliedCount": 0,
+    "bookedCount": 0,
+    "byCategory": {
+      "Airline": 10
+    }
+  },
+  "confirmedRecords": [
+    {
+      "leadId": "8",
+      "organization": "Vueling",
+      "category": "Airline",
+      "region": "Spain / Europe",
+      "email": "prensa@vueling.com",
+      "subject": "Paid video production & campaign film pitch \u2014 Vueling",
+      "sentAt": "2026-11-25T17:43:16Z",
+      "followUpCount": 0,
+      "lastFollowUpAt": "",
+      "status": "sent",
+      "notes": "Spain & EU city-break promo reels"
+    },
+    {
+      "leadId": "9",
+      "organization": "Iberia",
+      "category": "Airline",
+      "region": "Spain / Global",
+      "email": "prensa@iberia.es",
+      "subject": "Paid video production & campaign film pitch \u2014 Iberia",
+      "sentAt": "2026-11-25T17:43:16Z",
+      "followUpCount": 0,
+      "lastFollowUpAt": "",
+      "status": "sent",
+      "notes": "Route & brand video production"
+    },
+    {
+      "leadId": "14",
+      "organization": "Norwegian",
+      "category": "Airline",
+      "region": "Europe / UK",
+      "email": "marketing@norwegian.com",
+      "subject": "Paid video production & campaign film pitch \u2014 Norwegian",
+      "sentAt": "2026-11-25T17:43:16Z",
+      "followUpCount": 0,
+      "lastFollowUpAt": "",
+      "status": "sent",
+      "notes": "Paid marketing & sponsorship video sprint"
+    },
+    {
+      "leadId": "16",
+      "organization": "TAP Air Portugal",
+      "category": "Airline",
+      "region": "Portugal / Europe",
+      "email": "press.office@tap.pt",
+      "subject": "Paid video production & campaign film pitch \u2014 TAP Air Portugal",
+      "sentAt": "2026-11-25T17:43:16Z",
+      "followUpCount": 0,
+      "lastFollowUpAt": "",
+      "status": "sent",
+      "notes": "Portugal stopover & route promo films"
+    },
+    {
+      "leadId": "26",
+      "organization": "AirAsia",
+      "category": "Airline",
+      "region": "Malaysia / SE Asia",
+      "email": "communications@airasia.com",
+      "subject": "Paid video production & campaign film pitch \u2014 AirAsia",
+      "sentAt": "2026-11-25T17:43:16Z",
+      "followUpCount": 0,
+      "lastFollowUpAt": "",
+      "status": "sent",
+      "notes": "SE Asia route & lifestyle social reels"
+    },
+    {
+      "leadId": "1",
+      "organization": "British Airways",
+      "category": "Airline",
+      "region": "UK / Global",
+      "email": "press.office@ba.com",
+      "subject": "Paid video production & campaign film pitch \u2014 British Airways",
+      "sentAt": "2026-11-25T17:35:20Z",
+      "followUpCount": 0,
+      "lastFollowUpAt": "",
+      "status": "sent",
+      "notes": "Route & cabin promo film + paid creator campaign"
+    },
+    {
+      "leadId": "3",
+      "organization": "easyJet",
+      "category": "Airline",
+      "region": "UK / Europe",
+      "email": "matt.clemens@easyjet.com",
+      "subject": "Paid video production & campaign film pitch \u2014 easyJet",
+      "sentAt": "2026-11-25T17:35:20Z",
+      "followUpCount": 0,
+      "lastFollowUpAt": "",
+      "status": "sent",
+      "notes": "Destination reel sprint + paid campaign"
+    },
+    {
+      "leadId": "4",
+      "organization": "easyJet holidays",
+      "category": "Airline",
+      "region": "UK / Europe",
+      "email": "holidays.pressoffice@easyJet.com",
+      "subject": "Paid video production & campaign film pitch \u2014 easyJet holidays",
+      "sentAt": "2026-11-25T17:35:20Z",
+      "followUpCount": 0,
+      "lastFollowUpAt": "",
+      "status": "sent",
+      "notes": "Resort & package holiday promo films"
+    },
+    {
+      "leadId": "5",
+      "organization": "Jet2 / Jet2holidays",
+      "category": "Airline",
+      "region": "UK / Spain",
+      "email": "PressOffice@jet2.com",
+      "subject": "Paid video production & campaign film pitch \u2014 Jet2 / Jet2holidays",
+      "sentAt": "2026-11-25T17:35:20Z",
+      "followUpCount": 0,
+      "lastFollowUpAt": "",
+      "status": "sent",
+      "notes": "Spain/Canaries holiday video campaigns"
+    },
+    {
+      "leadId": "7",
+      "organization": "Virgin Atlantic",
+      "category": "Airline",
+      "region": "UK / Global",
+      "email": "press.office@fly.virgin.com",
+      "subject": "Paid video production & campaign film pitch \u2014 Virgin Atlantic",
+      "sentAt": "2026-11-25T17:35:20Z",
+      "followUpCount": 0,
+      "lastFollowUpAt": "",
+      "status": "sent",
+      "notes": "Commercial cabin & route launch films"
+    }
+  ]
+}
