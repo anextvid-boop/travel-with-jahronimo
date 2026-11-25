@@ -2,8 +2,11 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="geo.region" content="GB-BNH" />
+  <meta name="geo.placename" content="Brighton, United Kingdom" />
+  <meta name="geo.position" content="50.8225;-0.1372" />
   <title>Travel With Jahronimo | UK House &amp; Pet Sitter · Video &amp; Web</title>
   <meta name="description" content="Jahronimo Ellis (36), quiet UK remote worker, video &amp; web creator, and reliable house/pet sitter. 2027 goal: 13 countries. Brighton, Spain, Thailand &amp; Bali." />
   <meta name="author" content="Jahronimo Ellis" />
@@ -92,6 +95,15 @@
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Remote Video Production & Short-Form Reels", "areaServed": ["Brighton", "Málaga", "Valencia", "Thailand", "Bali"] } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development & Technical SEO", "areaServed": ["Brighton", "Málaga", "Valencia", "Thailand", "Bali"] } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "House Sitting & Dog/Cat Care", "areaServed": ["Brighton", "London", "Málaga", "Valencia", "Thailand", "Bali"] } }
+        ]
+      },
+      {
+        "@type": "HowTo",
+        "name": "How to Connect or Book Jahronimo for a House Sit or Creative Project",
+        "step": [
+          { "@type": "HowToStep", "position": 1, "name": "Check Route & Dates", "text": "View the interactive 3D World Globe and countdown timers for Brighton, Málaga, Valencia, Thailand, and Bali." },
+          { "@type": "HowToStep", "position": 2, "name": "Choose Your Arrangement", "text": "Select house and pet sitting, paid video/web production, a fair-rate room, or a language exchange." },
+          { "@type": "HowToStep", "position": 3, "name": "Message on WhatsApp or Email", "text": "Tap the pinned WhatsApp button or email jahronimo1@hotmail.com to schedule a quick 5-minute video call." }
         ]
       },
       {
@@ -385,6 +397,94 @@
       .page-break { break-before: page; page-break-before: always; }
       .card, details.acc-card { break-inside: avoid; page-break-inside: avoid; box-shadow: none !important; }
     }
+
+    /* Travel Marquee Ticker */
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .travel-marquee {
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 9px 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .travel-marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 28px;
+      animation: marqueeScroll 28s linear infinite;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      padding-left: 28px;
+    }
+
+    /* Right-Edge 5-Section Progress Rail (Desktop) */
+    .panel-rail {
+      position: fixed;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 45;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .rail-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .rail-dot.active, .rail-dot:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      transform: scale(1.12);
+    }
+    @media (max-width: 1020px) { .panel-rail { display: none; } }
+
+    /* Fullscreen 3D Map Fallback (iOS Safari + Desktop) */
+    .map-stage-wrap.is-fullscreen {
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 150 !important;
+      height: 100dvh !important;
+      width: 100vw !important;
+      border-radius: 0 !important;
+      border: none !important;
+    }
+    .map-fs-exit {
+      display: none;
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 155;
+      padding: 9px 15px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 0.84rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+    .map-stage-wrap.is-fullscreen + .map-fs-exit { display: inline-flex; }
 
     /* Focus Window Floating Modal (Blurred Backdrop) */
     @keyframes focusIn {
@@ -1659,6 +1759,14 @@
       </p>
     </section>
 
+    <!-- Travel Marquee Strip -->
+    <div class="travel-marquee" aria-hidden="true">
+      <div class="travel-marquee-track">
+        <span>BRIGHTON, UK • MÁLAGA • VALENCIA • THAILAND • BALI • 13 COUNTRIES IN 2027 • VIDEO &amp; WEB • HOUSE &amp; PET SITTING • JOIN THE STORY</span>
+        <span>BRIGHTON, UK • MÁLAGA • VALENCIA • THAILAND • BALI • 13 COUNTRIES IN 2027 • VIDEO &amp; WEB • HOUSE &amp; PET SITTING • JOIN THE STORY</span>
+      </div>
+    </div>
+
     <!-- STACK 2: Photos of Me -->
     <section class="card">
       <div class="section-kicker">
@@ -1712,10 +1820,13 @@
         <div class="map-controls-group">
           <button class="map-btn active" id="btn3D" type="button">🌐 <span data-i18n="btn3D">3D Globe</span></button>
           <button class="map-btn" id="btn2D" type="button">🗺️ <span data-i18n="btn2D">2D Flat</span></button>
+          <button class="map-btn" id="tiltMapBtn" type="button">📐 <span>+15° Tilt</span></button>
           <button class="map-btn" id="btnResetGlobe" type="button">🧭 <span>Full World</span></button>
         </div>
         <div class="map-controls-group">
-          <button class="map-btn geo" id="btnPhoneLoc" type="button">📍 <span data-i18n="btnPhoneLoc">Connect Phone Location</span></button>
+          <button class="map-btn geo" id="btnPhoneLoc" type="button">📍 <span data-i18n="btnPhoneLoc">Connect Phone</span></button>
+          <button class="map-btn" id="followMeBtn" type="button">📡 <span>Follow Me</span></button>
+          <button class="map-btn" id="expandMapBtn" type="button">⤢ <span>Fullscreen</span></button>
         </div>
       </div>
 
@@ -1727,6 +1838,19 @@
       <div class="map-stage-wrap" id="mapStageWrap">
         <div id="worldMap3D"></div>
       </div>
+      <button type="button" class="map-fs-exit tap-fx" id="mapFsExitBtn">✕ Exit Fullscreen</button>
+
+      <details style="margin-top:12px;">
+        <summary style="cursor:pointer;font-weight:700;font-size:0.84rem;color:var(--accent-dark);list-style:none;display:inline-flex;align-items:center;gap:6px;padding:6px 13px;border-radius:999px;background:var(--accent-soft);">
+          <span>🧭</span>
+          <span>View 13-Country Route Legs &amp; Distances</span>
+        </summary>
+        <div style="margin-top:10px;padding:12px;border-radius:14px;background:var(--surface-soft);border:1px solid var(--line);font-size:0.82rem;line-height:1.7;text-align:left;">
+          <strong>Leg 1:</strong> Brighton, UK → Málaga, Spain (~1,720 km) → Valencia (~465 km) → Portugal (~780 km) → Morocco (~490 km)<br/>
+          <strong>Leg 2:</strong> Mediterranean: Italy → Greece → Turkey<br/>
+          <strong>Leg 3:</strong> Asia &amp; 2027 Run: Thailand → Malaysia → Vietnam → Bali, Indonesia → Japan
+        </div>
+      </details>
 
       <div class="stop-pills" id="stopPills">
         <button class="stop-pill active" data-stop="brighton">🇬🇧 Brighton (Start)</button>
@@ -2218,7 +2342,10 @@
           </select>
         </div>
         <input class="auth-field" id="authEmail" type="email" placeholder="Email (or WhatsApp handle)" required />
-        <input class="auth-field" id="authPin" type="password" placeholder="Quick Passcode" required />
+        <div style="position:relative;">
+          <input class="auth-field" id="authPin" type="password" placeholder="Quick Passcode" required style="padding-right:44px;" />
+          <button type="button" id="toggleAuthPinBtn" aria-label="Show or hide passcode" style="position:absolute;right:10px;top:9px;background:none;border:none;cursor:pointer;font-size:1rem;">👁️</button>
+        </div>
         <div id="authMsg" style="font-size:0.82rem;color:var(--accent-dark);font-weight:700;margin-bottom:10px;min-height:18px;"></div>
         <button type="submit" class="btn btn-wa tap-fx" style="width:100%;" id="authSubmitBtn">Sign Up &amp; Send to Jahronimo</button>
       </form>
@@ -2240,6 +2367,14 @@
   <div id="photoLightbox" style="display:none;position:fixed;inset:0;z-index:130;background:rgba(17,19,22,0.88);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px;cursor:zoom-out;">
     <img id="lightboxImg" src="" alt="Full photo" style="max-width:94vw;max-height:88vh;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.45);" />
   </div>
+
+  <!-- Right-Edge 5-Section Progress Rail (Desktop) -->
+  <nav class="panel-rail" aria-label="Quick section jump">
+    <a class="rail-dot active" href="#top" data-rail="01">01</a>
+    <a class="rail-dot" href="#photoScrollStrip" data-rail="02">02</a>
+    <a class="rail-dot" href="#worldMap3D" data-rail="03">03</a>
+    <a class="rail-dot" href="#quick-whatsapp" data-rail="04">04</a>
+  </nav>
 
   <!-- Pinned Bottom-Left Language Switcher -->
   <button class="pinned-lang tap-fx" id="openLangBtn" type="button" aria-label="Change language">
@@ -2982,7 +3117,65 @@
       });
 
       document.getElementById("btnResetGlobe")?.addEventListener("click", () => {
-        map.flyTo({ center: [32, 26], zoom: 1.45, pitch: is3D ? 40 : 0, bearing: is3D ? -12 : 0, duration: 1000 });
+        map.flyTo({ center: [14, 34], zoom: 1.55, pitch: is3D ? 46 : 0, bearing: is3D ? -10 : 0, duration: 1000 });
+      });
+
+      // +15deg Tilt Button
+      document.getElementById("tiltMapBtn")?.addEventListener("click", () => {
+        const nextPitch = map.getPitch() >= 65 ? 0 : Math.min(75, map.getPitch() + 15);
+        map.easeTo({ pitch: nextPitch, duration: 300 });
+      });
+
+      // Fullscreen 3D Map + iOS Safari Fallback
+      const mapStageWrap = document.getElementById("mapStageWrap");
+      const expandMapBtn = document.getElementById("expandMapBtn");
+      const mapFsExitBtn = document.getElementById("mapFsExitBtn");
+      function setMapFullscreen(active) {
+        mapStageWrap?.classList.toggle("is-fullscreen", active);
+        expandMapBtn?.classList.toggle("active", active);
+        if (active) { map.scrollZoom.enable(); }
+        setTimeout(() => map.resize(), 120);
+      }
+      expandMapBtn?.addEventListener("click", () => setMapFullscreen(!mapStageWrap.classList.contains("is-fullscreen")));
+      mapFsExitBtn?.addEventListener("click", () => setMapFullscreen(false));
+
+      // Follow Me Live GPS Tracking (watchPosition)
+      let watchId = null;
+      const followMeBtn = document.getElementById("followMeBtn");
+      followMeBtn?.addEventListener("click", () => {
+        const note = document.getElementById("mapStatusNote");
+        if (watchId !== null) {
+          navigator.geolocation.clearWatch(watchId);
+          watchId = null;
+          followMeBtn.classList.remove("active");
+          note.textContent = "Live Follow Me paused.";
+          return;
+        }
+        if (!navigator.geolocation) {
+          note.textContent = "Geolocation not supported here.";
+          return;
+        }
+        followMeBtn.classList.add("active");
+        note.textContent = "Follow Me active — tracking your live GPS...";
+        let firstFix = true;
+        watchId = navigator.geolocation.watchPosition((pos) => {
+          originCoords = [pos.coords.longitude, pos.coords.latitude];
+          if (originMarker) originMarker.setLngLat(originCoords);
+          const src = map.getSource("world-route");
+          if (src) src.setData(getRouteGeoJSON());
+          if (firstFix) {
+            firstFix = false;
+            window.TravelSound?.play("mapPing");
+            map.flyTo({ center: originCoords, zoom: 5.2, pitch: is3D ? 50 : 0, duration: 900 });
+          } else {
+            map.easeTo({ center: originCoords, duration: 500 });
+          }
+          note.textContent = `Live Follow: (${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)})`;
+        }, () => {
+          followMeBtn.classList.remove("active");
+          watchId = null;
+          note.textContent = "Location permission declined.";
+        }, { enableHighAccuracy: true });
       });
 
       document.querySelectorAll(".stop-pill").forEach((pill) => {
@@ -3376,6 +3569,11 @@
           authModal.classList.remove("open");
           window.TravelSound?.play("modalClose");
         }
+      });
+
+      document.getElementById("toggleAuthPinBtn")?.addEventListener("click", () => {
+        const p = document.getElementById("authPin");
+        p.type = p.type === "password" ? "text" : "password";
       });
 
       document.getElementById("authForm").addEventListener("submit", (e) => {

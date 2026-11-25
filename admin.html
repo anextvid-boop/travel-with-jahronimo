@@ -98,7 +98,10 @@
       <p style="font-size:0.86rem;color:var(--muted);margin-bottom:16px;">Sign in to view and manage your travel contacts and helpers.</p>
       <form id="adminLoginForm">
         <input class="field" id="admEmail" type="email" placeholder="Admin Email" required />
-        <input class="field" id="admPass" type="password" placeholder="Passcode" required />
+        <div style="position:relative;">
+          <input class="field" id="admPass" type="password" placeholder="Passcode" required style="padding-right:42px;" />
+          <button type="button" id="toggleAdmPass" aria-label="Show or hide passcode" style="position:absolute;right:10px;top:9px;background:none;border:none;cursor:pointer;font-size:1rem;">👁️</button>
+        </div>
         <div id="admErr" style="font-size:0.82rem;color:#b91c1c;font-weight:700;min-height:18px;margin-bottom:8px;"></div>
         <button type="submit" class="btn btn-primary" style="width:100%;">Unlock Admin CRM</button>
       </form>
@@ -128,6 +131,13 @@
         <div class="stat-box"><div class="stat-num" id="statBooked">0</div><div class="stat-lbl">Booked / Met</div></div>
       </div>
 
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;" role="tablist">
+        <button type="button" class="btn btn-primary admin-tab-btn" data-tab="tabCrm">📋 CRM &amp; Contacts</button>
+        <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabEmergency">🚨 Emergency Protocol</button>
+        <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabBackup">💾 Backup &amp; Restore</button>
+      </div>
+
+      <div id="tabEmergency" class="admin-tab-panel" style="display:none;">
       <!-- Emergency Protocol & Last Known Location -->
       <div class="card" style="border-color:#dc2626;background:linear-gradient(180deg,#fffdf8 0%,#fef2f2 100%);">
         <div class="kicker" style="color:#b91c1c;">🚨 EMERGENCY PROTOCOL · LOCATION-BASED</div>
@@ -202,6 +212,9 @@
         </div>
       </div>
 
+      </div>
+
+      <div id="tabCrm" class="admin-tab-panel">
       <!-- Add Contact Form -->
       <div class="card">
         <div class="kicker">ADD CONTACT</div>
@@ -234,6 +247,25 @@
           </select>
         </div>
         <div class="crm-grid" id="crmGrid"></div>
+      </div>
+      </div>
+
+      <div id="tabBackup" class="admin-tab-panel" style="display:none;">
+        <div class="card">
+          <div class="kicker">DEVICE BACKUP &amp; RESTORE</div>
+          <h2 style="font-size:1.2rem;margin-bottom:6px;">Export or Restore All Admin Data (.json)</h2>
+          <p style="font-size:0.86rem;color:var(--muted);margin-bottom:14px;">
+            Back up your CRM contacts, Emergency Contacts, Last Known Location, and Passport Photo into one private <code>.json</code> file so you can move it to a new phone anytime.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+            <button type="button" class="btn btn-primary" id="exportJsonBtn">⬇ Download Full Backup (.json)</button>
+            <label class="btn btn-ghost" style="cursor:pointer;">
+              ⬆ Restore from .json
+              <input type="file" id="importJsonInput" accept="application/json,.json" style="display:none;" />
+            </label>
+          </div>
+          <div id="backupStatus" style="font-size:0.82rem;font-weight:700;color:var(--accent-dark);margin-top:10px;"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -547,6 +579,68 @@
         await navigator.clipboard.writeText(buildEmergencyText());
         document.getElementById("emgDispatchStatus").textContent = "Emergency pack copied to clipboard!";
       } catch (e) {}
+    });
+
+    // Show/Hide Admin Passcode
+    document.getElementById("toggleAdmPass")?.addEventListener("click", () => {
+      const p = document.getElementById("admPass");
+      p.type = p.type === "password" ? "text" : "password";
+    });
+
+    // 3-Tab Switching
+    document.querySelectorAll(".admin-tab-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".admin-tab-btn").forEach((b) => {
+          b.classList.remove("btn-primary");
+          b.classList.add("btn-ghost");
+        });
+        btn.classList.remove("btn-ghost");
+        btn.classList.add("btn-primary");
+        const target = btn.getAttribute("data-tab");
+        document.querySelectorAll(".admin-tab-panel").forEach((p) => {
+          p.style.display = p.id === target ? "block" : "none";
+        });
+      });
+    });
+
+    // Full JSON Backup & Restore
+    document.getElementById("exportJsonBtn")?.addEventListener("click", () => {
+      const dump = {
+        crm: loadContacts(),
+        emgContacts: loadEmgContacts(),
+        lastLocation: JSON.parse(localStorage.getItem(LOC_KEY) || "null"),
+        vault: JSON.parse(localStorage.getItem(EMG_VAULT_KEY) || "null"),
+        passportPhoto: localStorage.getItem(PASSPORT_IMG_KEY) || null,
+        exportedAt: new Date().toISOString()
+      };
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([JSON.stringify(dump, null, 2)], { type: "application/json" }));
+      a.download = "jahronimo-admin-backup.json";
+      a.click();
+      document.getElementById("backupStatus").textContent = "Full backup downloaded!";
+    });
+
+    document.getElementById("importJsonInput")?.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const data = JSON.parse(reader.result);
+          if (Array.isArray(data.crm)) saveContacts(data.crm);
+          if (Array.isArray(data.emgContacts)) saveEmgContacts(data.emgContacts);
+          if (data.lastLocation) localStorage.setItem(LOC_KEY, JSON.stringify(data.lastLocation));
+          if (data.vault) localStorage.setItem(EMG_VAULT_KEY, JSON.stringify(data.vault));
+          if (data.passportPhoto) localStorage.setItem(PASSPORT_IMG_KEY, data.passportPhoto);
+          renderCRM();
+          renderEmgContacts();
+          renderLastLocation();
+          document.getElementById("backupStatus").textContent = "Backup restored successfully!";
+        } catch (err) {
+          document.getElementById("backupStatus").textContent = "Invalid backup JSON file.";
+        }
+      };
+      reader.readAsText(file);
     });
   </script>
 </body>
