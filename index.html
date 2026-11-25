@@ -7,6 +7,7 @@
   <meta name="description" content="Jahronimo (36, Brighton UK) — calm remote video &amp; web creator and trusted house/pet sitter travelling with one carry-on across 13 countries in 2027." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <link rel="canonical" href="https://travelwithjahronimo.pages.dev/" />
+  <link rel="alternate" type="text/plain" title="LLMs Context" href="llms.txt" />
   <link rel="manifest" href="manifest.webmanifest" />
   <meta name="theme-color" content="#0b4f4a" />
 
@@ -56,14 +57,44 @@
         "url": "https://travelwithjahronimo.pages.dev/"
       },
       {
-        "@type": "Person",
-        "name": "Jahronimo",
-        "url": "https://travelwithjahronimo.pages.dev/",
-        "email": "mailto:jahronimo1@hotmail.com",
-        "homeLocation": { "@type": "Place", "name": "Brighton, United Kingdom" },
-        "sameAs": [
-          "https://www.linkedin.com/in/jahronimo-ellis-aa6863437/",
-          "https://instagram.com/Jahronimooo"
+        "@type": "ProfilePage",
+        "mainEntity": {
+          "@type": "Person",
+          "name": "Jahronimo Ellis",
+          "url": "https://travelwithjahronimo.pages.dev/",
+          "email": "mailto:jahronimo1@hotmail.com",
+          "homeLocation": { "@type": "Place", "name": "Brighton, United Kingdom" },
+          "hasOccupation": { "@type": "Occupation", "name": "Remote Video Producer, Web Creator & Trusted House Sitter" },
+          "knowsAbout": ["House Sitting", "Pet Sitting", "Dog & Cat Care", "Video Editing", "Web Design", "Remote Work"],
+          "sameAs": [
+            "https://www.linkedin.com/in/jahronimo-ellis-aa6863437/",
+            "https://instagram.com/Jahronimooo"
+          ]
+        }
+      },
+      {
+        "@type": "Service",
+        "name": "House Sitting, Pet Care & Remote Video/Web Production",
+        "provider": { "@type": "Person", "name": "Jahronimo Ellis" },
+        "areaServed": ["United Kingdom", "Europe", "North Africa", "Southeast Asia", "Japan"]
+      },
+      {
+        "@type": "ItemList",
+        "name": "2027 13-Country Travel Route",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "United Kingdom" },
+          { "@type": "ListItem", "position": 2, "name": "Spain" },
+          { "@type": "ListItem", "position": 3, "name": "Portugal" },
+          { "@type": "ListItem", "position": 4, "name": "Morocco" },
+          { "@type": "ListItem", "position": 5, "name": "France" },
+          { "@type": "ListItem", "position": 6, "name": "Italy" },
+          { "@type": "ListItem", "position": 7, "name": "Greece" },
+          { "@type": "ListItem", "position": 8, "name": "Turkey" },
+          { "@type": "ListItem", "position": 9, "name": "Thailand" },
+          { "@type": "ListItem", "position": 10, "name": "Malaysia" },
+          { "@type": "ListItem", "position": 11, "name": "Vietnam" },
+          { "@type": "ListItem", "position": 12, "name": "Indonesia (Bali)" },
+          { "@type": "ListItem", "position": 13, "name": "Japan" }
         ]
       },
       {
@@ -95,6 +126,21 @@
             "@type": "Question",
             "name": "Does Jahronimo work remotely while house sitting?",
             "acceptedAnswer": { "@type": "Answer", "text": "Yes. He works quietly from home producing video and web projects, giving pets calm daytime company." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can hosts do a video call and check ID before booking?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Jahronimo offers a 5-minute WhatsApp video call to meet your pets, tour the home, and verify his UK passport." }
+          },
+          {
+            "@type": "Question",
+            "name": "What pets and home tasks does Jahronimo handle?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Dogs, cats, and rescue pets (walks, feeding, medication, daily photo updates), plus garden, plants, and pool checks." }
+          },
+          {
+            "@type": "Question",
+            "name": "How long are typical stays?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Flexible 1-week to 6-week stays across the UK, Spain, Portugal, Morocco, Europe, and Southeast Asia." }
           }
         ]
       },
@@ -174,6 +220,7 @@
   </header>
 
   <!-- BAND 1: WARM CREAM — WHO I AM + WHERE NOW / NEXT -->
+  <main id="mainContent">
   <section id="sec-hero" class="band band-cream">
     <div class="band-inner">
       <article class="card hero-card reveal">
@@ -415,6 +462,22 @@
         <div id="starRateMsg" style="font-size:0.84rem;color:var(--muted);font-weight:700;" data-i18n="rateHint">Tap a star to rate</div>
       </article>
 
+      <article class="card reveal" aria-label="Travel Overview and FAQ" style="font-size:0.86rem;line-height:1.6;">
+        <div class="section-kicker">Quick Facts &amp; FAQ</div>
+        <h2 class="section-title" style="font-size:1.12rem;margin-bottom:8px;">Brighton UK House &amp; Pet Sitter · Remote Video &amp; Web Creator</h2>
+        <p style="color:var(--muted);margin-bottom:10px;">
+          Jahronimo Ellis (36, Brighton, UK) travels light with one carry-on toward a 2027 goal of <strong>13 countries</strong>: United Kingdom, Spain (Málaga &amp; Valencia), Portugal, Morocco, France, Italy, Greece, Turkey, Thailand, Malaysia, Vietnam, Indonesia (Bali), and Japan.
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;text-align:left;margin-bottom:10px;">
+          <div><strong>🏡 Pets &amp; Homes:</strong> Dogs, cats, rescue pets, daily photo/video updates, garden &amp; pool checks.</div>
+          <div><strong>💻 Remote Work:</strong> Quiet UK video editor &amp; web creator — home during the day for pet company.</div>
+          <div><strong>🪪 Trust &amp; Intro:</strong> Non-smoker, full UK passport shown on a 5-min WhatsApp video call, 1–6 week stays.</div>
+        </div>
+        <div style="font-size:0.78rem;color:var(--muted);">
+          <a href="llms.txt" style="text-decoration:underline;">llms.txt</a> · <a href="llms-full.txt" style="text-decoration:underline;">llms-full.txt</a> · <a href="sitemap.xml" style="text-decoration:underline;">sitemap.xml</a>
+        </div>
+      </article>
+
       <footer class="site-footer" style="text-align:center;padding:12px 0 80px;">
         <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:10px;">
           <a class="btn btn-outline tap-fx" href="https://www.linkedin.com/in/jahronimo-ellis-aa6863437/" target="_blank" rel="noopener">LinkedIn</a>
@@ -425,6 +488,7 @@
       </footer>
     </div>
   </section>
+  </main>
 
   <!-- Pinned Bottom Dock: Sound Off Bottom-Left | WhatsApp Bottom-Right -->
   <div class="pinned-bottom-dock">

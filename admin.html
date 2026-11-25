@@ -167,6 +167,7 @@
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabOutreach">📨 Outreach Log</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabAnalytics">📊 Analytics</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabRoute">🗺️ Route &amp; Where Next</button>
+        <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabOps">🧳 Trip Prep &amp; SEO</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabEmergency">🚨 Emergency Protocol</button>
         <button type="button" class="btn btn-ghost admin-tab-btn" data-tab="tabBackup">💾 Backup &amp; Restore</button>
       </div>
@@ -469,6 +470,42 @@ Jahronimo</textarea>
             <button type="button" class="btn btn-primary" id="pushPhoneGpsLiveBtn">📍 Push Phone GPS to Live Website</button>
           </div>
           <div id="gpsLivePushStatus" style="font-size:0.82rem;font-weight:700;color:var(--accent-dark);"></div>
+        </div>
+      </div>
+
+      <div id="tabOps" class="admin-tab-panel" style="display:none;">
+        <div class="card">
+          <div class="kicker">OWNER-ONLY · PRIVATE TRAVEL OPS</div>
+          <h2 style="font-size:1.2rem;margin-bottom:6px;">13-Country Visa, Entry &amp; Schengen 90/180 Tracker (UK Passport)</h2>
+          <p style="font-size:0.84rem;color:var(--muted);margin-bottom:12px;">
+            Saved privately on this device (<code>localStorage</code>). Track entry cards, e-Visas, and Schengen days.
+          </p>
+          <div id="opsVisaList" style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;"></div>
+
+          <hr style="border:none;border-top:1.5px solid var(--line);margin:16px 0;" />
+          <div class="kicker">PRIVATE INSURANCE, CARDS &amp; NOTES</div>
+          <div class="row" style="margin-bottom:10px;">
+            <input id="opsInsuranceRef" type="text" placeholder="Travel Insurance Provider &amp; Policy #" />
+            <input id="opsBankCardNote" type="text" placeholder="Cards &amp; eSIM (e.g. Monzo + Wise + Airalo)" />
+          </div>
+          <textarea id="opsScratchpad" rows="4" placeholder="Private trip scratchpad, flight refs, lockbox codes, or reminders..."></textarea>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+            <button type="button" class="btn btn-primary" id="saveOpsBtn">💾 Save Private Ops</button>
+            <span id="opsSaveStatus" style="font-size:0.82rem;font-weight:700;color:var(--accent-dark);"></span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="kicker">SEO &amp; AI / AGI DISCOVERY</div>
+          <h2 style="font-size:1.15rem;margin-bottom:8px;">Live Indexing &amp; Crawler Files</h2>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <a class="btn btn-ghost" href="sitemap.xml" target="_blank" rel="noopener">🗺️ sitemap.xml</a>
+            <a class="btn btn-ghost" href="llms.txt" target="_blank" rel="noopener">🤖 llms.txt</a>
+            <a class="btn btn-ghost" href="llms-full.txt" target="_blank" rel="noopener">📚 llms-full.txt</a>
+            <a class="btn btn-ghost" href="robots.txt" target="_blank" rel="noopener">🕷️ robots.txt</a>
+            <a class="btn btn-primary" href="https://search.google.com/search-console" target="_blank" rel="noopener">Google Search Console →</a>
+            <a class="btn btn-ghost" href="https://www.bing.com/webmasters" target="_blank" rel="noopener">Bing Webmaster Tools →</a>
+          </div>
         </div>
       </div>
 
@@ -1817,6 +1854,68 @@ Jahronimo</textarea>
       loadAnalyticsPanel();
     });
     loadAnalyticsPanel();
+
+    // Private Trip Prep & Visa/Entry Tracker (Owner-Only Device localStorage)
+    const PRIVATE_OPS_KEY = "twj_private_ops";
+    const VISA_DEFAULTS = [
+      { country: "🇪🇸 Spain / 🇵🇹 Portugal / 🇫🇷 France / 🇮🇹 Italy / 🇬🇷 Greece", rule: "Schengen 90/180 days (ETIAS when active)", done: false, note: "" },
+      { country: "🇲🇦 Morocco", rule: "90 days visa-free (UK Passport, 6m+ validity)", done: false, note: "" },
+      { country: "🇹🇷 Turkey", rule: "90 days in 180 days visa-free", done: false, note: "" },
+      { country: "🇹🇭 Thailand", rule: "60 days visa-exempt + TDAC Digital Arrival Card", done: false, note: "" },
+      { country: "🇲🇾 Malaysia", rule: "90 days visa-free + MDAC (3 days before arrival)", done: false, note: "" },
+      { country: "🇻🇳 Vietnam", rule: "45 days visa-exempt (or 90d e-Visa)", done: false, note: "" },
+      { country: "🇮🇩 Indonesia (Bali)", rule: "30-day e-VOA + All Indonesia Arrival Card + Bali Levy", done: false, note: "" },
+      { country: "🇯🇵 Japan", rule: "90 days visa-free + Visit Japan Web QR", done: false, note: "" }
+    ];
+
+    function loadPrivateOps() {
+      let saved = null;
+      try { saved = JSON.parse(localStorage.getItem(PRIVATE_OPS_KEY) || "null"); } catch (e) {}
+      return saved || { visas: VISA_DEFAULTS, insurance: "", cards: "Monzo + Wise + Airalo eSIM", notes: "" };
+    }
+
+    function renderPrivateOps() {
+      const ops = loadPrivateOps();
+      const listEl = document.getElementById("opsVisaList");
+      if (listEl) {
+        listEl.innerHTML = (ops.visas || VISA_DEFAULTS)
+          .map(
+            (v, idx) => `
+            <div style="display:grid;grid-template-columns:auto 1fr 1fr;gap:10px;align-items:center;padding:8px 12px;border-radius:12px;background:var(--surface-soft);border:1px solid var(--line);">
+              <input type="checkbox" data-ops-done="${idx}" ${v.done ? "checked" : ""} style="width:18px;height:18px;margin:0;" />
+              <div style="text-align:left;">
+                <strong style="font-size:0.86rem;">${v.country}</strong>
+                <div style="font-size:0.76rem;color:var(--muted);">${v.rule}</div>
+              </div>
+              <input type="text" data-ops-note="${idx}" value="${(v.note || "").replace(/"/g, "&quot;")}" placeholder="Booking / e-Visa ref..." style="margin:0;" />
+            </div>`
+          )
+          .join("");
+      }
+      const ins = document.getElementById("opsInsuranceRef");
+      const crd = document.getElementById("opsBankCardNote");
+      const scr = document.getElementById("opsScratchpad");
+      if (ins) ins.value = ops.insurance || "";
+      if (crd) crd.value = ops.cards || "";
+      if (scr) scr.value = ops.notes || "";
+    }
+
+    document.getElementById("saveOpsBtn")?.addEventListener("click", () => {
+      const ops = loadPrivateOps();
+      ops.visas = (ops.visas || VISA_DEFAULTS).map((v, idx) => {
+        const cb = document.querySelector(`[data-ops-done="${idx}"]`);
+        const inp = document.querySelector(`[data-ops-note="${idx}"]`);
+        return { ...v, done: !!cb?.checked, note: inp ? inp.value.trim() : v.note };
+      });
+      ops.insurance = document.getElementById("opsInsuranceRef")?.value.trim() || "";
+      ops.cards = document.getElementById("opsBankCardNote")?.value.trim() || "";
+      ops.notes = document.getElementById("opsScratchpad")?.value || "";
+      try { localStorage.setItem(PRIVATE_OPS_KEY, JSON.stringify(ops)); } catch (e) {}
+      const st = document.getElementById("opsSaveStatus");
+      if (st) st.textContent = "✅ Private Trip Ops saved on this device!";
+    });
+
+    renderPrivateOps();
 
     // Full JSON Backup & Restore
     document.getElementById("exportJsonBtn")?.addEventListener("click", () => {
