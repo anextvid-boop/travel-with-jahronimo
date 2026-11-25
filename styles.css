@@ -204,7 +204,7 @@ h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.18; }
 .hero-avatar-btn:hover { transform: translateY(-2px) scale(1.02); }
 .hero-avatar-btn:active { transform: translateY(2px) scale(0.97); }
 .hero-avatar {
-  width: clamp(168px, 28vw, 220px); height: clamp(190px, 32vw, 244px);
+  width: clamp(230px, 34vw, 300px); height: clamp(260px, 38vw, 340px);
   object-fit: cover; object-position: center 20%; display: block;
 }
 .hero-avatar-badge {
