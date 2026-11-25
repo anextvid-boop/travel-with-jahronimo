@@ -342,13 +342,21 @@
 
       summary.addEventListener("click", (e) => {
         e.preventDefault();
+        details.open = false;
         window.SFX?.open?.();
         const hTitle = summary.querySelector(".vbtn-title")?.textContent || "Details";
         if (titleEl) titleEl.textContent = hTitle;
         bodyEl.innerHTML = content.innerHTML;
+        const winCard = backdrop.querySelector(".focus-window-card");
+        if (winCard) winCard.scrollTop = 0;
         backdrop.classList.add("open");
         document.body.style.overflow = "hidden";
       });
+    });
+
+    document.getElementById("openAboutHeroBtn")?.addEventListener("click", () => {
+      const firstSummary = document.querySelector("#sec-info details.acc-card summary");
+      firstSummary?.click();
     });
   }
 
