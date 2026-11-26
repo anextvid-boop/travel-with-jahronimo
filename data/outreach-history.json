@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-26T14:34:06Z",
+  "updatedAt": "2026-11-26T16:34:09Z",
   "stats": {
-    "totalLeads": 186,
+    "totalLeads": 192,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,7 +12,7 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 184
+    "remainingQueue": 190
   },
   "dailyPlan": {
     "date": "2026-11-26",
@@ -37,7 +37,7 @@
         "dailyTarget": 15,
         "remainingToday": 15,
         "finalTotal": 2,
-        "note": "186 leads tracked (+ due 3d/7d follow-ups)"
+        "note": "192 leads tracked (+ due 3d/7d follow-ups)"
       },
       {
         "key": "fb_comments",
@@ -46,7 +46,7 @@
         "dailyTarget": 15,
         "remainingToday": 15,
         "finalTotal": 3,
-        "note": "0 comments + 0 posts today (13-day cycle)"
+        "note": "0 comments + 0 posts today (14-day cycle)"
       },
       {
         "key": "dms",
@@ -199,6 +199,18 @@
       "followUpDue": ""
     },
     {
+      "id": "c2a3ad4627",
+      "tier": "Tier 1",
+      "name": "Athens Backpackers",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Greece \u2014 Athens",
+      "channel": "Email",
+      "contact": "info@backpackers.gr",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "1024dbaa1c",
       "tier": "Tier 1",
       "name": "Baleal Surf Camp",
@@ -223,6 +235,18 @@
       "followUpDue": ""
     },
     {
+      "id": "b54ce5c66d",
+      "tier": "Tier 1",
+      "name": "City Circus Athens",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Greece \u2014 Athens",
+      "channel": "Email",
+      "contact": "info@citycircus.gr",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "1b0f02e8a3",
       "tier": "Tier 1",
       "name": "Cloud 9 Hostel Lagos",
@@ -230,6 +254,18 @@
       "cityCountry": "Portugal \u2014 Lagos, Algarve",
       "channel": "Email",
       "contact": "cloud9hostel@gmail.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "709791d32b",
+      "tier": "Tier 1",
+      "name": "Cocoon City Hostel",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Greece \u2014 Chania, Crete",
+      "channel": "Email",
+      "contact": "info@cocooncityhostel.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -559,6 +595,18 @@
       "followUpDue": ""
     },
     {
+      "id": "1777e95572",
+      "tier": "Tier 1",
+      "name": "Paros Surf Club",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Greece \u2014 Paros",
+      "channel": "Email",
+      "contact": "nikos@parosurf.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "8d0a66567f",
       "tier": "Tier 1",
       "name": "Puri Garden Hotel & Hostel",
@@ -703,6 +751,18 @@
       "followUpDue": ""
     },
     {
+      "id": "6c535c3a96",
+      "tier": "Tier 1",
+      "name": "The Pink Palace",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Greece \u2014 Corfu",
+      "channel": "Email",
+      "contact": "webmaster@thepinkpalace.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "d92dc36829",
       "tier": "Tier 1",
       "name": "The Salty Surf & Yoga",
@@ -746,6 +806,18 @@
       "cityCountry": "Portugal \u2014 Lisbon",
       "channel": "Email",
       "contact": "infolisbon@yeshostels.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "bbf81ae881",
+      "tier": "Tier 1",
+      "name": "Zeus is Loose Hostel",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Greece \u2014 Thessaloniki",
+      "channel": "Email",
+      "contact": "info@zeusisloose.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""

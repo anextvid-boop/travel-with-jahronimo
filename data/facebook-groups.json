@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-26T14:34:06Z",
+  "updatedAt": "2026-11-26T16:34:09Z",
   "accountName": "Jahronimo Ellis",
   "accountEmail": "jahronimo1@hotmail.com",
   "profileUrl": "https://www.facebook.com/profile.php",
   "rotation": {
     "dailyTarget": 15,
     "dailyDmTarget": 10,
-    "totalPages": 193,
-    "cycleDays": 13,
+    "totalPages": 197,
+    "cycleDays": 14,
     "todaysBatch": [
       {
         "id": "fb01",
@@ -82,13 +82,13 @@
         "groupUrl": "https://www.facebook.com/search/groups/?q=Peniche%20Surf%20Portugal"
       },
       {
-        "id": "fb29",
-        "groupName": "Workaway Travelers & Exchange Worldwide",
+        "id": "fb153",
+        "groupName": "Greek Islands Hostel Work Exchange & Volunteering",
         "groupType": "Hostel & Work Exchange",
-        "country": "Global / Worldwide",
-        "city": "Country-Wide / Multi-City",
+        "country": "Greece",
+        "city": "Athens / Crete",
         "status": "ready_to_join",
-        "groupUrl": "https://www.facebook.com/search/groups/?q=Workaway%20Travelers"
+        "groupUrl": "https://www.facebook.com/search/groups/?q=Greek%20Islands%20Volunteering%20Hostels"
       },
       {
         "id": "fb30",
@@ -147,22 +147,22 @@
     ]
   },
   "stats": {
-    "totalGroups": 193,
+    "totalGroups": 197,
     "joinedCount": 8,
     "postedCount": 2,
     "commentsCount": 1,
     "byCountry": {
       "Spain": 63,
-      "Global / Worldwide": 20,
+      "Global / Worldwide": 21,
       "Portugal": 17,
       "Indonesia (Bali)": 12,
       "Thailand": 12,
       "Morocco": 10,
       "Vietnam": 10,
+      "Greece": 9,
       "United Kingdom": 9,
       "Europe (Multi-Country)": 7,
       "Malaysia": 7,
-      "Greece": 6,
       "Japan": 6,
       "Turkey": 5,
       "France": 3,
@@ -170,14 +170,14 @@
       "Sri Lanka": 3
     },
     "byCity": {
-      "Country-Wide / Multi-City": 56,
+      "Country-Wide / Multi-City": 58,
       "Bali (Ubud / Canggu)": 13,
       "Canary Islands": 13,
       "M\u00e1laga / Costa del Sol": 9,
+      "Athens / Crete": 7,
       "Lisbon / Ericeira": 7,
       "Tokyo": 6,
       "Alicante / Costa Blanca": 5,
-      "Athens / Crete": 5,
       "Balearics (Mallorca / Ibiza)": 5,
       "Barcelona": 5,
       "Chiang Mai": 5,
@@ -204,19 +204,19 @@
       "Rome / Milan": 1
     },
     "byPurpose": {
-      "House & Pet Sitting": 68,
+      "House & Pet Sitting": 70,
       "Video, Media & Creative Collabs": 32,
       "Retreats, Surf & Eco-Farms": 19,
       "Sublets, Coliving & Spare Rooms": 19,
-      "Language Exchange": 16,
+      "Language Exchange": 17,
       "City Expats & Locals": 12,
       "Boat Crew, Rideshare & Vans": 9,
       "Solo Travel & Backpacker Meetups": 8,
       "Digital Nomads & Skill Swaps": 6,
-      "Hostel & Work Exchange": 4
+      "Hostel & Work Exchange": 5
     },
     "byStatus": {
-      "ready_to_join": 185,
+      "ready_to_join": 189,
       "joined_ready_to_post": 6,
       "posted": 2
     }
@@ -2923,6 +2923,62 @@
       "status": "ready_to_join",
       "responsesCount": 0,
       "notes": "Language tandems & local host connections"
+    },
+    {
+      "id": "fb151",
+      "groupName": "Thessaloniki Expats & Digital Nomads Greece",
+      "groupType": "House & Pet Sitting",
+      "country": "Greece",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Thessaloniki%20Expats%20Greece",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Northern Greece colivings & local sits"
+    },
+    {
+      "id": "fb152",
+      "groupName": "Corfu & Ionian Islands Expats & House Sitting",
+      "groupType": "House & Pet Sitting",
+      "country": "Global / Worldwide",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Corfu%20Expats%20House%20Sitting",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Ionian villa & pet sits"
+    },
+    {
+      "id": "fb153",
+      "groupName": "Greek Islands Hostel Work Exchange & Volunteering",
+      "groupType": "Hostel & Work Exchange",
+      "country": "Greece",
+      "city": "Athens / Crete",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Greek%20Islands%20Volunteering%20Hostels",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Cyclades/Crete hostel & eco-farm swaps"
+    },
+    {
+      "id": "fb154",
+      "groupName": "Athens Language Exchange & Cultural Meetups",
+      "groupType": "Language Exchange",
+      "country": "Greece",
+      "city": "Athens / Crete",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Athens%20Language%20Exchange",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Athens English-Greek tandems & local hosts"
     }
   ],
   "comments": [
