@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-26T06:24:26Z",
+  "updatedAt": "2026-11-26T06:49:29Z",
   "stats": {
-    "totalLeads": 158,
+    "totalLeads": 163,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,7 +12,7 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 156
+    "remainingQueue": 161
   },
   "dailyPlan": {
     "date": "2026-11-26",
@@ -37,7 +37,7 @@
         "dailyTarget": 15,
         "remainingToday": 15,
         "finalTotal": 2,
-        "note": "158 leads tracked (+ due 3d/7d follow-ups)"
+        "note": "163 leads tracked (+ due 3d/7d follow-ups)"
       },
       {
         "key": "fb_comments",
@@ -307,6 +307,18 @@
       "followUpDue": ""
     },
     {
+      "id": "52ff95746f",
+      "tier": "Tier 1",
+      "name": "KoHub",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Thailand \u2014 Koh Lanta",
+      "channel": "Email",
+      "contact": "booking@kohub.org",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "61874c256d",
       "tier": "Tier 1",
       "name": "Koisi Hostel (Cats San Sebasti\u00e1n)",
@@ -326,6 +338,30 @@
       "cityCountry": "Granada",
       "channel": "Email",
       "contact": "info@linguaschools.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "67b2a4be1d",
+      "tier": "Tier 1",
+      "name": "Lub d Bangkok Chinatown",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Thailand \u2014 Bangkok",
+      "channel": "Email",
+      "contact": "contact.chinatown@lubd.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "5142a47d51",
+      "tier": "Tier 1",
+      "name": "Lub d Bangkok Siam",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Thailand \u2014 Bangkok",
+      "channel": "Email",
+      "contact": "contact.siam@lubd.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -379,6 +415,18 @@
       "followUpDue": ""
     },
     {
+      "id": "f2b37416d3",
+      "tier": "Tier 1",
+      "name": "Stamps Backpackers",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Thailand \u2014 Chiang Mai",
+      "channel": "Email",
+      "contact": "info@stamps-backpackers.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "d92dc36829",
       "tier": "Tier 1",
       "name": "The Salty Surf & Yoga",
@@ -398,6 +446,18 @@
       "cityCountry": "Rural Spain (pickup: Madrid, C/ Orense 69)",
       "channel": "Web Portal / Form",
       "contact": "Apply via portal",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "1295c43439",
+      "tier": "Tier 1",
+      "name": "Yellow Coworking",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Thailand \u2014 Chiang Mai",
+      "channel": "Email",
+      "contact": "coworking@yellow.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""

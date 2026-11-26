@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-26T06:24:26Z",
+  "updatedAt": "2026-11-26T06:49:29Z",
   "accountName": "Jahronimo Ellis",
   "accountEmail": "jahronimo1@hotmail.com",
   "profileUrl": "https://www.facebook.com/profile.php",
   "rotation": {
     "dailyTarget": 15,
     "dailyDmTarget": 10,
-    "totalPages": 173,
+    "totalPages": 177,
     "cycleDays": 12,
     "todaysBatch": [
       {
@@ -147,16 +147,16 @@
     ]
   },
   "stats": {
-    "totalGroups": 173,
+    "totalGroups": 177,
     "joinedCount": 8,
     "postedCount": 2,
     "commentsCount": 1,
     "byCountry": {
       "Spain": 63,
-      "Global / Worldwide": 18,
+      "Global / Worldwide": 19,
       "Portugal": 17,
+      "Thailand": 12,
       "Indonesia (Bali)": 10,
-      "Thailand": 9,
       "United Kingdom": 8,
       "Europe (Multi-Country)": 7,
       "Greece": 6,
@@ -170,7 +170,7 @@
       "Sri Lanka": 3
     },
     "byCity": {
-      "Country-Wide / Multi-City": 48,
+      "Country-Wide / Multi-City": 51,
       "Canary Islands": 13,
       "Bali (Ubud / Canggu)": 10,
       "M\u00e1laga / Costa del Sol": 9,
@@ -186,6 +186,7 @@
       "Madrid": 4,
       "Phuket / Islands": 4,
       "Valencia": 4,
+      "Bangkok": 3,
       "Basque Country (Bilbao / Donostia)": 3,
       "Brighton / Sussex": 3,
       "Colombo / Weligama": 3,
@@ -194,7 +195,6 @@
       "Porto": 3,
       "Seville": 3,
       "Taghazout / Agadir": 3,
-      "Bangkok": 2,
       "Da Nang / Hoi An": 2,
       "Granada": 2,
       "Hanoi": 1,
@@ -204,11 +204,11 @@
       "Rome / Milan": 1
     },
     "byPurpose": {
-      "House & Pet Sitting": 59,
+      "House & Pet Sitting": 61,
       "Video, Media & Creative Collabs": 28,
       "Sublets, Coliving & Spare Rooms": 19,
-      "Retreats, Surf & Eco-Farms": 17,
-      "Language Exchange": 12,
+      "Retreats, Surf & Eco-Farms": 18,
+      "Language Exchange": 13,
       "City Expats & Locals": 11,
       "Boat Crew, Rideshare & Vans": 9,
       "Solo Travel & Backpacker Meetups": 8,
@@ -216,7 +216,7 @@
       "Hostel & Work Exchange": 4
     },
     "byStatus": {
-      "ready_to_join": 165,
+      "ready_to_join": 169,
       "joined_ready_to_post": 6,
       "posted": 2
     }
@@ -2643,6 +2643,62 @@
       "status": "ready_to_join",
       "responsesCount": 0,
       "notes": "Silver Coast surf camp & hostel media swaps"
+    },
+    {
+      "id": "fb131",
+      "groupName": "Pai Expats & Travelers Thailand",
+      "groupType": "Retreats, Surf & Eco-Farms",
+      "country": "Thailand",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Pai%20Expats%20Thailand",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Northern Thailand guesthouse & eco-retreat swaps"
+    },
+    {
+      "id": "fb132",
+      "groupName": "Koh Lanta Expats & Digital Nomads",
+      "groupType": "House & Pet Sitting",
+      "country": "Global / Worldwide",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Koh%20Lanta%20Expats",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "KoHub/island coliving & villa sit leads"
+    },
+    {
+      "id": "fb133",
+      "groupName": "Thailand Muay Thai & Wellness Retreats",
+      "groupType": "House & Pet Sitting",
+      "country": "Thailand",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Thailand%20Muay%20Thai%20Retreats",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Gym/camp promo video & website swaps"
+    },
+    {
+      "id": "fb134",
+      "groupName": "Bangkok Language Exchange & Cultural Meetups",
+      "groupType": "Language Exchange",
+      "country": "Thailand",
+      "city": "Bangkok",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Bangkok%20Language%20Exchange",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Bangkok English-Thai tandems & local hosts"
     }
   ],
   "comments": [
