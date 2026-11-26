@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-26T10:34:01Z",
+  "updatedAt": "2026-11-26T12:34:15Z",
   "accountName": "Jahronimo Ellis",
   "accountEmail": "jahronimo1@hotmail.com",
   "profileUrl": "https://www.facebook.com/profile.php",
   "rotation": {
     "dailyTarget": 15,
     "dailyDmTarget": 10,
-    "totalPages": 185,
+    "totalPages": 189,
     "cycleDays": 13,
     "todaysBatch": [
       {
@@ -147,7 +147,7 @@
     ]
   },
   "stats": {
-    "totalGroups": 185,
+    "totalGroups": 189,
     "joinedCount": 8,
     "postedCount": 2,
     "commentsCount": 1,
@@ -160,17 +160,17 @@
       "Vietnam": 10,
       "United Kingdom": 9,
       "Europe (Multi-Country)": 7,
+      "Malaysia": 7,
       "Greece": 6,
       "Japan": 6,
       "Morocco": 6,
       "Turkey": 5,
       "France": 3,
       "Italy": 3,
-      "Malaysia": 3,
       "Sri Lanka": 3
     },
     "byCity": {
-      "Country-Wide / Multi-City": 52,
+      "Country-Wide / Multi-City": 54,
       "Bali (Ubud / Canggu)": 13,
       "Canary Islands": 13,
       "M\u00e1laga / Costa del Sol": 9,
@@ -181,6 +181,7 @@
       "Balearics (Mallorca / Ibiza)": 5,
       "Barcelona": 5,
       "Chiang Mai": 5,
+      "KL / Penang": 5,
       "Algarve": 4,
       "Da Nang / Hoi An": 4,
       "Ho Chi Minh City": 4,
@@ -192,7 +193,6 @@
       "Basque Country (Bilbao / Donostia)": 3,
       "Brighton / Sussex": 3,
       "Colombo / Weligama": 3,
-      "KL / Penang": 3,
       "Porto": 3,
       "Seville": 3,
       "Taghazout / Agadir": 3,
@@ -204,19 +204,19 @@
       "Rome / Milan": 1
     },
     "byPurpose": {
-      "House & Pet Sitting": 65,
-      "Video, Media & Creative Collabs": 29,
+      "House & Pet Sitting": 66,
+      "Video, Media & Creative Collabs": 31,
       "Retreats, Surf & Eco-Farms": 19,
       "Sublets, Coliving & Spare Rooms": 19,
       "Language Exchange": 15,
-      "City Expats & Locals": 11,
+      "City Expats & Locals": 12,
       "Boat Crew, Rideshare & Vans": 9,
       "Solo Travel & Backpacker Meetups": 8,
       "Digital Nomads & Skill Swaps": 6,
       "Hostel & Work Exchange": 4
     },
     "byStatus": {
-      "ready_to_join": 177,
+      "ready_to_join": 181,
       "joined_ready_to_post": 6,
       "posted": 2
     }
@@ -2811,6 +2811,62 @@
       "status": "ready_to_join",
       "responsesCount": 0,
       "notes": "HCMC English practice & local community leads"
+    },
+    {
+      "id": "fb143",
+      "groupName": "Kuala Lumpur Digital Nomads & Remote Workers",
+      "groupType": "Video, Media & Creative Collabs",
+      "country": "Malaysia",
+      "city": "KL / Penang",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Kuala%20Lumpur%20Digital%20Nomads",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "KL coworking colivings & video/web swaps"
+    },
+    {
+      "id": "fb144",
+      "groupName": "Langkawi Expats & Island Living Malaysia",
+      "groupType": "City Expats & Locals",
+      "country": "Malaysia",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Langkawi%20Expats",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Island resort & eco-lodge stays"
+    },
+    {
+      "id": "fb145",
+      "groupName": "Malaysia Backpackers & Hostel Work Exchange",
+      "groupType": "Video, Media & Creative Collabs",
+      "country": "Malaysia",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Malaysia%20Backpackers%20Work%20Exchange",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Hostel reception & promo media exchanges"
+    },
+    {
+      "id": "fb146",
+      "groupName": "Malaysia Pet Sitters & Foster Care",
+      "groupType": "House & Pet Sitting",
+      "country": "Malaysia",
+      "city": "KL / Penang",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Malaysia%20Pet%20Sitters",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "KL & Penang expat pet & house sits"
     }
   ],
   "comments": [

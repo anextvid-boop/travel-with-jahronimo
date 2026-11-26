@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-26T10:34:01Z",
+  "updatedAt": "2026-11-26T12:34:15Z",
   "stats": {
-    "totalLeads": 174,
+    "totalLeads": 180,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,7 +12,7 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 172
+    "remainingQueue": 178
   },
   "dailyPlan": {
     "date": "2026-11-26",
@@ -37,7 +37,7 @@
         "dailyTarget": 15,
         "remainingToday": 15,
         "finalTotal": 2,
-        "note": "174 leads tracked (+ due 3d/7d follow-ups)"
+        "note": "180 leads tracked (+ due 3d/7d follow-ups)"
       },
       {
         "key": "fb_comments",
@@ -170,6 +170,18 @@
       "cityCountry": "Valencia",
       "channel": "Email",
       "contact": "info@aipidiomas.es",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "3d6e041222",
+      "tier": "Tier 1",
+      "name": "Akinabalu Youth Hostel",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Malaysia \u2014 Kota Kinabalu, Sabah",
+      "channel": "Email",
+      "contact": "sftsang@yahoo.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -343,6 +355,18 @@
       "followUpDue": ""
     },
     {
+      "id": "319a21d19f",
+      "tier": "Tier 1",
+      "name": "House of Journey Penang",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Malaysia \u2014 Penang",
+      "channel": "Email",
+      "contact": "houseofjourneyspenang@gmail.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "f743111f7d",
       "tier": "Tier 1",
       "name": "Jasmine Hostel & Tours",
@@ -475,6 +499,18 @@
       "followUpDue": ""
     },
     {
+      "id": "8e16d04841",
+      "tier": "Tier 1",
+      "name": "Paper Plane Hostel KL",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Malaysia \u2014 Kuala Lumpur",
+      "channel": "Email",
+      "contact": "hello@paperplanehostel.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "8d0a66567f",
       "tier": "Tier 1",
       "name": "Puri Garden Hotel & Hostel",
@@ -487,6 +523,18 @@
       "followUpDue": ""
     },
     {
+      "id": "6f0cf9078b",
+      "tier": "Tier 1",
+      "name": "Reggae Mansion Kuala Lumpur",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Malaysia \u2014 Kuala Lumpur",
+      "channel": "Email",
+      "contact": "contactus@reggaehostelsmalaysia.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "03ae25b420",
       "tier": "Tier 1",
       "name": "Rocks Ha Giang Hostel",
@@ -494,6 +542,30 @@
       "cityCountry": "Vietnam \u2014 Ha Giang",
       "channel": "Email",
       "contact": "rockshagiang@gmail.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "32de30a450",
+      "tier": "Tier 1",
+      "name": "Rucksack Inn Premium Melaka",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Malaysia \u2014 Melaka",
+      "channel": "Email",
+      "contact": "melaka@rucksackinn.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "bd91cecb39",
+      "tier": "Tier 1",
+      "name": "Ryokan Chic Hostel Penang",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Malaysia \u2014 Penang",
+      "channel": "Email",
+      "contact": "enquiries@myryokan.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
