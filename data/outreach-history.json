@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-26T20:34:02Z",
+  "updatedAt": "2026-11-26T22:34:02Z",
   "stats": {
-    "totalLeads": 204,
+    "totalLeads": 210,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,7 +12,7 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 202
+    "remainingQueue": 208
   },
   "dailyPlan": {
     "date": "2026-11-26",
@@ -37,7 +37,7 @@
         "dailyTarget": 15,
         "remainingToday": 15,
         "finalTotal": 2,
-        "note": "204 leads tracked (+ due 3d/7d follow-ups)"
+        "note": "210 leads tracked (+ due 3d/7d follow-ups)"
       },
       {
         "key": "fb_comments",
@@ -235,6 +235,18 @@
       "followUpDue": ""
     },
     {
+      "id": "4849921714",
+      "tier": "Tier 1",
+      "name": "Biarritz Surf Lodge",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "France \u2014 Biarritz",
+      "channel": "Email",
+      "contact": "contact@biarritzsurflodge.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "04b3487943",
       "tier": "Tier 1",
       "name": "Bonga Surf School",
@@ -254,6 +266,18 @@
       "cityCountry": "Vietnam \u2014 Hanoi",
       "channel": "Email",
       "contact": "hanoibuffalohostel@gmail.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "15591c3d56",
+      "tier": "Tier 1",
+      "name": "Central Hostel Bordeaux",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "France \u2014 Bordeaux",
+      "channel": "Email",
+      "contact": "bordeaux@centralhostel.fr",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -547,6 +571,18 @@
       "followUpDue": ""
     },
     {
+      "id": "7bb1191197",
+      "tier": "Tier 1",
+      "name": "JO&JOE Hossegor",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "France \u2014 Hossegor",
+      "channel": "Email",
+      "contact": "hossegor@joandjoe.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "52ff95746f",
       "tier": "Tier 1",
       "name": "KoHub",
@@ -811,6 +847,18 @@
       "followUpDue": ""
     },
     {
+      "id": "13dc2adcb1",
+      "tier": "Tier 1",
+      "name": "SLO Living Hostel Lyon",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "France \u2014 Lyon",
+      "channel": "Email",
+      "contact": "contact@slo-hostel.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "e8133a9880",
       "tier": "Tier 1",
       "name": "Soul & Surf Sri Lanka",
@@ -883,6 +931,18 @@
       "followUpDue": ""
     },
     {
+      "id": "4523a6d532",
+      "tier": "Tier 1",
+      "name": "The People Hostels (Paris Marais)",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "France \u2014 Paris",
+      "channel": "Email",
+      "contact": "hello@thepeoplehostel.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "6c535c3a96",
       "tier": "Tier 1",
       "name": "The Pink Palace",
@@ -914,6 +974,18 @@
       "cityCountry": "Rural Spain (pickup: Madrid, C/ Orense 69)",
       "channel": "Web Portal / Form",
       "contact": "Apply via portal",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "a02817cda1",
+      "tier": "Tier 1",
+      "name": "Vertigo Vieux Port",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "France \u2014 Marseille",
+      "channel": "Email",
+      "contact": "contact@vertigomarseille.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
