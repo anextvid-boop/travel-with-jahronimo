@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-26T06:49:29Z",
+  "updatedAt": "2026-11-26T08:34:11Z",
   "stats": {
-    "totalLeads": 163,
+    "totalLeads": 168,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,7 +12,7 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 161
+    "remainingQueue": 166
   },
   "dailyPlan": {
     "date": "2026-11-26",
@@ -37,7 +37,7 @@
         "dailyTarget": 15,
         "remainingToday": 15,
         "finalTotal": 2,
-        "note": "163 leads tracked (+ due 3d/7d follow-ups)"
+        "note": "168 leads tracked (+ due 3d/7d follow-ups)"
       },
       {
         "key": "fb_comments",
@@ -46,7 +46,7 @@
         "dailyTarget": 15,
         "remainingToday": 15,
         "finalTotal": 3,
-        "note": "0 comments + 0 posts today (12-day cycle)"
+        "note": "0 comments + 0 posts today (13-day cycle)"
       },
       {
         "key": "dms",
@@ -331,6 +331,18 @@
       "followUpDue": ""
     },
     {
+      "id": "4fb63b7ec9",
+      "tier": "Tier 1",
+      "name": "Kos One Hostel",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Indonesia \u2014 Canggu, Bali",
+      "channel": "Email",
+      "contact": "info@kosonehostel.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "5ce69f3a17",
       "tier": "Tier 1",
       "name": "Linguaschools Granada",
@@ -379,6 +391,30 @@
       "followUpDue": ""
     },
     {
+      "id": "a3e2f53e60",
+      "tier": "Tier 1",
+      "name": "Mana Earthly Paradise",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Indonesia \u2014 Ubud, Bali",
+      "channel": "Email",
+      "contact": "reserve@manaubud.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "cdd09c5f85",
+      "tier": "Tier 1",
+      "name": "Margarita Surf Hostel",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Indonesia \u2014 Canggu, Bali",
+      "channel": "Email",
+      "contact": "margaritasurfhostelcanggu@gmail.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "026f52d872",
       "tier": "Tier 1",
       "name": "My English School (MyES)",
@@ -386,6 +422,18 @@
       "cityCountry": "M\u00e1laga / Seville / Valencia",
       "channel": "Web Portal / Form",
       "contact": "City forms on site",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "8d0a66567f",
+      "tier": "Tier 1",
+      "name": "Puri Garden Hotel & Hostel",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Indonesia \u2014 Ubud, Bali",
+      "channel": "Email",
+      "contact": "info@purigardenhotel.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -422,6 +470,18 @@
       "cityCountry": "Thailand \u2014 Chiang Mai",
       "channel": "Email",
       "contact": "info@stamps-backpackers.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "4f5f2e3ff2",
+      "tier": "Tier 1",
+      "name": "The Farm Hostel",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Indonesia \u2014 Canggu, Bali",
+      "channel": "Email",
+      "contact": "hello@thefarmhostel.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""

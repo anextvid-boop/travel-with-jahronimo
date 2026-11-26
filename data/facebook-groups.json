@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-26T06:49:29Z",
+  "updatedAt": "2026-11-26T08:34:11Z",
   "accountName": "Jahronimo Ellis",
   "accountEmail": "jahronimo1@hotmail.com",
   "profileUrl": "https://www.facebook.com/profile.php",
   "rotation": {
     "dailyTarget": 15,
     "dailyDmTarget": 10,
-    "totalPages": 177,
-    "cycleDays": 12,
+    "totalPages": 181,
+    "cycleDays": 13,
     "todaysBatch": [
       {
         "id": "fb01",
@@ -147,17 +147,17 @@
     ]
   },
   "stats": {
-    "totalGroups": 177,
+    "totalGroups": 181,
     "joinedCount": 8,
     "postedCount": 2,
     "commentsCount": 1,
     "byCountry": {
       "Spain": 63,
-      "Global / Worldwide": 19,
+      "Global / Worldwide": 20,
       "Portugal": 17,
+      "Indonesia (Bali)": 12,
       "Thailand": 12,
-      "Indonesia (Bali)": 10,
-      "United Kingdom": 8,
+      "United Kingdom": 9,
       "Europe (Multi-Country)": 7,
       "Greece": 6,
       "Japan": 6,
@@ -170,9 +170,9 @@
       "Sri Lanka": 3
     },
     "byCity": {
-      "Country-Wide / Multi-City": 51,
+      "Country-Wide / Multi-City": 52,
+      "Bali (Ubud / Canggu)": 13,
       "Canary Islands": 13,
-      "Bali (Ubud / Canggu)": 10,
       "M\u00e1laga / Costa del Sol": 9,
       "Lisbon / Ericeira": 7,
       "Tokyo": 6,
@@ -204,10 +204,10 @@
       "Rome / Milan": 1
     },
     "byPurpose": {
-      "House & Pet Sitting": 61,
-      "Video, Media & Creative Collabs": 28,
+      "House & Pet Sitting": 63,
+      "Video, Media & Creative Collabs": 29,
+      "Retreats, Surf & Eco-Farms": 19,
       "Sublets, Coliving & Spare Rooms": 19,
-      "Retreats, Surf & Eco-Farms": 18,
       "Language Exchange": 13,
       "City Expats & Locals": 11,
       "Boat Crew, Rideshare & Vans": 9,
@@ -216,7 +216,7 @@
       "Hostel & Work Exchange": 4
     },
     "byStatus": {
-      "ready_to_join": 169,
+      "ready_to_join": 173,
       "joined_ready_to_post": 6,
       "posted": 2
     }
@@ -2699,6 +2699,62 @@
       "status": "ready_to_join",
       "responsesCount": 0,
       "notes": "Bangkok English-Thai tandems & local hosts"
+    },
+    {
+      "id": "fb135",
+      "groupName": "Uluwatu & Bukit Peninsula Expats Bali",
+      "groupType": "House & Pet Sitting",
+      "country": "United Kingdom",
+      "city": "Bali (Ubud / Canggu)",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Uluwatu%20Expats%20Bali",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "South Bali villa sits & surf-camp swaps"
+    },
+    {
+      "id": "fb136",
+      "groupName": "Bali Surf Camps & Hostel Work Exchange",
+      "groupType": "Video, Media & Creative Collabs",
+      "country": "Indonesia (Bali)",
+      "city": "Bali (Ubud / Canggu)",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Bali%20Surf%20Work%20Exchange",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Bali hostel & surf-camp promo media swaps"
+    },
+    {
+      "id": "fb137",
+      "groupName": "Lombok & Gili Islands Expats Indonesia",
+      "groupType": "Retreats, Surf & Eco-Farms",
+      "country": "Global / Worldwide",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Lombok%20Gili%20Expats",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Kuta Lombok & Gili surf/eco-lodge swaps"
+    },
+    {
+      "id": "fb138",
+      "groupName": "Bali Pet Adoption Foster & House Sitting",
+      "groupType": "House & Pet Sitting",
+      "country": "Indonesia (Bali)",
+      "city": "Bali (Ubud / Canggu)",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Bali%20Pet%20Foster%20House%20Sitting",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Bali villa & rescue pet sitting sits"
     }
   ],
   "comments": [
