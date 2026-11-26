@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-26T22:34:02Z",
+  "updatedAt": "2026-11-26T23:01:47Z",
   "stats": {
-    "totalLeads": 210,
+    "totalLeads": 217,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,7 +12,7 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 208
+    "remainingQueue": 215
   },
   "dailyPlan": {
     "date": "2026-11-26",
@@ -37,7 +37,7 @@
         "dailyTarget": 15,
         "remainingToday": 15,
         "finalTotal": 2,
-        "note": "210 leads tracked (+ due 3d/7d follow-ups)"
+        "note": "217 leads tracked (+ due 3d/7d follow-ups)"
       },
       {
         "key": "fb_comments",
@@ -46,7 +46,7 @@
         "dailyTarget": 15,
         "remainingToday": 15,
         "finalTotal": 3,
-        "note": "0 comments + 0 posts today (14-day cycle)"
+        "note": "0 comments + 0 posts today (15-day cycle)"
       },
       {
         "key": "dms",
@@ -199,6 +199,18 @@
       "followUpDue": ""
     },
     {
+      "id": "6e2ea725b1",
+      "tier": "Tier 1",
+      "name": "Astor Hostels London",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "UK \u2014 London",
+      "channel": "Email",
+      "contact": "hello@astorhostels.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "c2a3ad4627",
       "tier": "Tier 1",
       "name": "Athens Backpackers",
@@ -271,6 +283,18 @@
       "followUpDue": ""
     },
     {
+      "id": "45681ba918",
+      "tier": "Tier 1",
+      "name": "Castle Rock Hostel Edinburgh",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "UK \u2014 Edinburgh",
+      "channel": "Email",
+      "contact": "castlerock@macbackpackers.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "15591c3d56",
       "tier": "Tier 1",
       "name": "Central Hostel Bordeaux",
@@ -326,6 +350,18 @@
       "cityCountry": "Greece \u2014 Chania, Crete",
       "channel": "Email",
       "contact": "info@cocooncityhostel.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "5071771d48",
+      "tier": "Tier 1",
+      "name": "CoDE Pod Hostels Edinburgh",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "UK \u2014 Edinburgh",
+      "channel": "Email",
+      "contact": "marketing@staywithcode.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -487,6 +523,18 @@
       "followUpDue": ""
     },
     {
+      "id": "10112c9b9d",
+      "tier": "Tier 1",
+      "name": "Fistral Beach Surf School",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "UK \u2014 Newquay, Cornwall",
+      "channel": "Email",
+      "contact": "info@fistralbeachsurfschool.co.uk",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "d22764d511",
       "tier": "Tier 1",
       "name": "Hangover Hostels Mirissa",
@@ -554,6 +602,18 @@
       "cityCountry": "Malaysia \u2014 Penang",
       "channel": "Email",
       "contact": "houseofjourneyspenang@gmail.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "3a70f3b0e6",
+      "tier": "Tier 1",
+      "name": "Isaacs Hostel Dublin",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Ireland \u2014 Dublin",
+      "channel": "Email",
+      "contact": "hostel@isaacs.ie",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -823,6 +883,18 @@
       "followUpDue": ""
     },
     {
+      "id": "9371010dc0",
+      "tier": "Tier 1",
+      "name": "Sea Spray Brighton",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "UK \u2014 Brighton",
+      "channel": "Email",
+      "contact": "info@seaspraybrighton.co.uk",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "6bc3cf950e",
       "tier": "Tier 1",
       "name": "Sevilla Habla",
@@ -986,6 +1058,18 @@
       "cityCountry": "France \u2014 Marseille",
       "channel": "Email",
       "contact": "contact@vertigomarseille.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "ae7c596164",
+      "tier": "Tier 1",
+      "name": "Wombat's City Hostel London",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "UK \u2014 London",
+      "channel": "Email",
+      "contact": "office-london@wombats.eu",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""

@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-26T22:34:02Z",
+  "updatedAt": "2026-11-26T23:01:47Z",
   "accountName": "Jahronimo Ellis",
   "accountEmail": "jahronimo1@hotmail.com",
   "profileUrl": "https://www.facebook.com/profile.php",
   "rotation": {
     "dailyTarget": 15,
     "dailyDmTarget": 10,
-    "totalPages": 209,
-    "cycleDays": 14,
+    "totalPages": 213,
+    "cycleDays": 15,
     "todaysBatch": [
       {
         "id": "fb01",
@@ -147,20 +147,20 @@
     ]
   },
   "stats": {
-    "totalGroups": 209,
+    "totalGroups": 213,
     "joinedCount": 8,
     "postedCount": 2,
     "commentsCount": 1,
     "byCountry": {
       "Spain": 63,
-      "Global / Worldwide": 23,
+      "Global / Worldwide": 25,
       "Portugal": 17,
       "Indonesia (Bali)": 12,
       "Thailand": 12,
+      "United Kingdom": 11,
       "Morocco": 10,
       "Vietnam": 10,
       "Greece": 9,
-      "United Kingdom": 9,
       "Europe (Multi-Country)": 7,
       "France": 7,
       "Malaysia": 7,
@@ -170,7 +170,7 @@
       "Turkey": 5
     },
     "byCity": {
-      "Country-Wide / Multi-City": 66,
+      "Country-Wide / Multi-City": 69,
       "Bali (Ubud / Canggu)": 13,
       "Canary Islands": 13,
       "M\u00e1laga / Costa del Sol": 9,
@@ -199,14 +199,14 @@
       "Seville": 3,
       "Granada": 2,
       "Hanoi": 2,
+      "London": 2,
       "Marrakech": 2,
-      "Rome / Milan": 2,
-      "London": 1
+      "Rome / Milan": 2
     },
     "byPurpose": {
-      "House & Pet Sitting": 75,
-      "Video, Media & Creative Collabs": 33,
-      "Retreats, Surf & Eco-Farms": 22,
+      "House & Pet Sitting": 77,
+      "Video, Media & Creative Collabs": 34,
+      "Retreats, Surf & Eco-Farms": 23,
       "Language Exchange": 19,
       "Sublets, Coliving & Spare Rooms": 19,
       "City Expats & Locals": 12,
@@ -216,7 +216,7 @@
       "Hostel & Work Exchange": 6
     },
     "byStatus": {
-      "ready_to_join": 201,
+      "ready_to_join": 205,
       "joined_ready_to_post": 6,
       "posted": 2
     }
@@ -3147,6 +3147,62 @@
       "status": "ready_to_join",
       "responsesCount": 0,
       "notes": "French-English tandems & local host leads"
+    },
+    {
+      "id": "fb167",
+      "groupName": "Edinburgh & Scotland House Sitting & Pet Sitters",
+      "groupType": "House & Pet Sitting",
+      "country": "Global / Worldwide",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Scotland%20House%20Sitting",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Scotland city & highland house/pet sits"
+    },
+    {
+      "id": "fb168",
+      "groupName": "Cornwall & Devon Surf & Vanlife Community UK",
+      "groupType": "Retreats, Surf & Eco-Farms",
+      "country": "United Kingdom",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Cornwall%20Surf%20Vanlife",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Newquay/Cornwall surf camps & coastal stays"
+    },
+    {
+      "id": "fb169",
+      "groupName": "Dublin & Ireland House Sitting & Expats",
+      "groupType": "House & Pet Sitting",
+      "country": "Global / Worldwide",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Dublin%20Ireland%20House%20Sitting",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Dublin & Galway house/pet sits"
+    },
+    {
+      "id": "fb170",
+      "groupName": "London Digital Nomads & Remote Workers UK",
+      "groupType": "Video, Media & Creative Collabs",
+      "country": "United Kingdom",
+      "city": "London",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=London%20Digital%20Nomads",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "London remote work & media/web collabs"
     }
   ],
   "comments": [
