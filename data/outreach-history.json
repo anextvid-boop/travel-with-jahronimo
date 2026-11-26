@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-26T12:34:15Z",
+  "updatedAt": "2026-11-26T14:34:06Z",
   "stats": {
-    "totalLeads": 180,
+    "totalLeads": 186,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,7 +12,7 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 178
+    "remainingQueue": 184
   },
   "dailyPlan": {
     "date": "2026-11-26",
@@ -37,7 +37,7 @@
         "dailyTarget": 15,
         "remainingToday": 15,
         "finalTotal": 2,
-        "note": "180 leads tracked (+ due 3d/7d follow-ups)"
+        "note": "186 leads tracked (+ due 3d/7d follow-ups)"
       },
       {
         "key": "fb_comments",
@@ -187,6 +187,18 @@
       "followUpDue": ""
     },
     {
+      "id": "e28459ccb2",
+      "tier": "Tier 1",
+      "name": "Amayour Surf Hostel",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Morocco \u2014 Taghazout",
+      "channel": "Email",
+      "contact": "hello@amayoursurf.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "1024dbaa1c",
       "tier": "Tier 1",
       "name": "Baleal Surf Camp",
@@ -319,6 +331,18 @@
       "followUpDue": ""
     },
     {
+      "id": "b39c5b4ee8",
+      "tier": "Tier 1",
+      "name": "Equity Point Marrakech",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Morocco \u2014 Marrakech",
+      "channel": "Email",
+      "contact": "infomarrakech@equity-point.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "4b69bc002c",
       "tier": "Tier 1",
       "name": "Escuela Delengua",
@@ -331,6 +355,18 @@
       "followUpDue": ""
     },
     {
+      "id": "9a512b37bb",
+      "tier": "Tier 1",
+      "name": "Essaouira Surfing",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Morocco \u2014 Essaouira",
+      "channel": "Email",
+      "contact": "info@essaouirasurfing.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "e1f372826d",
       "tier": "Tier 1",
       "name": "Famara Surf Club",
@@ -338,6 +374,18 @@
       "cityCountry": "Spain \u2014 Famara, Lanzarote",
       "channel": "Email",
       "contact": "info@famarasurfclub.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "57e945176a",
+      "tier": "Tier 1",
+      "name": "Hashpoint Surf Camp",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Morocco \u2014 Taghazout",
+      "channel": "Email",
+      "contact": "info@hashpointsurfcamp.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -602,6 +650,30 @@
       "cityCountry": "Thailand \u2014 Chiang Mai",
       "channel": "Email",
       "contact": "info@stamps-backpackers.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "fbc76eb3fb",
+      "tier": "Tier 1",
+      "name": "Sun Desk Coliving",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Morocco \u2014 Taghazout",
+      "channel": "Email",
+      "contact": "info@sun-desk.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "ebff33809e",
+      "tier": "Tier 1",
+      "name": "Surf Camp Essaouira",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Morocco \u2014 Essaouira",
+      "channel": "Email",
+      "contact": "esurfcamp@gmail.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
