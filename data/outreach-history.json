@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-26T08:34:11Z",
+  "updatedAt": "2026-11-26T10:34:01Z",
   "stats": {
-    "totalLeads": 168,
+    "totalLeads": 174,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,7 +12,7 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 166
+    "remainingQueue": 172
   },
   "dailyPlan": {
     "date": "2026-11-26",
@@ -37,7 +37,7 @@
         "dailyTarget": 15,
         "remainingToday": 15,
         "finalTotal": 2,
-        "note": "168 leads tracked (+ due 3d/7d follow-ups)"
+        "note": "174 leads tracked (+ due 3d/7d follow-ups)"
       },
       {
         "key": "fb_comments",
@@ -187,6 +187,18 @@
       "followUpDue": ""
     },
     {
+      "id": "57ec526310",
+      "tier": "Tier 1",
+      "name": "Buffalo Hostel Hanoi",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Vietnam \u2014 Hanoi",
+      "channel": "Email",
+      "contact": "hanoibuffalohostel@gmail.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "1b0f02e8a3",
       "tier": "Tier 1",
       "name": "Cloud 9 Hostel Lagos",
@@ -235,6 +247,18 @@
       "followUpDue": ""
     },
     {
+      "id": "8affb7f7ec",
+      "tier": "Tier 1",
+      "name": "DNC \u2014 Da Nang Coworking",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Vietnam \u2014 Da Nang",
+      "channel": "Email",
+      "contact": "co-working@dnes.vn",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "b27d647196",
       "tier": "Tier 1",
       "name": "El Josemari Youth Hostel",
@@ -271,6 +295,18 @@
       "followUpDue": ""
     },
     {
+      "id": "571c7de683",
+      "tier": "Tier 1",
+      "name": "Enouvo Space",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Vietnam \u2014 Da Nang",
+      "channel": "Email",
+      "contact": "space@enouvo.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "4b69bc002c",
       "tier": "Tier 1",
       "name": "Escuela Delengua",
@@ -302,6 +338,18 @@
       "cityCountry": "Madrid",
       "channel": "Email",
       "contact": "info@holaclubdeespanol.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "f743111f7d",
+      "tier": "Tier 1",
+      "name": "Jasmine Hostel & Tours",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Vietnam \u2014 Ha Giang",
+      "channel": "Email",
+      "contact": "support@jasminehagiang.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -439,6 +487,18 @@
       "followUpDue": ""
     },
     {
+      "id": "03ae25b420",
+      "tier": "Tier 1",
+      "name": "Rocks Ha Giang Hostel",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Vietnam \u2014 Ha Giang",
+      "channel": "Email",
+      "contact": "rockshagiang@gmail.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "6bc3cf950e",
       "tier": "Tier 1",
       "name": "Sevilla Habla",
@@ -482,6 +542,18 @@
       "cityCountry": "Indonesia \u2014 Canggu, Bali",
       "channel": "Email",
       "contact": "hello@thefarmhostel.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "7931ee9fcc",
+      "tier": "Tier 1",
+      "name": "The Hideout Hostel Saigon",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Vietnam \u2014 Ho Chi Minh City",
+      "channel": "Email",
+      "contact": "saigon@hideouthostels.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
