@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-26T02:34:24Z",
+  "updatedAt": "2026-11-26T04:34:10Z",
   "accountName": "Jahronimo Ellis",
   "accountEmail": "jahronimo1@hotmail.com",
   "profileUrl": "https://www.facebook.com/profile.php",
   "rotation": {
     "dailyTarget": 15,
     "dailyDmTarget": 10,
-    "totalPages": 169,
+    "totalPages": 173,
     "cycleDays": 12,
     "todaysBatch": [
       {
@@ -73,13 +73,13 @@
         "groupUrl": "https://www.facebook.com/search/groups/?q=Japan%20Language%20Exchange%20Tokyo%20Osaka"
       },
       {
-        "id": "fb28",
-        "groupName": "Hostel Jobs Worldwide",
+        "id": "fb130",
+        "groupName": "Peniche & Nazare Surf Community Portugal",
         "groupType": "Video, Media & Creative Collabs",
-        "country": "Global / Worldwide",
+        "country": "Portugal",
         "city": "Country-Wide / Multi-City",
         "status": "ready_to_join",
-        "groupUrl": "https://www.facebook.com/search/groups/?q=Hostel%20Jobs%20Worldwide"
+        "groupUrl": "https://www.facebook.com/search/groups/?q=Peniche%20Surf%20Portugal"
       },
       {
         "id": "fb29",
@@ -147,14 +147,14 @@
     ]
   },
   "stats": {
-    "totalGroups": 169,
+    "totalGroups": 173,
     "joinedCount": 8,
     "postedCount": 2,
     "commentsCount": 1,
     "byCountry": {
       "Spain": 63,
       "Global / Worldwide": 18,
-      "Portugal": 13,
+      "Portugal": 17,
       "Indonesia (Bali)": 10,
       "Thailand": 9,
       "United Kingdom": 8,
@@ -170,33 +170,33 @@
       "Sri Lanka": 3
     },
     "byCity": {
-      "Country-Wide / Multi-City": 47,
+      "Country-Wide / Multi-City": 48,
       "Canary Islands": 13,
       "Bali (Ubud / Canggu)": 10,
       "M\u00e1laga / Costa del Sol": 9,
-      "Lisbon / Ericeira": 6,
+      "Lisbon / Ericeira": 7,
       "Tokyo": 6,
       "Alicante / Costa Blanca": 5,
       "Athens / Crete": 5,
       "Balearics (Mallorca / Ibiza)": 5,
       "Barcelona": 5,
       "Chiang Mai": 5,
+      "Algarve": 4,
       "Istanbul": 4,
       "Madrid": 4,
       "Phuket / Islands": 4,
       "Valencia": 4,
-      "Algarve": 3,
       "Basque Country (Bilbao / Donostia)": 3,
       "Brighton / Sussex": 3,
       "Colombo / Weligama": 3,
       "Ho Chi Minh City": 3,
       "KL / Penang": 3,
+      "Porto": 3,
       "Seville": 3,
       "Taghazout / Agadir": 3,
       "Bangkok": 2,
       "Da Nang / Hoi An": 2,
       "Granada": 2,
-      "Porto": 2,
       "Hanoi": 1,
       "London": 1,
       "Marrakech": 1,
@@ -204,19 +204,19 @@
       "Rome / Milan": 1
     },
     "byPurpose": {
-      "House & Pet Sitting": 58,
-      "Video, Media & Creative Collabs": 27,
-      "Sublets, Coliving & Spare Rooms": 18,
+      "House & Pet Sitting": 59,
+      "Video, Media & Creative Collabs": 28,
+      "Sublets, Coliving & Spare Rooms": 19,
       "Retreats, Surf & Eco-Farms": 17,
+      "Language Exchange": 12,
       "City Expats & Locals": 11,
-      "Language Exchange": 11,
       "Boat Crew, Rideshare & Vans": 9,
       "Solo Travel & Backpacker Meetups": 8,
       "Digital Nomads & Skill Swaps": 6,
       "Hostel & Work Exchange": 4
     },
     "byStatus": {
-      "ready_to_join": 161,
+      "ready_to_join": 165,
       "joined_ready_to_post": 6,
       "posted": 2
     }
@@ -2587,6 +2587,62 @@
       "status": "ready_to_join",
       "responsesCount": 0,
       "notes": "Canary Islands eco-fincas & shelter volunteering"
+    },
+    {
+      "id": "fb127",
+      "groupName": "Lisbon Language Exchange & Intercambio",
+      "groupType": "Language Exchange",
+      "country": "Portugal",
+      "city": "Lisbon / Ericeira",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Lisbon%20Language%20Exchange",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Lisbon English-Portuguese/Spanish tandems & rooms"
+    },
+    {
+      "id": "fb128",
+      "groupName": "Porto House & Pet Sitting Portugal",
+      "groupType": "House & Pet Sitting",
+      "country": "Portugal",
+      "city": "Porto",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Porto%20House%20Pet%20Sitting",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Northern Portugal home & pet sits"
+    },
+    {
+      "id": "fb129",
+      "groupName": "Algarve Digital Nomads & Remote Workers",
+      "groupType": "Sublets, Coliving & Spare Rooms",
+      "country": "Portugal",
+      "city": "Algarve",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Algarve%20Digital%20Nomads",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Lagos/Faro remote worker & coliving swaps"
+    },
+    {
+      "id": "fb130",
+      "groupName": "Peniche & Nazare Surf Community Portugal",
+      "groupType": "Video, Media & Creative Collabs",
+      "country": "Portugal",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Peniche%20Surf%20Portugal",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Silver Coast surf camp & hostel media swaps"
     }
   ],
   "comments": [

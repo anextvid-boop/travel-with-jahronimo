@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-26T02:34:24Z",
+  "updatedAt": "2026-11-26T04:34:10Z",
   "stats": {
-    "totalLeads": 153,
+    "totalLeads": 158,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,7 +12,7 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 151
+    "remainingQueue": 156
   },
   "dailyPlan": {
     "date": "2026-11-26",
@@ -37,7 +37,7 @@
         "dailyTarget": 15,
         "remainingToday": 15,
         "finalTotal": 2,
-        "note": "153 leads tracked (+ due 3d/7d follow-ups)"
+        "note": "158 leads tracked (+ due 3d/7d follow-ups)"
       },
       {
         "key": "fb_comments",
@@ -175,6 +175,30 @@
       "followUpDue": ""
     },
     {
+      "id": "1024dbaa1c",
+      "tier": "Tier 1",
+      "name": "Baleal Surf Camp",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Portugal \u2014 Peniche",
+      "channel": "Email",
+      "contact": "info@balealsurfcamp.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "1b0f02e8a3",
+      "tier": "Tier 1",
+      "name": "Cloud 9 Hostel Lagos",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Portugal \u2014 Lagos, Algarve",
+      "channel": "Email",
+      "contact": "cloud9hostel@gmail.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "3dabd70605",
       "tier": "Tier 1",
       "name": "C\u00e1diz Idiomas (Spanish in C\u00e1diz)",
@@ -182,6 +206,18 @@
       "cityCountry": "C\u00e1diz",
       "channel": "Email",
       "contact": "administracion@spanishincadiz.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "e61ca2a0d7",
+      "tier": "Tier 1",
+      "name": "Digital Nomads Madeira Islands",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Portugal \u2014 Ponta do Sol, Madeira",
+      "channel": "Email",
+      "contact": "info@digitalnomads.startupmadeira.eu",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -343,6 +379,18 @@
       "followUpDue": ""
     },
     {
+      "id": "d92dc36829",
+      "tier": "Tier 1",
+      "name": "The Salty Surf & Yoga",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Portugal \u2014 Cascais",
+      "channel": "Email",
+      "contact": "cascais@thesalty.co",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "f701aeae3f",
       "tier": "Tier 1",
       "name": "VaughanTown (Grupo Vaughan)",
@@ -350,6 +398,18 @@
       "cityCountry": "Rural Spain (pickup: Madrid, C/ Orense 69)",
       "channel": "Web Portal / Form",
       "contact": "Apply via portal",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "71fd2c5a1d",
+      "tier": "Tier 1",
+      "name": "Yes! Lisbon Hostel",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Portugal \u2014 Lisbon",
+      "channel": "Email",
+      "contact": "infolisbon@yeshostels.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
