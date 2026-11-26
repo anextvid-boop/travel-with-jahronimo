@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-26T16:34:09Z",
+  "updatedAt": "2026-11-26T18:33:54Z",
   "stats": {
-    "totalLeads": 192,
+    "totalLeads": 198,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,7 +12,7 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 190
+    "remainingQueue": 196
   },
   "dailyPlan": {
     "date": "2026-11-26",
@@ -37,7 +37,7 @@
         "dailyTarget": 15,
         "remainingToday": 15,
         "finalTotal": 2,
-        "note": "192 leads tracked (+ due 3d/7d follow-ups)"
+        "note": "198 leads tracked (+ due 3d/7d follow-ups)"
       },
       {
         "key": "fb_comments",
@@ -247,6 +247,18 @@
       "followUpDue": ""
     },
     {
+      "id": "b064155dc2",
+      "tier": "Tier 1",
+      "name": "Clock Inn Colombo",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Sri Lanka \u2014 Colombo",
+      "channel": "Email",
+      "contact": "info@clockinn.lk",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "1b0f02e8a3",
       "tier": "Tier 1",
       "name": "Cloud 9 Hostel Lagos",
@@ -314,6 +326,18 @@
       "cityCountry": "Vietnam \u2014 Da Nang",
       "channel": "Email",
       "contact": "co-working@dnes.vn",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "10d432edd8",
+      "tier": "Tier 1",
+      "name": "Dots Bay House",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Sri Lanka \u2014 Hiriketiya",
+      "channel": "Email",
+      "contact": "info@dotsbayhouse.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -415,6 +439,18 @@
       "followUpDue": ""
     },
     {
+      "id": "d22764d511",
+      "tier": "Tier 1",
+      "name": "Hangover Hostels Mirissa",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Sri Lanka \u2014 Mirissa",
+      "channel": "Email",
+      "contact": "mirissa@hangoverhostels.lk",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "57e945176a",
       "tier": "Tier 1",
       "name": "Hashpoint Surf Camp",
@@ -422,6 +458,18 @@
       "cityCountry": "Morocco \u2014 Taghazout",
       "channel": "Email",
       "contact": "info@hashpointsurfcamp.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "bcb69cc0c4",
+      "tier": "Tier 1",
+      "name": "Hideout Ella",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Sri Lanka \u2014 Ella",
+      "channel": "Email",
+      "contact": "info@hideella.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -571,6 +619,18 @@
       "followUpDue": ""
     },
     {
+      "id": "7e871b6d2a",
+      "tier": "Tier 1",
+      "name": "Mellow Hostel Sri Lanka",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Sri Lanka \u2014 Ahangama",
+      "channel": "Email",
+      "contact": "mellowhostelsrilanka@gmail.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "026f52d872",
       "tier": "Tier 1",
       "name": "My English School (MyES)",
@@ -686,6 +746,18 @@
       "cityCountry": "Seville",
       "channel": "Email",
       "contact": "info@sevillalanguagecenter.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "e8133a9880",
+      "tier": "Tier 1",
+      "name": "Soul & Surf Sri Lanka",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Sri Lanka \u2014 Ahangama",
+      "channel": "Email",
+      "contact": "enquiries.srilanka@soulandsurf.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""

@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-26T16:34:09Z",
+  "updatedAt": "2026-11-26T18:33:54Z",
   "accountName": "Jahronimo Ellis",
   "accountEmail": "jahronimo1@hotmail.com",
   "profileUrl": "https://www.facebook.com/profile.php",
   "rotation": {
     "dailyTarget": 15,
     "dailyDmTarget": 10,
-    "totalPages": 197,
+    "totalPages": 201,
     "cycleDays": 14,
     "todaysBatch": [
       {
@@ -147,7 +147,7 @@
     ]
   },
   "stats": {
-    "totalGroups": 197,
+    "totalGroups": 201,
     "joinedCount": 8,
     "postedCount": 2,
     "commentsCount": 1,
@@ -163,14 +163,14 @@
       "United Kingdom": 9,
       "Europe (Multi-Country)": 7,
       "Malaysia": 7,
+      "Sri Lanka": 7,
       "Japan": 6,
       "Turkey": 5,
       "France": 3,
-      "Italy": 3,
-      "Sri Lanka": 3
+      "Italy": 3
     },
     "byCity": {
-      "Country-Wide / Multi-City": 58,
+      "Country-Wide / Multi-City": 61,
       "Bali (Ubud / Canggu)": 13,
       "Canary Islands": 13,
       "M\u00e1laga / Costa del Sol": 9,
@@ -183,6 +183,7 @@
       "Chiang Mai": 5,
       "KL / Penang": 5,
       "Algarve": 4,
+      "Colombo / Weligama": 4,
       "Da Nang / Hoi An": 4,
       "Ho Chi Minh City": 4,
       "Istanbul": 4,
@@ -193,7 +194,6 @@
       "Bangkok": 3,
       "Basque Country (Bilbao / Donostia)": 3,
       "Brighton / Sussex": 3,
-      "Colombo / Weligama": 3,
       "Porto": 3,
       "Seville": 3,
       "Granada": 2,
@@ -204,19 +204,19 @@
       "Rome / Milan": 1
     },
     "byPurpose": {
-      "House & Pet Sitting": 70,
-      "Video, Media & Creative Collabs": 32,
-      "Retreats, Surf & Eco-Farms": 19,
+      "House & Pet Sitting": 71,
+      "Video, Media & Creative Collabs": 33,
+      "Retreats, Surf & Eco-Farms": 20,
       "Sublets, Coliving & Spare Rooms": 19,
       "Language Exchange": 17,
       "City Expats & Locals": 12,
       "Boat Crew, Rideshare & Vans": 9,
       "Solo Travel & Backpacker Meetups": 8,
       "Digital Nomads & Skill Swaps": 6,
-      "Hostel & Work Exchange": 5
+      "Hostel & Work Exchange": 6
     },
     "byStatus": {
-      "ready_to_join": 189,
+      "ready_to_join": 193,
       "joined_ready_to_post": 6,
       "posted": 2
     }
@@ -2979,6 +2979,62 @@
       "status": "ready_to_join",
       "responsesCount": 0,
       "notes": "Athens English-Greek tandems & local hosts"
+    },
+    {
+      "id": "fb155",
+      "groupName": "Sri Lanka House Sitting & Pet Sitters",
+      "groupType": "House & Pet Sitting",
+      "country": "Sri Lanka",
+      "city": "Colombo / Weligama",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Sri%20Lanka%20House%20Sitting",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "South coast & Colombo villa and pet sits"
+    },
+    {
+      "id": "fb156",
+      "groupName": "Ahangama & Hiriketiya Expats Sri Lanka",
+      "groupType": "Video, Media & Creative Collabs",
+      "country": "Sri Lanka",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Ahangama%20Hiriketiya%20Expats",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Surf hostels colivings & media swaps"
+    },
+    {
+      "id": "fb157",
+      "groupName": "Ella & Kandy Backpackers Sri Lanka",
+      "groupType": "Hostel & Work Exchange",
+      "country": "Sri Lanka",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Ella%20Sri%20Lanka%20Backpackers",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Hill country eco-lodges & hostel swaps"
+    },
+    {
+      "id": "fb158",
+      "groupName": "Arugam Bay Surf & Digital Nomads Sri Lanka",
+      "groupType": "Retreats, Surf & Eco-Farms",
+      "country": "Sri Lanka",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Arugam%20Bay%20Surf%20Nomads",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "East coast surf camp & guesthouse swaps"
     }
   ],
   "comments": [
