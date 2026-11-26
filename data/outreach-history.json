@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-26T18:33:54Z",
+  "updatedAt": "2026-11-26T20:34:02Z",
   "stats": {
-    "totalLeads": 198,
+    "totalLeads": 204,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,7 +12,7 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 196
+    "remainingQueue": 202
   },
   "dailyPlan": {
     "date": "2026-11-26",
@@ -37,7 +37,7 @@
         "dailyTarget": 15,
         "remainingToday": 15,
         "finalTotal": 2,
-        "note": "198 leads tracked (+ due 3d/7d follow-ups)"
+        "note": "204 leads tracked (+ due 3d/7d follow-ups)"
       },
       {
         "key": "fb_comments",
@@ -211,6 +211,18 @@
       "followUpDue": ""
     },
     {
+      "id": "7c6c5321bf",
+      "tier": "Tier 1",
+      "name": "B&Sicily Coliving",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Italy \u2014 Castelbuono, Sicily",
+      "channel": "Email",
+      "contact": "info@bnsicily.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "1024dbaa1c",
       "tier": "Tier 1",
       "name": "Baleal Surf Camp",
@@ -218,6 +230,18 @@
       "cityCountry": "Portugal \u2014 Peniche",
       "channel": "Email",
       "contact": "info@balealsurfcamp.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "04b3487943",
+      "tier": "Tier 1",
+      "name": "Bonga Surf School",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Italy \u2014 Porto Ferro, Sardinia",
+      "channel": "Email",
+      "contact": "info@bongasurfschool.it",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -487,6 +511,18 @@
       "followUpDue": ""
     },
     {
+      "id": "e977498f22",
+      "tier": "Tier 1",
+      "name": "Hostel of the Sun",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Italy \u2014 Naples",
+      "channel": "Email",
+      "contact": "info@hostelnapoli.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "319a21d19f",
       "tier": "Tier 1",
       "name": "House of Journey Penang",
@@ -643,6 +679,18 @@
       "followUpDue": ""
     },
     {
+      "id": "93d552dccf",
+      "tier": "Tier 1",
+      "name": "Ostello Bello Grande",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Italy \u2014 Milan",
+      "channel": "Email",
+      "contact": "booking.milanocentrale@ostellobello.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "8e16d04841",
       "tier": "Tier 1",
       "name": "Paper Plane Hostel KL",
@@ -662,6 +710,18 @@
       "cityCountry": "Greece \u2014 Paros",
       "channel": "Email",
       "contact": "nikos@parosurf.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "c369e7ffa4",
+      "tier": "Tier 1",
+      "name": "Plus Florence Hostel",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Italy \u2014 Florence",
+      "channel": "Email",
+      "contact": "plusflorence@humancompany.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
@@ -866,6 +926,18 @@
       "cityCountry": "Thailand \u2014 Chiang Mai",
       "channel": "Email",
       "contact": "coworking@yellow.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "685ec39d7d",
+      "tier": "Tier 1",
+      "name": "YellowSquare Rome",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Italy \u2014 Rome",
+      "channel": "Email",
+      "contact": "palestro@yellowsquare.it",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""
