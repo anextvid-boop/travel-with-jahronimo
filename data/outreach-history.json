@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-25T22:25:36Z",
+  "updatedAt": "2026-11-26T02:34:24Z",
   "stats": {
-    "totalLeads": 147,
+    "totalLeads": 153,
     "totalOutreachSent": 2,
     "totalEmailsSent": 2,
     "emailsReplied": 0,
@@ -12,10 +12,10 @@
     "bookedCount": 0,
     "replyRatePct": 0.0,
     "followUpsDue": 0,
-    "remainingQueue": 145
+    "remainingQueue": 151
   },
   "dailyPlan": {
-    "date": "2026-11-25",
+    "date": "2026-11-26",
     "freeOutreachPerDay": 15,
     "paidEmailsPerDay": 20,
     "fbCommentsPerDay": 15,
@@ -24,36 +24,36 @@
       {
         "key": "paid_emails",
         "label": "Paid Client Outreach Emails",
-        "sentToday": 10,
+        "sentToday": 0,
         "dailyTarget": 20,
-        "remainingToday": 10,
+        "remainingToday": 20,
         "finalTotal": 10,
         "note": "anextvid@gmail.com (+ due 4-day follow-ups)"
       },
       {
         "key": "free_outreach",
         "label": "Free / Skill-Swap Outreach",
-        "sentToday": 2,
+        "sentToday": 0,
         "dailyTarget": 15,
-        "remainingToday": 13,
+        "remainingToday": 15,
         "finalTotal": 2,
-        "note": "147 leads tracked (+ due 3d/7d follow-ups)"
+        "note": "153 leads tracked (+ due 3d/7d follow-ups)"
       },
       {
         "key": "fb_comments",
         "label": "Facebook Comments / Posts",
-        "sentToday": 3,
+        "sentToday": 0,
         "dailyTarget": 15,
-        "remainingToday": 12,
+        "remainingToday": 15,
         "finalTotal": 3,
-        "note": "1 comments + 2 posts today (11-day cycle)"
+        "note": "0 comments + 0 posts today (12-day cycle)"
       },
       {
         "key": "dms",
         "label": "DMs (FB / IG / WhatsApp)",
-        "sentToday": 1,
+        "sentToday": 0,
         "dailyTarget": 10,
-        "remainingToday": 9,
+        "remainingToday": 10,
         "finalTotal": 1,
         "note": "Paired with FB comments + IG/WhatsApp follow-ups"
       }
@@ -113,6 +113,18 @@
       "status": "sent",
       "firstSentAt": "2026-11-25",
       "followUpDue": "2026-11-27"
+    },
+    {
+      "id": "ee29c3115d",
+      "tier": "Tier 1",
+      "name": "A Room in the City",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Spain \u2014 San Sebasti\u00e1n",
+      "channel": "Email",
+      "contact": "info@aroominthecity.eu",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
     },
     {
       "id": "52a8a9e60a",
@@ -187,6 +199,18 @@
       "followUpDue": ""
     },
     {
+      "id": "b27d647196",
+      "tier": "Tier 1",
+      "name": "El Josemari Youth Hostel",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Spain \u2014 Palma, Mallorca",
+      "channel": "Email",
+      "contact": "holajosemari@thebricks.es",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "9ccf049349",
       "tier": "Tier 1",
       "name": "English and More",
@@ -211,6 +235,30 @@
       "followUpDue": ""
     },
     {
+      "id": "4b69bc002c",
+      "tier": "Tier 1",
+      "name": "Escuela Delengua",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Spain \u2014 Granada",
+      "channel": "Email",
+      "contact": "info@delengua.es",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "e1f372826d",
+      "tier": "Tier 1",
+      "name": "Famara Surf Club",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Spain \u2014 Famara, Lanzarote",
+      "channel": "Email",
+      "contact": "info@famarasurfclub.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "70182e60f4",
       "tier": "Tier 1",
       "name": "Hola! Club de Espa\u00f1ol",
@@ -223,6 +271,18 @@
       "followUpDue": ""
     },
     {
+      "id": "61874c256d",
+      "tier": "Tier 1",
+      "name": "Koisi Hostel (Cats San Sebasti\u00e1n)",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Spain \u2014 San Sebasti\u00e1n",
+      "channel": "Email",
+      "contact": "hello@koisihostel.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
       "id": "5ce69f3a17",
       "tier": "Tier 1",
       "name": "Linguaschools Granada",
@@ -230,6 +290,18 @@
       "cityCountry": "Granada",
       "channel": "Email",
       "contact": "info@linguaschools.com",
+      "status": "not_contacted",
+      "firstSentAt": "",
+      "followUpDue": ""
+    },
+    {
+      "id": "f560afdf82",
+      "tier": "Tier 1",
+      "name": "Malaca Instituto",
+      "category": "Category 10: 24-Hour Automated Collection \u2014 Direct Email Leads",
+      "cityCountry": "Spain \u2014 M\u00e1laga",
+      "channel": "Email",
+      "contact": "online@malacainstituto.com",
       "status": "not_contacted",
       "firstSentAt": "",
       "followUpDue": ""

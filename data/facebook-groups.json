@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-25T22:25:36Z",
+  "updatedAt": "2026-11-26T02:34:24Z",
   "accountName": "Jahronimo Ellis",
   "accountEmail": "jahronimo1@hotmail.com",
   "profileUrl": "https://www.facebook.com/profile.php",
   "rotation": {
     "dailyTarget": 15,
     "dailyDmTarget": 10,
-    "totalPages": 165,
-    "cycleDays": 11,
+    "totalPages": 169,
+    "cycleDays": 12,
     "todaysBatch": [
       {
         "id": "fb01",
@@ -147,12 +147,12 @@
     ]
   },
   "stats": {
-    "totalGroups": 165,
+    "totalGroups": 169,
     "joinedCount": 8,
     "postedCount": 2,
     "commentsCount": 1,
     "byCountry": {
-      "Spain": 59,
+      "Spain": 63,
       "Global / Worldwide": 18,
       "Portugal": 13,
       "Indonesia (Bali)": 10,
@@ -170,17 +170,17 @@
       "Sri Lanka": 3
     },
     "byCity": {
-      "Country-Wide / Multi-City": 45,
-      "Canary Islands": 12,
+      "Country-Wide / Multi-City": 47,
+      "Canary Islands": 13,
       "Bali (Ubud / Canggu)": 10,
       "M\u00e1laga / Costa del Sol": 9,
       "Lisbon / Ericeira": 6,
       "Tokyo": 6,
+      "Alicante / Costa Blanca": 5,
       "Athens / Crete": 5,
       "Balearics (Mallorca / Ibiza)": 5,
       "Barcelona": 5,
       "Chiang Mai": 5,
-      "Alicante / Costa Blanca": 4,
       "Istanbul": 4,
       "Madrid": 4,
       "Phuket / Islands": 4,
@@ -204,19 +204,19 @@
       "Rome / Milan": 1
     },
     "byPurpose": {
-      "House & Pet Sitting": 56,
+      "House & Pet Sitting": 58,
       "Video, Media & Creative Collabs": 27,
       "Sublets, Coliving & Spare Rooms": 18,
       "Retreats, Surf & Eco-Farms": 17,
-      "City Expats & Locals": 10,
-      "Language Exchange": 10,
+      "City Expats & Locals": 11,
+      "Language Exchange": 11,
       "Boat Crew, Rideshare & Vans": 9,
       "Solo Travel & Backpacker Meetups": 8,
       "Digital Nomads & Skill Swaps": 6,
       "Hostel & Work Exchange": 4
     },
     "byStatus": {
-      "ready_to_join": 157,
+      "ready_to_join": 161,
       "joined_ready_to_post": 6,
       "posted": 2
     }
@@ -2531,6 +2531,62 @@
       "status": "ready_to_join",
       "responsesCount": 0,
       "notes": "English-Japanese language tandems & local friends"
+    },
+    {
+      "id": "fb123",
+      "groupName": "Salamanca Language Exchange & Expats",
+      "groupType": "House & Pet Sitting",
+      "country": "Spain",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Salamanca%20Language%20Exchange%20Expats",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Spain university city language & local homestay leads"
+    },
+    {
+      "id": "fb124",
+      "groupName": "Alicante Language Exchange & Intercambio",
+      "groupType": "Language Exchange",
+      "country": "Spain",
+      "city": "Alicante / Costa Blanca",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Alicante%20Language%20Exchange",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Costa Blanca English-Spanish tandems & rooms"
+    },
+    {
+      "id": "fb125",
+      "groupName": "Cuidadores de Casas y Mascotas Espana",
+      "groupType": "House & Pet Sitting",
+      "country": "Spain",
+      "city": "Country-Wide / Multi-City",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Cuidadores%20de%20casas%20Espana",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Spanish-language house & pet sitting network across Spain"
+    },
+    {
+      "id": "fb126",
+      "groupName": "Voluntariado Canarias & Fincas",
+      "groupType": "City Expats & Locals",
+      "country": "Spain",
+      "city": "Canary Islands",
+      "groupUrl": "https://www.facebook.com/search/groups/?q=Voluntariado%20Canarias",
+      "postUrl": "",
+      "postedAt": "",
+      "next48hCheck": "",
+      "status": "ready_to_join",
+      "responsesCount": 0,
+      "notes": "Canary Islands eco-fincas & shelter volunteering"
     }
   ],
   "comments": [
